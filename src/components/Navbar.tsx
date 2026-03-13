@@ -35,7 +35,7 @@ const Navbar = () => {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {links.map((l) => (
-            
+            <a
               key={l.href}
               href={l.href}
               className="text-sm font-medium transition-colors hover:text-primary text-foreground/80"
@@ -43,7 +43,7 @@ const Navbar = () => {
               {l.label}
             </a>
           ))}
-          
+          <a
             href="#menu"
             className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
           >
@@ -55,6 +55,7 @@ const Navbar = () => {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-foreground"
+          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -65,7 +66,7 @@ const Navbar = () => {
         <div className="md:hidden bg-white border-t border-border animate-fade-in">
           <div className="flex flex-col px-6 py-4 gap-4">
             {links.map((l) => (
-              
+              <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setMenuOpen(false)}
@@ -74,7 +75,7 @@ const Navbar = () => {
                 {l.label}
               </a>
             ))}
-            
+            <a
               href="#menu"
               onClick={() => setMenuOpen(false)}
               className="bg-primary text-primary-foreground text-center px-5 py-3 rounded-full font-semibold"
