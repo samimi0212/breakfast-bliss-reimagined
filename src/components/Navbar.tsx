@@ -32,13 +32,13 @@ const Navbar = () => {
 
         {/* Droite — Connexion / S'inscrire */}
         <div className="flex-1 flex justify-end items-center gap-3">
-          
+          <a
             href="#connexion"
             className="hidden md:block text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
           >
             Connexion
           </a>
-          
+          <a
             href="#inscription"
             className="hidden md:block bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
           >
@@ -62,7 +62,7 @@ const Navbar = () => {
             <a href="#connexion" className="text-foreground font-medium py-2">
               Connexion
             </a>
-            
+            <a
               href="#inscription"
               className="bg-primary text-primary-foreground text-center px-5 py-3 rounded-full font-semibold"
             >
