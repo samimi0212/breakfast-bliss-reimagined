@@ -15,19 +15,16 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-border"
-          : "bg-white/80 backdrop-blur-sm"
+        scrolled ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-border" : "bg-white/80 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-0">
-
         {/* Gauche — vide */}
         <div className="flex-1" />
 
         {/* Centre — Logo */}
         <a href="#" className="flex-1 flex justify-center">
-          <img src={logo} alt="Breakfast Time" className="h-16 w-auto" />
+          <img src={logo} alt="Breakfast Time" className="h-20 w-auto" />
         </a>
 
         {/* Droite — Connexion / S'inscrire */}
@@ -46,10 +43,7 @@ const Navbar = () => {
           </a>
 
           {/* Mobile toggle */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-foreground"
-          >
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-foreground">
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
