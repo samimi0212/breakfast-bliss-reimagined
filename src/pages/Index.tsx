@@ -1,29 +1,88 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import HowItWorks from "@/components/HowItWorks";
-import MenuSection from "@/components/MenuSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Testimonials from "@/components/Testimonials";
-import AboutSection from "@/components/AboutSection";
-import DeliveryZone from "@/components/DeliveryZone";
-import FinalCTA from "@/components/FinalCTA";
-import Footer from "@/components/Footer";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
-const Index = () => (
-  <>
-    <Navbar />
-    <main>
-      <HeroSection />
-      <HowItWorks />
-      <MenuSection />
-      <WhyChooseUs />
-      <Testimonials />
-      <AboutSection />
-      <DeliveryZone />
-      <FinalCTA />
-    </main>
-    <Footer />
-  </>
-);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-export default Index;
+@layer base {
+  :root {
+    --background: 40 20% 97%;
+    --foreground: 30 10% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 10% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 10% 12%;
+
+    /* Vert olive foncé comme couleur principale */
+    --primary: 61 45% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 65 60% 90%;
+    --secondary-foreground: 61 45% 25%;
+
+    --muted: 60 20% 94%;
+    --muted-foreground: 30 8% 46%;
+
+    /* Vert jaune vif comme accent */
+    --accent: 72 90% 72%;
+    --accent-foreground: 61 45% 20%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 60 15% 85%;
+    --input: 60 15% 85%;
+    --ring: 61 45% 42%;
+
+    --radius: 0.75rem;
+
+    --hero-overlay: linear-gradient(180deg, hsla(30, 10%, 8%, 0.6) 0%, hsla(30, 10%, 8%, 0.3) 100%);
+    --card-shadow: 0 4px 24px -4px hsla(61, 45%, 20%, 0.10);
+    --card-shadow-hover: 0 12px 32px -8px hsla(61, 45%, 20%, 0.18);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-6 py-20 md:px-12 lg:px-20 lg:py-28;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-display font-semibold tracking-tight;
+  }
+  .section-subtitle {
+    @apply text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed;
+  }
+}
+
+@layer utilities {
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+  }
+}
