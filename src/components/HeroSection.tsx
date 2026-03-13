@@ -9,18 +9,32 @@ const HeroSection = () => (
     />
     <div className="absolute inset-0" style={{ background: "var(--hero-overlay)" }} />
     <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
-      <p className="text-primary text-sm md:text-base font-semibold tracking-widest uppercase mb-4 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+      <p
+        className="text-primary text-sm md:text-base font-semibold tracking-widest uppercase mb-4 animate-fade-up"
+        style={{ animationDelay: "0.1s" }}
+      >
         Livraison de petit-déjeuner & brunch
       </p>
-      <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 animate-fade-up" style={{ animationDelay: "0.3s", color: "hsl(0 0% 100%)" }}>
+      <h1
+        className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 animate-fade-up"
+        style={{ animationDelay: "0.3s", color: "hsl(0 0% 100%)" }}
+      >
         Rendre l'ordinaire{" "}
-        <span className="text-primary italic">Extraordinaire</span>
+        <span className="italic">
+          <span style={{ color: "#DCF155" }}>Extra</span>
+          <span style={{ color: "#ffffff" }}>ordinaire</span>
+        </span>
       </h1>
-      <p className="text-lg md:text-xl mb-10 animate-fade-up" style={{ animationDelay: "0.5s", color: "hsl(0 0% 100% / 0.8)" }}>
-        Des petits-déjeuners et brunchs d'exception, livrés chez vous en 30 minutes.
-        Alpes-Maritimes, 7j/7.
+      <p
+        className="text-lg md:text-xl mb-10 animate-fade-up"
+        style={{ animationDelay: "0.5s", color: "hsl(0 0% 100% / 0.8)" }}
+      >
+        Des petits-déjeuners et brunchs d'exception, livrés chez vous en 30 minutes. Alpes-Maritimes, 7j/7.
       </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: "0.7s" }}>
+      <div
+        className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up"
+        style={{ animationDelay: "0.7s" }}
+      >
         <a
           href="#menu"
           className="bg-primary text-primary-foreground px-8 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity"
@@ -37,7 +51,10 @@ const HeroSection = () => (
       </div>
     </div>
     {/* Scroll indicator */}
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" style={{ color: "hsl(0 0% 100% / 0.6)" }}>
+    <div
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+      style={{ color: "hsl(0 0% 100% / 0.6)" }}
+    >
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M12 5v14M5 12l7 7 7-7" />
       </svg>
