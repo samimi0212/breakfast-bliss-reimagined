@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -27,9 +28,8 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <a href="#" className="font-display text-2xl font-bold tracking-tight">
-          <span className={scrolled ? "text-foreground" : "text-primary-foreground"}>Breakfast</span>
-          <span className="text-primary"> Time</span>
+        <a href="#" className="flex items-center">
+          <img src={logo} alt="Breakfast Time" className="h-10" />
         </a>
 
         {/* Desktop */}
