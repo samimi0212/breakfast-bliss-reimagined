@@ -27,9 +27,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center">
-          <div className="bg-white/90 backdrop-blur-sm rounded-xl px-3 py-2">
-            <img src={logo} alt="Breakfast Time" className="h-24 w-auto" />
-          </div>
+          <img src={logo} alt="Breakfast Time" className="h-24 w-auto" />
         </a>
 
         {/* Desktop */}
