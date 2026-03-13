@@ -22,15 +22,13 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-card/95 backdrop-blur-md shadow-sm border-b border-border"
-          : "bg-transparent"
+        scrolled ? "bg-card/95 backdrop-blur-md shadow-sm border-b border-border" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center">
           <div className="bg-white/90 backdrop-blur-sm rounded-xl px-3 py-2">
-            <img src={logo} alt="Breakfast Time" className="h-16 w-auto" />
+            <img src={logo} alt="Breakfast Time" className="h-24 w-auto" />
           </div>
         </a>
 
