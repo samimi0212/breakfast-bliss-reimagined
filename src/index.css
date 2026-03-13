@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -15,30 +15,32 @@
     --popover: 0 0% 100%;
     --popover-foreground: 30 10% 12%;
 
-    --primary: 55 40% 35%;
+    /* Vert olive foncé comme couleur principale */
+    --primary: 61 45% 42%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 25% 92%;
-    --secondary-foreground: 30 10% 12%;
+    --secondary: 65 60% 90%;
+    --secondary-foreground: 61 45% 25%;
 
-    --muted: 40 15% 94%;
+    --muted: 60 20% 94%;
     --muted-foreground: 30 8% 46%;
 
-    --accent: 55 40% 35%;
-    --accent-foreground: 0 0% 100%;
+    /* Vert jaune vif comme accent */
+    --accent: 72 90% 72%;
+    --accent-foreground: 61 45% 20%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 35 15% 88%;
-    --input: 35 15% 88%;
-    --ring: 55 40% 35%;
+    --border: 60 15% 85%;
+    --input: 60 15% 85%;
+    --ring: 61 45% 42%;
 
     --radius: 0.75rem;
 
-    --hero-overlay: linear-gradient(180deg, hsla(30, 10%, 8%, 0.7) 0%, hsla(30, 10%, 8%, 0.4) 100%);
-    --card-shadow: 0 4px 24px -4px hsla(30, 10%, 12%, 0.08);
-    --card-shadow-hover: 0 12px 32px -8px hsla(30, 10%, 12%, 0.15);
+    --hero-overlay: linear-gradient(180deg, hsla(30, 10%, 8%, 0.6) 0%, hsla(30, 10%, 8%, 0.3) 100%);
+    --card-shadow: 0 4px 24px -4px hsla(61, 45%, 20%, 0.1);
+    --card-shadow-hover: 0 12px 32px -8px hsla(61, 45%, 20%, 0.18);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -58,7 +60,12 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display;
   }
 }
