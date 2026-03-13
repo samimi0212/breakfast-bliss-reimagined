@@ -62,7 +62,7 @@ const Navbar = () => {
             <a href="#connexion" className="text-foreground font-medium py-2">
               Connexion
             </a>
-            
+            <a
               href="#inscription"
               className="bg-primary text-primary-foreground text-center px-5 py-3 rounded-full font-semibold"
             >
