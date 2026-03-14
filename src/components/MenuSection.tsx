@@ -113,7 +113,33 @@ const produits: Record<string, { name: string; price: string; img: string }[]> =
       img: "https://static.wixstatic.com/media/21c6e4_de105d93f91e471d8ccb8b6c7ccbaa8f~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_de105d93f91e471d8ccb8b6c7ccbaa8f~mv2.jpg",
     },
   ],
-  "Le Sucré": [],
+  "Le Sucré": [
+    {
+      name: "Pancakes Sirop d'érable Myrtilles",
+      price: "10,90€",
+      img: "https://static.wixstatic.com/media/21c6e4_f419aee1d44244458fc6c57efc1de148~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_f419aee1d44244458fc6c57efc1de148~mv2.png",
+    },
+    {
+      name: "Pancakes Nutella Banane",
+      price: "10,90€",
+      img: "https://static.wixstatic.com/media/21c6e4_e0c9e849faa64c90b4e105a283f646bf~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_e0c9e849faa64c90b4e105a283f646bf~mv2.png",
+    },
+    {
+      name: "Brioche Perdue Gourmande",
+      price: "12,90€",
+      img: "https://static.wixstatic.com/media/21c6e4_5ba1b60f56084a23b7fe442adaafbe4a~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_5ba1b60f56084a23b7fe442adaafbe4a~mv2.png",
+    },
+    {
+      name: "Pudding Chia Bowl",
+      price: "9,50€",
+      img: "https://static.wixstatic.com/media/21c6e4_3b8ad26ddf37468a834c55f7697d48a6~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_3b8ad26ddf37468a834c55f7697d48a6~mv2.png",
+    },
+    {
+      name: "Granola Parfait",
+      price: "8,50€",
+      img: "https://static.wixstatic.com/media/21c6e4_cc66f5eaed7a462488b1df7264e4b5a6~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_cc66f5eaed7a462488b1df7264e4b5a6~mv2.png",
+    },
+  ],
   Boissons: [],
   "À Partager": [],
 };
