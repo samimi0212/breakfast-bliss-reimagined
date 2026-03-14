@@ -1,55 +1,69 @@
 import { useState } from "react";
-import croissantImg from "@/assets/menu-croissant.jpg";
-import brunchImg from "@/assets/menu-brunch.jpg";
-import granolaImg from "@/assets/menu-granola.jpg";
-import coffeeImg from "@/assets/menu-coffee.jpg";
-import pancakesImg from "@/assets/menu-pancakes.jpg";
-import boxImg from "@/assets/menu-box.jpg";
+
+// ---- DONNÉES ----
 
 const menus = [
-  { name: "Box Surprise", price: "29,90 €", desc: "Notre sélection du moment, livrée avec amour", img: boxImg },
-  { name: "Brunch Bowl", price: "14,90 €", desc: "Salé, sucré, frais — le brunch parfait", img: brunchImg },
-  { name: "Formule Duo", price: "39,90 €", desc: "Petit-déjeuner complet pour 2 personnes", img: croissantImg },
+  {
+    name: "Menu Brunch",
+    price: "29,00€",
+    desc: "Le brunch complet pour bien commencer la journée",
+    img: "https://static.wixstatic.com/media/21c6e4_137b677c57ed4588b83a5cd2f9c99169~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_137b677c57ed4588b83a5cd2f9c99169~mv2.png",
+  },
+  {
+    name: "Menu Famille",
+    price: "49,00€",
+    desc: "Un petit-déjeuner généreux pour toute la famille",
+    img: "https://static.wixstatic.com/media/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg",
+  },
+  {
+    name: "Birthday Box",
+    price: "45,00€",
+    desc: "Offrez un menu anniversaire à personnaliser",
+    img: "https://static.wixstatic.com/media/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png/v1/fill/w_980,h_1386,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png",
+  },
 ];
 
-const produits = {
+const produits: Record<string, { name: string; price: string; img: string }[]> = {
   Viennoiseries: [
-    { name: "Croissant Artisanal", price: "2,50 €", img: croissantImg },
-    { name: "Pain au Chocolat", price: "2,80 €", img: croissantImg },
-    { name: "Brioche Maison", price: "4,50 €", img: croissantImg },
+    {
+      name: "Croissant",
+      price: "1,50€",
+      img: "https://static.wixstatic.com/media/21c6e4_d396d1aefd3347a494342e2e3100c9d7~mv2.jpeg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_d396d1aefd3347a494342e2e3100c9d7~mv2.jpeg",
+    },
+    {
+      name: "Pain aux raisins",
+      price: "1,80€",
+      img: "https://static.wixstatic.com/media/21c6e4_321718d0c9b547fba1bc9e630d0d6db5~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_321718d0c9b547fba1bc9e630d0d6db5~mv2.png",
+    },
+    {
+      name: "Suisse",
+      price: "1,70€",
+      img: "https://static.wixstatic.com/media/21c6e4_84d87e8f2b6c494a94518f55cba0b872~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_84d87e8f2b6c494a94518f55cba0b872~mv2.png",
+    },
+    {
+      name: "Mini viennoiseries",
+      price: "3,90€",
+      img: "https://static.wixstatic.com/media/21c6e4_27396356b6cf494c807a4627f27d7d9a~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_27396356b6cf494c807a4627f27d7d9a~mv2.jpg",
+    },
+    {
+      name: "Brioche",
+      price: "8,50€",
+      img: "https://static.wixstatic.com/media/21c6e4_71ad92708a6a4bd68b0233b9842753ac~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_71ad92708a6a4bd68b0233b9842753ac~mv2.png",
+    },
   ],
-  Pains: [
-    { name: "Pain de Campagne", price: "3,90 €", img: brunchImg },
-    { name: "Pain aux Céréales", price: "4,20 €", img: brunchImg },
-    { name: "Baguette Tradition", price: "1,50 €", img: brunchImg },
-  ],
-  "Le Salé": [
-    { name: "Œufs Bénédicte", price: "9,90 €", img: brunchImg },
-    { name: "Avocat Toast", price: "8,50 €", img: brunchImg },
-    { name: "Assiette Fromages", price: "11,90 €", img: brunchImg },
-  ],
-  "Le Sucré": [
-    { name: "Granola Maison", price: "8,90 €", img: granolaImg },
-    { name: "Pancakes Gourmands", price: "11,90 €", img: pancakesImg },
-    { name: "Açaï Bowl", price: "10,50 €", img: granolaImg },
-  ],
-  Boissons: [
-    { name: "Latte Artisanal", price: "4,50 €", img: coffeeImg },
-    { name: "Jus d'Orange Frais", price: "4,90 €", img: coffeeImg },
-    { name: "Thé & Infusions", price: "3,50 €", img: coffeeImg },
-  ],
-  "À Partager": [
-    { name: "Plateau Viennoiseries", price: "18,90 €", img: boxImg },
-    { name: "Box Fruits Frais", price: "14,90 €", img: granolaImg },
-    { name: "Assortiment Maison", price: "24,90 €", img: boxImg },
-  ],
+  Pains: [],
+  "Le Salé": [],
+  "Le Sucré": [],
+  Boissons: [],
+  "À Partager": [],
 };
 
-const categories = Object.keys(produits) as Array<keyof typeof produits>;
+const categories = Object.keys(produits);
 
+// ---- COMPOSANT CARTE ----
 const CardItem = ({ name, price, img, desc }: { name: string; price: string; img: string; desc?: string }) => (
   <div className="bg-card rounded-2xl overflow-hidden hover-lift group" style={{ boxShadow: "var(--card-shadow)" }}>
-    <div className="relative overflow-hidden aspect-[4/3]">
+    <div className="relative overflow-hidden aspect-square">
       <img
         src={img}
         alt={name}
@@ -70,9 +84,10 @@ const CardItem = ({ name, price, img, desc }: { name: string; price: string; img
   </div>
 );
 
+// ---- SECTION MENU ----
 const MenuSection = () => {
   const [tab, setTab] = useState<"menus" | "carte">("menus");
-  const [catActive, setCatActive] = useState<string>("Viennoiseries");
+  const [catActive, setCatActive] = useState("Viennoiseries");
 
   return (
     <section id="menu" className="section-padding">
@@ -124,7 +139,6 @@ const MenuSection = () => {
         {/* Produits à la Carte */}
         {tab === "carte" && (
           <>
-            {/* Sous-catégories */}
             <div className="flex flex-wrap justify-center gap-3 mb-10">
               {categories.map((cat) => (
                 <button
@@ -141,12 +155,15 @@ const MenuSection = () => {
               ))}
             </div>
 
-            {/* Produits */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {produits[catActive as keyof typeof produits].map((item, i) => (
-                <CardItem key={i} {...item} />
-              ))}
-            </div>
+            {produits[catActive].length > 0 ? (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {produits[catActive].map((item, i) => (
+                  <CardItem key={i} {...item} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-muted-foreground py-12">Produits à venir...</p>
+            )}
           </>
         )}
       </div>
