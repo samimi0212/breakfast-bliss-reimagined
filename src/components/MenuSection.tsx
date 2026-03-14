@@ -157,7 +157,23 @@ const produits: Record<string, { name: string; price: string; img: string }[]> =
       img: "https://static.wixstatic.com/media/21c6e4_0666def6d3c34d979690efd0430ca8ec~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_0666def6d3c34d979690efd0430ca8ec~mv2.png",
     },
   ],
-  "À Partager": [],
+  "À Partager": [
+    {
+      name: "Plateau de viennoiseries",
+      price: "17,00€",
+      img: "https://static.wixstatic.com/media/21c6e4_54d6c72da0db428c9a95913573cb84ee~mv2.jpg/v1/fill/w_832,h_832,al_c,q_85,enc_avif,quality_auto/21c6e4_54d6c72da0db428c9a95913573cb84ee~mv2.jpg",
+    },
+    {
+      name: "Planche de charcuterie",
+      price: "39,00€",
+      img: "https://static.wixstatic.com/media/21c6e4_a7461066fb7542869e337fd7e3ef7d9a~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_a7461066fb7542869e337fd7e3ef7d9a~mv2.png",
+    },
+    {
+      name: "Planche de fromages",
+      price: "39,00€",
+      img: "https://static.wixstatic.com/media/21c6e4_1072c5ec1d8844478ad6ddf0753d7d1d~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_1072c5ec1d8844478ad6ddf0753d7d1d~mv2.png",
+    },
+  ],
 };
 
 const categories = Object.keys(produits);
