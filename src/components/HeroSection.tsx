@@ -21,7 +21,7 @@ const HeroSection = () => (
       >
         Rendre l'ordinaire{" "}
         <span className="italic">
-          <span style={{ color: "#DCF155" }}>Extra</span>
+          <span style={{ color: "#DFF057" }}>Extra</span>
           <span style={{ color: "#ffffff" }}>ordinaire</span>
         </span>
       </h1>
