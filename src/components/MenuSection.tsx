@@ -4,6 +4,18 @@ import { useState } from "react";
 
 const menus = [
   {
+    name: "Menu Français",
+    price: "12,90€",
+    desc: "Le classique à la française — viennoiseries, pain, beurre et confiture",
+    img: "https://static.wixstatic.com/media/21c6e4_34c4bd51a8a94133aebf056e7c1dfbbe~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_34c4bd51a8a94133aebf056e7c1dfbbe~mv2.png",
+  },
+  {
+    name: "Menu Anglais",
+    price: "12,90€",
+    desc: "Œufs, bacon, saucisses — le breakfast à l'anglaise",
+    img: "https://static.wixstatic.com/media/21c6e4_35577f9aced14c51b49fc307bf7656d6~mv2.jpg/v1/fill/w_917,h_917,al_c,q_85,enc_avif,quality_auto/21c6e4_35577f9aced14c51b49fc307bf7656d6~mv2.jpg",
+  },
+  {
     name: "Menu Brunch",
     price: "29,00€",
     desc: "Le brunch complet pour bien commencer la journée",
@@ -19,7 +31,7 @@ const menus = [
     name: "Birthday Box",
     price: "45,00€",
     desc: "Offrez un menu anniversaire à personnaliser",
-    img: "https://static.wixstatic.com/media/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png/v1/fill/w_980,h_1386,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png",
+    img: "https://static.wixstatic.com/media/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png",
   },
 ];
 
