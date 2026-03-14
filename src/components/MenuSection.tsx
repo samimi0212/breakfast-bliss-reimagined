@@ -140,7 +140,23 @@ const produits: Record<string, { name: string; price: string; img: string }[]> =
       img: "https://static.wixstatic.com/media/21c6e4_cc66f5eaed7a462488b1df7264e4b5a6~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_cc66f5eaed7a462488b1df7264e4b5a6~mv2.png",
     },
   ],
-  Boissons: [],
+  Boissons: [
+    {
+      name: "Smoothie banane",
+      price: "6,50€",
+      img: "https://static.wixstatic.com/media/21c6e4_97bb0d3d0a8e4fd5a0bcb6426a6b5a91~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_97bb0d3d0a8e4fd5a0bcb6426a6b5a91~mv2.png",
+    },
+    {
+      name: "Smoothie fruits rouges",
+      price: "6,50€",
+      img: "https://static.wixstatic.com/media/21c6e4_dd1900b53c5445bfa3005623afd0b1b0~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_dd1900b53c5445bfa3005623afd0b1b0~mv2.png",
+    },
+    {
+      name: "Café frappé",
+      price: "5,50€",
+      img: "https://static.wixstatic.com/media/21c6e4_0666def6d3c34d979690efd0430ca8ec~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_0666def6d3c34d979690efd0430ca8ec~mv2.png",
+    },
+  ],
   "À Partager": [],
 };
 
