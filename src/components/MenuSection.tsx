@@ -35,7 +35,7 @@ const menus = [
   },
 ];
 
-const produits: Record<string, { name: string; price: string; img: string }[]> = {
+const produits: Record<string, { name: string; price: string; img: string; desc?: string }[]> = {
   Viennoiseries: [
     {
       name: "Croissant",
