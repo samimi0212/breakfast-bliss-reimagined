@@ -51,7 +51,26 @@ const produits: Record<string, { name: string; price: string; img: string }[]> =
       img: "https://static.wixstatic.com/media/21c6e4_71ad92708a6a4bd68b0233b9842753ac~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_71ad92708a6a4bd68b0233b9842753ac~mv2.png",
     },
   ],
-  Pains: [],
+  Pains: [
+    {
+      name: "Baguette",
+      price: "1,30€",
+      desc: "La baguette tradition croustillante, cuite le matin même",
+      img: "https://static.wixstatic.com/media/21c6e4_d8f2fa38f4234f1e89e73216fb5da62b~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_d8f2fa38f4234f1e89e73216fb5da62b~mv2.jpg",
+    },
+    {
+      name: "Baguette bio aux graines",
+      price: "2,10€",
+      desc: "Baguette bio généreusement garnie de graines, dorée et savoureuse",
+      img: "https://static.wixstatic.com/media/21c6e4_bcd49273376a400fa8ca7e7b52d8d55d~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_bcd49273376a400fa8ca7e7b52d8d55d~mv2.jpg",
+    },
+    {
+      name: "Pain complet",
+      price: "2,80€",
+      desc: "Pain complet aux céréales, dense et nourrissant pour bien démarrer",
+      img: "https://static.wixstatic.com/media/21c6e4_736a710692ba41f2b3c6c6944edb9a40~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_736a710692ba41f2b3c6c6944edb9a40~mv2.jpg",
+    },
+  ],
   "Le Salé": [],
   "Le Sucré": [],
   Boissons: [],
