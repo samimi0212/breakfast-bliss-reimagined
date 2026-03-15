@@ -301,7 +301,7 @@ const CartePage = () => {
 
           {/* Nos Menus */}
           {tab === "menus" && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {menus.map((item) => (
                 <CardItem key={item.id} {...item} />
               ))}
@@ -326,7 +326,7 @@ const CartePage = () => {
                   </button>
                 ))}
               </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {produits[catActive].map((item) => (
                   <CardItem key={item.id} {...item} />
                 ))}
