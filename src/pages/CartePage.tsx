@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const menus = [
   {
@@ -213,6 +215,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
 };
 
 const categories = Object.keys(produits);
+const allProduits = Object.values(produits).flat();
 
 const CardItem = ({ id, name, price, img }: { id: string; name: string; price: string; img: string }) => {
   const navigate = useNavigate();
@@ -254,87 +257,149 @@ const CartePage = () => {
     const cat = searchParams.get("cat");
     return cat || "Viennoiseries";
   });
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const filteredMenus = menus.filter((m) => m.name.toLowerCase().includes(search.toLowerCase()));
+
+  const filteredProduits = search
+    ? allProduits.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
+    : produits[catActive];
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <div className="pt-28 pb-16">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Titre */}
-          <div className="text-center mb-12">
-            <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3">Nos produits</p>
-            <h1 className="section-title mb-4">La Carte</h1>
-            <p className="section-subtitle mx-auto">
-              Des produits frais, locaux et préparés le matin même pour commencer la journée en beauté.
+
+      {/* Header */}
+      <div className="bg-foreground pt-28 pb-16 px-6 text-center">
+        <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3">
+          Livraison 7j/7 · Alpes-Maritimes
+        </p>
+        <h1 className="font-display text-4xl md:text-5xl font-bold mb-4" style={{ color: "white" }}>
+          Notre{" "}
+          <span className="italic" style={{ color: "#DFF057" }}>
+            Carte
+          </span>
+        </h1>
+        <p className="text-lg max-w-xl mx-auto mb-8" style={{ color: "rgba(255,255,255,0.7)" }}>
+          Des produits frais, locaux et préparés le matin même pour commencer la journée en beauté.
+        </p>
+
+        {/* Barre de recherche */}
+        <div className="max-w-md mx-auto relative">
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Rechercher un produit..."
+            className="w-full pl-11 pr-4 py-3.5 rounded-full border-0 bg-white text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm"
+          />
+        </div>
+      </div>
+
+      {/* Breadcrumb */}
+      <div className="px-6 py-4 max-w-7xl mx-auto w-full">
+        <p className="text-sm text-muted-foreground">
+          <a href="/" className="hover:text-primary transition-colors">
+            Accueil
+          </a>
+          <span className="mx-2">›</span>
+          <span className="text-foreground font-medium">La Carte</span>
+        </p>
+      </div>
+
+      {/* Contenu */}
+      <div className="flex-1 pb-16 px-6 max-w-7xl mx-auto w-full">
+        {/* Si recherche active */}
+        {search ? (
+          <div>
+            <p className="text-muted-foreground text-sm mb-6">
+              {filteredMenus.length + filteredProduits.length} résultat(s) pour "<strong>{search}</strong>"
             </p>
-          </div>
-
-          {/* Onglets */}
-          <div className="flex justify-center mb-10">
-            <div className="bg-muted rounded-2xl p-1.5 flex gap-2">
-              <button
-                onClick={() => setTab("menus")}
-                className={`px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
-                  tab === "menus"
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Nos Menus
-              </button>
-              <button
-                onClick={() => setTab("carte")}
-                className={`px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
-                  tab === "carte"
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Produits à la Carte
-              </button>
-            </div>
-          </div>
-
-          {/* Nos Menus */}
-          {tab === "menus" && (
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-              {menus.map((item) => (
+              {[...filteredMenus, ...filteredProduits].map((item) => (
                 <CardItem key={item.id} {...item} />
               ))}
             </div>
-          )}
-
-          {/* Produits à la Carte */}
-          {tab === "carte" && (
-            <div>
-              <div className="flex flex-wrap justify-center gap-3 mb-10">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setCatActive(cat)}
-                    className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                      catActive === cat
-                        ? "bg-primary text-primary-foreground"
-                        : "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
+            {filteredMenus.length + filteredProduits.length === 0 && (
+              <div className="text-center py-16">
+                <p className="text-2xl mb-2">🔍</p>
+                <p className="font-display text-xl font-semibold mb-2">Aucun résultat</p>
+                <p className="text-muted-foreground">Essayez avec un autre mot-clé</p>
               </div>
+            )}
+          </div>
+        ) : (
+          <div>
+            {/* Onglets */}
+            <div className="flex justify-center mb-10 mt-4">
+              <div className="bg-muted rounded-2xl p-1.5 flex gap-2">
+                <button
+                  onClick={() => setTab("menus")}
+                  className={`px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                    tab === "menus"
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Nos Menus
+                </button>
+                <button
+                  onClick={() => setTab("carte")}
+                  className={`px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                    tab === "carte"
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Produits à la Carte
+                </button>
+              </div>
+            </div>
+
+            {/* Nos Menus */}
+            {tab === "menus" && (
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-                {produits[catActive].map((item) => (
+                {menus.map((item) => (
                   <CardItem key={item.id} {...item} />
                 ))}
               </div>
-            </div>
-          )}
-        </div>
+            )}
+
+            {/* Produits à la Carte */}
+            {tab === "carte" && (
+              <div>
+                <div className="flex flex-wrap justify-center gap-3 mb-10">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setCatActive(cat)}
+                      className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                        catActive === cat
+                          ? "bg-primary text-primary-foreground"
+                          : "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+                  {produits[catActive].map((item) => (
+                    <CardItem key={item.id} {...item} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
+
+      <Footer />
     </div>
   );
 };
