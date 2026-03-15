@@ -69,7 +69,7 @@ const FinalCTA = () => {
         {/* Boutons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            onClick={() => navigate("/#menu")}
+            onClick={() => navigate("/carte")}
             className="flex items-center justify-center gap-2 px-10 py-4 rounded-full text-lg font-semibold transition-all hover:scale-105"
             style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
           >
