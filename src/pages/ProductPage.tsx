@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, ShoppingBag, Check, Minus, Plus } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { allProducts } from "@/data/products";
