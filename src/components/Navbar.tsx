@@ -1,92 +1,74 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ShoppingBag, User, LogOut, Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag, User, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/lib/supabase";
 import logo from "@/assets/logo.png";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const { count } = useCart();
   const navigate = useNavigate();
-  const [user, setUser] = useState<any>(null);
-  const [prenom, setPrenom] = useState("");
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setPrenom(session?.user?.user_metadata?.prenom || "");
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
     });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      setPrenom(session?.user?.user_metadata?.prenom || "");
     });
-    return () => subscription.unsubscribe();
+    return () => listener.subscription.unsubscribe();
   }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    setUser(null);
     navigate("/");
   };
 
-  const scrollTo = (id: string) => {
-    setMobileOpen(false);
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
+  const prenom = user?.user_metadata?.prenom || "";
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Breakfast Time" className="h-10 w-auto" />
-        </Link>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-white shadow-sm border-b border-border" : "bg-white"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-0">
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
-          <button onClick={() => scrollTo("menu")} className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            Menu
-          </button>
-          <button onClick={() => scrollTo("about")} className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            À propos
-          </button>
-          <button onClick={() => scrollTo("how")} className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            Comment ça marche
-          </button>
-          <button onClick={() => scrollTo("delivery")} className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            Livraison
-          </button>
-        </div>
+        {/* Gauche — vide */}
+        <div className="flex-1" />
 
-        {/* Desktop right */}
-        <div className="hidden md:flex items-center gap-4">
-          <Link to="/panier" className="relative text-foreground hover:text-primary transition-colors">
-            <ShoppingBag size={22} />
-            {count > 0 && (
-              <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                {count}
-              </span>
-            )}
-          </Link>
+        {/* Centre — Logo */}
+        <a href="/" className="flex-1 flex justify-center">
+          <img src={logo} alt="Breakfast Time" className="h-16 w-auto" />
+        </a>
+
+        {/* Droite */}
+        <div className="flex-1 flex justify-end items-center gap-3">
 
           {user ? (
-            <div className="relative group">
-              <button className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
-                <User size={18} />
-                {prenom}
+            <div className="hidden md:flex items-center gap-3 relative group">
+              <button className="flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
+                <User size={16} className="text-primary" />
+                Bonjour {prenom} !
               </button>
-              {/* Menu déroulant */}
-              <div className="absolute top-8 right-0 bg-card rounded-2xl shadow-lg border border-border py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <a
+              <div className="absolute top-8 right-0 bg-white rounded-2xl shadow-lg border border-border py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                
                   href="/mon-compte"
                   className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
                 >
                   <User size={15} className="text-primary" />
                   Mon compte
                 </a>
-                <a
+                
                   href="/mes-commandes"
                   className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
                 >
@@ -96,7 +78,7 @@ const Navbar = () => {
                 <div className="border-t border-border my-1" />
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-destructive hover:bg-destructive/10 transition-colors"
+                  className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors"
                 >
                   <LogOut size={15} />
                   Déconnexion
@@ -104,47 +86,49 @@ const Navbar = () => {
               </div>
             </div>
           ) : (
-            <div className="flex items-center gap-3">
-              <a
+            <div className="hidden md:flex items-center gap-3">
+              
                 href="/connexion"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
               >
                 Connexion
               </a>
-              <a
+              
                 href="/inscription"
-                className="text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 transition-opacity"
+                className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
               >
                 S'inscrire
               </a>
             </div>
           )}
-        </div>
 
-        {/* Mobile hamburger */}
-        <div className="flex md:hidden items-center gap-3">
-          <Link to="/panier" className="relative text-foreground">
-            <ShoppingBag size={22} />
+          {/* Icône panier */}
+          <button
+            onClick={() => navigate("/panier")}
+            className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
+          >
+            <ShoppingBag size={22} className="text-foreground" />
             {count > 0 && (
-              <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-primary-foreground text-xs font-bold rounded-full flex items-center justify-center">
                 {count}
               </span>
             )}
-          </Link>
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="text-foreground">
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden text-foreground"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-background px-4 py-4 space-y-3">
-          <button onClick={() => scrollTo("menu")} className="block text-foreground text-sm py-2">Menu</button>
-          <button onClick={() => scrollTo("about")} className="block text-foreground text-sm py-2">À propos</button>
-          <button onClick={() => scrollTo("how")} className="block text-foreground text-sm py-2">Comment ça marche</button>
-          <button onClick={() => scrollTo("delivery")} className="block text-foreground text-sm py-2">Livraison</button>
-          <div className="border-t border-border pt-3">
+      {menuOpen && (
+        <div className="md:hidden bg-white border-t border-border animate-fade-in">
+          <div className="flex flex-col px-6 py-4 gap-4">
             {user ? (
               <div className="flex flex-col gap-2">
                 <p className="text-foreground font-medium py-2">Bonjour {prenom} !</p>
@@ -152,15 +136,20 @@ const Navbar = () => {
                 <a href="/mes-commandes" className="text-foreground py-2 text-sm">Mes commandes</a>
                 <button
                   onClick={handleLogout}
-                  className="text-destructive font-medium py-2 text-left text-sm"
+                  className="text-red-500 font-medium py-2 text-left text-sm"
                 >
                   Déconnexion
                 </button>
               </div>
             ) : (
-              <div className="flex flex-col gap-2">
-                <a href="/connexion" className="text-foreground text-sm py-2">Connexion</a>
-                <a href="/inscription" className="text-sm font-medium bg-primary text-primary-foreground px-4 py-2 rounded-full text-center">
+              <div className="flex flex-col gap-4">
+                <a href="/connexion" className="text-foreground font-medium py-2">
+                  Connexion
+                </a>
+                
+                  href="/inscription"
+                  className="bg-primary text-primary-foreground text-center px-5 py-3 rounded-full font-semibold"
+                >
                   S'inscrire
                 </a>
               </div>
