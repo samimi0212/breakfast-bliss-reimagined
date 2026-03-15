@@ -219,7 +219,7 @@ const CardItem = ({ id, name, price, img }: { id: string; name: string; price: s
   return (
     <div
       onClick={() => navigate(`/produit/${id}`)}
-      className="bg-card rounded-2xl overflow-hidden hover-lift group cursor-pointer max-w-xs mx-auto w-full"
+      className="bg-card rounded-2xl overflow-hidden hover-lift group cursor-pointer flex flex-col h-full"
       style={{ boxShadow: "var(--card-shadow)" }}
     >
       <div className="relative overflow-hidden aspect-square">
@@ -230,7 +230,7 @@ const CardItem = ({ id, name, price, img }: { id: string; name: string; price: s
           loading="lazy"
         />
       </div>
-      <div className="p-4 flex flex-col" style={{ minHeight: "100px" }}>
+      <div className="p-4 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-2 mb-3 flex-1">
           <h3 className="font-display text-base font-semibold leading-tight">{name}</h3>
           <span className="text-primary font-bold text-base flex-shrink-0">{price}</span>
@@ -301,7 +301,7 @@ const CartePage = () => {
 
           {/* Nos Menus */}
           {tab === "menus" && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
               {menus.map((item) => (
                 <CardItem key={item.id} {...item} />
               ))}
@@ -326,7 +326,7 @@ const CartePage = () => {
                   </button>
                 ))}
               </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
                 {produits[catActive].map((item) => (
                   <CardItem key={item.id} {...item} />
                 ))}
