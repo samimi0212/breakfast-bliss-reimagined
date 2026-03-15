@@ -24,8 +24,7 @@ const HeroSection = () => (
       />
       <div className="absolute inset-0" style={{ background: "var(--hero-overlay)" }} />
 
-      {/* Contenu */}
-      <div className="relative z-10 text-center max-w-3xl mx-auto px-6 pt-24">
+      <div className="relative z-10 text-center max-w-3xl mx-auto px-6">
         <div
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-6 animate-fade-up"
           style={{
@@ -40,11 +39,11 @@ const HeroSection = () => (
         </div>
 
         <h1
-          className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 animate-fade-up"
+          className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 animate-fade-up"
           style={{ animationDelay: "0.3s", color: "hsl(0 0% 100%)" }}
         >
           Rendre l'ordinaire{" "}
-          <span className="italic block">
+          <span className="italic">
             <span style={{ color: "#DFF057" }}>Extra</span>
             <span style={{ color: "#ffffff" }}>ordinaire</span>
           </span>
@@ -55,23 +54,23 @@ const HeroSection = () => (
           style={{ animationDelay: "0.5s", color: "hsl(0 0% 100% / 0.8)" }}
         >
           Des petits-déjeuners et brunchs d'exception, livrés chez vous en 30 minutes.
+          Alpes-Maritimes, 7j/7.
         </p>
 
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up"
           style={{ animationDelay: "0.7s" }}
         >
-          <a
+          
             href="#menu"
-            className="px-8 py-4 rounded-full text-base font-semibold transition-all hover:scale-105"
-            style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
+            className="bg-primary text-primary-foreground px-8 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity"
           >
             Découvrir la carte
           </a>
-          <a
+          
             href="#how"
-            className="border-2 px-8 py-4 rounded-full text-base font-semibold transition-colors hover:bg-white/10"
-            style={{ borderColor: "rgba(255,255,255,0.4)", color: "white" }}
+            className="border-2 px-8 py-4 rounded-full text-lg font-semibold transition-colors hover:bg-card/10"
+            style={{ borderColor: "hsl(0 0% 100% / 0.3)", color: "hsl(0 0% 100%)" }}
           >
             Comment ça marche
           </a>
@@ -81,7 +80,7 @@ const HeroSection = () => (
       {/* Scroll indicator */}
       <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-        style={{ color: "hsl(0 0% 100% / 0.5)" }}
+        style={{ color: "hsl(0 0% 100% / 0.6)" }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M12 5v14M5 12l7 7 7-7" />
@@ -90,10 +89,7 @@ const HeroSection = () => (
     </div>
 
     {/* Bandeau défilant */}
-    <div
-      className="relative z-20 py-4 overflow-hidden"
-      style={{ backgroundColor: "#DFF057" }}
-    >
+    <div className="relative z-20 py-4 overflow-hidden" style={{ backgroundColor: "#DFF057" }}>
       <div className="flex animate-marquee whitespace-nowrap">
         {badges.map((badge, i) => (
           <div
