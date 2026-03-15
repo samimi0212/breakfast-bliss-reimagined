@@ -47,7 +47,7 @@ const Navbar = () => {
 
         {/* Center — Logo */}
         <a href="/" className="flex-1 flex justify-center">
-          <img src={logo} alt="Breakfast Time" className="h-16 w-auto" />
+          <img src={logo} alt="Breakfast Time" className="h-20 w-auto" />
         </a>
 
         {/* Right */}
@@ -114,10 +114,7 @@ const Navbar = () => {
           </button>
 
           {/* Mobile toggle */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-foreground"
-          >
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-foreground">
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -130,12 +127,13 @@ const Navbar = () => {
             {user ? (
               <div className="flex flex-col gap-2">
                 <p className="text-foreground font-medium py-2">Bonjour {prenom} !</p>
-                <a href="/mon-compte" className="text-foreground py-2 text-sm">Mon compte</a>
-                <a href="/mes-commandes" className="text-foreground py-2 text-sm">Mes commandes</a>
-                <button
-                  onClick={handleLogout}
-                  className="text-red-500 font-medium py-2 text-left text-sm"
-                >
+                <a href="/mon-compte" className="text-foreground py-2 text-sm">
+                  Mon compte
+                </a>
+                <a href="/mes-commandes" className="text-foreground py-2 text-sm">
+                  Mes commandes
+                </a>
+                <button onClick={handleLogout} className="text-red-500 font-medium py-2 text-left text-sm">
                   Déconnexion
                 </button>
               </div>
