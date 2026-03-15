@@ -28,7 +28,6 @@ const ProductPage = () => {
     setSelections((prev) => ({ ...prev, [optionId]: choice }));
   };
 
-
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -97,7 +96,6 @@ const ProductPage = () => {
             {/* Prix */}
             <div className="flex items-baseline gap-2">
               <span className="text-4xl font-display font-bold text-primary">{product.price}</span>
-              <span className="text-muted-foreground text-sm">/ personne</span>
             </div>
 
             {/* Composition */}
