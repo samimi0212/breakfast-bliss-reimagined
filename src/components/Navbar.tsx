@@ -42,18 +42,16 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-0">
-
-        {/* Gauche — vide */}
+        {/* Left spacer */}
         <div className="flex-1" />
 
-        {/* Centre — Logo */}
+        {/* Center — Logo */}
         <a href="/" className="flex-1 flex justify-center">
           <img src={logo} alt="Breakfast Time" className="h-16 w-auto" />
         </a>
 
-        {/* Droite */}
+        {/* Right */}
         <div className="flex-1 flex justify-end items-center gap-3">
-
           {user ? (
             <div className="hidden md:flex items-center gap-3 relative group">
               <button className="flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors">
@@ -61,14 +59,14 @@ const Navbar = () => {
                 Bonjour {prenom} !
               </button>
               <div className="absolute top-8 right-0 bg-white rounded-2xl shadow-lg border border-border py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                
+                <a
                   href="/mon-compte"
                   className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
                 >
                   <User size={15} className="text-primary" />
                   Mon compte
                 </a>
-                
+                <a
                   href="/mes-commandes"
                   className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-foreground hover:bg-muted transition-colors"
                 >
@@ -87,13 +85,13 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="hidden md:flex items-center gap-3">
-              
+              <a
                 href="/connexion"
                 className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
               >
                 Connexion
               </a>
-              
+              <a
                 href="/inscription"
                 className="bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
               >
@@ -102,7 +100,7 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* Icône panier */}
+          {/* Cart icon */}
           <button
             onClick={() => navigate("/panier")}
             className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
@@ -146,7 +144,7 @@ const Navbar = () => {
                 <a href="/connexion" className="text-foreground font-medium py-2">
                   Connexion
                 </a>
-                
+                <a
                   href="/inscription"
                   className="bg-primary text-primary-foreground text-center px-5 py-3 rounded-full font-semibold"
                 >
