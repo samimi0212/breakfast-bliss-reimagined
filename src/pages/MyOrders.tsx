@@ -108,7 +108,7 @@ const MyOrders = () => {
                       <div className="flex items-center gap-4 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <Clock size={14} />
-                          {order.heure_livraison} · {order.date_livraison}
+{order.heure_livraison} · {new Date(order.date_livraison).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" })}
                         </span>
                         <span className="flex items-center gap-1">
                           <MapPin size={14} />
