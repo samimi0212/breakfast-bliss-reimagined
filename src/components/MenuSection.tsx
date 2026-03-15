@@ -14,33 +14,24 @@ const MenuSection = () => {
 
   const options = [
     {
-      tag: "Formules complètes",
       title: "Nos Menus",
       desc: "Des formules pensées pour vous — tout est inclus, rien à choisir. Du Menu Français au Brunch complet, on s'occupe de tout.",
       cta: "Voir les menus",
       path: "/?tab=menus#menu",
-      color: "#DFF057",
-      textColor: "#3a3a0a",
       imgIndex: 0,
     },
     {
-      tag: "Liberté totale",
       title: "Composez votre Brunch",
       desc: "Viennoiseries, pains, salé, sucré, boissons... Choisissez chaque élément à la carte et créez le brunch parfait selon vos envies.",
       cta: "Explorer la carte",
       path: "/?tab=carte#menu",
-      color: "var(--primary)",
-      textColor: "white",
       imgIndex: 1,
     },
     {
-      tag: "À partager",
       title: "Plateaux & Planches",
       desc: "Pour un moment à plusieurs — plateaux de viennoiseries, planches de fromages ou de charcuterie. Posez au centre, profitez ensemble.",
       cta: "Découvrir",
       path: "/?tab=carte#menu",
-      color: "#3a3a0a",
-      textColor: "white",
       imgIndex: 2,
     },
   ];
@@ -48,15 +39,14 @@ const MenuSection = () => {
   return (
     <section id="menu" className="section-padding bg-background">
       <div className="max-w-7xl mx-auto">
-
         {/* Titre */}
         <div className="text-center mb-16">
-          <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3">
-            Petit-déjeuner & Brunch
-          </p>
+          <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3">Petit-déjeuner & Brunch</p>
           <h2 className="section-title mb-4">
             Composez votre matin{" "}
-            <span className="italic" style={{ color: "#DFF057" }}>idéal</span>
+            <span className="italic" style={{ color: "#DFF057" }}>
+              idéal
+            </span>
           </h2>
           <p className="section-subtitle mx-auto">
             Menus tout compris ou produits à la carte — vous choisissez, on livre en 30 minutes.
@@ -65,7 +55,6 @@ const MenuSection = () => {
 
         {/* Split screen */}
         <div className="grid lg:grid-cols-2 gap-6 items-stretch">
-
           {/* Gauche — Image */}
           <div className="relative rounded-3xl overflow-hidden aspect-square lg:aspect-auto min-h-96">
             {visuals.map((src, i) => (
@@ -107,39 +96,26 @@ const MenuSection = () => {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    {/* Tag */}
-                    <span
-                      className="inline-block text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-3"
-                      style={{ backgroundColor: option.color, color: option.textColor }}
-                    >
-                      {option.tag}
-                    </span>
-
                     <h3 className="font-display text-2xl font-bold mb-2">{option.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-4">{option.desc}</p>
 
                     <span
-                      className="inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all"
-                      style={{ color: "hsl(var(--primary))" }}
+                      className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full transition-all group-hover:gap-3"
+                      style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
                     >
                       {option.cta}
-                      <ArrowRight size={16} />
+                      <ArrowRight size={14} />
                     </span>
                   </div>
 
                   {/* Mini image */}
                   <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <img
-                      src={visuals[option.imgIndex]}
-                      alt={option.title}
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={visuals[option.imgIndex]} alt={option.title} className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
 
         {/* CTA bas */}
@@ -147,7 +123,7 @@ const MenuSection = () => {
           <p className="text-muted-foreground text-sm mb-4">
             Plus de 30 produits disponibles · Livraison gratuite · 7j/7
           </p>
-          
+
           <a
             href="#menu"
             onClick={() => navigate("/carte")}
@@ -156,7 +132,6 @@ const MenuSection = () => {
             Voir tous les produits →
           </a>
         </div>
-
       </div>
     </section>
   );
