@@ -3,32 +3,9 @@ import logo from "@/assets/logo.png";
 
 const Footer = () => (
   <footer className="bg-foreground" style={{ color: "hsl(var(--background))" }}>
-
-    {/* Bandeau CTA */}
-    <div className="border-b px-6 py-10" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <h3 className="font-display text-2xl font-bold mb-1" style={{ color: "white" }}>
-            Prêt à commander ?
-          </h3>
-          <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
-            Livraison en 30 min · 7j/7 de 7h à 15h · Alpes-Maritimes
-          </p>
-        </div>
-        <a
-          href="/carte"
-          className="flex-shrink-0 px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:scale-105"
-          style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
-        >
-          Voir la carte →
-        </a>
-      </div>
-    </div>
-
     {/* Contenu principal */}
     <div className="px-6 py-16 max-w-6xl mx-auto">
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-
         {/* Logo + description */}
         <div className="lg:col-span-1">
           <img src={logo} alt="Breakfast Time" className="h-16 w-auto mb-4 brightness-0 invert" />
@@ -59,11 +36,31 @@ const Footer = () => (
             Navigation
           </h4>
           <ul className="space-y-3 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
-            <li><a href="/carte" className="hover:text-white transition-colors">La Carte</a></li>
-            <li><a href="/#how" className="hover:text-white transition-colors">Comment ça marche</a></li>
-            <li><a href="/#about" className="hover:text-white transition-colors">À propos</a></li>
-            <li><a href="/#delivery" className="hover:text-white transition-colors">Zone de livraison</a></li>
-            <li><a href="/connexion" className="hover:text-white transition-colors">Mon compte</a></li>
+            <li>
+              <a href="/carte" className="hover:text-white transition-colors">
+                La Carte
+              </a>
+            </li>
+            <li>
+              <a href="/#how" className="hover:text-white transition-colors">
+                Comment ça marche
+              </a>
+            </li>
+            <li>
+              <a href="/#about" className="hover:text-white transition-colors">
+                À propos
+              </a>
+            </li>
+            <li>
+              <a href="/#delivery" className="hover:text-white transition-colors">
+                Zone de livraison
+              </a>
+            </li>
+            <li>
+              <a href="/connexion" className="hover:text-white transition-colors">
+                Mon compte
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -113,25 +110,29 @@ const Footer = () => (
             </button>
           </div>
         </div>
-
       </div>
     </div>
 
     {/* Bas de page */}
-    <div
-      className="border-t px-6 py-6"
-      style={{ borderColor: "rgba(255,255,255,0.08)" }}
-    >
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-sm" style={{ color: "rgba(255,255,255,0.3)" }}>
+    <div className="border-t px-6 py-6" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+      <div
+        className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-sm"
+        style={{ color: "rgba(255,255,255,0.3)" }}
+      >
         <p>© 2026 Breakfast Time. Tous droits réservés.</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-white transition-colors">Mentions légales</a>
-          <a href="#" className="hover:text-white transition-colors">CGV</a>
-          <a href="#" className="hover:text-white transition-colors">Confidentialité</a>
+          <a href="#" className="hover:text-white transition-colors">
+            Mentions légales
+          </a>
+          <a href="#" className="hover:text-white transition-colors">
+            CGV
+          </a>
+          <a href="#" className="hover:text-white transition-colors">
+            Confidentialité
+          </a>
         </div>
       </div>
     </div>
-
   </footer>
 );
 
