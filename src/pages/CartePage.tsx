@@ -235,7 +235,7 @@ const CardItem = ({ id, name, price, img }: { id: string; name: string; price: s
           <h3 className="font-display text-lg font-semibold">{name}</h3>
           <span className="text-primary font-bold text-lg">{price}</span>
         </div>
-        <button className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
+        <button className="w-full border-2 border-primary text-primary py-2.5 rounded-xl font-semibold hover:bg-primary hover:text-primary-foreground transition-colors text-sm">
           Voir le produit →
         </button>
       </div>
