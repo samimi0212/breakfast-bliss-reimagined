@@ -14,7 +14,6 @@ const badges = [
 
 const HeroSection = () => (
   <section className="relative min-h-screen flex flex-col">
-
     {/* Image plein écran */}
     <div className="relative flex-1 flex items-center justify-center overflow-hidden">
       <img
@@ -31,7 +30,7 @@ const HeroSection = () => (
             backgroundColor: "rgba(223, 240, 87, 0.15)",
             border: "1px solid rgba(223, 240, 87, 0.4)",
             color: "#DFF057",
-            animationDelay: "0.1s"
+            animationDelay: "0.1s",
           }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
@@ -53,8 +52,7 @@ const HeroSection = () => (
           className="text-lg md:text-xl mb-10 animate-fade-up"
           style={{ animationDelay: "0.5s", color: "hsl(0 0% 100% / 0.8)" }}
         >
-          Des petits-déjeuners et brunchs d'exception, livrés chez vous en 30 minutes.
-          Alpes-Maritimes, 7j/7.
+          Des petits-déjeuners et brunchs d'exception, livrés chez vous en 30 minutes. Alpes-Maritimes, 7j/7.
         </p>
 
         <div
@@ -62,7 +60,7 @@ const HeroSection = () => (
           style={{ animationDelay: "0.7s" }}
         >
           <a
-            href="#menu"
+            href="/carte"
             className="bg-primary text-primary-foreground px-8 py-4 rounded-full text-lg font-semibold hover:opacity-90 transition-opacity"
           >
             Découvrir la carte
@@ -104,7 +102,6 @@ const HeroSection = () => (
         ))}
       </div>
     </div>
-
   </section>
 );
 
