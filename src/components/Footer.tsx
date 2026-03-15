@@ -15,7 +15,7 @@ const Footer = () => (
             Livraison en 30 min · 7j/7 de 7h à 15h · Alpes-Maritimes
           </p>
         </div>
-        
+        <a
           href="/carte"
           className="flex-shrink-0 px-8 py-3.5 rounded-full font-semibold text-sm transition-all hover:scale-105"
           style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
@@ -36,14 +36,14 @@ const Footer = () => (
             Des petits-déjeuners et brunchs d'exception livrés chez vous dans les Alpes-Maritimes.
           </p>
           <div className="flex gap-3 mt-6">
-            
+            <a
               href="#"
               className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110"
               style={{ backgroundColor: "rgba(223,240,87,0.15)" }}
             >
               <Instagram size={18} style={{ color: "#DFF057" }} />
             </a>
-            
+            <a
               href="#"
               className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110"
               style={{ backgroundColor: "rgba(223,240,87,0.15)" }}
