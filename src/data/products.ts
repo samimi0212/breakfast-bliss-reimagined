@@ -332,4 +332,90 @@ export const allProducts: Product[] = [
     desc: "Belle sélection de fromages affinés avec accompagnements.",
     composition: ["Comté", "Brie", "Chèvre", "Roquefort", "Fruits secs et confiture"],
   },
+  // ---- ÉVÉNEMENTS ----
+  {
+    id: "brunch-mariage",
+    name: "Brunch Mariage",
+    price: "Sur devis",
+    category: "Événements",
+    img: "https://static.wixstatic.com/media/21c6e4_137b677c57ed4588b83a5cd2f9c99169~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_137b677c57ed4588b83a5cd2f9c99169~mv2.png",
+    desc: "Un brunch d'exception pour votre mariage. Formule personnalisée selon vos envies et le nombre de convives.",
+    composition: ["Buffet viennoiseries", "Salé & sucré", "Boissons chaudes & froides", "Décoration incluse", "Service sur place"],
+    options: [
+      {
+        id: "nb-personnes",
+        label: "Nombre de personnes",
+        required: true,
+        choices: ["10 à 20 personnes", "20 à 50 personnes", "50 à 100 personnes", "Plus de 100 personnes"],
+      },
+    ],
+  },
+  {
+    id: "brunch-entreprise",
+    name: "Brunch Entreprise",
+    price: "Sur devis",
+    category: "Événements",
+    img: "https://static.wixstatic.com/media/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg",
+    desc: "Offrez à vos équipes un moment gourmand et convivial. Idéal pour réunions, séminaires ou team building.",
+    composition: ["Viennoiseries fraîches", "Plateaux salé", "Fruits frais", "Café & jus de fruits", "Livraison & installation"],
+    options: [
+      {
+        id: "nb-personnes",
+        label: "Nombre de personnes",
+        required: true,
+        choices: ["5 à 10 personnes", "10 à 20 personnes", "20 à 50 personnes", "Plus de 50 personnes"],
+      },
+    ],
+  },
+  {
+    id: "brunch-groupe",
+    name: "Brunch Groupe",
+    price: "Sur devis",
+    category: "Événements",
+    img: "https://static.wixstatic.com/media/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png",
+    desc: "Anniversaire, enterrement de vie, réunion de famille… Partagez un moment unique autour d'un brunch généreux.",
+    composition: ["Buffet viennoiseries & pains", "Sucré & salé", "Boissons fraîches", "Décoration thématique possible"],
+    options: [
+      {
+        id: "nb-personnes",
+        label: "Nombre de personnes",
+        required: true,
+        choices: ["5 à 10 personnes", "10 à 20 personnes", "20 à 30 personnes", "Plus de 30 personnes"],
+      },
+    ],
+  },
+  {
+    id: "box-cadeau-events",
+    name: "Box Cadeau Événement",
+    price: "Sur devis",
+    category: "Événements",
+    img: "https://static.wixstatic.com/media/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png",
+    desc: "Offrez une box petit-déjeuner personnalisée pour marquer une occasion spéciale.",
+    composition: ["Box personnalisée", "Viennoiseries & gourmandises", "Message manuscrit", "Emballage cadeau", "Livraison incluse"],
+    options: [
+      {
+        id: "occasion",
+        label: "Occasion",
+        required: true,
+        choices: ["Anniversaire", "Mariage", "Naissance", "Fête des mères / pères", "Autre"],
+      },
+    ],
+  },
+  {
+    id: "petit-dejeuner-seminaire",
+    name: "Petit-déjeuner Séminaire",
+    price: "Sur devis",
+    category: "Événements",
+    img: "https://static.wixstatic.com/media/21c6e4_34c4bd51a8a94133aebf056e7c1dfbbe~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_34c4bd51a8a94133aebf056e7c1dfbbe~mv2.png",
+    desc: "Démarrez votre séminaire du bon pied avec un petit-déjeuner professionnel livré sur site.",
+    composition: ["Viennoiseries individuelles", "Café & thé", "Jus de fruits frais", "Fruits de saison", "Service discret & ponctuel"],
+    options: [
+      {
+        id: "nb-personnes",
+        label: "Nombre de personnes",
+        required: true,
+        choices: ["5 à 15 personnes", "15 à 30 personnes", "30 à 60 personnes", "Plus de 60 personnes"],
+      },
+    ],
+  },
 ];

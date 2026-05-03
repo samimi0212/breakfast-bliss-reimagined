@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { allProducts } from "@/data/products";
 
 const menus = [
   {
@@ -216,6 +217,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
 
 const categories = Object.keys(produits);
 const allProduits = Object.values(produits).flat();
+const evenements = allProducts.filter((p) => p.category === "Événements");
 
 const CardItem = ({ id, name, price, img }: { id: string; name: string; price: string; img: string }) => {
   const navigate = useNavigate();
@@ -249,9 +251,11 @@ const CardItem = ({ id, name, price, img }: { id: string; name: string; price: s
 const CartePage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [tab, setTab] = useState<"menus" | "carte">(() => {
+  const [tab, setTab] = useState<"menus" | "carte" | "evenements">(() => {
     const t = searchParams.get("tab");
-    return t === "carte" ? "carte" : "menus";
+    if (t === "carte") return "carte";
+    if (t === "evenements") return "evenements";
+    return "menus";
   });
   const [catActive, setCatActive] = useState(() => {
     const cat = searchParams.get("cat");
@@ -337,7 +341,7 @@ const CartePage = () => {
           <div>
             {/* Onglets */}
             <div className="flex justify-center mb-10 mt-4">
-              <div className="bg-muted rounded-2xl p-1.5 flex gap-2">
+              <div className="bg-muted rounded-2xl p-1.5 flex gap-2 flex-wrap justify-center">
                 <button
                   onClick={() => setTab("menus")}
                   className={`px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
@@ -357,6 +361,16 @@ const CartePage = () => {
                   }`}
                 >
                   Produits à la Carte
+                </button>
+                <button
+                  onClick={() => setTab("evenements")}
+                  className={`px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200 ${
+                    tab === "evenements"
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Événements
                 </button>
               </div>
             </div>
@@ -390,6 +404,23 @@ const CartePage = () => {
                 </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
                   {produits[catActive].map((item) => (
+                    <CardItem key={item.id} {...item} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Événements */}
+            {tab === "evenements" && (
+              <div>
+                <div className="text-center mb-10">
+                  <p className="text-muted-foreground max-w-xl mx-auto">
+                    Mariage, brunch entreprise, anniversaire… Nous préparons votre événement sur mesure.
+                    Sélectionnez une formule pour passer votre commande.
+                  </p>
+                </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+                  {evenements.map((item) => (
                     <CardItem key={item.id} {...item} />
                   ))}
                 </div>
