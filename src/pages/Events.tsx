@@ -68,79 +68,49 @@ const Events = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="pt-24 pb-0 px-6 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[480px]">
-            {/* Texte */}
-            <div className="py-10">
-              <div
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-6"
-                style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
-              >
-                <Sparkles size={12} />
-                Événements sur mesure
+      <div className="pt-32 pb-20 px-6 text-center" style={{ backgroundColor: "#f4f1ea" }}>
+        <div className="max-w-3xl mx-auto">
+          <div
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-6"
+            style={{ backgroundColor: "rgba(58,58,10,0.08)", color: "#5a5a1a" }}
+          >
+            <Sparkles size={12} />
+            Sur mesure pour chaque occasion
+          </div>
+          <h1 className="font-display text-4xl md:text-5xl font-bold mb-5 leading-tight" style={{ color: "#2a2a08" }}>
+            Vos événements,{" "}
+            <span className="italic" style={{ color: "#7a7020" }}>
+              notre signature
+            </span>
+          </h1>
+          <p className="text-base leading-relaxed mb-10 max-w-xl mx-auto" style={{ color: "#5a5a40" }}>
+            De l'intime au grand format, nous créons l'expérience gourmande qui vous ressemble — mariage, entreprise, anniversaire.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={() => setShowAppointment(true)}
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold transition-all hover:scale-105"
+              style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
+            >
+              <Phone size={16} />
+              Prendre RDV téléphonique
+            </button>
+            <button
+              onClick={() => setShowDevis(true)}
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border-2 transition-colors"
+              style={{ borderColor: "rgba(58,58,10,0.2)", color: "#3a3a0a" }}
+            >
+              <FileText size={16} />
+              Demander un devis
+            </button>
+          </div>
+          <div className="flex items-center justify-center gap-8 mt-10 pt-8" style={{ borderTop: "1px solid rgba(58,58,10,0.12)" }}>
+            {[["12€", "Mariage / pers."], ["9€", "Entreprise / pers."], ["8€", "Groupe / pers."]].map(([price, label]) => (
+              <div key={label}>
+                <p className="font-display text-2xl font-bold" style={{ color: "#3a3a0a" }}>{price}</p>
+                <p className="text-xs mt-0.5" style={{ color: "#7a7a50" }}>{label}</p>
               </div>
-              <h1 className="font-display text-4xl md:text-5xl font-bold mb-5 leading-tight">
-                Vos événements,{" "}
-                <span className="italic" style={{ color: "#8a7c2a" }}>
-                  notre signature
-                </span>
-              </h1>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-md">
-                De l'intime au grand format, nous créons l'expérience gourmande qui vous ressemble — mariage, entreprise, anniversaire.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button
-                  onClick={() => setShowAppointment(true)}
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold transition-all hover:scale-105"
-                  style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
-                >
-                  <Phone size={16} />
-                  Prendre RDV téléphonique
-                </button>
-                <button
-                  onClick={() => setShowDevis(true)}
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border-2 border-foreground/15 hover:border-foreground/40 transition-colors"
-                >
-                  <FileText size={16} />
-                  Demander un devis
-                </button>
-              </div>
-              {/* Petits indicateurs */}
-              <div className="flex items-center gap-6 mt-8">
-                {[["12€", "Mariage / pers."], ["9€", "Entreprise / pers."], ["8€", "Groupe / pers."]].map(([price, label]) => (
-                  <div key={label}>
-                    <p className="font-display text-xl font-bold" style={{ color: "#3a3a0a" }}>{price}</p>
-                    <p className="text-xs text-muted-foreground">{label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Image collage */}
-            <div className="hidden lg:grid grid-cols-2 gap-3 h-[480px]">
-              <div className="rounded-3xl overflow-hidden row-span-2">
-                <img
-                  src="https://static.wixstatic.com/media/21c6e4_137b677c57ed4588b83a5cd2f9c99169~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_137b677c57ed4588b83a5cd2f9c99169~mv2.png"
-                  alt="Brunch événement"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="rounded-3xl overflow-hidden">
-                <img
-                  src="https://static.wixstatic.com/media/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg"
-                  alt="Brunch entreprise"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="rounded-3xl overflow-hidden">
-                <img
-                  src="https://static.wixstatic.com/media/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png"
-                  alt="Brunch groupe"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
