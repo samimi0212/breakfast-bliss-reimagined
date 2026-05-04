@@ -84,7 +84,7 @@ const Events = () => {
             </span>
           </h1>
           <p className="text-base leading-relaxed mb-10 max-w-xl mx-auto" style={{ color: "#5a5a40" }}>
-            De l'intime au grand format, nous créons l'expérience gourmande qui vous ressemble — mariage, entreprise, anniversaire.
+            De l'intime au grand format, nous créons l'expérience gourmande qui vous ressemble — mariage, entreprise, anniversaire, EVJF et bien plus
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
@@ -103,14 +103,6 @@ const Events = () => {
               <FileText size={16} />
               Demander un devis
             </button>
-          </div>
-          <div className="flex items-center justify-center gap-8 mt-10 pt-8" style={{ borderTop: "1px solid rgba(58,58,10,0.12)" }}>
-            {[["12€", "Mariage / pers."], ["9€", "Entreprise / pers."], ["8€", "Groupe / pers."]].map(([price, label]) => (
-              <div key={label}>
-                <p className="font-display text-2xl font-bold" style={{ color: "#3a3a0a" }}>{price}</p>
-                <p className="text-xs mt-0.5" style={{ color: "#7a7a50" }}>{label}</p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
