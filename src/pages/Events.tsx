@@ -4,13 +4,16 @@ import Footer from "@/components/Footer";
 import EventBookingForm from "@/components/EventBookingForm";
 import PhoneAppointmentForm from "@/components/PhoneAppointmentForm";
 import { Sparkles, Phone, FileText, X, Heart, Briefcase, Users, Check } from "lucide-react";
+import brunchMariage from "@/assets/brunch-mariage.jpg";
+import brunchEntreprise from "@/assets/brunch-entreprise.jpg";
+import brunchGroupe from "@/assets/brunch-groupe.png";
 
 const eventDetails = [
   {
     id: "mariage",
     name: "Brunch Mariage",
     price: "12€",
-    image: "https://static.wixstatic.com/media/21c6e4_137b677c57ed4588b83a5cd2f9c99169~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_137b677c57ed4588b83a5cd2f9c99169~mv2.png",
+    image: brunchMariage,
     icon: Heart,
     accroche: "Le plus beau jour mérite un buffet d'exception",
     description:
@@ -27,7 +30,7 @@ const eventDetails = [
     id: "entreprise",
     name: "Brunch Entreprise",
     price: "9€",
-    image: "https://static.wixstatic.com/media/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg",
+    image: brunchEntreprise,
     icon: Briefcase,
     accroche: "Boostez vos réunions et séminaires",
     description:
@@ -44,7 +47,7 @@ const eventDetails = [
     id: "groupe",
     name: "Brunch Groupe",
     price: "8€",
-    image: "https://static.wixstatic.com/media/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_b9896374a7884f76b153e6af574a0bdd~mv2.png",
+    image: brunchGroupe,
     icon: Users,
     accroche: "Tous vos moments de partage",
     description:
