@@ -9,12 +9,13 @@ const steps = [
   {
     icon: ShoppingBag,
     title: "Commandez",
-    desc: "Passez votre commande en quelques clics. Paiement simple et sécurisé.",
+    desc: "Passez commande directement sur Deliveroo ou Uber Eats en quelques clics.",
+    platforms: true,
   },
   {
     icon: Truck,
     title: "Savourez",
-    desc: "Livré chez vous en 30 minutes, frais et prêt à déguster. 7j/7 de 7h à 15h.",
+    desc: "Livré chez vous frais et prêt à déguster. 7j/7 de 8h à 15h.",
   },
 ];
 
@@ -35,6 +36,21 @@ const HowItWorks = () => (
             <div className="text-sm font-bold text-primary mb-2">0{i + 1}</div>
             <h3 className="text-xl font-display font-semibold mb-3">{s.title}</h3>
             <p className="text-muted-foreground leading-relaxed">{s.desc}</p>
+            {s.platforms && (
+              <div className="flex items-center gap-3 mt-4">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Deliveroo_logo.svg/200px-Deliveroo_logo.svg.png"
+                  alt="Deliveroo"
+                  className="h-6 object-contain opacity-80"
+                />
+                <span className="text-muted-foreground">·</span>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Uber_Eats_logo_2023.svg/200px-Uber_Eats_logo_2023.svg.png"
+                  alt="Uber Eats"
+                  className="h-6 object-contain opacity-80"
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
