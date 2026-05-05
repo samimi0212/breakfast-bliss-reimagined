@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import logo from "@/assets/logo.png";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Login = () => {
+  usePageMeta("Connexion | Breakfast Time", "Connectez-vous à votre compte Breakfast Time.");
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);

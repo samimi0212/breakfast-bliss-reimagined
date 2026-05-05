@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventBookingForm from "@/components/EventBookingForm";
@@ -63,6 +64,10 @@ const eventDetails = [
 ];
 
 const Events = () => {
+  usePageMeta(
+    "Événements — Mariage, Entreprise, Groupe | Breakfast Time",
+    "Breakfast Time organise vos petits-déjeuners d'exception pour mariages, séminaires et événements de groupe dans les Alpes-Maritimes."
+  );
   const [showAppointment, setShowAppointment] = useState(false);
   const [showDevis, setShowDevis] = useState(false);
 

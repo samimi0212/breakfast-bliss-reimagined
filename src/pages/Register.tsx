@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import logo from "@/assets/logo.png";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Register = () => {
+  usePageMeta("Inscription | Breakfast Time", "Créez votre compte Breakfast Time et commandez vos petits-déjeuners livrés à domicile.");
   const navigate = useNavigate();
   const [form, setForm] = useState({
     prenom: "",

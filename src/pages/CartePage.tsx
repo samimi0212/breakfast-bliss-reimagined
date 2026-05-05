@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const menus = [
   {
@@ -247,6 +248,10 @@ const CardItem = ({ id, name, price, img }: { id: string; name: string; price: s
 };
 
 const CartePage = () => {
+  usePageMeta(
+    "Notre Carte — Menus & Brunchs | Breakfast Time",
+    "Découvrez nos menus petit-déjeuner et brunch livrés à domicile dans les Alpes-Maritimes. Produits frais et locaux, 7j/7."
+  );
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [tab, setTab] = useState<"menus" | "carte">(() => {
