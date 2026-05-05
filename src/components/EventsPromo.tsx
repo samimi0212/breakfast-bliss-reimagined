@@ -1,76 +1,118 @@
 import { useNavigate } from "react-router-dom";
-import { Heart, Briefcase, Users, Gift } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
+import brunchMariage from "@/assets/brunch-mariage.jpg";
+import brunchEntreprise from "@/assets/brunch-entreprise.jpg";
+import brunchGroupe from "@/assets/brunch-groupe.png";
 
-const events = [
-  { icon: Heart, label: "Mariage" },
-  { icon: Users, label: "Brunch groupe" },
-  { icon: Briefcase, label: "Entreprise" },
-  { icon: Gift, label: "Box cadeau" },
+const formules = [
+  {
+    label: "Mariage",
+    tag: "Cérémonie & réception",
+    price: "À partir de 12€/pers.",
+    image: brunchMariage,
+  },
+  {
+    label: "Entreprise",
+    tag: "Réunion & séminaire",
+    price: "À partir de 9€/pers.",
+    image: brunchEntreprise,
+  },
+  {
+    label: "Groupe",
+    tag: "Anniversaire & retrouvailles",
+    price: "À partir de 8€/pers.",
+    image: brunchGroupe,
+  },
 ];
 
 const EventsPromo = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="section-padding bg-background">
-      <div className="max-w-6xl mx-auto">
-        <div className="rounded-3xl overflow-hidden grid md:grid-cols-2" style={{ background: "hsl(var(--foreground))" }}>
+    <section className="py-24 px-6 md:px-12 lg:px-20" style={{ backgroundColor: "#f4f1ea" }}>
+      <div className="max-w-7xl mx-auto">
 
-          {/* Colonne gauche — texte */}
-          <div className="p-10 md:p-14 flex flex-col justify-center">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+          <div>
             <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-6 w-fit"
-              style={{
-                backgroundColor: "rgba(223, 240, 87, 0.15)",
-                border: "1px solid rgba(223, 240, 87, 0.4)",
-                color: "#DFF057",
-              }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-5"
+              style={{ backgroundColor: "rgba(58,58,10,0.08)", color: "#5a5a1a" }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-              Nouveau
+              <Sparkles size={11} />
+              Sur mesure pour chaque occasion
             </div>
-
-            <h2 className="font-display text-3xl md:text-4xl font-bold leading-tight mb-4" style={{ color: "white" }}>
-              Votre événement,{" "}
-              <span className="italic" style={{ color: "#DFF057" }}>
-                sur mesure
+            <h2
+              className="font-display text-4xl md:text-5xl font-bold leading-tight"
+              style={{ color: "#2a2a08" }}
+            >
+              Vos événements,{" "}
+              <span className="italic" style={{ color: "#7a7020" }}>
+                notre signature
               </span>
             </h2>
-
-            <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.65)" }}>
-              Mariage, brunch d'entreprise, anniversaire… Nous concevons des formules personnalisées pour rendre chaque occasion inoubliable. Commandez directement en ligne.
-            </p>
-
-            <button
-              onClick={() => navigate("/evenements")}
-              className="flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-sm transition-all hover:scale-105 w-fit"
-              style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
-            >
-              Voir les formules événements →
-            </button>
           </div>
 
-          {/* Colonne droite — cartes événements */}
-          <div className="p-10 md:p-14 grid grid-cols-2 gap-4 content-center">
-            {events.map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl text-center cursor-pointer hover:scale-105 transition-transform duration-200"
-                style={{ backgroundColor: "rgba(223, 240, 87, 0.08)", border: "1px solid rgba(223, 240, 87, 0.15)" }}
-                onClick={() => navigate("/evenements")}
-              >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: "rgba(223, 240, 87, 0.15)" }}
-                >
-                  <Icon size={22} style={{ color: "#DFF057" }} />
-                </div>
-                <span className="text-sm font-semibold" style={{ color: "white" }}>{label}</span>
-              </div>
-            ))}
-          </div>
-
+          <button
+            onClick={() => navigate("/evenements")}
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold transition-all hover:scale-105 whitespace-nowrap self-start md:self-auto"
+            style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
+          >
+            Voir toutes les formules
+            <ArrowRight size={15} />
+          </button>
         </div>
+
+        {/* Cards photos */}
+        <div className="grid md:grid-cols-3 gap-5">
+          {formules.map(({ label, tag, price, image }) => (
+            <div
+              key={label}
+              className="group relative overflow-hidden rounded-2xl cursor-pointer"
+              style={{ aspectRatio: "4/5" }}
+              onClick={() => navigate("/evenements")}
+            >
+              {/* Photo */}
+              <img
+                src={image}
+                alt={label}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+
+              {/* Overlay dégradé */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+              {/* Price tag */}
+              <div
+                className="absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-bold"
+                style={{ backgroundColor: "rgba(223,240,87,0.95)", color: "#3a3a0a" }}
+              >
+                {price}
+              </div>
+
+              {/* Text bas */}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="text-xs font-semibold tracking-widest uppercase mb-1.5" style={{ color: "rgba(255,255,255,0.6)" }}>
+                  {tag}
+                </p>
+                <h3 className="font-display text-2xl font-bold text-white mb-3">
+                  Brunch {label}
+                </h3>
+                <span
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ color: "#DFF057" }}
+                >
+                  Découvrir <ArrowRight size={12} />
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Sous-texte */}
+        <p className="text-center mt-10 text-sm" style={{ color: "#8a8a60" }}>
+          Devis personnalisé · Livraison & installation incluses · Disponible 7j/7
+        </p>
       </div>
     </section>
   );
