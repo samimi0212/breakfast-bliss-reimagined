@@ -267,6 +267,11 @@ const CartePage = () => {
     setTab(t);
     setSearchParams({ tab: t }, { replace: true });
   };
+
+  const switchCat = (cat: string) => {
+    setCatActive(cat);
+    setSearchParams({ tab: "carte", cat }, { replace: true });
+  };
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -387,7 +392,7 @@ const CartePage = () => {
                   {categories.map((cat) => (
                     <button
                       key={cat}
-                      onClick={() => setCatActive(cat)}
+                      onClick={() => switchCat(cat)}
                       className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                         catActive === cat
                           ? "bg-primary text-primary-foreground"
