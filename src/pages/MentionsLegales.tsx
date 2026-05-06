@@ -13,7 +13,7 @@ const MentionsLegales = () => (
           Breakfast Time<br />
           Pont du Lys – 06600 Antibes<br />
           SIREN : 507 940 070<br />
-          Contact : <a href="mailto:hello@breakfast-time.fr" className="underline hover:text-foreground transition-colors">hello@breakfast-time.fr</a>
+          Contact : <a href="mailto:contact@breakfast-time.fr" className="underline hover:text-foreground transition-colors">contact@breakfast-time.fr</a>
         </p>
       </section>
 

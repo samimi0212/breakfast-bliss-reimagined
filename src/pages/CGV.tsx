@@ -13,7 +13,7 @@ const CGV = () => (
           Breakfast Time<br />
           Pont du Lys – 06600 Antibes<br />
           SIREN : 507 940 070<br />
-          Contact : <a href="mailto:hello@breakfast-time.fr" className="underline hover:text-foreground transition-colors">hello@breakfast-time.fr</a>
+          Contact : <a href="mailto:contact@breakfast-time.fr" className="underline hover:text-foreground transition-colors">contact@breakfast-time.fr</a>
         </p>
       </section>
 
@@ -71,7 +71,7 @@ const CGV = () => (
       <section className="mb-10">
         <h2 className="text-lg font-semibold mb-3">9. Réclamations</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Toute réclamation relative à une commande doit être adressée dans les 24 heures suivant la livraison à l'adresse : <a href="mailto:hello@breakfast-time.fr" className="underline hover:text-foreground transition-colors">hello@breakfast-time.fr</a>. Nous nous engageons à vous répondre dans les meilleurs délais.
+          Toute réclamation relative à une commande doit être adressée dans les 24 heures suivant la livraison à l'adresse : <a href="mailto:contact@breakfast-time.fr" className="underline hover:text-foreground transition-colors">contact@breakfast-time.fr</a>. Nous nous engageons à vous répondre dans les meilleurs délais.
         </p>
       </section>
 

@@ -13,7 +13,7 @@ const Confidentialite = () => (
           Breakfast Time<br />
           Pont du Lys – 06600 Antibes<br />
           SIREN : 507 940 070<br />
-          Contact RGPD : <a href="mailto:hello@breakfast-time.fr" className="underline hover:text-foreground transition-colors">hello@breakfast-time.fr</a>
+          Contact RGPD : <a href="mailto:contact@breakfast-time.fr" className="underline hover:text-foreground transition-colors">contact@breakfast-time.fr</a>
         </p>
       </section>
 
@@ -78,7 +78,7 @@ const Confidentialite = () => (
           <li>Droit à la portabilité de vos données</li>
         </ul>
         <p className="text-muted-foreground leading-relaxed mt-3">
-          Pour exercer ces droits, contactez-nous à : <a href="mailto:hello@breakfast-time.fr" className="underline hover:text-foreground transition-colors">hello@breakfast-time.fr</a>. Vous disposez également du droit d'introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition-colors">www.cnil.fr</a>).
+          Pour exercer ces droits, contactez-nous à : <a href="mailto:contact@breakfast-time.fr" className="underline hover:text-foreground transition-colors">contact@breakfast-time.fr</a>. Vous disposez également du droit d'introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition-colors">www.cnil.fr</a>).
         </p>
       </section>
 
