@@ -53,6 +53,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/pain-chocolat.png",
     },
     {
+      id: "chausson-pommes",
+      name: "Chausson aux pommes",
+      price: "1,60€",
+      img: "/chausson-pommes.png",
+    },
+    {
       id: "pain-aux-raisins",
       name: "Pain aux raisins",
       price: "1,80€",
@@ -68,7 +74,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "mini-viennoiseries",
       name: "Mini viennoiseries",
       price: "3,90€",
-      img: "https://static.wixstatic.com/media/21c6e4_27396356b6cf494c807a4627f27d7d9a~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_27396356b6cf494c807a4627f27d7d9a~mv2.jpg",
+      img: "/mini-viennoiseries.png",
     },
     {
       id: "brioche",
