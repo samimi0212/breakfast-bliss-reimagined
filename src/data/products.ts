@@ -312,6 +312,15 @@ export const allProducts: Product[] = [
     desc: "Granola croustillant maison, yaourt et fruits de saison.",
     composition: ["Granola maison", "Yaourt grec", "Fruits de saison", "Miel"],
   },
+  {
+    id: "cookie-chocolat",
+    name: "Cookie chocolat",
+    price: "3,50€",
+    category: "Le Sucré",
+    img: "/cookie-choco.png",
+    desc: "Cookie moelleux aux pépites de chocolat, cuit le matin même.",
+    composition: ["Farine", "Beurre", "Pépites de chocolat", "Sucre", "Œuf"],
+  },
   // ---- BOISSONS ----
   {
     id: "smoothie-banane",
