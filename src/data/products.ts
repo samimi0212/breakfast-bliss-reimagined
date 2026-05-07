@@ -358,6 +358,15 @@ export const allProducts: Product[] = [
     desc: "Jus d'orange fraîchement pressé, 100% pur jus sans sucre ajouté.",
     composition: ["Oranges fraîches pressées"],
   },
+  {
+    id: "jus-pamplemousse-presse",
+    name: "Jus de pamplemousse pressé",
+    price: "3,50€",
+    category: "Boissons",
+    img: "/jus-pamplemousse.png",
+    desc: "Jus de pamplemousse fraîchement pressé, légèrement acidulé et vitaminé.",
+    composition: ["Pamplemousses frais pressés"],
+  },
   // ---- À PARTAGER ----
   {
     id: "plateau-viennoiseries",

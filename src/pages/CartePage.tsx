@@ -228,6 +228,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       price: "3,50€",
       img: "/jus-orange.png",
     },
+    {
+      id: "jus-pamplemousse-presse",
+      name: "Jus de pamplemousse pressé",
+      price: "3,50€",
+      img: "/jus-pamplemousse.png",
+    },
   ],
   "À Partager": [
     {
