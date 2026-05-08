@@ -321,6 +321,15 @@ export const allProducts: Product[] = [
     desc: "Cookie moelleux aux pépites de chocolat, cuit le matin même.",
     composition: ["Farine", "Beurre", "Pépites de chocolat", "Sucre", "Œuf"],
   },
+  {
+    id: "cake-marbre",
+    name: "Cake marbré",
+    price: "3,80€",
+    category: "Le Sucré",
+    img: "/marbre.png",
+    desc: "Cake marbré vanille-chocolat moelleux, fait maison.",
+    composition: ["Farine", "Beurre", "Œufs", "Sucre", "Chocolat", "Vanille"],
+  },
   // ---- BOISSONS ----
   {
     id: "smoothie-banane",

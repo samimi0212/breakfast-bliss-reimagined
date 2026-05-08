@@ -202,6 +202,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       price: "3,50€",
       img: "/cookie-choco.png",
     },
+    {
+      id: "cake-marbre",
+      name: "Cake marbré",
+      price: "3,80€",
+      img: "/marbre.png",
+    },
   ],
   Boissons: [
     {
