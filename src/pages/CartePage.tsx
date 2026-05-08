@@ -62,7 +62,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "pain-au-chocolat",
       name: "Pain au chocolat",
       price: "1,60€",
-      img: "/pain-chocolat.png",
+      img: "/choco.png",
     },
     {
       id: "chausson-pommes",

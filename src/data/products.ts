@@ -116,7 +116,7 @@ export const allProducts: Product[] = [
     name: "Pain au chocolat",
     price: "1,60€",
     category: "Viennoiseries",
-    img: "/pain-chocolat.png",
+    img: "/choco.png",
     desc: "Pain au chocolat pur beurre, feuilleté et fondant, avec deux barres de chocolat noir.",
     composition: ["Farine", "Beurre pur", "Chocolat noir", "Levure", "Sel", "Sucre"],
   },
