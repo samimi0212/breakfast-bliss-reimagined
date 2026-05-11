@@ -11,12 +11,16 @@ const Footer = () => {
     if (!email || status === "loading") return;
 
     setStatus("loading");
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
     try {
       const res = await fetch("/api/send-newsletter-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
+        signal: controller.signal,
       });
+      clearTimeout(timeout);
       if (res.ok) {
         setStatus("success");
         setEmail("");
@@ -24,6 +28,7 @@ const Footer = () => {
         setStatus("error");
       }
     } catch {
+      clearTimeout(timeout);
       setStatus("error");
     }
   };
