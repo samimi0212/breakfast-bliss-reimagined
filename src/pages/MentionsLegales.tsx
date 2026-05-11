@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const MentionsLegales = () => {
-  usePageMeta("Mentions légales | Breakfast Time", "Mentions légales de Breakfast Time, service de livraison de petits-déjeuners dans les Alpes-Maritimes.", "/mentions-legales");
+  usePageMeta("Mentions légales | Breakfast Time", "Mentions légales de Breakfast Time, service de livraison de petits-déjeuners dans les Alpes-Maritimes.", "/mentions-legales", true);
   return (
   <>
     <Navbar />

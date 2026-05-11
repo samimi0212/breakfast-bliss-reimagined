@@ -1,3 +1,4 @@
+import { usePageMeta } from "@/hooks/usePageMeta";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
@@ -11,7 +12,13 @@ import OrderOnline from "@/components/OrderOnline";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 
-const Index = () => (
+const Index = () => {
+  usePageMeta(
+    "Breakfast Time — Petit-déjeuner & brunch livré à domicile",
+    "Breakfast Time livre des petits-déjeuners et brunchs d'exception dans les Alpes-Maritimes. Produits frais, locaux, livrés en 30 minutes. 7j/7.",
+    "/"
+  );
+  return (
   <>
     <Navbar />
     <main>
@@ -28,6 +35,7 @@ const Index = () => (
     </main>
     <Footer />
   </>
-);
+  );
+};
 
 export default Index;

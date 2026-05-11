@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const CGV = () => {
-  usePageMeta("Conditions Générales de Vente | Breakfast Time", "Conditions générales de vente de Breakfast Time, service de livraison de petits-déjeuners dans les Alpes-Maritimes.", "/cgv");
+  usePageMeta("Conditions Générales de Vente | Breakfast Time", "Conditions générales de vente de Breakfast Time, service de livraison de petits-déjeuners dans les Alpes-Maritimes.", "/cgv", true);
   return (
   <>
     <Navbar />

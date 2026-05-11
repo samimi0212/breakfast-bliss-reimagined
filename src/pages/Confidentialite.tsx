@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Confidentialite = () => {
-  usePageMeta("Politique de confidentialité | Breakfast Time", "Politique de confidentialité et traitement des données personnelles de Breakfast Time.", "/confidentialite");
+  usePageMeta("Politique de confidentialité | Breakfast Time", "Politique de confidentialité et traitement des données personnelles de Breakfast Time.", "/confidentialite", true);
   return (
   <>
     <Navbar />
