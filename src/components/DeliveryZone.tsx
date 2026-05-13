@@ -11,7 +11,7 @@ const DeliveryZone = () => (
       <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
         {[
           { icon: MapPin, label: "Zone", value: "Alpes-Maritimes" },
-          { icon: Clock, label: "Horaires", value: "7h – 15h" },
+          { icon: Clock, label: "Horaires", value: "8h – 15h" },
           { icon: Calendar, label: "Jours", value: "Lun. – Dim." },
         ].map((item, i) => (
           <div
