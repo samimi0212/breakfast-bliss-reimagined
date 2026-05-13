@@ -1,15 +1,15 @@
 import heroImg from "@/assets/hero-breakfast.jpg";
-import { Clock, MapPin, Star, Bike } from "lucide-react";
+import { Clock, MapPin, Croissant, Bike } from "lucide-react";
 
 const badges = [
-  { icon: Clock, text: "Livré en 30 min" },
+  { icon: Clock, text: "Livré en 45 min" },
   { icon: MapPin, text: "Alpes-Maritimes" },
-  { icon: Star, text: "Produits frais du matin" },
-  { icon: Bike, text: "7j/7 · 7h à 15h" },
-  { icon: Clock, text: "Livré en 30 min" },
+  { icon: Croissant, text: "Produits frais du matin" },
+  { icon: Bike, text: "7j/7 · 8h à 15h" },
+  { icon: Clock, text: "Livré en 45 min" },
   { icon: MapPin, text: "Alpes-Maritimes" },
-  { icon: Star, text: "Produits frais du matin" },
-  { icon: Bike, text: "7j/7 · 7h à 15h" },
+  { icon: Croissant, text: "Produits frais du matin" },
+  { icon: Bike, text: "7j/7 · 8h à 15h" },
 ];
 
 const HeroSection = () => (
