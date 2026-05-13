@@ -3,7 +3,7 @@ import { Leaf, MapPin, Clock, Award } from "lucide-react";
 const benefits = [
   { icon: Leaf, title: "Produits frais", desc: "Préparés le matin même avec des ingrédients soigneusement sélectionnés." },
   { icon: MapPin, title: "Produits locaux", desc: "Nous privilégions les producteurs et artisans des Alpes-Maritimes." },
-  { icon: Clock, title: "Livraison rapide", desc: "Livré en moins de 45 min, 7 jours sur 7, de 7h à 15h." },
+  { icon: Clock, title: "Livraison rapide", desc: "Livré en moins de 45 min, 7 jours sur 7, de 8h à 15h." },
   { icon: Award, title: "Expérience soignée", desc: "Une présentation soignée et prête à déguster." },
 ];
 
