@@ -32,11 +32,11 @@ const Testimonials = () => {
           Des matins plus beaux grâce à Breakfast Time.
         </p>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-stretch gap-4">
           <button
             onClick={prev}
             disabled={start === 0}
-            className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border border-border bg-background hover:bg-primary hover:text-white hover:border-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border border-border bg-background hover:bg-primary hover:text-white hover:border-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed self-center"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -45,7 +45,7 @@ const Testimonials = () => {
             {visible.map((r, i) => (
               <div
                 key={start + i}
-                className="bg-background rounded-xl p-5 text-left"
+                className="bg-background rounded-xl p-5 text-left flex flex-col min-h-[180px]"
                 style={{ boxShadow: "var(--card-shadow)" }}
               >
                 <div className="flex gap-0.5 mb-3">
@@ -62,7 +62,7 @@ const Testimonials = () => {
           <button
             onClick={next}
             disabled={start >= reviews.length - VISIBLE}
-            className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border border-border bg-background hover:bg-primary hover:text-white hover:border-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border border-border bg-background hover:bg-primary hover:text-white hover:border-primary transition-colors disabled:opacity-30 disabled:cursor-not-allowed self-center"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
