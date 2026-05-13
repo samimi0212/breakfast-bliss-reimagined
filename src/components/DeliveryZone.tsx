@@ -6,7 +6,7 @@ const DeliveryZone = () => (
       <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3">Zone de livraison</p>
       <h2 className="section-title mb-4">Nous livrons dans les Alpes-Maritimes</h2>
       <p className="section-subtitle mx-auto mb-12">
-        Nice, Cannes, Antibes, Grasse et leurs environs — votre petit-déjeuner arrive en 30 minutes.
+        Nice, Cannes, Antibes, Grasse et leurs environs — votre petit-déjeuner arrive en 45 minutes.
       </p>
       <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
         {[
