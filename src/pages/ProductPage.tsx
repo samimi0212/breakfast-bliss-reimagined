@@ -132,14 +132,32 @@ const ProductPage = () => {
               <div className="bg-muted rounded-2xl p-5">
                 <h3 className="font-display font-semibold text-lg mb-3">Allergènes</h3>
                 <ul className="space-y-2">
-                  {product.allergens.map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm text-foreground/80">
-                      <span className="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-amber-600 text-xs font-bold">!</span>
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
+                  {product.allergens.map((item, i) => {
+                    const icons: Record<string, string> = {
+                      "Gluten": "🌾",
+                      "Œufs": "🥚",
+                      "Poisson": "🐟",
+                      "Crustacés": "🦀",
+                      "Arachide": "🥜",
+                      "Soja": "🫘",
+                      "Céleri": "🥬",
+                      "Lait": "🥛",
+                      "Fruits à coque": "🌰",
+                      "Moutarde": "🟡",
+                      "Sésame": "🌱",
+                      "Sulfites": "🧪",
+                      "Lupin": "🌻",
+                      "Mollusques": "🦪",
+                    };
+                    return (
+                      <li key={i} className="flex items-center gap-3 text-sm text-foreground/80">
+                        <span className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0 text-base">
+                          {icons[item] ?? "⚠️"}
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}
