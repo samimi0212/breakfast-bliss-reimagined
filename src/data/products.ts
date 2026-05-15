@@ -200,7 +200,7 @@ export const allProducts: Product[] = [
     name: "Bagel chèvre miel",
     price: "13,50€",
     category: "Le Salé",
-    img: "https://static.wixstatic.com/media/21c6e4_a2a0e40b65f14dc0b9e902939034c8b7~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_a2a0e40b65f14dc0b9e902939034c8b7~mv2.png",
+    img: "/bagel-chevre.png",
     desc: "Un bagel gourmand avec du chèvre fondant et un filet de miel.",
     composition: ["Bagel maison", "Fromage de chèvre", "Miel", "Roquette", "Noix"],
   },
