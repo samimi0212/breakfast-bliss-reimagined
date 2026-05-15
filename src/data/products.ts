@@ -330,6 +330,15 @@ export const allProducts: Product[] = [
     desc: "Cake marbré vanille-chocolat moelleux, fait maison.",
     composition: ["Farine", "Beurre", "Œufs", "Sucre", "Chocolat", "Vanille"],
   },
+  {
+    id: "muffin-myrtilles",
+    name: "Muffin myrtilles",
+    price: "2,70€",
+    category: "Le Sucré",
+    img: "/muffin-myrtille.png",
+    desc: "Muffin moelleux aux myrtilles, fait maison.",
+    composition: ["Farine", "Myrtilles", "Beurre", "Œufs", "Sucre"],
+  },
   // ---- BOISSONS ----
   {
     id: "smoothie-banane",
