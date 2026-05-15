@@ -13,6 +13,7 @@ export interface Product {
   category: string;
   composition: string[];
   desc: string;
+  allergens?: string[];
   options?: ProductOption[];
 }
 

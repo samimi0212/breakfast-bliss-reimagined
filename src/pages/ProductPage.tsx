@@ -127,6 +127,23 @@ const ProductPage = () => {
               </div>
             )}
 
+            {/* Allergènes */}
+            {product.allergens && product.allergens.length > 0 && (
+              <div className="bg-muted rounded-2xl p-5">
+                <h3 className="font-display font-semibold text-lg mb-3">Allergènes</h3>
+                <ul className="space-y-2">
+                  {product.allergens.map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-sm text-foreground/80">
+                      <span className="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                        <span className="text-amber-600 text-xs font-bold">!</span>
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Options */}
             {product.options && product.options.length > 0 && (
               <div className="space-y-5">
@@ -183,7 +200,7 @@ const ProductPage = () => {
             <div className="flex items-center gap-3 text-sm text-muted-foreground border border-border rounded-2xl px-4 py-3">
               <span className="text-xl">🚴</span>
               <span>
-                Livré en <strong className="text-foreground">30 minutes</strong> · Alpes-Maritimes · 7j/7 de 7h à 15h
+                Livré en <strong className="text-foreground">45 minutes</strong> · Alpes-Maritimes · 7j/7 de 7h à 15h
               </span>
             </div>
           </div>
