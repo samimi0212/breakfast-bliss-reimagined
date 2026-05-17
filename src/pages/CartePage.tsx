@@ -156,13 +156,13 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "oeufs-brouilles-truffe",
       name: "Oeufs brouillés Truffe",
       price: "7,50€",
-      img: "https://static.wixstatic.com/media/21c6e4_cb3b17ebf6484ce6a13ed79d3a530f53~mv2.png/v1/fill/w_980,h_980,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_cb3b17ebf6484ce6a13ed79d3a530f53~mv2.png",
+      img: "/oeufs-brouilles-truffe.png",
     },
     {
       id: "oeufs-brouilles",
       name: "Oeufs brouillés",
       price: "4,50€",
-      img: "https://static.wixstatic.com/media/21c6e4_de105d93f91e471d8ccb8b6c7ccbaa8f~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_de105d93f91e471d8ccb8b6c7ccbaa8f~mv2.jpg",
+      img: "/oeufs-brouilles.png",
     },
     {
       id: "breakfast-burrito",
