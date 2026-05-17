@@ -177,6 +177,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/toast-med.png",
     },
   ],
+  "Extra": [],
   "Le Sucré": [
     {
       id: "pancakes-erable-myrtilles",
