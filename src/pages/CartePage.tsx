@@ -184,6 +184,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       price: "5,50€",
       img: "/frite-patate-douce.png",
     },
+    {
+      id: "halloumi-grille",
+      name: "Halloumi grillé",
+      price: "7,50€",
+      img: "/halloumi-grille.png",
+    },
   ],
   "Le Sucré": [
     {

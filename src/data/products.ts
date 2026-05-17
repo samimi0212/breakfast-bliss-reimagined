@@ -295,6 +295,15 @@ export const allProducts: Product[] = [
     desc: "",
     composition: [],
   },
+  {
+    id: "halloumi-grille",
+    name: "Halloumi grillé",
+    price: "7,50€",
+    category: "Extra",
+    img: "/halloumi-grille.png",
+    desc: "",
+    composition: [],
+  },
   // ---- LE SUCRÉ ----
   {
     id: "pancakes-erable-myrtilles",
