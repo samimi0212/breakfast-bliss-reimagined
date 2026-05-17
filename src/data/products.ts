@@ -263,7 +263,7 @@ export const allProducts: Product[] = [
     name: "Oeufs brouillés",
     price: "4,50€",
     category: "Le Salé",
-    img: "https://static.wixstatic.com/media/21c6e4_de105d93f91e471d8ccb8b6c7ccbaa8f~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_de105d93f91e471d8ccb8b6c7ccbaa8f~mv2.jpg",
+    img: "/oeufs-brouilles.png",
     desc: "Œufs brouillés moelleux, préparés à la minute.",
     composition: ["Œufs frais", "Beurre", "Sel", "Poivre"],
   },
