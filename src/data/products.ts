@@ -276,6 +276,15 @@ export const allProducts: Product[] = [
     desc: "Un burrito généreux garni pour un petit-déjeuner qui tient au corps.",
     composition: ["Tortilla", "Œufs brouillés", "Bacon", "Cheddar", "Salsa"],
   },
+  {
+    id: "toast-mediterraneen",
+    name: "Toast méditerranéen",
+    price: "17,90€",
+    category: "Le Salé",
+    img: "/toast-med.png",
+    desc: "Pain au levain toasté garni de houmous, labneh et halloumi toasté.",
+    composition: ["Pain au levain", "Houmous", "Labneh", "Halloumi toasté", "Pois chiches croustillants", "Œuf émietté", "Épices zaatar", "Menthe fraîche"],
+  },
   // ---- LE SUCRÉ ----
   {
     id: "pancakes-erable-myrtilles",

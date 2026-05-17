@@ -170,6 +170,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       price: "14,90€",
       img: "/breakfast-burrito.png",
     },
+    {
+      id: "toast-mediterraneen",
+      name: "Toast méditerranéen",
+      price: "17,90€",
+      img: "/toast-med.png",
+    },
   ],
   "Le Sucré": [
     {
