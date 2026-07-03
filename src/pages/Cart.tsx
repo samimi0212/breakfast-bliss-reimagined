@@ -308,6 +308,11 @@ const Cart = () => {
               <button
                 onClick={async () => {
                   if (!isMinReached) return;
+                  if (wantsCutlery) {
+                    sessionStorage.setItem("bt_cutlery_qty", String(cutleryQty));
+                  } else {
+                    sessionStorage.removeItem("bt_cutlery_qty");
+                  }
                   const { data: { session } } = await supabase.auth.getSession();
                   if (session) {
                     navigate(lp("/commande"));

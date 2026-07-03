@@ -99,6 +99,13 @@ const CheckoutForm = () => {
     if (stored) setPromoCode(stored);
   }, []);
   const [deliveryPrice, setDeliveryPrice] = useState<number | null>(null);
+
+  const storedCutleryQty = Number(sessionStorage.getItem("bt_cutlery_qty") ?? "0");
+  const cutleryQty = storedCutleryQty > 0 ? storedCutleryQty : 0;
+  const cutleryCost = cutleryQty * 0.80;
+  const itemsWithCutlery = cutleryQty > 0
+    ? [...items, { id: "couverts", name: `Couverts × ${cutleryQty}`, price: cutleryCost.toFixed(2).replace(".", ",") + "€", img: "", qty: cutleryQty }]
+    : items;
   const [deliveryLoading, setDeliveryLoading] = useState(false);
   const [deliveryError, setDeliveryError] = useState("");
   const [suggestions, setSuggestions] = useState<{ description: string; place_id: string }[]>([]);
@@ -113,10 +120,10 @@ const CheckoutForm = () => {
   useEffect(() => { formRef.current = form; }, [form]);
   const deliveryPriceRef = useRef(deliveryPrice);
   useEffect(() => { deliveryPriceRef.current = deliveryPrice; }, [deliveryPrice]);
-  const itemsRef = useRef(items);
-  useEffect(() => { itemsRef.current = items; }, [items]);
-  const totalRef = useRef(total);
-  useEffect(() => { totalRef.current = total; }, [total]);
+  const itemsRef = useRef(itemsWithCutlery);
+  useEffect(() => { itemsRef.current = itemsWithCutlery; }, [itemsWithCutlery]);
+  const totalRef = useRef(total + cutleryCost);
+  useEffect(() => { totalRef.current = total + cutleryCost; }, [total, cutleryCost]);
 
   const isCoordComplete = !!(form.prenom && form.nom && form.email && form.telephone);
   const isAdresseComplete = !!(form.adresse && form.ville && form.codePostal && deliveryPrice !== null);
@@ -318,6 +325,7 @@ const CheckoutForm = () => {
         } catch { /* ignore */ }
 
         sessionStorage.removeItem("bt_promo_code");
+        sessionStorage.removeItem("bt_cutlery_qty");
         clearCart();
         navigate(lp("/confirmation"));
       } catch (err: any) {
@@ -481,7 +489,7 @@ const CheckoutForm = () => {
       }
 
       const effectiveDelivery = freeDelivery ? 0 : (deliveryPrice ?? 0);
-      const baseTotal = total + effectiveDelivery;
+      const baseTotal = total + cutleryCost + effectiveDelivery;
       const orderTotal = promoCode ? baseTotal * (1 - promoDiscount) : baseTotal;
 
       // 1. Créer le PaymentIntent côté serveur
@@ -534,7 +542,7 @@ const CheckoutForm = () => {
         date_livraison: form.date,
         heure_livraison: form.heure,
         note: form.note,
-        items,
+        items: itemsWithCutlery,
         total: orderTotal,
         frais_livraison: deliveryPrice,
         statut: "Payée",
@@ -563,8 +571,8 @@ const CheckoutForm = () => {
               heure: form.heure,
               isMaintenant: form.isMaintenant,
               note: form.note,
-              items,
-              total,
+              items: itemsWithCutlery,
+              total: total + cutleryCost,
             },
           }),
         });
@@ -580,6 +588,7 @@ const CheckoutForm = () => {
       if (promoCode) {
         await supabase.from("promo_usage").insert({ email: form.email, promo_code: promoCode });
       }
+      sessionStorage.removeItem("bt_cutlery_qty");
 
       // 5. Envoyer l'email de confirmation
       try {
@@ -599,7 +608,7 @@ const CheckoutForm = () => {
               heure: form.heure,
               isMaintenant: form.isMaintenant,
               note: form.note,
-              items,
+              items: itemsWithCutlery,
               total: orderTotal,
               fraisLivraison: deliveryPrice,
               stripeId: paymentIntent?.id,
