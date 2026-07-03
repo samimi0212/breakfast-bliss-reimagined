@@ -237,13 +237,34 @@ const CheckoutForm = () => {
 
         setLoading(true);
 
-        // Stuart delivery
+        // Supabase — la commande est créée d'abord, le tracking_url est complété une fois la livraison créée
+        const { data: { session } } = await supabase.auth.getSession();
+        const { data: commandeRow } = await supabase.from("commandes").insert({
+          user_id: session?.user?.id || null,
+          user_email: f.email,
+          user_prenom: f.prenom,
+          user_nom: f.nom,
+          user_telephone: f.telephone,
+          adresse: f.complement ? `${f.adresse} — ${f.complement}` : f.adresse,
+          ville: f.ville,
+          code_postal: f.codePostal,
+          date_livraison: f.date,
+          heure_livraison: f.heure,
+          note: f.note,
+          items: itms,
+          total: orderTotal,
+          frais_livraison: dp,
+          statut: "Payée",
+        }).select("id").single();
+
+        // Livraison : Uber en priorité, bascule automatique sur Stuart en cas d'échec
         let trackingUrl = "";
         try {
-          const stuartRes = await fetch("/api/create-stuart-delivery", {
+          const deliveryRes = await fetch("/api/create-delivery", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              commandeId: commandeRow?.id,
               order: {
                 prenom: f.prenom,
                 nom: f.nom,
@@ -260,32 +281,16 @@ const CheckoutForm = () => {
               },
             }),
           });
-          const stuartData = await stuartRes.json();
-          if (stuartData.tracking_url) trackingUrl = stuartData.tracking_url;
-        } catch (stuartErr) {
-          console.error("Stuart error:", stuartErr);
+          const deliveryData = await deliveryRes.json();
+          if (deliveryData.tracking_url) {
+            trackingUrl = deliveryData.tracking_url;
+            if (commandeRow?.id) {
+              await supabase.from("commandes").update({ tracking_url: trackingUrl }).eq("id", commandeRow.id);
+            }
+          }
+        } catch (deliveryErr) {
+          console.error("Delivery error:", deliveryErr);
         }
-
-        // Supabase
-        const { data: { session } } = await supabase.auth.getSession();
-        await supabase.from("commandes").insert({
-          user_id: session?.user?.id || null,
-          user_email: f.email,
-          user_prenom: f.prenom,
-          user_nom: f.nom,
-          user_telephone: f.telephone,
-          adresse: f.complement ? `${f.adresse} — ${f.complement}` : f.adresse,
-          ville: f.ville,
-          code_postal: f.codePostal,
-          date_livraison: f.date,
-          heure_livraison: f.heure,
-          note: f.note,
-          items: itms,
-          total: orderTotal,
-          frais_livraison: dp,
-          statut: "Payée",
-          tracking_url: trackingUrl || null,
-        });
 
         // Email de confirmation
         try {
@@ -515,13 +520,41 @@ const CheckoutForm = () => {
         return;
       }
 
-      // 3. Créer la livraison Stuart en premier pour récupérer le tracking_url
+      // 3. Enregistrer la commande dans Supabase — le tracking_url est complété une fois la livraison créée
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      const { data: commandeRow, error: dbError } = await supabase.from("commandes").insert({
+        user_id: session?.user?.id || null,
+        user_email: form.email,
+        user_prenom: form.prenom,
+        user_nom: form.nom,
+        user_telephone: form.telephone,
+        adresse: form.complement ? `${form.adresse} — ${form.complement}` : form.adresse,
+        ville: form.ville,
+        code_postal: form.codePostal,
+        date_livraison: form.date,
+        heure_livraison: form.heure,
+        note: form.note,
+        items,
+        total: orderTotal,
+        frais_livraison: deliveryPrice,
+        statut: "Payée",
+      }).select("id").single();
+
+      if (dbError) {
+        console.error("Supabase insert error:", dbError);
+      }
+
+      // 4. Créer la livraison : Uber en priorité, bascule automatique sur Stuart en cas d'échec
       let trackingUrl = "";
       try {
-        const stuartRes = await fetch("/api/create-stuart-delivery", {
+        const deliveryRes = await fetch("/api/create-delivery", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            commandeId: commandeRow?.id,
             order: {
               prenom: form.prenom,
               nom: form.nom,
@@ -538,40 +571,15 @@ const CheckoutForm = () => {
             },
           }),
         });
-        const stuartData = await stuartRes.json();
-        if (stuartData.tracking_url) {
-          trackingUrl = stuartData.tracking_url;
+        const deliveryData = await deliveryRes.json();
+        if (deliveryData.tracking_url) {
+          trackingUrl = deliveryData.tracking_url;
+          if (commandeRow?.id) {
+            await supabase.from("commandes").update({ tracking_url: trackingUrl }).eq("id", commandeRow.id);
+          }
         }
-      } catch (stuartErr) {
-        console.error("Stuart error:", stuartErr);
-      }
-
-      // 4. Enregistrer la commande dans Supabase avec le tracking_url inclus
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      const { error: dbError } = await supabase.from("commandes").insert({
-        user_id: session?.user?.id || null,
-        user_email: form.email,
-        user_prenom: form.prenom,
-        user_nom: form.nom,
-        user_telephone: form.telephone,
-        adresse: form.complement ? `${form.adresse} — ${form.complement}` : form.adresse,
-        ville: form.ville,
-        code_postal: form.codePostal,
-        date_livraison: form.date,
-        heure_livraison: form.heure,
-        note: form.note,
-        items,
-        total: orderTotal,
-        frais_livraison: deliveryPrice,
-        statut: "Payée",
-        tracking_url: trackingUrl || null,
-      });
-
-      if (dbError) {
-        console.error("Supabase insert error:", dbError);
+      } catch (deliveryErr) {
+        console.error("Delivery error:", deliveryErr);
       }
 
       // Enregistrer l'usage du code promo pour bloquer la réutilisation
