@@ -18,6 +18,11 @@ async function recordPendingUberDelivery(commandeId: string, deliveryId: string,
   });
 }
 
+async function saveTrackingUrl(commandeId: string, trackingUrl: string) {
+  if (!trackingUrl) return;
+  await supabase.from("commandes").update({ tracking_url: trackingUrl }).eq("id", commandeId);
+}
+
 export default async function handler(req: Request): Promise<Response> {
   if (req.method !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
@@ -31,6 +36,7 @@ export default async function handler(req: Request): Promise<Response> {
 
       if (commandeId) {
         await recordPendingUberDelivery(commandeId, uber.delivery_id, order);
+        await saveTrackingUrl(commandeId, uber.tracking_url);
       }
 
       return new Response(
@@ -41,6 +47,9 @@ export default async function handler(req: Request): Promise<Response> {
       console.error("Uber Direct error, bascule sur Stuart:", uberErr);
 
       const stuart = await createStuartDelivery(order);
+      if (commandeId) {
+        await saveTrackingUrl(commandeId, stuart.tracking_url);
+      }
       return new Response(
         JSON.stringify({ provider: "stuart", tracking_url: stuart.tracking_url, job_id: stuart.job_id }),
         { status: 200, headers: { "Content-Type": "application/json" } }

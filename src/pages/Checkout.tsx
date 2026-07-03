@@ -284,9 +284,6 @@ const CheckoutForm = () => {
           const deliveryData = await deliveryRes.json();
           if (deliveryData.tracking_url) {
             trackingUrl = deliveryData.tracking_url;
-            if (commandeRow?.id) {
-              await supabase.from("commandes").update({ tracking_url: trackingUrl }).eq("id", commandeRow.id);
-            }
           }
         } catch (deliveryErr) {
           console.error("Delivery error:", deliveryErr);
@@ -574,9 +571,6 @@ const CheckoutForm = () => {
         const deliveryData = await deliveryRes.json();
         if (deliveryData.tracking_url) {
           trackingUrl = deliveryData.tracking_url;
-          if (commandeRow?.id) {
-            await supabase.from("commandes").update({ tracking_url: trackingUrl }).eq("id", commandeRow.id);
-          }
         }
       } catch (deliveryErr) {
         console.error("Delivery error:", deliveryErr);
