@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Instagram, Facebook, Mail, MapPin, Clock, CheckCircle, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useLangPath } from "@/hooks/useLangPath";
+import { cities } from "@/data/cities";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
@@ -109,6 +110,18 @@ const Footer = () => {
         </form>
       )}
 
+      {/* Zones de livraison */}
+      <div className="mt-6">
+        <h4 className="font-semibold text-xs tracking-widest uppercase mb-3" style={{ color: "#DFF057" }}>{t("footer.zonesTitle")}</h4>
+        <ul className="flex flex-wrap gap-x-3 gap-y-2 text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>
+          {cities.map((c) => (
+            <li key={c.slug}>
+              <a href={lp(`/livraison-petit-dejeuner-${c.slug}`)} className="hover:text-white transition-colors">{c.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {/* Copyright */}
       <div className="border-t mt-6 pt-4 flex flex-wrap justify-between gap-2 text-xs" style={{ borderColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.3)" }}>
         <p>{t("footer.copyright")}</p>
@@ -210,6 +223,20 @@ const Footer = () => {
               </>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* Zones de livraison desktop */}
+      <div className="border-t px-6 py-8" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+        <div className="max-w-6xl mx-auto">
+          <h4 className="font-semibold text-sm tracking-widest uppercase mb-4" style={{ color: "#DFF057" }}>{t("footer.zonesTitle")}</h4>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+            {cities.map((c) => (
+              <li key={c.slug}>
+                <a href={lp(`/livraison-petit-dejeuner-${c.slug}`)} className="hover:text-white transition-colors">{c.name}</a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
