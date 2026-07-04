@@ -45,10 +45,14 @@ const Cart = () => {
 
   const promoDiscount = promoCode ? (VALID_PROMOS[promoCode] ?? 0) : 0;
   const MIN_ORDER = 15;
+  const FREE_DELIVERY_THRESHOLD = 45;
   const subtotalWithCutlery = total + (wantsCutlery ? cutleryQty * 0.80 : 0);
   const orderTotal = subtotalWithCutlery * (1 - promoDiscount);
   const isMinReached = orderTotal >= MIN_ORDER;
   const progressPct = Math.min((orderTotal / MIN_ORDER) * 100, 100);
+  const isFreeDeliveryReached = subtotalWithCutlery >= FREE_DELIVERY_THRESHOLD;
+  const freeDeliveryPct = Math.min((subtotalWithCutlery / FREE_DELIVERY_THRESHOLD) * 100, 100);
+  const remainingForFreeDelivery = Math.max(FREE_DELIVERY_THRESHOLD - subtotalWithCutlery, 0);
 
   if (items.length === 0) {
     return (
@@ -257,6 +261,23 @@ const Cart = () => {
                 <div className="border-t border-border pt-4 flex justify-between font-bold text-lg">
                   <span>{t("cart.total")}</span>
                   <span className="text-primary">{orderTotal.toFixed(2).replace(".", ",")}€</span>
+                </div>
+              </div>
+
+              {/* Barre livraison offerte */}
+              <div className="mb-5">
+                <div className="flex text-xs font-medium mb-2">
+                  <span style={{ color: isFreeDeliveryReached ? "#5a7a0a" : undefined }} className={isFreeDeliveryReached ? "" : "text-muted-foreground"}>
+                    {isFreeDeliveryReached
+                      ? t("cart.freeDeliveryReached")
+                      : t("cart.freeDeliveryProgress", { amount: remainingForFreeDelivery.toFixed(2).replace(".", ",") })}
+                  </span>
+                </div>
+                <div className="h-2 rounded-full bg-muted overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all duration-500"
+                    style={{ width: `${freeDeliveryPct}%`, backgroundColor: "#DFF057" }}
+                  />
                 </div>
               </div>
 

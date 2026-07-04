@@ -435,6 +435,8 @@
     "deliveryCalc": "Calculée à l'étape suivante",
     "total": "Total",
     "minOrder": "Min. de commande : 15,00€",
+    "freeDeliveryProgress": "Plus que {{amount}}€ pour la livraison offerte 🎉",
+    "freeDeliveryReached": "Livraison offerte débloquée ! 🎉",
     "checkoutBtn": "Passer la commande →"
   },
   "cartePage": {
@@ -482,8 +484,8 @@
     "choiceLabel": "au choix",
     "requiredChoice": "Choix requis",
     "selectedCount": "sélectionné(s)",
-    "deliveryShort": "Livré en 30-45 min · Suivi en temps réel",
-    "deliveryFull": "Livré en 30-45 minutes · Suivi de livraison en temps réel",
+    "deliveryShort": "Livré en 30-45 min · Suivi en temps réel · Offerte dès 45€",
+    "deliveryFull": "Livré en 30-45 minutes · Suivi de livraison en temps réel · Offerte dès 45€ d'achat",
     "addedShort": "Ajouté !",
     "addToCartShort": "Ajouter au panier · {{price}}",
     "addedFull": "Ajouté au panier !",

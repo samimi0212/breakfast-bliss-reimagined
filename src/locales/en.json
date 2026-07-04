@@ -435,6 +435,8 @@
     "deliveryCalc": "Calculated at next step",
     "total": "Total",
     "minOrder": "Min. order: €15.00",
+    "freeDeliveryProgress": "Only €{{amount}} left for free delivery 🎉",
+    "freeDeliveryReached": "Free delivery unlocked! 🎉",
     "checkoutBtn": "Place order →"
   },
   "cartePage": {
@@ -482,8 +484,8 @@
     "choiceLabel": "to choose",
     "requiredChoice": "Required choice",
     "selectedCount": "selected",
-    "deliveryShort": "Delivered in 30-45 min · Live tracking",
-    "deliveryFull": "Delivered in 30-45 minutes · Live delivery tracking",
+    "deliveryShort": "Delivered in 30-45 min · Live tracking · Free from €45",
+    "deliveryFull": "Delivered in 30-45 minutes · Live delivery tracking · Free from €45 spent",
     "addedShort": "Added!",
     "addToCartShort": "Add to cart · {{price}}",
     "addedFull": "Added to cart!",
