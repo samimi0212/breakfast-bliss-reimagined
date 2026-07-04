@@ -1,8 +1,19 @@
 export const config = { runtime: "edge" };
 
+import { getUberToken, getStuartToken } from "./_lib/delivery-providers";
+
 // Coordonnées du point de pickup : 371 chemin des Prés, 06410 Biot
 const PICKUP_LAT = 43.6186;
 const PICKUP_LNG = 7.0897;
+const PICKUP_ADDRESS = "371 chemin des Prés, 06410 Biot, France";
+
+const UBER_API_BASE = "https://sandbox-api.uber.com/v1/customers";
+const STUART_API_BASE = "https://api.sandbox.stuart.com/v2";
+
+const MINIMUM_ORDER = 20;
+const FREE_DELIVERY_THRESHOLD = 45;
+const CLIENT_SHARE = 0.5;
+const MAX_CLIENT_FEE = 15;
 
 function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371;
@@ -16,11 +27,42 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
   return R * c;
 }
 
-function getDeliveryPrice(distanceKm: number): number | null {
+// Grille de secours si les devis Uber/Stuart échouent tous les deux
+function fallbackPrice(distanceKm: number): number | null {
   if (distanceKm < 5) return 7.50;
   if (distanceKm < 10) return 12.50;
   if (distanceKm < 15) return 17;
-  return null; // hors zone
+  return null;
+}
+
+async function getUberQuote(dropoffAddress: string): Promise<number> {
+  const token = await getUberToken();
+  const customerId = process.env.UBER_CUSTOMER_ID;
+  const res = await fetch(`${UBER_API_BASE}/${customerId}/delivery_quotes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ pickup_address: PICKUP_ADDRESS, dropoff_address: dropoffAddress }),
+  });
+  const data: any = await res.json();
+  if (!res.ok) throw new Error(data.message || JSON.stringify(data));
+  return data.fee / 100;
+}
+
+async function getStuartQuote(dropoffAddress: string): Promise<number> {
+  const token = await getStuartToken();
+  const res = await fetch(`${STUART_API_BASE}/jobs/pricing`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify({
+      job: {
+        pickups: [{ address: PICKUP_ADDRESS }],
+        dropoffs: [{ address: dropoffAddress, package_type: "small" }],
+      },
+    }),
+  });
+  const data: any = await res.json();
+  if (!res.ok) throw new Error(data.message || JSON.stringify(data));
+  return data.amount_with_tax;
 }
 
 export default async function handler(req: Request): Promise<Response> {
@@ -29,32 +71,70 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   try {
-    const { address } = await req.json();
+    const { address, cartTotal } = await req.json();
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
     const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
-    const res = await fetch(geocodeUrl);
-    const data: any = await res.json();
+    const geoRes = await fetch(geocodeUrl);
+    const geoData: any = await geoRes.json();
 
-    if (data.status !== "OK" || !data.results?.[0]) {
+    if (geoData.status !== "OK" || !geoData.results?.[0]) {
       return new Response(JSON.stringify({ error: "Adresse introuvable" }), { status: 400 });
     }
 
-    const { lat, lng } = data.results[0].geometry.location;
+    const { lat, lng } = geoData.results[0].geometry.location;
     const distance = haversineDistance(PICKUP_LAT, PICKUP_LNG, lat, lng);
-    const price = getDeliveryPrice(distance);
 
-    if (price === null) {
+    if (distance > 15) {
       return new Response(JSON.stringify({
         deliverable: false,
         message: "Cette adresse est hors de notre zone de livraison (max 15 km)",
       }), { status: 200 });
     }
 
+    if (typeof cartTotal === "number" && cartTotal < MINIMUM_ORDER) {
+      return new Response(JSON.stringify({
+        deliverable: false,
+        belowMinimum: true,
+        minimum: MINIMUM_ORDER,
+        message: `Commande minimum de ${MINIMUM_ORDER}€ pour la livraison`,
+      }), { status: 200 });
+    }
+
+    const roundedDistance = Math.round(distance * 10) / 10;
+
+    if (typeof cartTotal === "number" && cartTotal >= FREE_DELIVERY_THRESHOLD) {
+      return new Response(JSON.stringify({
+        deliverable: true,
+        price: 0,
+        distance: roundedDistance,
+      }), { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+
+    let price: number;
+    try {
+      const realCost = await getUberQuote(address);
+      price = Math.min(Math.round(realCost * CLIENT_SHARE * 100) / 100, MAX_CLIENT_FEE);
+    } catch {
+      try {
+        const realCost = await getStuartQuote(address);
+        price = Math.min(Math.round(realCost * CLIENT_SHARE * 100) / 100, MAX_CLIENT_FEE);
+      } catch {
+        const fallback = fallbackPrice(distance);
+        if (fallback === null) {
+          return new Response(JSON.stringify({
+            deliverable: false,
+            message: "Cette adresse est hors de notre zone de livraison (max 15 km)",
+          }), { status: 200 });
+        }
+        price = fallback;
+      }
+    }
+
     return new Response(JSON.stringify({
       deliverable: true,
       price,
-      distance: Math.round(distance * 10) / 10,
+      distance: roundedDistance,
     }), { status: 200, headers: { "Content-Type": "application/json" } });
 
   } catch (error: any) {

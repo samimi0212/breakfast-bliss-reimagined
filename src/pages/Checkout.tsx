@@ -92,13 +92,13 @@ const CheckoutForm = () => {
   const [promoCode, setPromoCode] = useState<string | null>(null);
   const VALID_PROMOS: Record<string, number> = { BONJOUR20: 0.20, BIENVENUE10: 0.10, RETOUR: 0 };
   const promoDiscount = promoCode ? (VALID_PROMOS[promoCode] ?? 0) : 0;
-  const freeDelivery = promoCode === "RETOUR";
+  const [deliveryPrice, setDeliveryPrice] = useState<number | null>(null);
+  const freeDelivery = promoCode === "RETOUR" || deliveryPrice === 0;
 
   useEffect(() => {
     const stored = sessionStorage.getItem("bt_promo_code");
     if (stored) setPromoCode(stored);
   }, []);
-  const [deliveryPrice, setDeliveryPrice] = useState<number | null>(null);
 
   const storedCutleryQty = Number(sessionStorage.getItem("bt_cutlery_qty") ?? "0");
   const cutleryQty = storedCutleryQty > 0 ? storedCutleryQty : 0;
@@ -359,7 +359,7 @@ const CheckoutForm = () => {
         const res = await fetch("/api/get-delivery-price", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ address: fullAddress }),
+          body: JSON.stringify({ address: fullAddress, cartTotal: total + cutleryCost }),
         });
         const data = await res.json();
         if (!data.deliverable) {
@@ -376,7 +376,7 @@ const CheckoutForm = () => {
       }
     }, 800);
     return () => clearTimeout(timer);
-  }, [form.adresse, form.codePostal, form.ville]);
+  }, [form.adresse, form.codePostal, form.ville, total, cutleryCost]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
