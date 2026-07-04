@@ -84,6 +84,12 @@ export const cities: City[] = [
         a_en: "Yes, we deliver across all of Cannes: La Croisette, Le Suquet, La Bocca, Palm Beach, the centre and residential areas.",
       },
       {
+        q: "Livrez-vous des brunchs à domicile à Cannes ?",
+        q_en: "Do you deliver brunch to homes in Cannes?",
+        a: "Oui, la livraison de brunch à Cannes fonctionne 7j/7 de 8h à 15h : Menu Brunch, pancakes, bagels, œufs bénédicte et jus pressés arrivent directement chez vous.",
+        a_en: "Yes, brunch delivery in Cannes runs 7 days a week from 8am to 3pm: Brunch Menu, pancakes, bagels, eggs benedict and fresh juices arrive straight to your door.",
+      },
+      {
         q: "En combien de temps suis-je livré à Cannes ?",
         q_en: "How long does delivery to Cannes take?",
         a: "Comptez environ 30 à 45 minutes après confirmation de votre commande, selon le quartier et l'affluence.",
@@ -114,9 +120,9 @@ export const cities: City[] = [
       "Breakfast Time delivers your breakfast and brunch at home anywhere in Antibes — fresh, prepared the same morning, 7 days a week from 8am to 3pm.",
     quartiers: ["Vieil Antibes", "Cap d'Antibes", "La Fontonne", "Les Semboules", "Le Port Vauban", "La Brague"],
     context:
-      "Du Vieil Antibes au Cap, en passant par La Fontonne et Les Semboules, votre petit-déjeuner arrive chaud et soigné. Le matin face au port Vauban ou dans votre jardin antibois, c'est encore meilleur quand c'est livré.",
+      "Du Vieil Antibes au Cap, en passant par La Fontonne et Les Semboules, votre petit-déjeuner ou votre brunch arrive chaud et soigné. Le matin face au port Vauban ou dans votre jardin antibois, c'est encore meilleur quand c'est livré.",
     context_en:
-      "From Vieil Antibes to the Cap, through La Fontonne and Les Semboules, your breakfast arrives warm and beautifully prepared. Mornings facing Port Vauban or in your Antibes garden are even better when delivered.",
+      "From Vieil Antibes to the Cap, through La Fontonne and Les Semboules, your breakfast or brunch arrives warm and beautifully prepared. Mornings facing Port Vauban or in your Antibes garden are even better when delivered.",
     useCases: [
       {
         title: "Le réveil tranquille",
@@ -143,6 +149,12 @@ export const cities: City[] = [
         q_en: "Can I get same-day delivery in Antibes?",
         a: "Oui, nous livrons à Antibes le jour même, 7j/7 de 8h à 15h. Il vous suffit de passer commande en ligne.",
         a_en: "Yes, we deliver in Antibes the same day, 7 days a week from 8am to 3pm. Just place your order online.",
+      },
+      {
+        q: "Livrez-vous un brunch à domicile à Antibes ?",
+        q_en: "Do you deliver brunch at home in Antibes?",
+        a: "Oui, nous livrons le brunch partout à Antibes en 30 à 45 minutes, 7j/7 de 8h à 15h : Menu Brunch, pancakes, bagels et jus pressés, parfaits pour un dimanche sans cuisine.",
+        a_en: "Yes, we deliver brunch anywhere in Antibes in 30 to 45 minutes, 7 days a week from 8am to 3pm: Brunch Menu, pancakes, bagels and fresh juices — perfect for a no-cooking Sunday.",
       },
       {
         q: "Livrez-vous le Cap d'Antibes et Les Semboules ?",
@@ -175,9 +187,9 @@ export const cities: City[] = [
       "Breakfast and brunch delivered at home in Juan-les-Pins — fresh products prepared the same morning, delivered 7 days a week from 8am to 3pm.",
     quartiers: ["Centre de Juan-les-Pins", "La Pinède", "Les plages", "Le Cap", "La Gallice"],
     context:
-      "Station balnéaire animée, Juan-les-Pins se savoure encore mieux au réveil. Que vous soyez près de la Pinède, à deux pas des plages ou dans une location de vacances, Breakfast Time vous apporte un petit-déjeuner frais sans avoir à chercher une boulangerie ouverte. Parfait pour prolonger les matinées d'été et les week-ends en bord de mer.",
+      "Station balnéaire animée, Juan-les-Pins se savoure encore mieux au réveil. Que vous soyez près de la Pinède, à deux pas des plages ou dans une location de vacances, Breakfast Time vous apporte un petit-déjeuner ou un brunch frais sans avoir à chercher une boulangerie ouverte. Parfait pour prolonger les matinées d'été et les week-ends en bord de mer.",
     context_en:
-      "A lively seaside resort, Juan-les-Pins is even better enjoyed at breakfast. Whether you're near the Pinède, steps from the beaches or in a holiday rental, Breakfast Time brings you a fresh breakfast without hunting for an open bakery. Perfect for stretching out summer mornings and seaside weekends.",
+      "A lively seaside resort, Juan-les-Pins is even better enjoyed at breakfast. Whether you're near the Pinède, steps from the beaches or in a holiday rental, Breakfast Time brings you a fresh breakfast or brunch without hunting for an open bakery. Perfect for stretching out summer mornings and seaside weekends.",
     useCases: [
       {
         title: "Vacances & locations",
@@ -204,6 +216,12 @@ export const cities: City[] = [
         q_en: "Do you deliver to holiday rentals in Juan-les-Pins?",
         a: "Oui, nous livrons à toute adresse de Juan-les-Pins, y compris les locations saisonnières et Airbnb.",
         a_en: "Yes, we deliver to any address in Juan-les-Pins, including seasonal rentals and Airbnbs.",
+      },
+      {
+        q: "Peut-on se faire livrer un brunch à Juan-les-Pins ?",
+        q_en: "Can I get brunch delivered in Juan-les-Pins?",
+        a: "Oui, votre brunch est livré jusque sur votre terrasse ou dans votre location de vacances — idéal après une soirée ou avant une journée à la plage.",
+        a_en: "Yes, your brunch is delivered right to your terrace or holiday rental — ideal after a night out or before a day at the beach.",
       },
       {
         q: "Quel délai pour être livré à Juan-les-Pins ?",
@@ -267,6 +285,12 @@ export const cities: City[] = [
         a_en: "Yes, we deliver to homes and residences as well as offices across the whole park: Garbejaire, Les Lucioles, Saint-Philippe, Les Templiers and nearby areas.",
       },
       {
+        q: "Livrez-vous des brunchs à Sophia Antipolis le week-end ?",
+        q_en: "Do you deliver brunch in Sophia Antipolis at the weekend?",
+        a: "Oui, le brunch est livré 7j/7, week-end compris, à domicile comme au bureau, partout sur la technopole et ses quartiers résidentiels.",
+        a_en: "Yes, brunch is delivered 7 days a week, weekends included, at home or at the office, across the whole technology park and its residential areas.",
+      },
+      {
         q: "Puis-je être livré le matin même à Sophia Antipolis ?",
         q_en: "Can I get same-day delivery in Sophia Antipolis?",
         a: "Oui, nous livrons le jour même à partir de 8h, 7j/7. Il vous suffit de passer commande en ligne.",
@@ -297,9 +321,9 @@ export const cities: City[] = [
       "Breakfast Time delivers fresh breakfasts and brunches in western Nice — airport area, Arénas and Saint-Augustin — prepared the same morning, 7 days a week from 8am to 3pm.",
     quartiers: ["Nice Ouest", "Aéroport / Arénas", "Saint-Augustin", "Saint-Isidore", "Sainte-Marguerite"],
     context:
-      "L'ouest de Nice, autour de l'aéroport, d'Arénas et de Saint-Augustin, est à portée de livraison. Hôtels près de l'aéroport, bureaux du secteur ou résidents de Nice Ouest : profitez d'un petit-déjeuner frais livré à domicile ou au bureau, sans détour par une boulangerie.",
+      "L'ouest de Nice, autour de l'aéroport, d'Arénas et de Saint-Augustin, est à portée de livraison. Hôtels près de l'aéroport, bureaux du secteur ou résidents de Nice Ouest : profitez d'un petit-déjeuner ou d'un brunch frais livré à domicile ou au bureau, sans détour par une boulangerie.",
     context_en:
-      "Western Nice, around the airport, Arénas and Saint-Augustin, is within delivery reach. Hotels near the airport, local offices or residents of western Nice: enjoy a fresh breakfast delivered at home or to the office, no bakery detour needed.",
+      "Western Nice, around the airport, Arénas and Saint-Augustin, is within delivery reach. Hotels near the airport, local offices or residents of western Nice: enjoy a fresh breakfast or brunch delivered at home or to the office, no bakery detour needed.",
     useCases: [
       {
         title: "Bureaux de Nice Ouest",
@@ -326,6 +350,12 @@ export const cities: City[] = [
         q_en: "Which areas of Nice do you deliver to?",
         a: "Nous livrons l'ouest de Nice : aéroport, Arénas, Saint-Augustin, Saint-Isidore et Sainte-Marguerite, à domicile comme au bureau.",
         a_en: "We deliver to western Nice: airport, Arénas, Saint-Augustin, Saint-Isidore and Sainte-Marguerite, at home or at the office.",
+      },
+      {
+        q: "Livrez-vous un brunch à domicile à Nice ?",
+        q_en: "Do you deliver brunch at home in Nice?",
+        a: "Oui, nous livrons le brunch dans l'ouest de Nice (aéroport, Arénas, Saint-Augustin, Saint-Isidore) : Menu Brunch, pancakes et bagels, 7j/7 de 8h à 15h.",
+        a_en: "Yes, we deliver brunch in western Nice (airport, Arénas, Saint-Augustin, Saint-Isidore): Brunch Menu, pancakes and bagels, 7 days a week from 8am to 3pm.",
       },
       {
         q: "Puis-je être livré le matin même à Nice ?",
@@ -358,9 +388,9 @@ export const cities: City[] = [
       "Fresh breakfast and brunch delivered in Biot in 15 to 25 minutes — our fastest delivery area, 7 days a week from 8am to 3pm.",
     quartiers: ["Village historique", "Saint-Philippe", "Sophia Antipolis (côté Biot)", "La Brague", "Gare de Biot"],
     context:
-      "Biot est notre zone la mieux desservie : du village des verriers aux quartiers proches de Sophia Antipolis, votre commande arrive rapidement et encore chaude. Résidents, télétravailleurs ou vacanciers en villa, profitez d'un vrai petit-déjeuner sans sortir de chez vous.",
+      "Biot est notre zone la mieux desservie : du village des verriers aux quartiers proches de Sophia Antipolis, votre commande arrive rapidement et encore chaude. Résidents, télétravailleurs ou vacanciers en villa, profitez d'un vrai petit-déjeuner ou d'un brunch complet sans sortir de chez vous.",
     context_en:
-      "Biot is our best-served area: from the glassblowers' village to the neighbourhoods near Sophia Antipolis, your order arrives quickly and still warm. Residents, remote workers or holidaymakers in villas — enjoy a proper breakfast without leaving home.",
+      "Biot is our best-served area: from the glassblowers' village to the neighbourhoods near Sophia Antipolis, your order arrives quickly and still warm. Residents, remote workers or holidaymakers in villas — enjoy a proper breakfast or a full brunch without leaving home.",
     useCases: [
       {
         title: "Livraison express",
@@ -387,6 +417,12 @@ export const cities: City[] = [
         q_en: "Do you deliver everywhere in Biot?",
         a: "Oui, toute la commune : le village historique, Saint-Philippe, La Brague, la gare et les quartiers résidentiels.",
         a_en: "Yes, the whole town: the historic village, Saint-Philippe, La Brague, the station area and residential neighbourhoods.",
+      },
+      {
+        q: "Livrez-vous un brunch à domicile à Biot ?",
+        q_en: "Do you deliver brunch at home in Biot?",
+        a: "Oui, et c'est notre zone la plus rapide : votre brunch arrive en 15 à 25 minutes, encore chaud, 7j/7 de 8h à 15h.",
+        a_en: "Yes, and it's our fastest area: your brunch arrives in 15 to 25 minutes, still warm, 7 days a week from 8am to 3pm.",
       },
       {
         q: "Quel est le délai de livraison à Biot ?",
@@ -450,6 +486,12 @@ export const cities: City[] = [
         a_en: "Yes — Garbejaïre, Haut-Sartoux, Les Clausonnes and the whole technology park. For groups, request an Events quote.",
       },
       {
+        q: "Livrez-vous un brunch à domicile à Valbonne ?",
+        q_en: "Do you deliver brunch at home in Valbonne?",
+        a: "Oui, le brunch est livré au village de Valbonne comme dans les quartiers de Sophia Antipolis, 7j/7 de 8h à 15h — pancakes, bagels et jus pressés compris.",
+        a_en: "Yes, brunch is delivered to Valbonne village as well as the Sophia Antipolis neighbourhoods, 7 days a week from 8am to 3pm — pancakes, bagels and fresh juices included.",
+      },
+      {
         q: "En combien de temps suis-je livré à Valbonne ?",
         q_en: "How long does delivery to Valbonne take?",
         a: "Comptez 20 à 30 minutes après confirmation de votre commande, selon le quartier.",
@@ -509,6 +551,12 @@ export const cities: City[] = [
         q_en: "Do you deliver across all of Cagnes-sur-Mer?",
         a: "Oui : centre-ville, Cros-de-Cagnes, Haut-de-Cagnes, Les Collettes, Val Fleuri et les quartiers autour du Polygone Riviera.",
         a_en: "Yes: the town centre, Cros-de-Cagnes, Haut-de-Cagnes, Les Collettes, Val Fleuri and the areas around Polygone Riviera.",
+      },
+      {
+        q: "Livrez-vous un brunch à domicile à Cagnes-sur-Mer ?",
+        q_en: "Do you deliver brunch at home in Cagnes-sur-Mer?",
+        a: "Oui, notre Menu Brunch et nos plateaux à partager sont livrés partout à Cagnes-sur-Mer, du Cros-de-Cagnes au Haut-de-Cagnes, 7j/7 de 8h à 15h.",
+        a_en: "Yes, our Brunch Menu and sharing platters are delivered anywhere in Cagnes-sur-Mer, from Cros-de-Cagnes to Haut-de-Cagnes, 7 days a week from 8am to 3pm.",
       },
       {
         q: "Quel est le délai de livraison à Cagnes-sur-Mer ?",
