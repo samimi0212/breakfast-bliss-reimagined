@@ -767,6 +767,67 @@ export const cities: City[] = [
     metaDesc_en:
       "Breakfast and brunch delivery in Villeneuve-Loubet (village, Marina Baie des Anges, beach). Fresh, delivered in 20-30 min, 7 days a week from 8am to 3pm.",
   },
+  {
+    slug: "vallauris-golfe-juan",
+    name: "Vallauris - Golfe-Juan",
+    deliveryTime: "15 à 25 minutes",
+    deliveryTime_en: "15 to 25 minutes",
+    intro:
+      "Entre le village de potiers de Vallauris et le port de Golfe-Juan, Breakfast Time livre votre petit-déjeuner et votre brunch — frais, préparé le matin même, 7j/7 de 8h à 15h.",
+    intro_en:
+      "Between the potters' village of Vallauris and the port of Golfe-Juan, Breakfast Time delivers your breakfast and brunch — fresh, prepared the same morning, 7 days a week from 8am to 3pm.",
+    quartiers: ["Vallauris village", "Golfe-Juan", "Le Point du Jour", "Les Iscles", "Le Val d'Ondes"],
+    context:
+      "Vallauris, ville de céramique où Picasso a posé ses mains dans la terre, et Golfe-Juan, son port où Napoléon a débarqué en 1815, forment une seule et même commune que Breakfast Time dessert entièrement. Un petit-déjeuner ou un brunch frais livré au village comme en bord de plage, sans jamais quitter votre matinée.",
+    context_en:
+      "Vallauris, a ceramics town where Picasso once worked the clay, and Golfe-Juan, its port where Napoleon landed in 1815, form a single commune fully served by Breakfast Time. A fresh breakfast or brunch delivered to the village or the seafront, without ever leaving your morning behind.",
+    useCases: [
+      {
+        title: "Matin au port",
+        title_en: "Morning at the port",
+        text: "Petit-déjeuner frais livré face aux bateaux du port de Golfe-Juan.",
+        text_en: "Fresh breakfast delivered facing the boats of Golfe-Juan harbour.",
+      },
+      {
+        title: "Brunch en famille",
+        title_en: "Family brunch",
+        text: "Le Menu Famille livré un dimanche, entre plage et village, sans cuisine ni vaisselle.",
+        text_en: "The Family Menu delivered on a Sunday, between beach and village, no cooking, no dishes.",
+      },
+      {
+        title: "Vacances à Golfe-Juan",
+        title_en: "Golfe-Juan holidays",
+        text: "En location saisonnière près de la plage ? Un vrai petit-déjeuner livré sans chercher une boulangerie.",
+        text_en: "Staying in a seasonal rental near the beach? A proper breakfast delivered without hunting for a bakery.",
+      },
+    ],
+    faq: [
+      {
+        q: "Livrez-vous à Golfe-Juan et au village de Vallauris ?",
+        q_en: "Do you deliver to Golfe-Juan and Vallauris village?",
+        a: "Oui, nous couvrons toute la commune : Vallauris village, Golfe-Juan, Le Point du Jour, Les Iscles et Le Val d'Ondes.",
+        a_en: "Yes, we cover the whole town: Vallauris village, Golfe-Juan, Le Point du Jour, Les Iscles and Le Val d'Ondes.",
+      },
+      {
+        q: "Livrez-vous un brunch à domicile à Vallauris - Golfe-Juan ?",
+        q_en: "Do you deliver brunch at home in Vallauris - Golfe-Juan?",
+        a: "Oui, le brunch est livré 7j/7 de 8h à 15h : Menu Brunch, pancakes, bagels et jus pressés, au village comme au port.",
+        a_en: "Yes, brunch is delivered 7 days a week from 8am to 3pm: Brunch Menu, pancakes, bagels and fresh juices, in the village or at the port.",
+      },
+      {
+        q: "Quel est le délai de livraison à Vallauris - Golfe-Juan ?",
+        q_en: "How fast is delivery in Vallauris - Golfe-Juan?",
+        a: "Comptez 15 à 25 minutes après confirmation de votre commande — nous sommes tout proches.",
+        a_en: "Allow 15 to 25 minutes after your order is confirmed — we're just around the corner.",
+      },
+    ],
+    metaTitle: "Livraison petit-déjeuner Vallauris - Golfe-Juan — Brunch à domicile | Breakfast Time",
+    metaTitle_en: "Breakfast Delivery Vallauris - Golfe-Juan — Brunch at Home | Breakfast Time",
+    metaDesc:
+      "Livraison de petit-déjeuner et brunch à domicile à Vallauris et Golfe-Juan (village, port, plage). Frais, livrés en 15-25 min, 7j/7 de 8h à 15h.",
+    metaDesc_en:
+      "Breakfast and brunch delivery at home in Vallauris and Golfe-Juan (village, port, beach). Fresh, delivered in 15-25 min, 7 days a week from 8am to 3pm.",
+  },
 ];
 
 export const getCityBySlug = (slug: string): City | undefined =>
