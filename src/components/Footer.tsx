@@ -10,6 +10,7 @@ const Footer = () => {
   const { lp } = useLangPath();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "already" | "error">("idle");
+  const sortedCities = [...cities].sort((a, b) => a.name.localeCompare(b.name, "fr"));
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,7 +115,7 @@ const Footer = () => {
       <div className="mt-6">
         <h4 className="font-semibold text-xs tracking-widest uppercase mb-3" style={{ color: "#DFF057" }}>{t("footer.zonesTitle")}</h4>
         <ul className="flex flex-wrap gap-x-3 gap-y-2 text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>
-          {cities.map((c) => (
+          {sortedCities.map((c) => (
             <li key={c.slug}>
               <a href={lp(`/livraison-petit-dejeuner-${c.slug}`)} className="hover:text-white transition-colors">{c.name}</a>
             </li>
@@ -231,7 +232,7 @@ const Footer = () => {
         <div className="max-w-6xl mx-auto">
           <h4 className="font-semibold text-sm tracking-widest uppercase mb-4" style={{ color: "#DFF057" }}>{t("footer.zonesTitle")}</h4>
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
-            {cities.map((c) => (
+            {sortedCities.map((c) => (
               <li key={c.slug}>
                 <a href={lp(`/livraison-petit-dejeuner-${c.slug}`)} className="hover:text-white transition-colors">{c.name}</a>
               </li>
