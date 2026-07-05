@@ -25,6 +25,8 @@ import Confidentialite from "./pages/Confidentialite.tsx";
 import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import VillePage from "./pages/VillePage.tsx";
+import BlogPage from "./pages/BlogPage.tsx";
+import BlogPostPage from "./pages/BlogPostPage.tsx";
 import Jeu from "./pages/Jeu.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
 import BottomNav from "./components/BottomNav.tsx";
@@ -52,6 +54,8 @@ const routeDefs = [
   { path: "/contact", element: <Contact /> },
   { path: "/jeu", element: <Jeu /> },
   { path: "/produit/:id", element: <ProductPage /> },
+  { path: "/blog", element: <BlogPage /> },
+  { path: "/blog/:slug", element: <BlogPostPage /> },
   // Pages locales SEO (une par ville) — /livraison-petit-dejeuner-{slug}
   ...cities.map((city) => ({
     path: `/livraison-petit-dejeuner-${city.slug}`,

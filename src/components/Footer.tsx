@@ -66,6 +66,7 @@ const Footer = () => {
           <h4 className="font-semibold text-xs tracking-widest uppercase mb-3" style={{ color: "#DFF057" }}>{t("footer.navigationTitle")}</h4>
           <ul className="space-y-2 text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>
             <li><a href={lp("/carte")} className="hover:text-white transition-colors">{t("footer.menuLink")}</a></li>
+            <li><a href={lp("/blog")} className="hover:text-white transition-colors">{t("footer.blogLink")}</a></li>
             <li><a href={lp("/#how")} className="hover:text-white transition-colors">{t("footer.howItWorksLink")}</a></li>
             <li><a href={lp("/#about")} className="hover:text-white transition-colors">{t("footer.aboutLink")}</a></li>
             <li><a href={lp("/#delivery")} className="hover:text-white transition-colors">{t("footer.deliveryLink")}</a></li>
@@ -158,6 +159,7 @@ const Footer = () => {
             <h4 className="font-semibold text-sm tracking-widest uppercase mb-5" style={{ color: "#DFF057" }}>{t("footer.navigationTitle")}</h4>
             <ul className="space-y-3 text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
               <li><a href={lp("/carte")} className="hover:text-white transition-colors">{t("footer.menuLink")}</a></li>
+              <li><a href={lp("/blog")} className="hover:text-white transition-colors">{t("footer.blogLink")}</a></li>
               <li><a href={lp("/#how")} className="hover:text-white transition-colors">{t("footer.howItWorksLink")}</a></li>
               <li><a href={lp("/#about")} className="hover:text-white transition-colors">{t("footer.aboutLink")}</a></li>
               <li><a href={lp("/#delivery")} className="hover:text-white transition-colors">{t("footer.deliveryLink")}</a></li>
