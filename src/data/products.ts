@@ -633,8 +633,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/bagel-saumon.png",
     desc: "",
-    composition: ["Bagel maison", "Saumon fumé", "Avocat", "Cream cheese", "Aneth"],
-    composition_en: ["Homemade bagel", "Smoked salmon", "Avocado", "Cream cheese", "Dill"],
+    composition: ["Bagel sésame", "Saumon fumé", "Émincé d'avocat", "Sauce Cream Cheese maison", "Aneth frais"],
+    composition_en: ["Sesame bagel", "Smoked salmon", "Sliced avocado", "House cream cheese sauce", "Fresh dill"],
   },
   {
     id: "breakfast-burrito",
