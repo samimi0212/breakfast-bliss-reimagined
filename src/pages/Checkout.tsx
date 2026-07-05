@@ -985,6 +985,29 @@ const CheckoutForm = () => {
                 ))}
               </div>
 
+              {(() => {
+                const FREE_DELIVERY_THRESHOLD = 45;
+                const subtotalWithCutlery = total + cutleryCost;
+                const isFree = subtotalWithCutlery >= FREE_DELIVERY_THRESHOLD;
+                const remaining = Math.max(FREE_DELIVERY_THRESHOLD - subtotalWithCutlery, 0);
+                const pct = Math.min((subtotalWithCutlery / FREE_DELIVERY_THRESHOLD) * 100, 100);
+                return (
+                  <div className="mb-4">
+                    <p className="text-xs font-medium mb-1.5" style={{ color: isFree ? "#5a7a0a" : undefined }}>
+                      {isFree
+                        ? "🎉 Livraison offerte !"
+                        : `Ajoutez ${remaining.toFixed(2).replace(".", ",")}€ pour la livraison offerte`}
+                    </p>
+                    <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{ width: `${pct}%`, backgroundColor: "#DFF057" }}
+                      />
+                    </div>
+                  </div>
+                );
+              })()}
+
               <div className="border-t border-border pt-4 space-y-2 mb-6">
                 <div className="flex justify-between text-sm text-muted-foreground">
                   <span>{t("checkout.subtotal")}</span>
