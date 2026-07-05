@@ -601,8 +601,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/oeufs-benedicte.png",
     desc: "",
-    composition: ["Muffin toastée", "Bacon crispy", "Oeufs brouillés", "Pickles d'oignons rouges", "Gomasio", "Sauce hollandaise artisanale"],
-    composition_en: ["Toasted muffin", "Crispy bacon", "Scrambled eggs", "Pickled red onions", "Gomasio", "Artisan hollandaise sauce"],
+    composition: ["Muffin toastée", "Bacon crispy", "Oeufs brouillés", "Pickles d'oignons rouges", "Gomasio", "Sauce Hollandaise"],
+    composition_en: ["Toasted muffin", "Crispy bacon", "Scrambled eggs", "Pickled red onions", "Gomasio", "Hollandaise sauce"],
   },
   {
     id: "bagel-chevre-miel",
