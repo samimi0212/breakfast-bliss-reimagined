@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPath } from "@/hooks/useLangPath";
 
-const DeliveryZone = () => {
+interface DeliveryZoneProps {
+  variant?: "full" | "compact";
+}
+
+const DeliveryZone = ({ variant = "full" }: DeliveryZoneProps) => {
   const { t } = useTranslation();
   const { lp } = useLangPath();
   const [address, setAddress] = useState("");
@@ -74,12 +78,20 @@ const DeliveryZone = () => {
   return (
     <section id="delivery" className="section-padding bg-secondary">
       <div className="max-w-6xl mx-auto text-center">
-        <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3">{t("delivery.label")}</p>
-        <h2 className="section-title mb-3">{t("delivery.title")}</h2>
-        <p className="text-sm text-muted-foreground mb-8">{t("delivery.subtitle")}</p>
+        {variant === "full" && (
+          <>
+            <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-3">{t("delivery.label")}</p>
+            <h2 className="section-title mb-3">{t("delivery.title")}</h2>
+            <p className="text-sm text-muted-foreground mb-8">{t("delivery.subtitle")}</p>
+          </>
+        )}
 
         <div className="max-w-xl mx-auto mb-12">
-          <p className="text-sm font-medium mb-3 text-foreground">{t("delivery.checkLabel")}</p>
+          {variant === "compact" ? (
+            <h2 className="font-display text-2xl md:text-3xl font-bold mb-4 text-foreground">{t("delivery.checkLabel")}</h2>
+          ) : (
+            <p className="text-sm font-medium mb-3 text-foreground">{t("delivery.checkLabel")}</p>
+          )}
           <div className="relative">
             <div className="flex gap-2">
               <input

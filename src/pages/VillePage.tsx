@@ -104,7 +104,7 @@ const VillePage = ({ slug }: VillePageProps) => {
       </div>
 
       {/* Vérification d'éligibilité d'adresse */}
-      <DeliveryZone />
+      <DeliveryZone variant="compact" />
 
       {/* Contenu principal */}
       <div className="py-16 px-6">
