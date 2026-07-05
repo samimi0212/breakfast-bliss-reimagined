@@ -5,6 +5,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 import { useLangPath } from "@/hooks/useLangPath";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DeliveryZone from "@/components/DeliveryZone";
 import NotFound from "./NotFound";
 import { getCityBySlug, cities } from "@/data/cities";
 import { MapPin, Clock, Check, ShoppingBag, Phone, Info } from "lucide-react";
@@ -57,6 +58,7 @@ const VillePage = ({ slug }: VillePageProps) => {
   const coverageNote = isEn ? city.coverageNote_en : city.coverageNote;
   const deliveryTime = isEn ? city.deliveryTime_en : city.deliveryTime;
   const otherCities = cities.filter((c) => c.slug !== slug);
+  const nameAfterPreposition = city.preposition ? (city.shortName ?? city.name) : city.name;
 
   const tr = (fr: string, en: string) => (isEn ? en : fr);
 
@@ -75,8 +77,8 @@ const VillePage = ({ slug }: VillePageProps) => {
             {tr("Zone de livraison", "Delivery area")}
           </div>
           <h1 className="font-display text-4xl md:text-5xl font-bold mb-5 leading-tight" style={{ color: "#2a2a08" }}>
-            {tr("Livraison petit-déjeuner & brunch à", "Breakfast & brunch delivery in")}{" "}
-            <span className="italic" style={{ color: "#7a7020" }}>{city.name}</span>
+            {tr(`Livraison petit-déjeuner & brunch ${city.preposition ?? "à"}`, "Breakfast & brunch delivery in")}{" "}
+            <span className="italic" style={{ color: "#7a7020" }}>{nameAfterPreposition}</span>
           </h1>
           <p className="text-base leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: "#5a5a40" }}>
             {intro}
@@ -101,6 +103,9 @@ const VillePage = ({ slug }: VillePageProps) => {
         </div>
       </div>
 
+      {/* Vérification d'éligibilité d'adresse */}
+      <DeliveryZone />
+
       {/* Contenu principal */}
       <div className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
@@ -120,7 +125,7 @@ const VillePage = ({ slug }: VillePageProps) => {
 
           {/* Quartiers desservis */}
           <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">
-            {tr("Quartiers desservis à", "Areas covered in")} {city.name}
+            {tr(`Quartiers desservis ${city.preposition ?? "à"}`, "Areas covered in")} {nameAfterPreposition}
           </h2>
           <div className="flex flex-wrap gap-2.5 mb-16">
             {city.quartiers.map((q) => (
@@ -177,8 +182,8 @@ const VillePage = ({ slug }: VillePageProps) => {
       >
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-6" style={{ color: "white" }}>
-            {tr("Envie d'un petit-déjeuner à", "Fancy a breakfast in")}{" "}
-            <span className="italic" style={{ color: "#DFF057" }}>{city.name}</span> ?
+            {tr(`Envie d'un petit-déjeuner ${city.preposition ?? "à"}`, "Fancy a breakfast in")}{" "}
+            <span className="italic" style={{ color: "#DFF057" }}>{nameAfterPreposition}</span> ?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
             <button

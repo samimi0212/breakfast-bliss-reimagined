@@ -19,6 +19,10 @@ export interface CityFaq {
 export interface City {
   slug: string;
   name: string;
+  /** Préposition FR devant le nom ("à" par défaut, "au" pour "Le Cannet"). */
+  preposition?: string;
+  /** Nom sans article, utilisé avec `preposition` (ex. "Cannet" pour éviter "au Le Cannet"). */
+  shortName?: string;
   /** Estimation distance routière depuis le local (371 Chemin des Prés, Biot). */
   deliveryTime: string;
   deliveryTime_en: string;
@@ -577,6 +581,191 @@ export const cities: City[] = [
       "Livraison de petit-déjeuner et brunch à Cagnes-sur-Mer (Cros, Haut-de-Cagnes, centre). Produits frais, livrés en 25-40 min, 7j/7 de 8h à 15h.",
     metaDesc_en:
       "Breakfast and brunch delivery in Cagnes-sur-Mer (Cros, Haut-de-Cagnes, centre). Fresh products, delivered in 25-40 min, 7 days a week from 8am to 3pm.",
+  },
+  {
+    slug: "le-cannet",
+    name: "Le Cannet",
+    preposition: "au",
+    shortName: "Cannet",
+    deliveryTime: "30 à 45 minutes",
+    deliveryTime_en: "30 to 45 minutes",
+    intro:
+      "Le Cannet, ville d'art nichée sur les hauteurs de Cannes, profite elle aussi de la livraison de petit-déjeuner et de brunch Breakfast Time — frais, préparé le matin même, 7j/7 de 8h à 15h.",
+    intro_en:
+      "Le Cannet, an art town perched above Cannes, also enjoys Breakfast Time's breakfast and brunch delivery — fresh, prepared the same morning, 7 days a week from 8am to 3pm.",
+    quartiers: ["Centre historique", "Saint-Sauveur", "Le Piol", "Vallon Fleuri", "Font-de-Currault"],
+    context:
+      "Du centre historique cher à Bonnard au quartier résidentiel du Piol, Le Cannet profite d'un vrai petit-déjeuner ou d'un brunch livré sans redescendre vers Cannes. Un réveil sur les hauteurs, entre calme et vue dégagée, encore meilleur avec un plateau frais à la porte.",
+    context_en:
+      "From the historic centre once painted by Bonnard to the residential Piol district, Le Cannet enjoys a proper breakfast or brunch delivered without heading down to Cannes. A wake-up in the hills, calm and with a clear view, even better with a fresh tray at the door.",
+    useCases: [
+      {
+        title: "Réveil sur les hauteurs",
+        title_en: "Hillside wake-up",
+        text: "Un petit-déjeuner frais livré avec vue dégagée sur la baie, sans quitter votre quartier du Cannet.",
+        text_en: "A fresh breakfast delivered with a clear view over the bay, without leaving your Le Cannet neighbourhood.",
+      },
+      {
+        title: "Brunch du dimanche",
+        title_en: "Sunday brunch",
+        text: "Pancakes, bagels et jus pressés livrés pour un dimanche tranquille en famille ou entre amis.",
+        text_en: "Pancakes, bagels and fresh juices delivered for a relaxed Sunday with family or friends.",
+      },
+      {
+        title: "Petit-déjeuner d'équipe",
+        title_en: "Team breakfast",
+        text: "Bureaux et commerces du Cannet : régalez votre équipe avec un plateau livré et installé.",
+        text_en: "Offices and businesses in Le Cannet: treat your team to a platter delivered and set up.",
+      },
+    ],
+    faq: [
+      {
+        q: "Livrez-vous partout au Cannet ?",
+        q_en: "Do you deliver everywhere in Le Cannet?",
+        a: "Oui, nous couvrons l'ensemble de la commune : centre historique, Saint-Sauveur, Le Piol, Vallon Fleuri et Font-de-Currault.",
+        a_en: "Yes, we cover the whole town: historic centre, Saint-Sauveur, Le Piol, Vallon Fleuri and Font-de-Currault.",
+      },
+      {
+        q: "Livrez-vous un brunch à domicile au Cannet ?",
+        q_en: "Do you deliver brunch at home in Le Cannet?",
+        a: "Oui, le brunch est livré au Cannet 7j/7 de 8h à 15h : Menu Brunch, pancakes, bagels et jus pressés.",
+        a_en: "Yes, brunch is delivered in Le Cannet 7 days a week from 8am to 3pm: Brunch Menu, pancakes, bagels and fresh juices.",
+      },
+      {
+        q: "Quel est le délai de livraison au Cannet ?",
+        q_en: "How long does delivery to Le Cannet take?",
+        a: "Comptez 30 à 45 minutes après confirmation de votre commande, selon le quartier.",
+        a_en: "Allow 30 to 45 minutes after your order is confirmed, depending on the area.",
+      },
+    ],
+    metaTitle: "Livraison petit-déjeuner Le Cannet — Brunch à domicile | Breakfast Time",
+    metaTitle_en: "Breakfast Delivery Le Cannet — Brunch at Home | Breakfast Time",
+    metaDesc:
+      "Livraison de petit-déjeuner et brunch à domicile au Cannet (centre historique, Saint-Sauveur, Le Piol). Frais, livrés en 30-45 min, 7j/7 de 8h à 15h.",
+    metaDesc_en:
+      "Breakfast and brunch delivery at home in Le Cannet (historic centre, Saint-Sauveur, Le Piol). Fresh, delivered in 30-45 min, 7 days a week from 8am to 3pm.",
+  },
+  {
+    slug: "saint-laurent-du-var",
+    name: "Saint-Laurent-du-Var",
+    deliveryTime: "25 à 40 minutes",
+    deliveryTime_en: "25 to 40 minutes",
+    intro:
+      "Entre l'aéroport de Nice et Cagnes-sur-Mer, Saint-Laurent-du-Var profite de la livraison de petit-déjeuner et de brunch Breakfast Time — frais, préparé le matin même, 7j/7 de 8h à 15h.",
+    intro_en:
+      "Between Nice airport and Cagnes-sur-Mer, Saint-Laurent-du-Var enjoys Breakfast Time's breakfast and brunch delivery — fresh, prepared the same morning, 7 days a week from 8am to 3pm.",
+    quartiers: ["Centre-ville", "La Baie des Anges", "Cap 3000", "Les Vespins", "Saint-Laurent Plage"],
+    context:
+      "Entre la marina de la Baie des Anges, les commerces de Cap 3000 et le centre-ville, Saint-Laurent-du-Var vit au rythme de la Méditerranée. Un petit-déjeuner ou un brunch frais livré à la résidence ou au bureau, sans détour par une boulangerie, avant une journée shopping ou un vol matinal.",
+    context_en:
+      "Between the Baie des Anges marina, the Cap 3000 shopping centre and the town centre, Saint-Laurent-du-Var lives at the Mediterranean's pace. A fresh breakfast or brunch delivered to your residence or office, no bakery detour needed, before a day of shopping or an early flight.",
+    useCases: [
+      {
+        title: "Résidences de la Baie des Anges",
+        title_en: "Baie des Anges residences",
+        text: "Petit-déjeuner frais livré directement à votre résidence face à la mer.",
+        text_en: "Fresh breakfast delivered straight to your seafront residence.",
+      },
+      {
+        title: "Avant un vol",
+        title_en: "Before a flight",
+        text: "Proche de l'aéroport de Nice, un petit-déjeuner livré avant d'embarquer ou pour accueillir des visiteurs.",
+        text_en: "Near Nice airport, a breakfast delivered before boarding or to welcome visitors.",
+      },
+      {
+        title: "Brunch du week-end",
+        title_en: "Weekend brunch",
+        text: "Pancakes, bagels et jus pressés livrés pour un brunch tranquille après une virée à Cap 3000.",
+        text_en: "Pancakes, bagels and fresh juices delivered for a relaxed brunch after a trip to Cap 3000.",
+      },
+    ],
+    faq: [
+      {
+        q: "Livrez-vous à la Baie des Anges et à Cap 3000 ?",
+        q_en: "Do you deliver to Baie des Anges and Cap 3000?",
+        a: "Oui, nous livrons tout Saint-Laurent-du-Var : Baie des Anges, Cap 3000, centre-ville et Saint-Laurent Plage.",
+        a_en: "Yes, we deliver across all of Saint-Laurent-du-Var: Baie des Anges, Cap 3000, town centre and Saint-Laurent Plage.",
+      },
+      {
+        q: "Livrez-vous un brunch à domicile à Saint-Laurent-du-Var ?",
+        q_en: "Do you deliver brunch at home in Saint-Laurent-du-Var?",
+        a: "Oui, le brunch est livré 7j/7 de 8h à 15h : Menu Brunch, pancakes, bagels et jus pressés.",
+        a_en: "Yes, brunch is delivered 7 days a week from 8am to 3pm: Brunch Menu, pancakes, bagels and fresh juices.",
+      },
+      {
+        q: "Quel est le délai de livraison à Saint-Laurent-du-Var ?",
+        q_en: "How long does delivery to Saint-Laurent-du-Var take?",
+        a: "Comptez 25 à 40 minutes après confirmation de votre commande, selon le quartier et la circulation.",
+        a_en: "Allow 25 to 40 minutes after your order is confirmed, depending on the area and traffic.",
+      },
+    ],
+    metaTitle: "Livraison petit-déjeuner Saint-Laurent-du-Var — Brunch à domicile | Breakfast Time",
+    metaTitle_en: "Breakfast Delivery Saint-Laurent-du-Var — Brunch at Home | Breakfast Time",
+    metaDesc:
+      "Livraison de petit-déjeuner et brunch à Saint-Laurent-du-Var (Baie des Anges, Cap 3000). Frais, livrés en 25-40 min, 7j/7 de 8h à 15h.",
+    metaDesc_en:
+      "Breakfast and brunch delivery in Saint-Laurent-du-Var (Baie des Anges, Cap 3000). Fresh, delivered in 25-40 min, 7 days a week from 8am to 3pm.",
+  },
+  {
+    slug: "villeneuve-loubet",
+    name: "Villeneuve-Loubet",
+    deliveryTime: "20 à 30 minutes",
+    deliveryTime_en: "20 to 30 minutes",
+    intro:
+      "Entre le village historique et la Marina Baie des Anges, Villeneuve-Loubet profite de la livraison de petit-déjeuner et de brunch Breakfast Time — frais, préparé le matin même, 7j/7 de 8h à 15h.",
+    intro_en:
+      "Between the historic village and the Marina Baie des Anges, Villeneuve-Loubet enjoys Breakfast Time's breakfast and brunch delivery — fresh, prepared the same morning, 7 days a week from 8am to 3pm.",
+    quartiers: ["Village historique", "Marina Baie des Anges", "Villeneuve-Loubet Plage", "Les Plans", "La Bourgade"],
+    context:
+      "Du village perché à la Marina Baie des Anges et sa célèbre architecture pyramidale, en passant par les plages, Villeneuve-Loubet se réveille encore mieux avec un petit-déjeuner ou un brunch livré frais. Résidents à l'année, propriétaires de la Marina ou vacanciers : tout le monde profite d'une livraison rapide, à deux pas de notre local.",
+    context_en:
+      "From the hilltop village to the Marina Baie des Anges and its famous pyramid architecture, and along the beaches, Villeneuve-Loubet wakes up even better with a fresh breakfast or brunch delivered. Year-round residents, Marina owners or holidaymakers: everyone enjoys fast delivery, just minutes from our kitchen.",
+    useCases: [
+      {
+        title: "Marina Baie des Anges",
+        title_en: "Marina Baie des Anges",
+        text: "Petit-déjeuner ou brunch livré directement à votre appartement avec vue sur le port.",
+        text_en: "Breakfast or brunch delivered straight to your apartment overlooking the marina.",
+      },
+      {
+        title: "Matin de plage",
+        title_en: "Beach morning",
+        text: "Bowls, smoothies et viennoiseries livrés avant une journée à Villeneuve-Loubet Plage.",
+        text_en: "Bowls, smoothies and pastries delivered before a day at Villeneuve-Loubet Plage.",
+      },
+      {
+        title: "Vacances en village",
+        title_en: "Village holidays",
+        text: "En location dans le village historique ? Un vrai petit-déjeuner livré au portail, sans chercher une boulangerie.",
+        text_en: "Staying in the historic village? A proper breakfast delivered to your gate, no need to hunt for a bakery.",
+      },
+    ],
+    faq: [
+      {
+        q: "Livrez-vous à la Marina Baie des Anges ?",
+        q_en: "Do you deliver to Marina Baie des Anges?",
+        a: "Oui, nous livrons toute la commune : village historique, Marina Baie des Anges, Les Plans et Villeneuve-Loubet Plage.",
+        a_en: "Yes, we deliver across the whole town: historic village, Marina Baie des Anges, Les Plans and Villeneuve-Loubet Plage.",
+      },
+      {
+        q: "Livrez-vous un brunch à domicile à Villeneuve-Loubet ?",
+        q_en: "Do you deliver brunch at home in Villeneuve-Loubet?",
+        a: "Oui, notre Menu Brunch et nos plateaux à partager sont livrés 7j/7 de 8h à 15h, partout à Villeneuve-Loubet.",
+        a_en: "Yes, our Brunch Menu and sharing platters are delivered 7 days a week from 8am to 3pm, anywhere in Villeneuve-Loubet.",
+      },
+      {
+        q: "Quel est le délai de livraison à Villeneuve-Loubet ?",
+        q_en: "How fast is delivery in Villeneuve-Loubet?",
+        a: "Comptez 20 à 30 minutes après confirmation de votre commande — nous sommes tout proches.",
+        a_en: "Allow 20 to 30 minutes after your order is confirmed — we're just around the corner.",
+      },
+    ],
+    metaTitle: "Livraison petit-déjeuner Villeneuve-Loubet — Brunch à domicile | Breakfast Time",
+    metaTitle_en: "Breakfast Delivery Villeneuve-Loubet — Brunch at Home | Breakfast Time",
+    metaDesc:
+      "Livraison de petit-déjeuner et brunch à Villeneuve-Loubet (village, Marina Baie des Anges, plage). Frais, livrés en 20-30 min, 7j/7 de 8h à 15h.",
+    metaDesc_en:
+      "Breakfast and brunch delivery in Villeneuve-Loubet (village, Marina Baie des Anges, beach). Fresh, delivered in 20-30 min, 7 days a week from 8am to 3pm.",
   },
 ];
 
