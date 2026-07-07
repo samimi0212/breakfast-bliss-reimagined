@@ -962,8 +962,8 @@ export const allProducts: Product[] = [
     category: "Le Sucré",
     img: "/cookie-choco.png",
     desc: "",
-    composition: ["Farine", "Beurre", "Pépites de chocolat", "Sucre", "Œuf"],
-    composition_en: ["Flour", "Butter", "Chocolate chips", "Sugar", "Egg"],
+    composition: ["Pépites de chocolat noir"],
+    composition_en: ["Dark chocolate chips"],
   },
   {
     id: "cookie-caramel",
