@@ -931,8 +931,8 @@ export const allProducts: Product[] = [
     category: "Le Sucré",
     img: "/acai-bowl.png",
     desc: "",
-    composition: ["Acai", "Bananes", "Fruits rouges", "Granola maison", "Miel"],
-    composition_en: ["Acai", "Bananas", "Mixed berries", "Homemade granola", "Honey"],
+    composition: ["Acai", "Bananes", "Fruits rouges", "Granola maison", "Miel de Lavande"],
+    composition_en: ["Acai", "Bananas", "Mixed berries", "Homemade granola", "Lavender honey"],
     options: [
       {
         id: "taille",
