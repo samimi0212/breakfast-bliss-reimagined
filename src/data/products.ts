@@ -891,8 +891,8 @@ export const allProducts: Product[] = [
     category: "Le Sucré",
     img: "/granola-bowl.png",
     desc: "",
-    composition: ["Granola maison", "Yaourt grec", "Fruits de saison", "Miel"],
-    composition_en: ["Homemade granola", "Greek yogurt", "Seasonal fruits", "Honey"],
+    composition: ["Yaourt grec", "Granola maison", "Fruits rouges", "Banane", "Miel de Lavande"],
+    composition_en: ["Greek yogurt", "Homemade granola", "Mixed berries", "Banana", "Lavender honey"],
     options: [
       {
         id: "taille",
