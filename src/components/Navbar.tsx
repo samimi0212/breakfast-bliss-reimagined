@@ -130,6 +130,29 @@ const Navbar = () => {
             )}
           </button>
 
+          {/* Panier — mobile */}
+          <button
+            onClick={() => navigate(lp("/panier"))}
+            className="md:hidden relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-muted transition-colors"
+          >
+            <ShoppingBag size={20} className="text-foreground/80" />
+            {count > 0 && (
+              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[11px] font-bold flex items-center justify-center"
+                style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}>
+                {count > 9 ? "9+" : count}
+              </span>
+            )}
+          </button>
+
+          {/* Hamburger — mobile */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full hover:bg-muted transition-colors"
+            aria-label="Menu"
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+
         </div>
       </div>
 
