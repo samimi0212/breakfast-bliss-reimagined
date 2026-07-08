@@ -483,6 +483,7 @@
     "back": "Back",
     "details": "Details",
     "allergens": "Allergens",
+    "viewAllergensTable": "View the allergens table",
     "choiceLabel": "to choose",
     "requiredChoice": "Required choice",
     "selectedCount": "selected",

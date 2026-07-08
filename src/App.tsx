@@ -17,6 +17,7 @@ import MyAccount from "./pages/MyAccount.tsx";
 import Confirmation from "./pages/Confirmation.tsx";
 import MyOrders from "./pages/MyOrders.tsx";
 import CartePage from "./pages/CartePage.tsx";
+import AllergenesPage from "./pages/AllergenesPage.tsx";
 import Events from "./pages/Events.tsx";
 import EventsCommander from "./pages/EventsCommander.tsx";
 import MentionsLegales from "./pages/MentionsLegales.tsx";
@@ -46,6 +47,7 @@ const routeDefs = [
   { path: "/confirmation", element: <PrivateRoute><Confirmation /></PrivateRoute> },
   { path: "/mes-commandes", element: <PrivateRoute><MyOrders /></PrivateRoute> },
   { path: "/carte", element: <CartePage /> },
+  { path: "/allergenes", element: <AllergenesPage /> },
   { path: "/evenements", element: <Events /> },
   { path: "/evenements/commander", element: <EventsCommander /> },
   { path: "/mentions-legales", element: <MentionsLegales /> },

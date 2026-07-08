@@ -119,7 +119,6 @@ const ProductPage = () => {
 
   const localName = isEn ? (product.name_en || product.name) : product.name;
   const localComposition = isEn ? (product.composition_en || product.composition) : product.composition;
-  const localAllergens = isEn && product.allergens_en ? product.allergens_en : product.allergens;
 
   const parsePrice = (s: string) => parseFloat(s.replace("€", "").replace(",", ".").trim()) || 0;
   const extractSupplement = (choice: string) => {
@@ -208,28 +207,6 @@ const ProductPage = () => {
                   );
                 })}
               </ul>
-            </div>
-          )}
-
-          {/* Allergènes */}
-          {localAllergens && localAllergens.length > 0 && (
-            <div className="bg-muted rounded-2xl p-4 mb-4">
-              <h3 className="font-display font-semibold text-sm mb-2">{t("productPage.allergens")}</h3>
-              <div className="flex flex-wrap gap-2">
-                {localAllergens.map((item, i) => {
-                  const icons: Record<string, string> = {
-                    "Gluten": "🌾", "Œufs": "🥚", "Poisson": "🐟", "Crustacés": "🦀",
-                    "Arachide": "🥜", "Soja": "🫘", "Céleri": "🥬", "Lait": "🥛",
-                    "Fruits à coque": "🌰", "Moutarde": "🟡", "Sésame": "🌱",
-                    "Sulfites": "🧪", "Lupin": "🌻", "Mollusques": "🦪",
-                  };
-                  return (
-                    <span key={i} className="inline-flex items-center gap-1 text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-medium">
-                      {icons[item] ?? "⚠️"} {item}
-                    </span>
-                  );
-                })}
-              </div>
             </div>
           )}
 
@@ -325,10 +302,19 @@ const ProductPage = () => {
           )}
 
           {/* Livraison */}
-          <div className="flex items-center gap-2 text-xs text-muted-foreground border border-border rounded-xl px-3 py-2.5">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground border border-border rounded-xl px-3 py-2.5 mb-4">
             <span>🚴</span>
             <span>{t("productPage.deliveryShort")}</span>
           </div>
+
+          {/* Lien vers le tableau des allergènes */}
+          <button
+            type="button"
+            onClick={() => navigate(lp("/allergenes"))}
+            className="text-sm font-medium text-primary underline underline-offset-2 hover:opacity-80 transition-opacity"
+          >
+            {t("productPage.viewAllergensTable")}
+          </button>
         </div>
 
         {/* Barre sticky bas */}
@@ -427,30 +413,6 @@ const ProductPage = () => {
                             {t("productPage.choiceLabel")}
                           </span>
                         )}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
-
-            {localAllergens && localAllergens.length > 0 && (
-              <div className="bg-muted rounded-2xl p-5">
-                <h3 className="font-display font-semibold text-lg mb-3">{t("productPage.allergens")}</h3>
-                <ul className="space-y-2">
-                  {localAllergens.map((item, i) => {
-                    const icons: Record<string, string> = {
-                      "Gluten": "🌾", "Œufs": "🥚", "Poisson": "🐟", "Crustacés": "🦀",
-                      "Arachide": "🥜", "Soja": "🫘", "Céleri": "🥬", "Lait": "🥛",
-                      "Fruits à coque": "🌰", "Moutarde": "🟡", "Sésame": "🌱",
-                      "Sulfites": "🧪", "Lupin": "🌻", "Mollusques": "🦪",
-                    };
-                    return (
-                      <li key={i} className="flex items-center gap-3 text-sm text-foreground/80">
-                        <span className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0 text-base">
-                          {icons[item] ?? "⚠️"}
-                        </span>
-                        <span>{item}</span>
                       </li>
                     );
                   })}
@@ -588,6 +550,14 @@ const ProductPage = () => {
               <span className="text-xl">🚴</span>
               <span>{t("productPage.deliveryFull")}</span>
             </div>
+
+            <button
+              type="button"
+              onClick={() => navigate(lp("/allergenes"))}
+              className="text-sm font-medium text-primary underline underline-offset-2 hover:opacity-80 transition-opacity self-start"
+            >
+              {t("productPage.viewAllergensTable")}
+            </button>
           </div>
         </div>
 
