@@ -3,13 +3,12 @@ import { initReactI18next } from "react-i18next";
 import fr from "@/locales/fr.json";
 import en from "@/locales/en.json";
 
-// Détermine la langue initiale à partir du préfixe d'URL (/en/...) en priorité,
-// sinon depuis le localStorage, sinon FR par défaut.
+// Détermine la langue uniquement à partir du préfixe d'URL (/en/...) — jamais
+// depuis le navigateur ou un stockage persistant, pour que "/" soit toujours FR
+// même si l'utilisateur a déjà visité une page /en auparavant.
 const getInitialLanguage = (): "fr" | "en" => {
-  if (typeof window !== "undefined") {
-    if (window.location.pathname.startsWith("/en")) return "en";
-    const stored = window.localStorage.getItem("bt_language");
-    if (stored === "en" || stored === "fr") return stored;
+  if (typeof window !== "undefined" && window.location.pathname.startsWith("/en")) {
+    return "en";
   }
   return "fr";
 };
@@ -33,7 +32,6 @@ if (typeof window !== "undefined") {
 
 i18n.on("languageChanged", (lng) => {
   if (typeof window !== "undefined") {
-    window.localStorage.setItem("bt_language", lng);
     document.documentElement.lang = lng;
   }
 });
