@@ -20,6 +20,7 @@ import CartePage from "./pages/CartePage.tsx";
 import AllergenesPage from "./pages/AllergenesPage.tsx";
 import Events from "./pages/Events.tsx";
 import EventsCommander from "./pages/EventsCommander.tsx";
+import Entreprise from "./pages/Entreprise.tsx";
 import MentionsLegales from "./pages/MentionsLegales.tsx";
 import CGV from "./pages/CGV.tsx";
 import Confidentialite from "./pages/Confidentialite.tsx";
@@ -50,6 +51,7 @@ const routeDefs = [
   { path: "/allergenes", element: <AllergenesPage /> },
   { path: "/evenements", element: <Events /> },
   { path: "/evenements/commander", element: <EventsCommander /> },
+  { path: "/entreprise", element: <Entreprise /> },
   { path: "/mentions-legales", element: <MentionsLegales /> },
   { path: "/cgv", element: <CGV /> },
   { path: "/confidentialite", element: <Confidentialite /> },

@@ -17,7 +17,7 @@ export function usePageMeta(
     let canonical = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
     if (path !== undefined) {
       // Derive the FR path (strip /en prefix if present)
-      const frPath = path.startsWith("/en") ? path.slice(3) || "/" : path;
+      const frPath = path === "/en" || path.startsWith("/en/") ? path.slice(3) || "/" : path;
       const canonicalPath = frPath;
 
       if (!canonical) {
