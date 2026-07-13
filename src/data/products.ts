@@ -1042,6 +1042,28 @@ export const allProducts: Product[] = [
     ],
   },
   {
+    id: "iced-latte",
+    name: "Iced Latte",
+    name_en: "Iced Latte",
+    price: "5,50€",
+    category: "Boissons",
+    img: "/iced-latte.png",
+    desc: "",
+    composition: [],
+    composition_en: [],
+    options: [
+      {
+        id: "lait",
+        label: "Options",
+        label_en: "Options",
+        required: false,
+        multiSelect: false,
+        choices: ["Lait d'avoine (+0,50€)"],
+        choices_en: ["Oat milk (+€0.50)"],
+      },
+    ],
+  },
+  {
     id: "capuccino",
     name: "Capuccino",
     price: "5,50€",
