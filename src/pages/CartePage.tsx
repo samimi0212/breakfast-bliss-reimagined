@@ -337,6 +337,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/cafe-latte.png",
     },
     {
+      id: "iced-latte",
+      name: "Iced Latte",
+      price: "5,50€",
+      img: "/iced-latte.png",
+    },
+    {
       id: "capuccino",
       name: "Capuccino",
       price: "5,50€",
