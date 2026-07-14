@@ -35,6 +35,9 @@ const generateSlots = (date: string): string[] => {
 };
 
 const todayStr = () => new Date().toISOString().split("T")[0];
+const OPENING_DATE = "2026-08-01";
+const isBeforeOpening = () => todayStr() < OPENING_DATE;
+const initialDate = () => isBeforeOpening() ? OPENING_DATE : todayStr();
 
 const CARD_ELEMENT_OPTIONS = {
   hidePostalCode: true,
@@ -67,7 +70,7 @@ const CheckoutForm = () => {
     ville: "",
     codePostal: "",
     note: "",
-    date: todayStr(),
+    date: initialDate(),
     heure: "",
     isMaintenant: false,
   });
@@ -756,6 +759,11 @@ const CheckoutForm = () => {
               onBlur={() => setActiveSection(null)}
             >
               <SectionTitle icon={Clock} title={t("checkout.creneauTitle")} complete={isCreneauComplete} />
+              {isBeforeOpening() && (
+                <div className="mb-4 px-4 py-3 rounded-xl text-sm font-medium" style={{ backgroundColor: "#DFF05722", border: "1px solid #DFF057", color: "#5a7a0a" }}>
+                  🗓️ Les livraisons démarrent le <strong>1er août 2026</strong> — choisissez votre créneau dès maintenant !
+                </div>
+              )}
               <div className="mb-4">
                 <label className="block text-sm font-bold mb-2">{t("checkout.dateLabel")}</label>
                 <div className="flex gap-2 flex-wrap">
@@ -764,7 +772,7 @@ const CheckoutForm = () => {
                     d.setDate(d.getDate() + i);
                     const iso = d.toISOString().split("T")[0];
                     const isSelected = form.date === iso && !showCustomDate;
-                    const isUnavailable = i === 0 && generateSlots(iso).length === 0;
+                    const isUnavailable = (i === 0 && generateSlots(iso).length === 0) || iso < OPENING_DATE;
                     const locale = i18n.language === "en" ? "en-GB" : "fr-FR";
                     const label = i === 0
                       ? t("checkout.todayLabel")
@@ -810,7 +818,7 @@ const CheckoutForm = () => {
                   <div className="mt-3">
                     <input
                       type="date"
-                      min={(() => { const d = new Date(); d.setDate(d.getDate() + 7); return d.toISOString().split("T")[0]; })()}
+                      min={isBeforeOpening() ? OPENING_DATE : (() => { const d = new Date(); d.setDate(d.getDate() + 7); return d.toISOString().split("T")[0]; })()}
                       value={showCustomDate && !Array.from({ length: 7 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() + i); return d.toISOString().split("T")[0]; }).includes(form.date) ? form.date : ""}
                       onChange={(e) => {
                         setForm((prev) => ({ ...prev, date: e.target.value }));
