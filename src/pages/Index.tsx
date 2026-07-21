@@ -76,16 +76,17 @@ const Index = () => {
           style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="text-5xl mb-4">☀️</div>
-          <h2 className="font-display text-2xl font-bold mb-3">Nous arrivons bientôt !</h2>
+          <div className="text-5xl mb-4">🎉</div>
+          <h2 className="font-display text-2xl font-bold mb-3">Breakfast Time arrive bientôt !</h2>
           <p className="text-muted-foreground mb-6 leading-relaxed">
-            Breakfast Time sera disponible <strong>début août 2026</strong>. En attendant, explorez notre carte et nos menus.
+            Nous ouvrons le <strong>5 août 2026</strong>.<br />
+            <strong>Les précommandes sont ouvertes !</strong> Réservez dès maintenant !
           </p>
           <button
             onClick={closePopup}
             className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity"
           >
-            Découvrir la carte →
+            Précommander →
           </button>
         </div>
       </div>
