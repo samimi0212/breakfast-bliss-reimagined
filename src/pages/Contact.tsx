@@ -6,7 +6,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Contact = () => {
   const { t } = useTranslation();
-  usePageMeta("Contact | Breakfast Time", "Contactez Breakfast Time pour toute question ou demande spéciale.", "/contact", true);
+  usePageMeta("Contact | Breakfast Time", "Contactez Breakfast Time pour toute question ou demande spéciale.", "/contact");
 
   const [form, setForm] = useState({ nom: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);

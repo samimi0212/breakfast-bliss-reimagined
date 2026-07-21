@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 const MentionsLegales = () => {
   const { t } = useTranslation();
-  usePageMeta("Mentions légales | Breakfast Time", "Mentions légales de Breakfast Time, service de livraison de petits-déjeuners dans les Alpes-Maritimes.", "/mentions-legales", true);
+  usePageMeta("Mentions légales | Breakfast Time", "Mentions légales de Breakfast Time, service de livraison de petits-déjeuners dans les Alpes-Maritimes.", "/mentions-legales");
 
   return (
     <>

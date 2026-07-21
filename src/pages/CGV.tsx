@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 const CGV = () => {
   const { t } = useTranslation();
-  usePageMeta("Conditions Générales de Vente | Breakfast Time", "Conditions générales de vente de Breakfast Time, service de livraison de petits-déjeuners dans les Alpes-Maritimes.", "/cgv", true);
+  usePageMeta("Conditions Générales de Vente | Breakfast Time", "Conditions générales de vente de Breakfast Time, service de livraison de petits-déjeuners dans les Alpes-Maritimes.", "/cgv");
 
   const sections = [
     { title: t("cgv.s1Title"), text: t("cgv.s1Text"), isAddress: true },

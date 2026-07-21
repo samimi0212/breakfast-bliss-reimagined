@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 const Confidentialite = () => {
   const { t } = useTranslation();
-  usePageMeta("Politique de confidentialité | Breakfast Time", "Politique de confidentialité et traitement des données personnelles de Breakfast Time.", "/confidentialite", true);
+  usePageMeta("Politique de confidentialité | Breakfast Time", "Politique de confidentialité et traitement des données personnelles de Breakfast Time.", "/confidentialite");
 
   const s2Items = t("privacy.s2Items", { returnObjects: true }) as string[];
   const s3Items = t("privacy.s3Items", { returnObjects: true }) as string[];
