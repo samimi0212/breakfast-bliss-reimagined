@@ -35,7 +35,7 @@ const generateSlots = (date: string): string[] => {
 };
 
 const todayStr = () => new Date().toISOString().split("T")[0];
-const OPENING_DATE = "2026-08-01";
+const OPENING_DATE = "2026-08-05";
 const isBeforeOpening = () => todayStr() < OPENING_DATE;
 const initialDate = () => isBeforeOpening() ? OPENING_DATE : todayStr();
 
