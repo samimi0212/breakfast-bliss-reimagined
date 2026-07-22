@@ -29,7 +29,7 @@ export default async function handler(req: Request): Promise<Response> {
     const data: EventFormData = await req.json();
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@immo-score.fr>",
+      from: "Breakfast Time <noreply@breakfast-time.fr>",
       to: "contact@breakfast-time.fr",
       subject: `Nouvelle demande de devis - ${eventTypeLabels[data.eventType]}`,
       html: `
@@ -49,7 +49,7 @@ export default async function handler(req: Request): Promise<Response> {
     });
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@immo-score.fr>",
+      from: "Breakfast Time <noreply@breakfast-time.fr>",
       to: data.email,
       subject: "Votre demande de devis - Breakfast Time",
       html: `

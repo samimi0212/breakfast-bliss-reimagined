@@ -28,7 +28,7 @@ export default async function handler(req: Request): Promise<Response> {
     });
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@immo-score.fr>",
+      from: "Breakfast Time <noreply@breakfast-time.fr>",
       to: "contact@breakfast-time.fr",
       subject: `Nouvelle demande de RDV téléphonique - ${data.name}`,
       html: `
@@ -48,7 +48,7 @@ export default async function handler(req: Request): Promise<Response> {
     });
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@immo-score.fr>",
+      from: "Breakfast Time <noreply@breakfast-time.fr>",
       to: data.email,
       subject: "Confirmation de votre RDV - Breakfast Time",
       html: `
