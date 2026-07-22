@@ -95,14 +95,14 @@ export default async function handler(req: Request): Promise<Response> {
 </html>`;
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@breakfast-time.fr>",
+      from: "Breakfast Time <contact@breakfast-time.fr>",
       to: email,
       subject: "Votre cadeau de bienvenue ☀️",
       html: emailHtml,
     });
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@breakfast-time.fr>",
+      from: "Breakfast Time <contact@breakfast-time.fr>",
       to: "contact@breakfast-time.fr",
       subject: `Nouvelle inscription newsletter — ${email}`,
       html: `

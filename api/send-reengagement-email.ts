@@ -70,7 +70,7 @@ export default async function handler(req: Request): Promise<Response> {
 </html>`;
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@breakfast-time.fr>",
+      from: "Breakfast Time <contact@breakfast-time.fr>",
       to: email,
       subject: `On pense à vous${prenom ? ", " + prenom : ""}`,
       html: emailHtml,

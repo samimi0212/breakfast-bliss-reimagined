@@ -13,7 +13,7 @@ export default async function handler(req: Request): Promise<Response> {
     const { nom, email, message } = await req.json();
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@breakfast-time.fr>",
+      from: "Breakfast Time <contact@breakfast-time.fr>",
       to: "contact@breakfast-time.fr",
       replyTo: email,
       subject: `Message de ${nom} via le site`,

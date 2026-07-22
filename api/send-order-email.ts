@@ -141,7 +141,7 @@ export default async function handler(req: Request): Promise<Response> {
 
     // Email au client + copie en BCC pour Breakfast Time
     await resend.emails.send({
-      from: "Breakfast Time <noreply@breakfast-time.fr>",
+      from: "Breakfast Time <contact@breakfast-time.fr>",
       to: order.email,
       bcc: "deborah.catalano@gmail.com",
       subject: `Commande confirmée — livraison le ${new Date(order.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long" })} à ${order.heure}`,
@@ -164,7 +164,7 @@ export default async function handler(req: Request): Promise<Response> {
     }
 
     await resend.emails.send({
-      from: "Breakfast Time <noreply@breakfast-time.fr>",
+      from: "Breakfast Time <contact@breakfast-time.fr>",
       to: "contact@breakfast-time.fr",
       subject: `Nouvelle commande — ${order.prenom} ${order.nom} — ${Number(order.total).toFixed(2)}€`,
       html: `
