@@ -9,6 +9,7 @@ const Footer = () => {
   const { t } = useTranslation();
   const { lp } = useLangPath();
   const [email, setEmail] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "already" | "error">("idle");
   const sortedCities = [...cities].sort((a, b) => a.name.localeCompare(b.name, "fr"));
 
@@ -23,7 +24,7 @@ const Footer = () => {
       const res = await fetch("/api/send-newsletter-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, website: honeypot }),
         signal: controller.signal,
       });
       clearTimeout(timeout);
@@ -93,6 +94,16 @@ const Footer = () => {
         </div>
       ) : (
         <form onSubmit={handleSubscribe} className="flex gap-2">
+          <input
+            type="text"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+          />
           <input
             type="email"
             value={email}
@@ -206,6 +217,16 @@ const Footer = () => {
               <>
                 <p className="text-sm mb-4" style={{ color: "rgba(255,255,255,0.5)" }}>{t("footer.newsletterText")}</p>
                 <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
+                  <input
+                    type="text"
+                    name="website"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                  />
                   <input
                     type="email"
                     value={email}

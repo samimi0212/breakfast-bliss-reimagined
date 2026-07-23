@@ -15,7 +15,11 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   try {
-    const { email } = await req.json();
+    const { email, website } = await req.json();
+
+    if (website) {
+      return new Response(JSON.stringify({ success: true }), { status: 200 });
+    }
 
     if (!email || !email.includes("@")) {
       return new Response(JSON.stringify({ error: "Adresse email invalide" }), { status: 400 });
