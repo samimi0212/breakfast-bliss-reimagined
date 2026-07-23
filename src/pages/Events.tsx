@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { useLangPath } from "@/hooks/useLangPath";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventBookingForm from "@/components/EventBookingForm";
@@ -18,9 +16,7 @@ const Events = () => {
     "Breakfast Time organise vos petits-déjeuners d'exception pour mariages, séminaires et événements de groupe à Antibes, Cannes, Nice et alentours.",
     "/evenements"
   );
-  const navigate = useNavigate();
   const { t } = useTranslation();
-  const { lp } = useLangPath();
   const [showAppointment, setShowAppointment] = useState(false);
   const [showDevis, setShowDevis] = useState(false);
 
@@ -100,12 +96,13 @@ const Events = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
-              onClick={() => navigate(lp("/evenements/commander"))}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold transition-all hover:scale-105"
+              disabled
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold opacity-50 cursor-not-allowed"
               style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
             >
               <ShoppingBag size={16} />
               {t("eventsPage.orderOnline")}
+              <span className="text-xs font-normal italic">({t("eventsPage.comingSoon")})</span>
             </button>
             <button
               onClick={() => setShowAppointment(true)}
@@ -183,12 +180,13 @@ const Events = () => {
 
                   <div className="flex flex-col sm:flex-row gap-3">
                     <button
-                      onClick={() => navigate(lp("/evenements/commander"))}
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all hover:scale-105"
+                      disabled
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold opacity-50 cursor-not-allowed"
                       style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
                     >
                       <ShoppingBag size={16} />
                       {t("eventsPage.orderOnline")}
+                      <span className="text-xs font-normal italic">({t("eventsPage.comingSoon")})</span>
                     </button>
                     <button
                       onClick={() => setShowAppointment(true)}
@@ -231,12 +229,13 @@ const Events = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => navigate(lp("/evenements/commander"))}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold transition-all hover:scale-105"
+              disabled
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold opacity-50 cursor-not-allowed"
               style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
             >
               <ShoppingBag size={18} />
               {t("eventsPage.orderOnline")}
+              <span className="text-xs font-normal italic">({t("eventsPage.comingSoon")})</span>
             </button>
             <button
               onClick={() => setShowAppointment(true)}
