@@ -81,10 +81,10 @@ export const allProducts: Product[] = [
     name_en: "English Breakfast",
     price: "16,90€",
     category: "Nos Menus",
-    img: "/menu-anglais.png",
+    img: "/menu-anglais2.png",
     desc: "",
-    composition: ["3 Breakfast sausage", "Œufs brouillés", "Baked Beans", "2 Tranches de pain toastées", "Sauce à l'avocat", "1 Jus frais au choix", "1 Boisson chaude au choix"],
-    composition_en: ["3 Breakfast sausages", "Scrambled eggs", "Baked Beans", "2 Slices of toast", "Avocado sauce", "1 Fresh juice of your choice", "1 Hot drink of your choice"],
+    composition: ["2 Breakfast sausage", "Œufs brouillés", "Baked Beans", "Tranches d'Emmental", "2 Tranches de pain toastées", "Sauce à l'avocat", "1 Jus frais au choix", "1 Boisson chaude au choix"],
+    composition_en: ["2 Breakfast sausages", "Scrambled eggs", "Baked Beans", "Emmental slices", "2 Slices of toast", "Avocado sauce", "1 Fresh juice of your choice", "1 Hot drink of your choice"],
     options: [
       {
         id: "jus",

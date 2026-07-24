@@ -20,7 +20,7 @@ const menus = [
     id: "menu-anglais",
     name: "Menu Anglais",
     price: "16,90€",
-    img: "/menu-anglais.png",
+    img: "/menu-anglais2.png",
   },
   {
     id: "menu-brunch",
