@@ -9,6 +9,17 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
+function normalizeEmail(raw: string): string {
+  const email = raw.trim().toLowerCase();
+  const [local, domain] = email.split("@");
+  if (domain === "gmail.com" || domain === "googlemail.com") {
+    const withoutTag = local.split("+")[0];
+    const withoutDots = withoutTag.replace(/\./g, "");
+    return `${withoutDots}@gmail.com`;
+  }
+  return email;
+}
+
 export default async function handler(req: Request): Promise<Response> {
   if (req.method !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
@@ -25,9 +36,11 @@ export default async function handler(req: Request): Promise<Response> {
       return new Response(JSON.stringify({ error: "Adresse email invalide" }), { status: 400 });
     }
 
+    const normalizedEmail = normalizeEmail(email);
+
     const { error: dbError } = await supabase
       .from("newsletter_subscribers")
-      .insert({ email })
+      .insert({ email: normalizedEmail })
       .select();
 
     if (dbError) {
@@ -100,7 +113,7 @@ export default async function handler(req: Request): Promise<Response> {
 
     await resend.emails.send({
       from: "Breakfast Time <contact@breakfast-time.fr>",
-      to: email,
+      to: normalizedEmail,
       subject: "Votre cadeau de bienvenue ☀️",
       html: emailHtml,
     });
@@ -108,11 +121,11 @@ export default async function handler(req: Request): Promise<Response> {
     await resend.emails.send({
       from: "Breakfast Time <contact@breakfast-time.fr>",
       to: "contact@breakfast-time.fr",
-      subject: `Nouvelle inscription newsletter — ${email}`,
+      subject: `Nouvelle inscription newsletter — ${normalizedEmail}`,
       html: `
         <div style="font-family: sans-serif; max-width: 500px; margin: 0 auto;">
           <h2 style="color: #3a3a0a;">Nouvelle inscription newsletter</h2>
-          <p><strong>Email :</strong> ${email}</p>
+          <p><strong>Email :</strong> ${normalizedEmail}</p>
           <p style="font-size: 12px; color: #999;">Inscription le ${new Date().toLocaleDateString("fr-FR")} à ${new Date().toLocaleTimeString("fr-FR")}</p>
         </div>
       `,
