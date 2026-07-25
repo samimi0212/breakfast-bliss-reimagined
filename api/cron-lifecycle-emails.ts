@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Cron Vercel — déclenché quotidiennement à 9h (voir vercel.json)
+// Cron Vercel — déclenché chaque vendredi à 9h UTC (voir vercel.json)
 // Envoie automatiquement :
 //   - J+21 sans nouvelle commande : email relance avec code RETOUR (send-reengagement-email)
 
