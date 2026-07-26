@@ -1,169 +1,548 @@
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventBookingForm from "@/components/EventBookingForm";
 import PhoneAppointmentForm from "@/components/PhoneAppointmentForm";
-import { Sparkles, Phone, FileText, X, Check } from "lucide-react";
-import brunchMariage from "@/assets/brunch-mariage.jpg";
+import {
+  Heart,
+  Check,
+  Sparkles,
+  Clock,
+  Users,
+  Truck,
+  Leaf,
+  ChefHat,
+  ArrowRight,
+  Plus,
+  Minus,
+  MapPin,
+  ShoppingBag,
+  FileText,
+  Phone,
+  X,
+} from "lucide-react";
+import heroMariage from "@/assets/mariage-hero.jpg";
+import buffetMariage from "@/assets/mariage-buffet.jpg";
+import convivesMariage from "@/assets/mariage-convives.jpg";
+import detailMariage from "@/assets/mariage-detail.jpg";
+
+const OLIVE_DARK = "#2a2a08";
+const OLIVE_MID = "#7a7020";
+const OLIVE_SOFT = "#8a8a60";
+const LIME = "#DFF057";
+const CREAM = "#f4f1ea";
+
+const formules = [
+  {
+    name: "Essentiel",
+    price: "12€",
+    tagline: "L'élégance simple",
+    items: [
+      "Viennoiseries pur beurre",
+      "Corbeille de fruits frais de saison",
+      "Jus d'orange pressé & eaux",
+      "Café en grains & thés premium",
+      "Vaisselle jetable haut de gamme",
+    ],
+  },
+  {
+    name: "Signature",
+    price: "18€",
+    tagline: "Notre formule la plus choisie",
+    highlight: true,
+    items: [
+      "Tout l'Essentiel",
+      "Plateau salé : mini-quiches, croque-monsieur, wraps",
+      "Bar à granolas & yaourts fermiers",
+      "Pâtisseries signature & mignardises",
+      "Décoration florale & scénographie du buffet",
+      "Vaisselle porcelaine & couverts dorés",
+    ],
+  },
+  {
+    name: "Prestige",
+    price: "29€",
+    tagline: "L'expérience complète",
+    items: [
+      "Tout le Signature",
+      "Bar à œufs & pancakes en live cooking",
+      "Saumon fumé, burrata & planches de charcuterie fine",
+      "Bar à mimosas & jus détox",
+      "Wedding cake de viennoiseries",
+      "Maîtres d'hôtel sur place (2 à 4 pers.)",
+    ],
+  },
+];
+
+const moments = [
+  {
+    title: "Le brunch du lendemain",
+    text: "Le rendez-vous incontournable pour prolonger la fête en douceur avec vos proches, au domaine ou à la villa.",
+    image: convivesMariage,
+  },
+  {
+    title: "Le welcome breakfast",
+    text: "Accueillez vos invités venus de loin avec un petit-déjeuner raffiné le matin de la cérémonie.",
+    image: buffetMariage,
+  },
+  {
+    title: "Le brunch-cérémonie",
+    text: "Un mariage entièrement pensé autour d'un brunch : lumineux, gourmand, chaleureux et 100 % à votre image.",
+    image: detailMariage,
+  },
+];
+
+const inclus = [
+  { icon: Truck, title: "Livraison & installation", text: "Buffet dressé et scénographié avant l'arrivée de vos invités." },
+  { icon: ChefHat, title: "Produits faits maison", text: "Viennoiseries et pâtisseries préparées le matin même." },
+  { icon: Leaf, title: "Produits locaux", text: "Fruits, fromages et jus sourcés dans les Alpes-Maritimes." },
+  { icon: Users, title: "Équipe dédiée", text: "Un interlocuteur unique du devis au débarrassage." },
+  { icon: Clock, title: "Ponctualité garantie", text: "Créneau confirmé 48 h avant le jour J." },
+  { icon: Sparkles, title: "Sur-mesure", text: "Palette, fleurs et menu adaptés à votre thème." },
+];
+
+const etapes = [
+  { n: "01", title: "Échange", text: "On parle de votre lieu, votre date, votre nombre d'invités." },
+  { n: "02", title: "Devis & dégustation", text: "Proposition détaillée sous 24 h, dégustation offerte dès 60 convives." },
+  { n: "03", title: "Personnalisation", text: "On affine menu, décor et timing jusqu'au moindre détail." },
+  { n: "04", title: "Le jour J", text: "On installe, on sert, on débarrasse. Vous profitez." },
+];
+
+const faq = [
+  {
+    q: "Combien de temps à l'avance faut-il réserver ?",
+    a: "Nous recommandons 2 à 3 mois pour un mariage, et jusqu'à 6 mois en haute saison (mai à septembre). Nous étudions aussi les demandes de dernière minute selon nos disponibilités.",
+  },
+  {
+    q: "Intervenez-vous dans tous les lieux de réception ?",
+    a: "Oui : domaines, villas privées, plages privées, hôtels et salles des Alpes-Maritimes et du Var Est. Nous sommes autonomes en matériel et n'avons pas besoin de cuisine sur place.",
+  },
+  {
+    q: "Gérez-vous les régimes alimentaires particuliers ?",
+    a: "Absolument. Options végétariennes, vegan, sans gluten, sans lactose et halal disponibles sur simple demande, sans supplément sur la formule.",
+  },
+  {
+    q: "Y a-t-il un nombre minimum d'invités ?",
+    a: "Nos formules mariage démarrent à 20 convives. En dessous, nous vous orientons vers nos plateaux brunch groupe.",
+  },
+  {
+    q: "La décoration du buffet est-elle incluse ?",
+    a: "La scénographie du buffet (nappage, présentoirs, verdure) est incluse dès la formule Signature. Les compositions florales sur-mesure sont proposées en option.",
+  },
+];
 
 const BrunchMariage = () => {
-  const { t } = useTranslation();
+  usePageMeta(
+    "Brunch Mariage — Traiteur brunch de mariage | Breakfast Time",
+    "Traiteur brunch de mariage dans les Alpes-Maritimes : buffet raffiné, décoration sur-mesure, installation et service inclus. À partir de 12€/pers. Devis en 24h.",
+    "/brunch-mariage"
+  );
+  const navigate = useNavigate();
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [showAppointment, setShowAppointment] = useState(false);
-  const [showDevis, setShowDevis] = useState(false);
-
-  usePageMeta(t("brunchMariagePage.metaTitle"), t("brunchMariagePage.metaDesc"), "/brunch-mariage");
-
-  const features = [
-    t("eventsPage.mariageF1"),
-    t("eventsPage.mariageF2"),
-    t("eventsPage.mariageF3"),
-    t("eventsPage.mariageF4"),
-    t("eventsPage.mariageF5"),
-  ];
-
-  const faq = [
-    { q: t("brunchMariagePage.faq1Q"), a: t("brunchMariagePage.faq1A") },
-    { q: t("brunchMariagePage.faq2Q"), a: t("brunchMariagePage.faq2A") },
-    { q: t("brunchMariagePage.faq3Q"), a: t("brunchMariagePage.faq3A") },
-  ];
-
-  // Schema JSON-LD : FAQPage (aide à l'affichage enrichi dans Google).
-  useEffect(() => {
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faq.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    };
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.setAttribute("data-brunch-mariage-faq", "true");
-    script.textContent = JSON.stringify(faqSchema);
-    document.head.appendChild(script);
-    return () => {
-      document.head.querySelectorAll('script[data-brunch-mariage-faq="true"]').forEach((el) => el.remove());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [t]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
 
-      {/* Hero */}
-      <div className="pt-32 pb-16 px-6 text-center" style={{ backgroundColor: "#f4f1ea" }}>
-        <div className="max-w-3xl mx-auto">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "Brunch de mariage",
+            serviceType: "Traiteur brunch mariage",
+            provider: { "@type": "LocalBusiness", name: "Breakfast Time", areaServed: "Alpes-Maritimes" },
+            offers: { "@type": "Offer", price: "12", priceCurrency: "EUR" },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faq.map(({ q, a }) => ({
+              "@type": "Question",
+              name: q,
+              acceptedAnswer: { "@type": "Answer", text: a },
+            })),
+          }),
+        }}
+      />
+
+      {/* HERO */}
+      <section className="relative min-h-[92vh] flex items-end overflow-hidden">
+        <img
+          src={heroMariage}
+          alt="Table de brunch de mariage dressée en extérieur avec viennoiseries et branches d'olivier"
+          width={1920}
+          height={1280}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(180deg, rgba(20,20,6,0.45) 0%, rgba(20,20,6,0.15) 40%, rgba(20,20,6,0.85) 100%)" }}
+        />
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 pt-32">
           <div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-6"
-            style={{ backgroundColor: "rgba(58,58,10,0.08)", color: "#5a5a1a" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase mb-7"
+            style={{ backgroundColor: "rgba(223,240,87,0.14)", border: "1px solid rgba(223,240,87,0.4)", color: LIME }}
           >
-            <Sparkles size={12} />
-            {t("brunchMariagePage.badge")}
+            <Heart size={11} />
+            Traiteur brunch de mariage · Alpes-Maritimes
           </div>
-          <h1 className="font-display text-4xl md:text-5xl font-bold mb-5 leading-tight" style={{ color: "#2a2a08" }}>
-            {t("brunchMariagePage.h1")}{" "}
-            <span className="italic" style={{ color: "#7a7020" }}>{t("brunchMariagePage.h1Italic")}</span>
+
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] max-w-3xl text-white mb-6">
+            Le plus beau jour
+            <br />
+            commence par un{" "}
+            <span className="italic" style={{ color: LIME }}>
+              brunch
+            </span>
           </h1>
-          <p className="text-base leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: "#5a5a40" }}>
-            {t("brunchMariagePage.intro")}
+
+          <p className="text-base md:text-xl max-w-xl leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.78)" }}>
+            Buffets raffinés, scénographie sur-mesure et service attentionné pour votre mariage.
+            Installation incluse, de 20 à 300 convives.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <button
-              onClick={() => setShowDevis(true)}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold transition-all hover:scale-105"
-              style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="#devis"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-bold transition-transform hover:scale-105"
+              style={{ backgroundColor: LIME, color: "#3a3a0a" }}
             >
-              <FileText size={16} />
-              {t("eventsPage.quoteBtn")}
-            </button>
+              Demander un devis gratuit <ArrowRight size={16} />
+            </a>
             <button
-              onClick={() => setShowAppointment(true)}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold border-2 transition-colors hover:bg-black/5"
-              style={{ borderColor: "rgba(58,58,10,0.25)", color: "#3a3a0a" }}
+              onClick={() => navigate("/evenements/commander")}
+              className="inline-flex items-center justify-center gap-2 border-2 px-8 py-4 rounded-full text-base font-semibold text-white transition-colors hover:bg-white/10"
+              style={{ borderColor: "rgba(255,255,255,0.35)" }}
             >
-              <Phone size={16} />
-              {t("eventsPage.callbackBtn")}
+              <ShoppingBag size={16} /> Composer mon brunch
             </button>
           </div>
-        </div>
-      </div>
 
-      {/* Contenu principal */}
-      <div className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-            <div className="relative aspect-square rounded-3xl overflow-hidden" style={{ boxShadow: "0 30px 60px -12px rgba(0,0,0,0.15)" }}>
-              <img src={brunchMariage} alt={t("brunchMariagePage.h1")} className="w-full h-full object-cover" loading="lazy" />
-              <div
-                className="absolute top-6 left-6 px-4 py-2 rounded-full text-sm font-bold backdrop-blur-md"
-                style={{ backgroundColor: "rgba(223, 240, 87, 0.95)", color: "#3a3a0a" }}
-              >
-                {t("eventsPage.priceFrom", { price: t("eventsPage.mariagePrice") })}
-              </div>
-            </div>
-            <div className="space-y-3">
-              {features.map((feature, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check size={12} className="text-primary" />
-                  </div>
-                  <span className="text-foreground">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* FAQ */}
-          <h2 className="font-display text-2xl md:text-3xl font-bold mb-8">{t("brunchMariagePage.faqTitle")}</h2>
-          <div className="space-y-6 mb-4">
-            {faq.map((f, i) => (
-              <div key={i}>
-                <h3 className="font-semibold text-lg mb-2" style={{ color: "#2a2a08" }}>{f.q}</h3>
-                <p className="text-muted-foreground leading-relaxed">{f.a}</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14 pt-8 border-t" style={{ borderColor: "rgba(255,255,255,0.18)" }}>
+            {[
+              ["12€", "par personne"],
+              ["300", "convives max"],
+              ["24h", "réponse devis"],
+              ["7j/7", "disponibilité"],
+            ].map(([big, small]) => (
+              <div key={small}>
+                <p className="font-display text-3xl md:text-4xl font-bold" style={{ color: LIME }}>
+                  {big}
+                </p>
+                <p className="text-xs uppercase tracking-widest mt-1" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  {small}
+                </p>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* CTA */}
-      <div
-        className="relative py-16 px-6 overflow-hidden"
-        style={{ background: "linear-gradient(135deg, hsl(61, 45%, 20%) 0%, hsl(30, 10%, 8%) 100%)" }}
-      >
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-6" style={{ color: "white" }}>
-            {t("eventsPage.ctaTitle")}{" "}
-            <span className="italic" style={{ color: "#DFF057" }}>{t("eventsPage.ctaTitleItalic")}</span>
-          </h2>
-          <p className="text-lg mb-10" style={{ color: "rgba(255,255,255,0.75)" }}>
-            {t("eventsPage.ctaSubtitle")}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => setShowDevis(true)}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold transition-all hover:scale-105"
-              style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}
-            >
-              <FileText size={18} />
-              {t("eventsPage.quoteBtn")}
-            </button>
-            <button
-              onClick={() => setShowAppointment(true)}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold border-2 transition-colors hover:bg-white/10"
-              style={{ borderColor: "rgba(255,255,255,0.3)", color: "white" }}
-            >
-              <Phone size={18} />
-              {t("eventsPage.callbackBtn")}
-            </button>
+      {/* INTRO ÉDITORIALE */}
+      <section className="py-24 px-6 md:px-12 lg:px-20" style={{ backgroundColor: CREAM }}>
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
+          <img
+            src={detailMariage}
+            alt="Assiette de mariage dressée avec branche d'olivier et marque-place calligraphié"
+            loading="lazy"
+            width={1200}
+            height={1200}
+            className="w-full rounded-3xl object-cover"
+            style={{ aspectRatio: "4/5", boxShadow: "var(--card-shadow-hover)" }}
+          />
+
+          <div>
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-5" style={{ color: OLIVE_MID }}>
+              Notre approche
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight mb-6" style={{ color: OLIVE_DARK }}>
+              Un brunch qui vous <span className="italic" style={{ color: OLIVE_MID }}>ressemble</span>
+            </h2>
+            <p className="text-base md:text-lg leading-relaxed mb-5" style={{ color: "#4a4a2a" }}>
+              Nous ne dupliquons pas un buffet standard. Chaque mariage démarre par un échange sur votre
+              lieu, votre palette de couleurs, vos invités et ce que vous aimez manger.
+            </p>
+            <p className="text-base leading-relaxed mb-8" style={{ color: OLIVE_SOFT }}>
+              Viennoiseries pur beurre sorties du four le matin même, fruits de producteurs voisins,
+              café de spécialité, et une présentation pensée comme un décor : nappage naturel, verdure
+              fraîche, présentoirs en céramique et bois.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {["Fait maison", "Producteurs locaux", "Zéro plastique", "Options vegan & sans gluten"].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold"
+                  style={{ backgroundColor: "rgba(58,58,10,0.07)", color: "#5a5a1a" }}
+                >
+                  <Check size={12} /> {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* MOMENTS */}
+      <section className="py-24 px-6 md:px-12 lg:px-20 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="max-w-xl mb-14">
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: OLIVE_MID }}>
+              Trois façons de célébrer
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight" style={{ color: OLIVE_DARK }}>
+              Quel brunch pour votre mariage&nbsp;?
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {moments.map(({ title, text, image }, i) => (
+              <div
+                key={title}
+                className="group rounded-3xl overflow-hidden bg-card hover-lift"
+                style={{ boxShadow: "var(--card-shadow)" }}
+              >
+                <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
+                  <img
+                    src={image}
+                    alt={title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <span
+                    className="absolute top-4 left-4 w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
+                    style={{ backgroundColor: LIME, color: "#3a3a0a" }}
+                  >
+                    {i + 1}
+                  </span>
+                </div>
+                <div className="p-7">
+                  <h3 className="font-display text-xl font-bold mb-2.5" style={{ color: OLIVE_DARK }}>
+                    {title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: OLIVE_SOFT }}>
+                    {text}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FORMULES */}
+      <section className="py-24 px-6 md:px-12 lg:px-20" style={{ backgroundColor: CREAM }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: OLIVE_MID }}>
+              Nos formules mariage
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight mb-4" style={{ color: OLIVE_DARK }}>
+              Des prix clairs, sans surprise
+            </h2>
+            <p className="text-sm" style={{ color: OLIVE_SOFT }}>
+              Tarifs par personne · Livraison, installation et débarrassage inclus · Dès 20 convives
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 items-start">
+            {formules.map(({ name, price, tagline, items, highlight }) => (
+              <div
+                key={name}
+                className="relative rounded-3xl p-8 h-full flex flex-col hover-lift"
+                style={{
+                  backgroundColor: highlight ? OLIVE_DARK : "white",
+                  boxShadow: highlight ? "var(--card-shadow-hover)" : "var(--card-shadow)",
+                  border: highlight ? `1px solid ${LIME}` : "1px solid rgba(58,58,10,0.07)",
+                }}
+              >
+                {highlight && (
+                  <span
+                    className="absolute -top-3 left-8 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase"
+                    style={{ backgroundColor: LIME, color: "#3a3a0a" }}
+                  >
+                    Le plus demandé
+                  </span>
+                )}
+                <p
+                  className="text-xs font-semibold tracking-widest uppercase mb-3"
+                  style={{ color: highlight ? "rgba(223,240,87,0.8)" : OLIVE_MID }}
+                >
+                  {tagline}
+                </p>
+                <h3 className="font-display text-2xl font-bold mb-4" style={{ color: highlight ? "white" : OLIVE_DARK }}>
+                  {name}
+                </h3>
+                <div className="flex items-baseline gap-1.5 mb-7">
+                  <span className="font-display text-4xl font-bold" style={{ color: highlight ? LIME : OLIVE_DARK }}>
+                    {price}
+                  </span>
+                  <span className="text-sm" style={{ color: highlight ? "rgba(255,255,255,0.55)" : OLIVE_SOFT }}>
+                    / personne
+                  </span>
+                </div>
+                <ul className="space-y-3 flex-1 mb-8">
+                  {items.map((it) => (
+                    <li key={it} className="flex gap-2.5 text-sm leading-snug">
+                      <Check size={15} className="flex-shrink-0 mt-0.5" style={{ color: highlight ? LIME : OLIVE_MID }} />
+                      <span style={{ color: highlight ? "rgba(255,255,255,0.82)" : "#4a4a2a" }}>{it}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#devis"
+                  className="block text-center px-6 py-3.5 rounded-full text-sm font-bold transition-transform hover:scale-[1.03]"
+                  style={highlight ? { backgroundColor: LIME, color: "#3a3a0a" } : { backgroundColor: "rgba(58,58,10,0.06)", color: OLIVE_DARK }}
+                >
+                  Demander cette formule
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* INCLUS */}
+      <section className="py-24 px-6 md:px-12 lg:px-20 bg-background">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-xl mx-auto mb-14">
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: OLIVE_MID }}>
+              Tout est prévu
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight" style={{ color: OLIVE_DARK }}>
+              Ce qui est inclus
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {inclus.map(({ icon: Icon, title, text }) => (
+              <div key={title} className="p-7 rounded-2xl" style={{ backgroundColor: CREAM }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: "rgba(223,240,87,0.35)" }}>
+                  <Icon size={20} style={{ color: OLIVE_DARK }} />
+                </div>
+                <h3 className="font-display text-lg font-bold mb-2" style={{ color: OLIVE_DARK }}>
+                  {title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: OLIVE_SOFT }}>
+                  {text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ÉTAPES */}
+      <section className="py-24 px-6 md:px-12 lg:px-20" style={{ backgroundColor: OLIVE_DARK }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: LIME }}>
+              De l'échange au jour J
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight text-white">
+              Comment ça se passe
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {etapes.map(({ n, title, text }, i) => (
+              <div key={n} className="relative">
+                <p className="font-display text-2xl font-bold mb-3" style={{ color: LIME }}>
+                  {n}
+                </p>
+                <h3 className="font-display text-lg font-bold text-white mb-2">{title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>
+                  {text}
+                </p>
+                {i < etapes.length - 1 && (
+                  <div className="hidden lg:block absolute top-3 -right-4 w-8 h-px" style={{ backgroundColor: "rgba(223,240,87,0.3)" }} />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ZONE */}
+      <section className="py-20 px-6 md:px-12 lg:px-20 bg-background">
+        <div
+          className="max-w-7xl mx-auto rounded-3xl p-9 md:p-12 flex flex-col md:flex-row md:items-center gap-8"
+          style={{ backgroundColor: "rgba(223,240,87,0.18)" }}
+        >
+          <MapPin size={30} style={{ color: "#5a5a1a" }} className="flex-shrink-0" />
+          <div className="flex-1">
+            <h2 className="font-display text-2xl md:text-3xl font-bold mb-3" style={{ color: OLIVE_DARK }}>
+              Nous livrons partout sur la Côte d'Azur
+            </h2>
+            <p className="text-sm leading-relaxed" style={{ color: "#4a4a2a" }}>
+              Nice · Cannes · Antibes · Mougins · Valbonne · Saint-Paul-de-Vence · Grasse · Villefranche ·
+              Monaco · Menton · Saint-Tropez (sur devis)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-24 px-6 md:px-12 lg:px-20" style={{ backgroundColor: CREAM }}>
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight mb-12 text-center" style={{ color: OLIVE_DARK }}>
+            Questions fréquentes
+          </h2>
+          <div className="space-y-3">
+            {faq.map(({ q, a }, i) => (
+              <div key={q} className="rounded-2xl overflow-hidden bg-card" style={{ boxShadow: "var(--card-shadow)" }}>
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 text-left px-6 py-5"
+                >
+                  <span className="font-display text-base md:text-lg font-bold" style={{ color: OLIVE_DARK }}>
+                    {q}
+                  </span>
+                  {openFaq === i ? (
+                    <Minus size={18} style={{ color: OLIVE_MID }} className="flex-shrink-0" />
+                  ) : (
+                    <Plus size={18} style={{ color: OLIVE_MID }} className="flex-shrink-0" />
+                  )}
+                </button>
+                {openFaq === i && (
+                  <p className="px-6 pb-6 text-sm leading-relaxed" style={{ color: OLIVE_SOFT }}>
+                    {a}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DEVIS */}
+      <section id="devis" className="py-24 px-6 md:px-12 lg:px-20 bg-background scroll-mt-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-5"
+              style={{ backgroundColor: "rgba(58,58,10,0.08)", color: "#5a5a1a" }}
+            >
+              <Heart size={11} /> Réponse en 24 h
+            </div>
+            <h2 className="font-display text-3xl md:text-5xl font-bold leading-tight mb-4" style={{ color: OLIVE_DARK }}>
+              Parlons de votre <span className="italic" style={{ color: OLIVE_MID }}>grand jour</span>
+            </h2>
+            <p className="text-sm" style={{ color: OLIVE_SOFT }}>
+              Devis gratuit et sans engagement · Dégustation offerte dès 60 convives
+            </p>
+          </div>
+          <EventBookingForm />
+        </div>
+      </section>
 
       <Footer />
 
@@ -181,26 +560,6 @@ const BrunchMariage = () => {
               <X size={20} />
             </button>
             <PhoneAppointmentForm onClose={() => setShowAppointment(false)} />
-          </div>
-        </div>
-      )}
-
-      {/* Modal Demander un devis */}
-      {showDevis && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto"
-          onClick={() => setShowDevis(false)}
-        >
-          <div className="bg-white rounded-3xl max-w-3xl w-full my-8 p-8 relative" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => setShowDevis(false)}
-              className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center hover:bg-muted transition-colors z-10"
-            >
-              <X size={20} />
-            </button>
-            <h2 className="font-display text-3xl font-bold text-center mb-3">{t("eventsPage.quoteModalTitle")}</h2>
-            <p className="text-center text-muted-foreground mb-8">{t("eventsPage.quoteModalSubtitle")}</p>
-            <EventBookingForm />
           </div>
         </div>
       )}
