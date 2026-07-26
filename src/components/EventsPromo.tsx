@@ -12,9 +12,9 @@ const EventsPromo = () => {
   const navigate = useNavigate();
 
   const formules = [
-    { label: t("events.f1Label"), tag: t("events.f1Tag"), price: t("events.f1Price"), image: brunchMariage },
-    { label: t("events.f2Label"), tag: t("events.f2Tag"), price: t("events.f2Price"), image: brunchEntreprise },
-    { label: t("events.f3Label"), tag: t("events.f3Tag"), price: t("events.f3Price"), image: brunchGroupe },
+    { label: t("events.f1Label"), tag: t("events.f1Tag"), price: t("events.f1Price"), image: brunchMariage, path: "/brunch-mariage" },
+    { label: t("events.f2Label"), tag: t("events.f2Tag"), price: t("events.f2Price"), image: brunchEntreprise, path: "/produit/brunch-entreprise" },
+    { label: t("events.f3Label"), tag: t("events.f3Tag"), price: t("events.f3Price"), image: brunchGroupe, path: "/produit/brunch-groupe" },
   ];
 
   return (
@@ -42,10 +42,10 @@ const EventsPromo = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {formules.map(({ label, tag, price, image }) => (
+          {formules.map(({ label, tag, price, image, path }) => (
             <div
               key={label}
-              onClick={() => navigate(lp("/evenements"))}
+              onClick={() => navigate(lp(path))}
               className="group cursor-pointer rounded-2xl overflow-hidden"
               style={{ backgroundColor: "white", boxShadow: "var(--card-shadow)" }}
             >

@@ -406,6 +406,21 @@
     "groupeF4": "Warm and friendly atmosphere",
     "groupeF5": "Themed decoration possible"
   },
+  "brunchMariagePage": {
+    "metaTitle": "Wedding Brunch Caterer Antibes | Breakfast Time",
+    "metaDesc": "Bespoke wedding brunch catering in Antibes and the Alpes-Maritimes. Elegant buffet, decoration included, free quote within 24h.",
+    "badge": "Event catering",
+    "h1": "Wedding brunch",
+    "h1Italic": "tailored in Antibes",
+    "intro": "The most beautiful day deserves an exceptional buffet. Breakfast Time creates your wedding brunch in Antibes and across the Alpes-Maritimes: a generous buffet, customisable decoration and discreet service, from intimate gatherings to large receptions.",
+    "faqTitle": "Frequently asked questions",
+    "faq1Q": "How much does a wedding brunch cost?",
+    "faq1A": "From €12 per person depending on guest count and chosen formula. Every quote is tailored — contact us for a precise price.",
+    "faq2Q": "Which areas do you cover for weddings?",
+    "faq2A": "We cater weddings in Antibes and across the Alpes-Maritimes (Cannes, Nice, Sophia Antipolis, Cagnes-sur-Mer and surrounding areas).",
+    "faq3Q": "Can the buffet be customised?",
+    "faq3A": "Yes, every brunch is composed to order: pastries, savoury, sweet, drinks and decoration are adapted to your theme and dietary preferences."
+  },
   "eventsCommander": {
     "badge": "Delivery & setup included",
     "title": "Order for your",

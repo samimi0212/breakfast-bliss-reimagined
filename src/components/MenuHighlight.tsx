@@ -21,7 +21,7 @@ const MenuSection = () => {
     { title: t("menuSection.o1Title"), desc: t("menuSection.o1Desc"), cta: t("menuSection.o1Cta"), path: lp("/") + "?tab=menus#menu", imgIndex: 0 },
     { title: t("menuSection.o2Title"), desc: t("menuSection.o2Desc"), cta: t("menuSection.o2Cta"), path: lp("/") + "?tab=carte#menu", imgIndex: 1 },
     { title: t("menuSection.o3Title"), desc: t("menuSection.o3Desc"), cta: t("menuSection.o3Cta"), path: lp("/") + "?tab=carte#menu", imgIndex: 2 },
-    { title: t("menuSection.o4Title"), desc: t("menuSection.o4Desc"), cta: t("menuSection.o4Cta"), path: lp("/evenements"), imgIndex: 3 },
+    { title: t("menuSection.o4Title"), desc: t("menuSection.o4Desc"), cta: t("menuSection.o4Cta"), path: lp("/evenements/commander"), imgIndex: 3 },
   ];
 
   return (

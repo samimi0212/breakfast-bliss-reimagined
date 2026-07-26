@@ -406,11 +406,26 @@
     "groupeF4": "Ambiance chaleureuse",
     "groupeF5": "Décoration thématique possible"
   },
+  "brunchMariagePage": {
+    "metaTitle": "Traiteur Brunch Mariage Antibes | Breakfast Time",
+    "metaDesc": "Traiteur brunch de mariage sur mesure à Antibes et dans les Alpes-Maritimes. Buffet raffiné, décoration incluse, devis gratuit sous 24h.",
+    "badge": "Traiteur événementiel",
+    "h1": "Brunch de mariage",
+    "h1Italic": "sur mesure à Antibes",
+    "intro": "Le plus beau jour mérite un buffet d'exception. Breakfast Time compose votre brunch de mariage à Antibes et dans les Alpes-Maritimes : buffet généreux, décoration personnalisable et service discret, du petit comité à la grande réception.",
+    "faqTitle": "Questions fréquentes",
+    "faq1Q": "Quel est le prix d'un brunch de mariage ?",
+    "faq1A": "À partir de 12€ par personne selon le nombre d'invités et la formule choisie. Chaque devis est personnalisé — contactez-nous pour un tarif précis.",
+    "faq2Q": "Dans quelles villes intervenez-vous pour un mariage ?",
+    "faq2A": "Nous intervenons à Antibes et dans tout le département des Alpes-Maritimes (Cannes, Nice, Sophia Antipolis, Cagnes-sur-Mer et alentours) pour vos brunchs de mariage.",
+    "faq3Q": "Peut-on personnaliser le buffet selon nos envies ?",
+    "faq3A": "Oui, chaque brunch est composé sur mesure : viennoiseries, salé, sucré, boissons et décoration s'adaptent à votre thème et à vos préférences alimentaires."
+  },
   "eventsCommander": {
     "badge": "Livraison & installation incluses",
     "title": "Commander pour votre",
     "titleItalic": "événement",
-    "subtitle": "Sélectionnez vos formules et ajoutez-les au panier. Nous nous occupons du reste.",
+    "subtitle": "Sélectionnez vos produits et ajoutez-les au panier. Nous nous occupons du reste.",
     "backBtn": "Retour aux événements",
     "viewCart": "Voir le panier · {{count}} article",
     "viewCartPlural": "Voir le panier · {{count}} articles",

@@ -195,7 +195,7 @@ const VillePage = ({ slug }: VillePageProps) => {
               {tr("Voir la carte", "See the menu")}
             </button>
             <button
-              onClick={() => navigate(lp("/evenements"))}
+              onClick={() => navigate(lp("/evenements/commander"))}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold border-2 transition-colors hover:bg-white/10"
               style={{ borderColor: "rgba(255,255,255,0.3)", color: "white" }}
             >
