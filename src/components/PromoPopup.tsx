@@ -60,8 +60,11 @@ const PromoPopup = ({ code, discount, onClose }: PromoPopupProps) => {
           </p>
         </div>
 
-        <p className="text-xs text-muted-foreground mb-6">
+        <p className="text-xs text-muted-foreground mb-1">
           Appliqué automatiquement au paiement ✓
+        </p>
+        <p className="text-xs text-muted-foreground italic mb-6">
+          Valable jusqu'au 30/08/26
         </p>
 
         {/* CTA */}
