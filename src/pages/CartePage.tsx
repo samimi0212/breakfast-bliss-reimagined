@@ -588,7 +588,10 @@ const CartePage = () => {
       <Navbar />
 
       {/* Header desktop */}
-      <div className="hidden md:block bg-foreground pt-24 pb-10 px-6 text-center">
+      <div
+        className="hidden md:block pt-24 pb-10 px-6 text-center"
+        style={{ background: "linear-gradient(135deg, hsl(61, 45%, 20%) 0%, hsl(30, 10%, 8%) 100%)" }}
+      >
         <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-2">
           {t("cartePage.deliveryBadge")}
         </p>

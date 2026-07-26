@@ -13,7 +13,7 @@ const EventsPromo = () => {
 
   const formules = [
     { label: t("events.f1Label"), tag: t("events.f1Tag"), price: t("events.f1Price"), image: brunchMariage, path: "/brunch-mariage" },
-    { label: t("events.f2Label"), tag: t("events.f2Tag"), price: t("events.f2Price"), image: brunchEntreprise, path: "/produit/brunch-entreprise" },
+    { label: t("events.f2Label"), tag: t("events.f2Tag"), price: t("events.f2Price"), image: brunchEntreprise, path: "/evenements/commander" },
     { label: t("events.f3Label"), tag: t("events.f3Tag"), price: t("events.f3Price"), image: brunchGroupe, path: "/produit/brunch-groupe" },
   ];
 
