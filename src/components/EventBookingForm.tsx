@@ -11,9 +11,9 @@ interface FormData {
   message: string;
 }
 
-const EventBookingForm = () => {
+const EventBookingForm = ({ defaultEventType = "mariage" }: { defaultEventType?: FormData["eventType"] }) => {
   const [formData, setFormData] = useState<FormData>({
-    eventType: "mariage",
+    eventType: defaultEventType,
     name: "",
     email: "",
     phone: "",

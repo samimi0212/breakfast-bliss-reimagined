@@ -1,21 +1,29 @@
-import { useNavigate } from "react-router-dom";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Sparkles, ArrowRight, X, FileText, Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useLangPath } from "@/hooks/useLangPath";
+import EventBookingForm from "@/components/EventBookingForm";
+import PhoneAppointmentForm from "@/components/PhoneAppointmentForm";
 import brunchMariage from "@/assets/brunch-mariage.jpg";
 import brunchEntreprise from "@/assets/brunch-entreprise.jpg";
 import brunchGroupe from "@/assets/brunch-groupe.png";
 
+type EventType = "mariage" | "entreprise" | "groupe";
+
 const EventsPromo = () => {
   const { t } = useTranslation();
-  const { lp } = useLangPath();
-  const navigate = useNavigate();
+  const [activeEventType, setActiveEventType] = useState<EventType | null>(null);
+  const [modalTab, setModalTab] = useState<"devis" | "rdv">("devis");
 
-  const formules = [
-    { label: t("events.f1Label"), tag: t("events.f1Tag"), price: t("events.f1Price"), image: brunchMariage, path: "/brunch-mariage" },
-    { label: t("events.f2Label"), tag: t("events.f2Tag"), price: t("events.f2Price"), image: brunchEntreprise, path: "/evenements/commander" },
-    { label: t("events.f3Label"), tag: t("events.f3Tag"), price: t("events.f3Price"), image: brunchGroupe, path: "/produit/brunch-groupe" },
+  const formules: { label: string; tag: string; price: string; image: string; eventType: EventType }[] = [
+    { label: t("events.f1Label"), tag: t("events.f1Tag"), price: t("events.f1Price"), image: brunchMariage, eventType: "mariage" },
+    { label: t("events.f2Label"), tag: t("events.f2Tag"), price: t("events.f2Price"), image: brunchEntreprise, eventType: "entreprise" },
+    { label: t("events.f3Label"), tag: t("events.f3Tag"), price: t("events.f3Price"), image: brunchGroupe, eventType: "groupe" },
   ];
+
+  const openModal = (eventType: EventType) => {
+    setActiveEventType(eventType);
+    setModalTab("devis");
+  };
 
   return (
     <section className="py-24 px-6 md:px-12 lg:px-20" style={{ backgroundColor: "#f4f1ea" }}>
@@ -42,10 +50,10 @@ const EventsPromo = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {formules.map(({ label, tag, price, image, path }) => (
+          {formules.map(({ label, tag, price, image, eventType }) => (
             <div
               key={label}
-              onClick={() => navigate(lp(path))}
+              onClick={() => openModal(eventType)}
               className="group cursor-pointer rounded-2xl overflow-hidden"
               style={{ backgroundColor: "white", boxShadow: "var(--card-shadow)" }}
             >
@@ -86,6 +94,57 @@ const EventsPromo = () => {
           {t("events.footnote")}
         </p>
       </div>
+
+      {/* Modale devis / rappel */}
+      {activeEventType && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto"
+          onClick={() => setActiveEventType(null)}
+        >
+          <div
+            className="bg-white rounded-3xl max-w-2xl w-full my-8 p-8 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setActiveEventType(null)}
+              className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center hover:bg-muted transition-colors z-10"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="flex gap-2 mb-6">
+              <button
+                onClick={() => setModalTab("devis")}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                style={
+                  modalTab === "devis"
+                    ? { backgroundColor: "#3a3a0a", color: "white" }
+                    : { backgroundColor: "rgba(58,58,10,0.08)", color: "#3a3a0a" }
+                }
+              >
+                <FileText size={15} /> Devis en ligne
+              </button>
+              <button
+                onClick={() => setModalTab("rdv")}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                style={
+                  modalTab === "rdv"
+                    ? { backgroundColor: "#3a3a0a", color: "white" }
+                    : { backgroundColor: "rgba(58,58,10,0.08)", color: "#3a3a0a" }
+                }
+              >
+                <Phone size={15} /> Être rappelé
+              </button>
+            </div>
+
+            {modalTab === "devis" ? (
+              <EventBookingForm defaultEventType={activeEventType} />
+            ) : (
+              <PhoneAppointmentForm onClose={() => setActiveEventType(null)} />
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 };
