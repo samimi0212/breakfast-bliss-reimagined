@@ -88,6 +88,81 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "anniversaire-brunch-antibes-cannes-nice",
+    title: "Organiser un anniversaire brunch à Antibes, Cannes ou Nice sans rien préparer",
+    title_en: "Throwing a birthday brunch in Antibes, Cannes or Nice without preparing anything",
+    excerpt:
+      "Un anniversaire à fêter en famille ou entre amis à Antibes, Cannes ou Nice ? Découvrez comment composer un brunch d'anniversaire livré chez vous, sans passer la matinée en cuisine.",
+    excerpt_en:
+      "Celebrating a birthday with family or friends in Antibes, Cannes or Nice? Here's how to put together a birthday brunch delivered to your door, without spending your morning in the kitchen.",
+    date: "2026-07-27",
+    image: "/birthday-box.png",
+    metaTitle: "Anniversaire brunch à Antibes, Cannes, Nice | Breakfast Time",
+    metaTitle_en: "Birthday brunch in Antibes, Cannes, Nice | Breakfast Time",
+    metaDesc:
+      "Comment organiser un anniversaire brunch à Antibes, Cannes ou Nice : Birthday Box, Menu Duo ou Menu Famille, livrés directement chez vous ou au bureau.",
+    metaDesc_en:
+      "How to organise a birthday brunch in Antibes, Cannes or Nice: Birthday Box, Duo Menu or Family Menu, delivered straight to your door or office.",
+    blocks: [
+      {
+        type: "p",
+        text: "Fêter un anniversaire ne devrait pas commencer par une liste de courses et deux heures en cuisine. Que vous soyez à Antibes, à Cannes ou du côté de Nice, il existe une façon plus simple de célébrer : laisser le brunch venir à vous, avec la même qualité qu'en boulangerie-traiteur artisanale.",
+        text_en:
+          "Celebrating a birthday shouldn't start with a shopping list and two hours in the kitchen. Whether you're in Antibes, Cannes or around Nice, there's a simpler way to celebrate: let the brunch come to you, with the same quality as an artisan bakery-caterer.",
+      },
+      {
+        type: "h2",
+        text: "Pourquoi le brunch est le format idéal pour un anniversaire",
+        text_en: "Why brunch is the perfect format for a birthday",
+      },
+      {
+        type: "p",
+        text: "Contrairement à un repas classique, le brunch mélange sucré et salé et se partage facilement à table, quel que soit l'âge des invités. Il convient aussi bien à un anniversaire d'enfant qu'à une réunion entre adultes, sans avoir à choisir un seul menu qui plaise à tout le monde.",
+        text_en:
+          "Unlike a classic meal, brunch mixes sweet and savoury and is easy to share around the table, whatever the age of your guests. It works just as well for a child's birthday as for a gathering of adults, without having to pick a single menu that pleases everyone.",
+      },
+      {
+        type: "h2",
+        text: "La Birthday Box, pensée pour l'occasion",
+        text_en: "The Birthday Box, made for the moment",
+      },
+      {
+        type: "p",
+        text: "Chez Breakfast Time, la Birthday Box a été conçue spécialement pour marquer un anniversaire : viennoiseries et douceurs choisies pour l'occasion, dans une présentation soignée. Selon le nombre d'invités, elle se complète facilement avec un plat salé ou une boisson de la carte.",
+        text_en:
+          "At Breakfast Time, the Birthday Box was designed specifically to mark a birthday: pastries and sweet treats chosen for the occasion, in a carefully presented box. Depending on the number of guests, it's easily completed with a savoury dish or a drink from the menu.",
+      },
+      {
+        type: "h2",
+        text: "Menu Duo ou Menu Famille : adapter la commande au nombre d'invités",
+        text_en: "Duo Menu or Family Menu: matching the order to your guest count",
+      },
+      {
+        type: "p",
+        text: "Pour un anniversaire à deux, le Menu Duo évite de multiplier les commandes séparées. Pour une tablée plus large, le Menu Famille rassemble tout le monde autour d'un assortiment varié. Tout est personnalisable directement sur la carte, selon les goûts et les allergies de chacun.",
+        text_en:
+          "For a birthday for two, the Duo Menu avoids placing several separate orders. For a bigger table, the Family Menu brings everyone together around a varied assortment. Everything can be customised directly on the menu, according to everyone's tastes and allergies.",
+      },
+      {
+        type: "h2",
+        text: "Livrer l'anniversaire à Antibes, Cannes ou Nice",
+        text_en: "Delivering the birthday in Antibes, Cannes or Nice",
+      },
+      {
+        type: "p",
+        text: "Nous livrons les anniversaires brunch partout à Antibes, à Cannes et dans l'ouest de Nice (secteur aéroport, Arénas, Saint-Augustin), généralement en 30 à 45 minutes après confirmation de la commande. Il suffit d'indiquer votre adresse au moment de la commande pour vérifier votre zone de livraison et choisir un créneau, 7j/7 de 8h à 15h.",
+        text_en:
+          "We deliver birthday brunches anywhere in Antibes, Cannes and western Nice (airport area, Arénas, Saint-Augustin), usually within 30 to 45 minutes of order confirmation. Just enter your address when ordering to check your delivery zone and pick a time slot, 7 days a week from 8am to 3pm.",
+      },
+      {
+        type: "p",
+        text: "Envie de composer l'anniversaire idéal dès maintenant ? Direction notre carte pour découvrir la Birthday Box et tous les menus disponibles.",
+        text_en:
+          "Ready to put together the perfect birthday now? Head to our menu to discover the Birthday Box and all the available menus.",
+      },
+    ],
+  },
 ];
 
 export const getBlogPostBySlug = (slug: string) =>
