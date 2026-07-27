@@ -133,22 +133,9 @@ a img, button img {
   }
 }
 
-/* Remonte le bouton Crisp au-dessus de la bottom nav sur mobile.
-   On cible le launcher (la bulle minimisée) via ses attributs Crisp stables
-   role="button" + data-maximized="false" — pas les classes hashées (cc-xxxx)
-   qui changent entre versions. On utilise transform : Crisp réinitialise
-   bottom/right mais jamais transform. À ne PAS appliquer sur #crisp-chatbox
-   lui-même : un transform sur le conteneur crée un containing block et envoie
-   le bouton fixed hors écran. */
-@media (max-width: 767px) {
-  #crisp-chatbox [role="button"][data-maximized="false"] {
-    transform: translateY(-72px) !important;
-  }
-}
-
-
-@media (max-width: 767px) {
-  body.crisp-hidden #crisp-chatbox {
-    display: none !important;
-  }
-}
+/* Le widget Tawk.to génère des id d'iframe aléatoires à chaque chargement
+   (pas de sélecteur stable comme #crisp-chatbox avec Crisp) : le
+   repositionnement au-dessus de la bottom nav mobile et le masquage hors
+   accueil se gèrent via l'API JS Tawk_API (voir App.tsx) et, pour le
+   décalage vertical, via les réglages "Position" du widget dans le
+   dashboard Tawk.to plutôt qu'en CSS. */

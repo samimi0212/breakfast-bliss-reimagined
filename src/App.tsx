@@ -95,14 +95,30 @@ const AppRoutes = () => {
     }
   }, [location.pathname, i18n]);
 
-  // Sur mobile, masquer le widget Crisp sur toutes les pages sauf l'accueil
+  // Sur mobile, masquer le widget Tawk.to sur toutes les pages sauf l'accueil
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
     const isHome = location.pathname === "/" || location.pathname === "/en";
-    if (isMobile && !isHome) {
-      document.body.classList.add("crisp-hidden");
-    } else {
-      document.body.classList.remove("crisp-hidden");
+    const shouldHide = isMobile && !isHome;
+    const applyVisibility = () => {
+      const api = (window as any).Tawk_API;
+      if (!api) return;
+      if (shouldHide) {
+        api.hideWidget?.();
+      } else {
+        api.showWidget?.();
+      }
+    };
+    const api = (window as any).Tawk_API;
+    if (api?.hideWidget) {
+      applyVisibility();
+    } else if (api) {
+      // Le widget n'est pas encore chargé : on chaîne sur son onLoad.
+      const previousOnLoad = api.onLoad;
+      api.onLoad = () => {
+        previousOnLoad?.();
+        applyVisibility();
+      };
     }
   }, [location.pathname]);
 
