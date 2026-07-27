@@ -451,12 +451,12 @@ export const cities: City[] = [
   {
     slug: "valbonne",
     name: "Valbonne",
-    deliveryTime: "20 à 30 minutes",
-    deliveryTime_en: "20 to 30 minutes",
+    deliveryTime: "30 à 45 minutes",
+    deliveryTime_en: "30 to 45 minutes",
     intro:
-      "Petit-déjeuner et brunch frais livrés à Valbonne et Sophia Antipolis en 20 à 30 minutes — à la maison comme au bureau, 7j/7 de 8h à 15h.",
+      "Petit-déjeuner et brunch frais livrés à Valbonne et Sophia Antipolis en 30 à 45 minutes — à la maison comme au bureau, 7j/7 de 8h à 15h.",
     intro_en:
-      "Fresh breakfast and brunch delivered to Valbonne and Sophia Antipolis in 20 to 30 minutes — at home or at the office, 7 days a week from 8am to 3pm.",
+      "Fresh breakfast and brunch delivered to Valbonne and Sophia Antipolis in 30 to 45 minutes — at home or at the office, 7 days a week from 8am to 3pm.",
     quartiers: ["Village de Valbonne", "Garbejaïre", "Haut-Sartoux", "Île Verte", "Les Clausonnes", "Sophia Antipolis"],
     context:
       "Entre le village provençal de Valbonne et les entreprises de Sophia Antipolis, les matins sont souvent trop courts. Petit-déjeuner d'équipe livré avant une réunion, brunch du week-end près de la place des Arcades ou à Garbejaïre : commandez en ligne, on s'occupe du reste. Site et service disponibles en anglais pour la communauté internationale.",
@@ -498,8 +498,8 @@ export const cities: City[] = [
       {
         q: "En combien de temps suis-je livré à Valbonne ?",
         q_en: "How long does delivery to Valbonne take?",
-        a: "Comptez 20 à 30 minutes après confirmation de votre commande, selon le quartier.",
-        a_en: "Allow 20 to 30 minutes after your order is confirmed, depending on the area.",
+        a: "Comptez 30 à 45 minutes après confirmation de votre commande, selon le quartier.",
+        a_en: "Allow 30 to 45 minutes after your order is confirmed, depending on the area.",
       },
       {
         q: "Proposez-vous un service en anglais ?",
@@ -511,9 +511,9 @@ export const cities: City[] = [
     metaTitle: "Livraison petit-déjeuner Valbonne & Sophia — Brunch livré | Breakfast Time",
     metaTitle_en: "Breakfast Delivery Valbonne & Sophia — Brunch Delivered | Breakfast Time",
     metaDesc:
-      "Livraison de petit-déjeuner et brunch à Valbonne et Sophia Antipolis (Garbejaïre, Haut-Sartoux). Frais, livrés en 20-30 min, 7j/7 de 8h à 15h.",
+      "Livraison de petit-déjeuner et brunch à Valbonne et Sophia Antipolis (Garbejaïre, Haut-Sartoux). Frais, livrés en 30-45 min, 7j/7 de 8h à 15h.",
     metaDesc_en:
-      "Breakfast and brunch delivery in Valbonne and Sophia Antipolis (Garbejaïre, Haut-Sartoux). Fresh, delivered in 20-30 min, 7 days a week from 8am to 3pm.",
+      "Breakfast and brunch delivery in Valbonne and Sophia Antipolis (Garbejaïre, Haut-Sartoux). Fresh, delivered in 30-45 min, 7 days a week from 8am to 3pm.",
   },
   {
     slug: "cagnes-sur-mer",
