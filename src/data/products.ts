@@ -1029,7 +1029,8 @@ export const allProducts: Product[] = [
     category: "Boissons",
     img: "/cafe-latte.png",
     desc: "",
-    composition: [],
+    composition: ["Non sucré — sucre servi à part"],
+    composition_en: ["Unsweetened — sugar served on the side"],
     options: [
       {
         id: "lait",
@@ -1049,8 +1050,8 @@ export const allProducts: Product[] = [
     category: "Boissons",
     img: "/iced-latte.png",
     desc: "",
-    composition: [],
-    composition_en: [],
+    composition: ["Non sucré — sucre servi à part"],
+    composition_en: ["Unsweetened — sugar served on the side"],
     options: [
       {
         id: "lait",
@@ -1112,7 +1113,8 @@ export const allProducts: Product[] = [
     category: "Boissons",
     img: "/americano.png",
     desc: "",
-    composition: [],
+    composition: ["Non sucré — sucre servi à part"],
+    composition_en: ["Unsweetened — sugar served on the side"],
   },
   {
     id: "chocolat-chaud",
