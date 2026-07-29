@@ -443,8 +443,9 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
   ],
 };
 
-const categories = Object.keys(produits);
-const allProduits = Object.values(produits).flat();
+const HIDDEN_CATEGORIES = ["À Partager"];
+const categories = Object.keys(produits).filter((c) => !HIDDEN_CATEGORIES.includes(c));
+const allProduits = Object.values(produits).flat().filter((p) => !HIDDEN_CATEGORIES.some((c) => produits[c as keyof typeof produits]?.find((pp) => pp.id === p.id)));
 
 const CardItem = ({ id, name, price, img, hasOptions = false }: { id: string; name: string; price: string; img: string; hasOptions?: boolean }) => {
   const navigate = useNavigate();
