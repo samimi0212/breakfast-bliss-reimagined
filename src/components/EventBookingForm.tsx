@@ -95,7 +95,6 @@ const EventBookingForm = ({ defaultEventType = "mariage" }: { defaultEventType?:
                 }`}
               >
                 <div className="font-semibold text-foreground">{value.label}</div>
-                <div className="text-sm mt-1">{value.price}</div>
               </button>
             )
           )}
