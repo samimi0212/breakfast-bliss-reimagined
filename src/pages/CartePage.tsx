@@ -331,8 +331,14 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
   ],
   Boissons: [
     {
+      id: "americano",
+      name: "Café",
+      price: "3,00€",
+      img: "/americano.png",
+    },
+    {
       id: "cafe-latte",
-      name: "Café Latte",
+      name: "Latte Macchiato",
       price: "5,50€",
       img: "/cafe-latte.png",
     },
@@ -359,12 +365,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       name: "Thé Earl Grey",
       price: "3,00€",
       img: "/the.png",
-    },
-    {
-      id: "americano",
-      name: "Americano",
-      price: "3,00€",
-      img: "/americano.png",
     },
     {
       id: "chocolat-chaud",

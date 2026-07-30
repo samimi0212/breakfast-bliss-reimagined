@@ -1023,8 +1023,20 @@ export const allProducts: Product[] = [
   },
   // ---- BOISSONS ----
   {
+    id: "americano",
+    name: "Café",
+    name_en: "Coffee",
+    price: "3,00€",
+    category: "Boissons",
+    img: "/americano.png",
+    desc: "",
+    composition: ["Non sucré — sucre servi à part"],
+    composition_en: ["Unsweetened — sugar served on the side"],
+  },
+  {
     id: "cafe-latte",
-    name: "Café Latte",
+    name: "Latte Macchiato",
+    name_en: "Latte Macchiato",
     price: "5,50€",
     category: "Boissons",
     img: "/cafe-latte.png",
@@ -1105,16 +1117,6 @@ export const allProducts: Product[] = [
     composition: ["Thé noir à la Bergamote", "Non sucré — sucre servi à part"],
     composition_en: ["Bergamot black tea", "Unsweetened — sugar served on the side"],
     options: [],
-  },
-  {
-    id: "americano",
-    name: "Americano",
-    price: "3,00€",
-    category: "Boissons",
-    img: "/americano.png",
-    desc: "",
-    composition: ["Non sucré — sucre servi à part"],
-    composition_en: ["Unsweetened — sugar served on the side"],
   },
   {
     id: "chocolat-chaud",
