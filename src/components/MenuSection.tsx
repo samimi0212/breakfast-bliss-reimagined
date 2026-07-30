@@ -7,7 +7,6 @@ import { useLangPath } from "@/hooks/useLangPath";
 const visuals = [
   "/menu-brunch.png",
   "/menu-anglais.png",
-  "/plateau-viennoiserie-entre-2.png",
 ];
 
 const MenuSection = () => {
@@ -19,7 +18,6 @@ const MenuSection = () => {
   const options = [
     { title: t("menuSection.o1Title"), desc: t("menuSection.o1Desc"), cta: t("menuSection.o1Cta"), link: lp("/carte") + "?tab=menus", imgIndex: 0 },
     { title: t("menuSection.o2Title"), desc: t("menuSection.o2Desc"), cta: t("menuSection.o2Cta"), link: lp("/carte") + "?tab=carte", imgIndex: 1 },
-    { title: t("menuSection.o3Title"), desc: t("menuSection.o3Desc"), cta: t("menuSection.o3Cta"), link: lp("/carte") + "?tab=carte&cat=À Partager", imgIndex: 2 },
   ];
 
   return (
