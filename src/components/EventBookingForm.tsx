@@ -27,9 +27,9 @@ const EventBookingForm = ({ defaultEventType = "mariage" }: { defaultEventType?:
   const [error, setError] = useState("");
 
   const eventTypes = {
-    mariage: { label: "Brunch Mariage", price: "À partir de 12€/pers" },
-    entreprise: { label: "Brunch Entreprise", price: "À partir de 9€/pers" },
-    groupe: { label: "Brunch Groupe", price: "À partir de 8€/pers" },
+    mariage: { label: "Mariage", price: "À partir de 12€/pers" },
+    entreprise: { label: "Entreprise", price: "À partir de 9€/pers" },
+    groupe: { label: "Groupe", price: "À partir de 8€/pers" },
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
