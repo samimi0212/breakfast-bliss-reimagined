@@ -560,17 +560,6 @@ export const allProducts: Product[] = [
     composition: ["330g", "Farine complète de blé T150"],
     composition_en: ["330g", "Wholemeal wheat flour T150"],
   },
-  {
-    id: "pain-nordique",
-    name: "Pain Nordique",
-    name_en: "Nordic Bread",
-    price: "4,70€",
-    category: "Pains",
-    img: "/pain-nordique.png",
-    desc: "",
-    composition: ["330g", "Farine de blé", "Farine de seigle", "Levain", "Mélange de graines"],
-    composition_en: ["330g", "Wheat flour", "Rye flour", "Sourdough", "Mixed seeds"],
-  },
   // ---- LE SALÉ ----
   {
     id: "avocado-toast",
