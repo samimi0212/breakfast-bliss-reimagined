@@ -553,7 +553,7 @@ export const allProducts: Product[] = [
     id: "pain-complet",
     name: "Pain complet",
     name_en: "Wholemeal Bread",
-    price: "3,70€",
+    price: "4,10€",
     category: "Pains",
     img: "/pain-complet.png",
     desc: "",
