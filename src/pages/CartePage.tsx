@@ -187,10 +187,10 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/chicken-burrito.png",
     },
     {
-      id: "potatoe-saumon",
-      name: "Potatoe Saumon",
+      id: "focaccia-saumon",
+      name: "Focaccia Saumon",
       price: "10,90€",
-      img: "/potatoe-saumon.png",
+      img: "/foccacia.png",
     },
     {
       id: "toast-mediterraneen",
