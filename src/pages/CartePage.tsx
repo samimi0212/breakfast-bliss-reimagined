@@ -367,10 +367,10 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/chocolat-chaud.png",
     },
     {
-      id: "smoothie-banane",
-      name: "Smoothie banane",
+      id: "smoothie-tropical",
+      name: "Smoothie Tropical Ginger",
       price: "6,50€",
-      img: "/smoothie-banane.png",
+      img: "/smoothie-tropical.png",
     },
     {
       id: "smoothie-fruits-rouges",
