@@ -190,7 +190,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "focaccia-saumon",
       name: "Focaccia Saumon",
       price: "10,90€",
-      img: "/foccacia.png",
+      img: "/focaccia.png",
     },
     {
       id: "toast-mediterraneen",

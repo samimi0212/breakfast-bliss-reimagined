@@ -715,7 +715,7 @@ export const allProducts: Product[] = [
     name_en: "Salmon Focaccia",
     price: "10,90€",
     category: "Le Salé",
-    img: "/foccacia.png",
+    img: "/focaccia.png",
     desc: "",
     composition: ["Saumon fumé", "Stracciatella citronné", "Pickles oignons rouges", "Roquette", "Gomasio"],
     composition_en: ["Smoked salmon", "Lemon stracciatella", "Pickled red onions", "Rocket", "Gomasio"],
