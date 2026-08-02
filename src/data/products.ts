@@ -1153,6 +1153,18 @@ export const allProducts: Product[] = [
     options: [],
   },
   {
+    id: "smoothie-detox",
+    name: "Smoothie Green Detox",
+    name_en: "Green Detox Smoothie",
+    price: "6,50€",
+    category: "Boissons",
+    img: "/smoothie-detox.png",
+    desc: "",
+    composition: ["Kiwi", "Concombre", "Pomme", "Matcha", "Sans sucres ajoutés"],
+    composition_en: ["Kiwi", "Cucumber", "Apple", "Matcha", "No added sugar"],
+    options: [],
+  },
+  {
     id: "jus-orange-presse",
     name: "Jus d'orange pressé",
     name_en: "Freshly Squeezed Orange Juice",

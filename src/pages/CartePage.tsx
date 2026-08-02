@@ -379,6 +379,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/smoothie-energie.png",
     },
     {
+      id: "smoothie-detox",
+      name: "Smoothie Green Detox",
+      price: "6,50€",
+      img: "/smoothie-detox.png",
+    },
+    {
       id: "jus-orange-presse",
       name: "Jus d'orange pressé",
       price: "3,50€",
