@@ -373,10 +373,10 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/smoothie-tropical.png",
     },
     {
-      id: "smoothie-fruits-rouges",
-      name: "Smoothie fruits rouges",
+      id: "smoothie-energie",
+      name: "Smoothie Énergie",
       price: "6,50€",
-      img: "/smoothie-fruits-rouges.png",
+      img: "/smoothie-energie.png",
     },
     {
       id: "jus-orange-presse",
