@@ -431,6 +431,7 @@
     "cutleryQuestion": "Souhaitez-vous des couverts ?",
     "cutleryQtyLabel": "Nombre de couverts",
     "clearCart": "Vider le panier",
+    "removeItem": "Supprimer l'article",
     "summaryTitle": "Récapitulatif",
     "subtotal": "Sous-total",
     "cutleryLine": "Couverts × {{count}}",

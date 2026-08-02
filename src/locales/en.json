@@ -431,6 +431,7 @@
     "cutleryQuestion": "Would you like cutlery?",
     "cutleryQtyLabel": "Number of cutlery sets",
     "clearCart": "Empty cart",
+    "removeItem": "Remove item",
     "summaryTitle": "Summary",
     "subtotal": "Subtotal",
     "cutleryLine": "Cutlery × {{count}}",

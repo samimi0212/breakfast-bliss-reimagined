@@ -643,7 +643,7 @@ const CheckoutForm = () => {
       <div className="pt-28 pb-16 px-6 max-w-5xl mx-auto">
         <button
           onClick={() => navigate(lp("/panier"))}
-          className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group"
+          className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group py-3 min-h-[44px]"
         >
           <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
           <span className="text-sm font-medium">{t("checkout.backBtn")}</span>
@@ -651,8 +651,8 @@ const CheckoutForm = () => {
 
         <h1 className="font-display text-3xl font-bold mb-8">{t("checkout.title")}</h1>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 min-w-0 space-y-6">
 
             {/* Coordonnées */}
             <div
@@ -662,7 +662,7 @@ const CheckoutForm = () => {
               onBlur={() => setActiveSection(null)}
             >
               <SectionTitle icon={User} title={t("checkout.coordTitle")} complete={isCoordComplete} />
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1.5">{t("checkout.firstNameLabel")}</label>
                   <input name="prenom" value={form.prenom} onChange={handleChange} onBlur={handleBlur} placeholder="Marie" className={inputClass("prenom")} />
@@ -736,7 +736,7 @@ const CheckoutForm = () => {
                     className={inputClass("complement")}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1.5">{t("checkout.cityLabel")}</label>
                     <input name="ville" value={form.ville} onChange={handleChange} placeholder="Nice" className={inputClass("ville")} />
@@ -759,11 +759,6 @@ const CheckoutForm = () => {
               onBlur={() => setActiveSection(null)}
             >
               <SectionTitle icon={Clock} title={t("checkout.creneauTitle")} complete={isCreneauComplete} />
-              {isBeforeOpening() && (
-                <div className="mb-4 px-4 py-3 rounded-xl text-sm font-medium" style={{ backgroundColor: "#DFF05722", border: "1px solid #DFF057", color: "#5a7a0a" }}>
-                  🗓️ Les livraisons démarrent le <strong>1er août 2026</strong> — choisissez votre créneau dès maintenant !
-                </div>
-              )}
               <div className="mb-4">
                 <label className="block text-sm font-bold mb-2">{t("checkout.dateLabel")}</label>
                 <div className="flex gap-2 flex-wrap">

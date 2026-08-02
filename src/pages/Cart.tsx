@@ -86,7 +86,7 @@ const Cart = () => {
         {/* Retour */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group"
+          className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group py-3 min-h-[44px]"
         >
           <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
           <span className="text-sm font-medium">{t("cart.backBtn")}</span>
@@ -94,10 +94,10 @@ const Cart = () => {
 
         <h1 className="font-display text-3xl font-bold mb-8">{t("cart.title")}</h1>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
           {/* Liste produits */}
-          <div className="lg:col-span-3 space-y-4">
+          <div className="lg:col-span-3 min-w-0 space-y-4">
             {items.map((item, index) => (
               <div
                 key={index}
@@ -137,7 +137,8 @@ const Cart = () => {
                 <div className="flex flex-col items-end gap-3">
                   <button
                     onClick={() => removeItem(index)}
-                    className="text-muted-foreground hover:text-red-500 transition-colors"
+                    aria-label={t("cart.removeItem")}
+                    className="p-2 -m-2 text-muted-foreground hover:text-red-500 transition-colors"
                   >
                     <Trash2 size={16} />
                   </button>
@@ -145,14 +146,14 @@ const Cart = () => {
                   <div className="flex items-center gap-2 bg-muted rounded-xl px-2 py-1">
                     <button
                       onClick={() => updateQty(index, Math.max(1, item.qty - 1))}
-                      className="w-6 h-6 rounded-full bg-white flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+                      className="relative w-6 h-6 rounded-full bg-white flex items-center justify-center hover:bg-primary hover:text-white transition-colors before:absolute before:-inset-2 before:content-['']"
                     >
                       <Minus size={12} />
                     </button>
                     <span className="font-semibold text-sm w-6 text-center">{item.qty}</span>
                     <button
                       onClick={() => updateQty(index, item.qty + 1)}
-                      className="w-6 h-6 rounded-full bg-white flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+                      className="relative w-6 h-6 rounded-full bg-white flex items-center justify-center hover:bg-primary hover:text-white transition-colors before:absolute before:-inset-2 before:content-['']"
                     >
                       <Plus size={12} />
                     </button>
@@ -200,14 +201,14 @@ const Cart = () => {
                   <div className="flex items-center gap-2 bg-muted rounded-xl px-2 py-1">
                     <button
                       onClick={() => setCutleryQty(Math.max(1, cutleryQty - 1))}
-                      className="w-6 h-6 rounded-full bg-white flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+                      className="relative w-6 h-6 rounded-full bg-white flex items-center justify-center hover:bg-primary hover:text-white transition-colors before:absolute before:-inset-2 before:content-['']"
                     >
                       <Minus size={12} />
                     </button>
                     <span className="font-semibold text-sm w-6 text-center">{cutleryQty}</span>
                     <button
                       onClick={() => setCutleryQty(cutleryQty + 1)}
-                      className="w-6 h-6 rounded-full bg-white flex items-center justify-center hover:bg-primary hover:text-white transition-colors"
+                      className="relative w-6 h-6 rounded-full bg-white flex items-center justify-center hover:bg-primary hover:text-white transition-colors before:absolute before:-inset-2 before:content-['']"
                     >
                       <Plus size={12} />
                     </button>
@@ -219,7 +220,7 @@ const Cart = () => {
             {/* Vider le panier */}
             <button
               onClick={clearCart}
-              className="text-sm text-muted-foreground hover:text-red-500 transition-colors flex items-center gap-1 mt-2"
+              className="text-sm text-muted-foreground hover:text-red-500 transition-colors flex items-center gap-1 mt-2 py-3 min-h-[44px]"
             >
               <Trash2 size={14} />
               {t("cart.clearCart")}

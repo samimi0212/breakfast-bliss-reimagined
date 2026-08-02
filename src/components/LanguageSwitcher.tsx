@@ -23,7 +23,7 @@ const LanguageSwitcher = ({ className = "" }: LanguageSwitcherProps) => {
         onClick={() => switchTo("fr")}
         aria-label="Passer en français"
         title="Français"
-        className={`text-lg leading-none transition-opacity ${
+        className={`relative text-lg leading-none transition-opacity before:absolute before:-inset-y-3 before:inset-x-0 before:content-[''] ${
           i18n.language === "fr" ? "opacity-100" : "opacity-40 hover:opacity-70"
         }`}
       >
@@ -33,7 +33,7 @@ const LanguageSwitcher = ({ className = "" }: LanguageSwitcherProps) => {
         onClick={() => switchTo("en")}
         aria-label="Switch to English"
         title="English"
-        className={`text-lg leading-none transition-opacity ${
+        className={`relative text-lg leading-none transition-opacity before:absolute before:-inset-y-3 before:inset-x-0 before:content-[''] ${
           i18n.language === "en" ? "opacity-100" : "opacity-40 hover:opacity-70"
         }`}
       >

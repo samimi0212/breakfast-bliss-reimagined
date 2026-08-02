@@ -21,11 +21,28 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | null>(null);
 
+// Un panier stocké par une ancienne version du site (ou corrompu) ne doit jamais
+// pouvoir casser le rendu : ce Provider est à la racine de l'app, une exception ici
+// rend TOUTES les pages blanches. On écarte donc silencieusement les articles invalides.
+const isValidItem = (item: unknown): item is CartItem => {
+  if (!item || typeof item !== "object") return false;
+  const i = item as Record<string, unknown>;
+  return (
+    typeof i.id === "string" &&
+    typeof i.name === "string" &&
+    typeof i.price === "string" &&
+    typeof i.qty === "number" &&
+    Number.isFinite(i.qty)
+  );
+};
+
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem("breakfast-cart");
-      return saved ? JSON.parse(saved) : [];
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed.filter(isValidItem) : [];
     } catch {
       return [];
     }
@@ -60,8 +77,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const clearCart = () => setItems([]);
 
   const total = items.reduce((sum, item) => {
-    const price = parseFloat(item.price.replace("€", "").replace(",", "."));
-    return sum + price * item.qty;
+    const price = parseFloat(String(item.price).replace("€", "").replace(",", "."));
+    return Number.isFinite(price) ? sum + price * item.qty : sum;
   }, 0);
 
   const count = items.reduce((sum, item) => sum + item.qty, 0);
