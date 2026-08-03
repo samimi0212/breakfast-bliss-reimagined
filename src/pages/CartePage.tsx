@@ -96,14 +96,14 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
   Pains: [
     {
       id: "baguette",
-      name: "1/2 baguette",
-      price: "1,20€",
+      name: "Baguette",
+      price: "2,20€",
       img: "/baguette.png",
     },
     {
       id: "baguette-bio",
-      name: "1/2 baguette céréales",
-      price: "1,50€",
+      name: "Baguette céréales",
+      price: "2,70€",
       img: "/baguette-cereales.png",
     },
     {

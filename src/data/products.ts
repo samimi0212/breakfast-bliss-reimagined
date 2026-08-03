@@ -477,8 +477,9 @@ export const allProducts: Product[] = [
   // ---- PAINS ----
   {
     id: "baguette",
-    name: "1/2 baguette",
-    price: "1,20€",
+    name: "Baguette",
+    name_en: "Baguette",
+    price: "2,20€",
     category: "Pains",
     img: "/baguette.png",
     desc: "",
@@ -487,9 +488,9 @@ export const allProducts: Product[] = [
   },
   {
     id: "baguette-bio",
-    name: "1/2 baguette céréales",
-    name_en: "1/2 Seeded Baguette",
-    price: "1,50€",
+    name: "Baguette céréales",
+    name_en: "Seeded Baguette",
+    price: "2,70€",
     category: "Pains",
     img: "/baguette-cereales.png",
     desc: "",
