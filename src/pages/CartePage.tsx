@@ -107,12 +107,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/baguette-cereales.png",
     },
     {
-      id: "pain-ciabatta",
-      name: "Pain Ciabatta",
-      price: "1,60€",
-      img: "/ciabatta.png",
-    },
-    {
       id: "petit-pain-gluten-free",
       name: "Pain Gluten Free",
       price: "2,40€",
@@ -123,12 +117,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       name: "Pavé de campagne",
       price: "0,90€",
       img: "/petit-pain-campagne.png",
-    },
-    {
-      id: "pain-pepites",
-      name: "Pain pépites de chocolat",
-      price: "1,90€",
-      img: "/pain-pepites.png",
     },
     {
       id: "pain-complet",
