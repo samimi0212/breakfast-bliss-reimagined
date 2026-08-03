@@ -541,8 +541,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/avocado-toast.png",
     desc: "",
-    composition: ["Tranche de pain toasté", "Sauce avocat", "Stracciatella", "Tranches d'avocat", "Grenade", "Germe de betterave"],
-    composition_en: ["Slice of toast", "Avocado sauce", "Stracciatella", "Avocado slices", "Pomegranate", "Beetroot sprouts"],
+    composition: ["Tranche de pain toasté", "Sauce onctueuse à l'avocat", "Stracciatella", "Émincé d'avocat", "Grenade", "Germe de betterave"],
+    composition_en: ["Slice of toast", "Creamy avocado sauce", "Stracciatella", "Sliced avocado", "Pomegranate", "Beetroot sprouts"],
     options: [
       {
         id: "supplement",
