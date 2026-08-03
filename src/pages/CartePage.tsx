@@ -121,7 +121,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "pain-complet",
       name: "Pain complet",
-      price: "4,10€",
+      price: "3,10€",
       img: "/pain-complet.png",
     },
   ],

@@ -526,12 +526,12 @@ export const allProducts: Product[] = [
     id: "pain-complet",
     name: "Pain complet",
     name_en: "Wholemeal Bread",
-    price: "4,10€",
+    price: "3,10€",
     category: "Pains",
     img: "/pain-complet.png",
     desc: "",
-    composition: ["330g", "Farine complète de blé T150"],
-    composition_en: ["330g", "Wholemeal wheat flour T150"],
+    composition: ["220g", "Farine complète de blé T150"],
+    composition_en: ["220g", "Wholemeal wheat flour T150"],
   },
   // ---- LE SALÉ ----
   {
