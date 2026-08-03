@@ -574,8 +574,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/bagel-chevre.png",
     desc: "",
-    composition: ["Bagel sésame", "Rondelles de chèvre", "Miel de Lavande", "Roquette", "Noix de Grenoble AOP", "Pickles de concombre", "Sauce maison"],
-    composition_en: ["Sesame bagel", "Goat cheese rounds", "Lavender honey", "Rocket", "AOP Grenoble walnuts", "Cucumber pickles", "House sauce"],
+    composition: ["Bagel brioché", "Chèvre cendrée", "Salade fraîche", "Noix de Grenoble AOP", "Concombre", "Sauce crémeuse miel moutarde"],
+    composition_en: ["Brioche bagel", "Ash-ripened goat cheese", "Fresh salad", "AOP Grenoble walnuts", "Cucumber", "Creamy honey mustard sauce"],
   },
   {
     id: "bagel-bacon-cheddar",
