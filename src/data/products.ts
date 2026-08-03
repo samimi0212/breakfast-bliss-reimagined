@@ -690,8 +690,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/focaccia.png",
     desc: "",
-    composition: ["Saumon fumé", "Stracciatella citronné", "Pickles oignons rouges", "Roquette", "Gomasio"],
-    composition_en: ["Smoked salmon", "Lemon stracciatella", "Pickled red onions", "Rocket", "Gomasio"],
+    composition: ["Saumon fumé", "Stracciatella citronné", "Pickles oignons rouges", "Pousse d'épinard", "Gomasio"],
+    composition_en: ["Smoked salmon", "Lemon stracciatella", "Pickled red onions", "Baby spinach", "Gomasio"],
   },
   {
     id: "toast-mediterraneen",
