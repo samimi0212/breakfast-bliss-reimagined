@@ -701,8 +701,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/toast-med.png",
     desc: "",
-    composition: ["Pain au levain", "Houmous", "Labneh", "Halloumi toasté", "Pois chiches croustillants", "Pousses d'épinards", "Épices zaatar", "Menthe fraîche"],
-    composition_en: ["Sourdough bread", "Hummus", "Labneh", "Toasted halloumi", "Crispy chickpeas", "Baby spinach", "Zaatar spices", "Fresh mint"],
+    composition: ["Pain au levain", "Houmous onctueux au Labneh", "Halloumi toasté", "Pois chiches croustillants", "Pousses d'épinards", "Épices zaatar", "Menthe fraîche"],
+    composition_en: ["Sourdough bread", "Creamy Labneh Hummus", "Toasted halloumi", "Crispy chickpeas", "Baby spinach", "Zaatar spices", "Fresh mint"],
   },
   {
     id: "breakfast-bowl",
