@@ -605,8 +605,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/breakfast-burrito.png",
     desc: "",
-    composition: ["Sauce avocat", "Bacon crispy", "Galette de pomme de terre", "Oeufs brouillés"],
-    composition_en: ["Avocado sauce", "Crispy bacon", "Hash brown", "Scrambled eggs"],
+    composition: ["Oeufs émiettés", "Galette de pomme de terre", "Bacon crispy", "Sauce onctueuse à l'avocat"],
+    composition_en: ["Crumbled eggs", "Hash brown", "Crispy bacon", "Creamy avocado sauce"],
   },
   {
     id: "pancakes-a-composer",
