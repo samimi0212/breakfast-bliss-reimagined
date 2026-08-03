@@ -115,7 +115,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "petit-pain-campagne",
       name: "Pavé de campagne",
-      price: "0,90€",
+      price: "1,40€",
       img: "/petit-pain-campagne.png",
     },
     {

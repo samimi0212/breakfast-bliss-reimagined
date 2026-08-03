@@ -515,7 +515,7 @@ export const allProducts: Product[] = [
     id: "petit-pain-campagne",
     name: "Pavé de campagne",
     name_en: "Country Roll",
-    price: "0,90€",
+    price: "1,40€",
     category: "Pains",
     img: "/petit-pain-campagne.png",
     desc: "",
