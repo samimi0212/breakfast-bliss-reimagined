@@ -582,7 +582,7 @@ export const allProducts: Product[] = [
     name: "Bagel Bacon Cheddar",
     price: "10,90€",
     category: "Le Salé",
-    img: "/bagel-cheddar.png",
+    img: "/bagel-cheddar2.png",
     desc: "",
     composition: ["Bagel au sésame", "Œuf émietté", "Bacon crispy", "Cheddar", "Roquette", "Sauce maison"],
     composition_en: ["Sesame bagel", "Crumbled egg", "Crispy bacon", "Cheddar", "Rocket", "House sauce"],

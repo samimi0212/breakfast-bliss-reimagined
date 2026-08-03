@@ -148,7 +148,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "bagel-bacon-cheddar",
       name: "Bagel Bacon Cheddar",
       price: "10,90€",
-      img: "/bagel-cheddar.png",
+      img: "/bagel-cheddar2.png",
     },
     {
       id: "bagel-saumon-avocat",
