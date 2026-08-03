@@ -679,8 +679,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/chicken-burrito.png",
     desc: "",
-    composition: ["Poulet mariné", "Sauce spicy", "Pickles oignons rouge", "Salade", "Chou blanc", "Betterave"],
-    composition_en: ["Marinated chicken", "Spicy sauce", "Pickled red onions", "Lettuce", "White cabbage", "Beetroot"],
+    composition: ["Poulet mariné", "Pickles oignons rouge", "Salade fraîche", "Chou blanc", "Betterave", "Sauce spicy"],
+    composition_en: ["Marinated chicken", "Pickled red onions", "Fresh salad", "White cabbage", "Beetroot", "Spicy sauce"],
   },
   {
     id: "focaccia-saumon",
