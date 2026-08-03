@@ -338,7 +338,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     },
     {
       id: "the-earl-grey",
-      name: "Thé Earl Grey",
+      name: "Thé Earl Grey citron",
       price: "2,30€",
       img: "/the.png",
     },
