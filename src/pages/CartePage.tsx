@@ -89,7 +89,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "mini-viennoiseries",
       name: "Mini viennoiseries",
-      price: "3,20€",
+      price: "3,40€",
       img: "/mini-viennoiseries.png",
     },
   ],

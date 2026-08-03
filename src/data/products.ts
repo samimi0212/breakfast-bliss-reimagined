@@ -467,7 +467,7 @@ export const allProducts: Product[] = [
     id: "mini-viennoiseries",
     name: "Mini viennoiseries",
     name_en: "Mini Pastries",
-    price: "3,20€",
+    price: "3,40€",
     category: "Viennoiseries",
     img: "/mini-viennoiseries.png",
     desc: "",
