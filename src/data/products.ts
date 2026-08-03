@@ -464,16 +464,6 @@ export const allProducts: Product[] = [
     composition_en: ["Pure butter"],
   },
   {
-    id: "suisse",
-    name: "Suisse",
-    price: "2,10€",
-    category: "Viennoiseries",
-    img: "/suisse.png",
-    desc: "",
-    composition: ["Pur beurre"],
-    composition_en: ["Pure butter"],
-  },
-  {
     id: "mini-viennoiseries",
     name: "Mini viennoiseries",
     name_en: "Mini Pastries",
