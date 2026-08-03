@@ -389,8 +389,8 @@ export const allProducts: Product[] = [
         label_en: "Smoothie (choose 1)",
         required: true,
         multiSelect: false,
-        choices: ["Smoothie Banane", "Smoothie Fruits Rouges"],
-        choices_en: ["Banana Smoothie", "Mixed Berry Smoothie"],
+        choices: ["Smoothie Tropical Ginger", "Smoothie Énergie", "Smoothie Green Detox"],
+        choices_en: ["Tropical Ginger Smoothie", "Energy Smoothie", "Green Detox Smoothie"],
       },
       {
         id: "boisson-chaude",
