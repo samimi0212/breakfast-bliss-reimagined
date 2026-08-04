@@ -283,7 +283,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "cookie-caramel",
       name: "Cookie Caramel Beurre Salé",
-      price: "3,80€",
+      price: "3,90€",
       img: "/cookie-caramel.jpg",
     },
     {

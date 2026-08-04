@@ -950,7 +950,7 @@ export const allProducts: Product[] = [
     id: "cookie-caramel",
     name: "Cookie Caramel Beurre Salé",
     name_en: "Salted Butter Caramel Cookie",
-    price: "3,80€",
+    price: "3,90€",
     category: "Le Sucré",
     img: "/cookie-caramel.jpg",
     desc: "",
