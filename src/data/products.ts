@@ -777,8 +777,8 @@ export const allProducts: Product[] = [
     category: "Extra",
     img: "/salade-verte.png",
     desc: "",
-    composition: ["Mélange de salades", "Grenade", "Germe de betteraves", "Sauce vinaigrette"],
-    composition_en: ["Mixed salad leaves", "Pomegranate", "Beetroot sprouts", "Vinaigrette dressing"],
+    composition: ["Salade fraîche", "Grenade", "Germe de betteraves", "Sauce vinaigrette (servie à part)"],
+    composition_en: ["Fresh salad", "Pomegranate", "Beetroot sprouts", "Vinaigrette dressing (served separately)"],
   },
   {
     id: "frites-patates-douces",
