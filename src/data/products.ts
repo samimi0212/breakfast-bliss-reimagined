@@ -948,14 +948,14 @@ export const allProducts: Product[] = [
   },
   {
     id: "cookie-caramel",
-    name: "Cookie Caramel Salé",
-    name_en: "Salted Caramel Cookie",
+    name: "Cookie Caramel Beurre Salé",
+    name_en: "Salted Butter Caramel Cookie",
     price: "3,80€",
     category: "Le Sucré",
     img: "/cookie-caramel.jpg",
     desc: "",
-    composition: ["Caramel", "Beurre salé de Guérande"],
-    composition_en: ["Caramel", "Guérande salted butter"],
+    composition: ["80g", "Caramel", "Beurre salé de Guérande"],
+    composition_en: ["80g", "Caramel", "Guérande salted butter"],
   },
   {
     id: "brownie-pecan",
