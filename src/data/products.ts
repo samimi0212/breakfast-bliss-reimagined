@@ -901,8 +901,8 @@ export const allProducts: Product[] = [
     category: "Le Sucré",
     img: "/porridge.png",
     desc: "",
-    composition: ["Céréales", "Amandes grillées", "Graines de Chia", "Bananes", "Beurre de cacahuètes", "Purée de mangue", "Vanille"],
-    composition_en: ["Cereals", "Toasted almonds", "Chia seeds", "Bananas", "Peanut butter", "Mango purée", "Vanilla"],
+    composition: ["Céréales", "Amandes grillées", "Graines de Chia", "Bananes", "Beurre de cacahuètes", "Purée de mangue", "Vanille", "Fromage grec"],
+    composition_en: ["Cereals", "Toasted almonds", "Chia seeds", "Bananas", "Peanut butter", "Mango purée", "Vanilla", "Greek cheese"],
     options: [],
   },
   {
