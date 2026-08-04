@@ -190,10 +190,15 @@ export default async function handler(req: Request): Promise<Response> {
           <p><strong>Téléphone :</strong> ${order.telephone}</p>
           <p><strong>Livraison :</strong> ${new Date(order.date).toLocaleDateString("fr-FR")} à ${order.heure}</p>
           <p><strong>Adresse :</strong> ${order.adresse}, ${order.codePostal} ${order.ville}</p>
+          ${order.trackingUrl ? `
           <div style="background:#f0f7e0; border-left:4px solid #6b7c2d; padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0;">
             <p style="margin:0 0 4px 0;">🚴 <strong>Stuart récupère à :</strong> ${fmt(pickupTime)}</p>
             <p style="margin:0;">📦 <strong>Livraison estimée :</strong> ${fmt(deliveryTime)}</p>
-          </div>
+          </div>` : `
+          <div style="background:#ffe8e8; border-left:4px solid #c0392b; padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0;">
+            <p style="margin:0 0 4px 0;font-weight:700;color:#8a1f14;">⚠️ AUCUNE COURSE STUART CRÉÉE</p>
+            <p style="margin:0;">La commande est payée mais aucun coursier n'est réservé. À faire manuellement pour ${fmt(pickupTime)} (livraison ${fmt(deliveryTime)}).</p>
+          </div>`}
           ${order.observations ? `
           <div style="background:#fff8e0; border-left:4px solid #e0a800; padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0;">
             <p style="margin:0 0 4px 0;font-weight:700;color:#7a5a00;">🍽️ OBSERVATIONS CLIENT — à lire en cuisine</p>

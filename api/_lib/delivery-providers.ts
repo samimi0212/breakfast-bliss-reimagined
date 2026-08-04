@@ -105,15 +105,62 @@ export async function getStuartToken(): Promise<string> {
 }
 
 export async function createStuartDelivery(order: DeliveryOrder) {
-  const token = await getStuartToken();
   const dropoffAddress = `${order.adresse}, ${order.codePostal} ${order.ville}, France`;
+
+  // Contrôle des formats avant conversion : parisTimeToUtc lève un
+  // « Invalid time value » peu parlant si on lui passe autre chose.
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(order.date ?? "") || !/^\d{2}:\d{2}$/.test(order.heure ?? "")) {
+    throw new Error(
+      `Créneau de livraison illisible (date="${order.date}", heure="${order.heure}") : course non créée.`
+    );
+  }
 
   const deliveryTime = parisTimeToUtc(order.date, order.heure);
 
-  const isMaintenant = order.isMaintenant === true;
+  if (Number.isNaN(deliveryTime.getTime())) {
+    throw new Error(
+      `Créneau de livraison illisible (date="${order.date}", heure="${order.heure}") : course non créée.`
+    );
+  }
+
+  const PICKUP_BEFORE_DELIVERY_MS = 40 * 60000;
+  const scheduledPickup = new Date(deliveryTime.getTime() - PICKUP_BEFORE_DELIVERY_MS);
+
+  // « Maintenant » n'a de sens que si le créneau demandé est effectivement
+  // proche. Le 04/08/2026, une livraison prévue le lendemain à 11h30 est partie
+  // pour le jour même : si le drapeau contredit le créneau choisi, c'est le
+  // créneau qui fait foi. On corrige au lieu de refuser la course, pour ne
+  // jamais laisser une commande payée sans coursier.
+  const IMMEDIATE_WINDOW_MS = 90 * 60000;
+  const askedImmediate = order.isMaintenant === true;
+  const creneauIsNear = deliveryTime.getTime() - Date.now() <= IMMEDIATE_WINDOW_MS;
+  const isMaintenant = askedImmediate && creneauIsNear;
+
   const pickupTime = isMaintenant
     ? new Date(Date.now() + 15 * 60000)
-    : new Date(deliveryTime.getTime() - 40 * 60000);
+    : scheduledPickup;
+
+  if (askedImmediate && !creneauIsNear) {
+    console.warn(
+      `Drapeau « maintenant » ignoré : le créneau ${order.date} ${order.heure} ` +
+        `est trop lointain. Collecte programmée pour ${pickupTime.toISOString()}.`
+    );
+  }
+
+  // Tracé systématique : permet de vérifier dans les logs Vercel ce qui a
+  // réellement été demandé à Stuart, sans avoir à reproduire la commande.
+  console.log(
+    JSON.stringify({
+      tag: "stuart_job",
+      creneau_client: `${order.date} ${order.heure}`,
+      isMaintenant_recu: askedImmediate,
+      isMaintenant_applique: isMaintenant,
+      pickup_at: pickupTime.toISOString(),
+      livraison_attendue: deliveryTime.toISOString(),
+    })
+  );
+
+  const token = await getStuartToken();
 
   const payload = {
     job: {

@@ -34,7 +34,10 @@ const generateSlots = (date: string): string[] => {
   return slots;
 };
 
-const todayStr = () => new Date().toISOString().split("T")[0];
+// La date « aujourd'hui » doit être celle de Paris, pas celle d'UTC :
+// toISOString() renvoyait la veille entre minuit et 2h du matin en été.
+const todayStr = () =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Paris" }).format(new Date());
 const OPENING_DATE = "2026-08-05";
 const isBeforeOpening = () => todayStr() < OPENING_DATE;
 const initialDate = () => isBeforeOpening() ? OPENING_DATE : todayStr();
@@ -177,7 +180,9 @@ const CheckoutForm = () => {
   useEffect(() => {
     const newSlots = generateSlots(form.date);
     setSlots(newSlots);
-    setForm((prev) => ({ ...prev, heure: newSlots[0] || "" }));
+    // isMaintenant doit retomber à false : sans ça, un client qui choisit
+    // « Maintenant » puis change de jour partait en livraison immédiate.
+    setForm((prev) => ({ ...prev, heure: newSlots[0] || "", isMaintenant: false }));
   }, [form.date]);
 
   // Initialiser le Payment Request (Google Pay / Apple Pay)
