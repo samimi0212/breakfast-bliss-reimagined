@@ -811,8 +811,8 @@ export const allProducts: Product[] = [
     category: "Le Sucré",
     img: "/brioche-perdue.png",
     desc: "",
-    composition: ["Brioche perdue", "Pâte à tartiner", "Eclats de noisettes grillées"],
-    composition_en: ["French toast brioche", "Pâte à tartiner", "Toasted hazelnut bits"],
+    composition: ["Brioche de Nanterre pur beurre", "Pâte à tartiner", "Eclats de noisettes grillées"],
+    composition_en: ["Pure butter Nanterre brioche", "Pâte à tartiner", "Toasted hazelnut bits"],
     options: [
       {
         id: "supplement",
