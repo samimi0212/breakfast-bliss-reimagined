@@ -4,6 +4,15 @@ export const config = { runtime: "edge" };
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Texte libre saisi par le client : neutralisé avant insertion dans le HTML de l'email
+const esc = (s: unknown) =>
+  String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/\n/g, "<br>");
+
 export default async function handler(req: Request): Promise<Response> {
   if (req.method !== "POST") {
     return new Response("Method Not Allowed", { status: 405 });
@@ -105,10 +114,16 @@ export default async function handler(req: Request): Promise<Response> {
         </table>
       </div>
 
+      ${order.observations ? `
+      <!-- Observations sur la commande -->
+      <div style="margin:0 32px 12px;padding:14px 18px;border-left:4px solid #DFF057;background:#f9f7f0;border-radius:0 10px 10px 0;">
+        <p style="margin:0;font-size:13px;color:#666;">🍽️ <strong>Vos observations :</strong> ${esc(order.observations)}</p>
+      </div>` : ""}
+
       ${order.note ? `
-      <!-- Note -->
+      <!-- Note livreur -->
       <div style="margin:0 32px 20px;padding:14px 18px;border-left:4px solid #DFF057;background:#f9f7f0;border-radius:0 10px 10px 0;">
-        <p style="margin:0;font-size:13px;color:#666;">📝 <strong>Note :</strong> ${order.note}</p>
+        <p style="margin:0;font-size:13px;color:#666;">📝 <strong>Note pour le livreur :</strong> ${esc(order.note)}</p>
       </div>` : ""}
 
       ${order.trackingUrl ? `
@@ -179,7 +194,12 @@ export default async function handler(req: Request): Promise<Response> {
             <p style="margin:0 0 4px 0;">🚴 <strong>Stuart récupère à :</strong> ${fmt(pickupTime)}</p>
             <p style="margin:0;">📦 <strong>Livraison estimée :</strong> ${fmt(deliveryTime)}</p>
           </div>
-          ${order.note ? `<p><strong>Note :</strong> ${order.note}</p>` : ""}
+          ${order.observations ? `
+          <div style="background:#fff8e0; border-left:4px solid #e0a800; padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0;">
+            <p style="margin:0 0 4px 0;font-weight:700;color:#7a5a00;">🍽️ OBSERVATIONS CLIENT — à lire en cuisine</p>
+            <p style="margin:0;">${esc(order.observations)}</p>
+          </div>` : ""}
+          ${order.note ? `<p><strong>Note pour le livreur :</strong> ${esc(order.note)}</p>` : ""}
           <hr style="margin: 16px 0; border: none; border-top: 1px solid #e0e0d0;">
           <h3 style="margin: 0 0 8px 0; color: #3a3a0a;">Détail de la commande</h3>
           <table style="width: 100%; border-collapse: collapse; font-size: 14px;">

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, UtensilsCrossed } from "lucide-react";
+import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, UtensilsCrossed, MessageSquareText } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useLangPath } from "@/hooks/useLangPath";
 import Navbar from "@/components/Navbar";
@@ -17,13 +17,26 @@ const Cart = () => {
   const [promoCode, setPromoCode] = useState<string | null>(null);
   const [promoInput, setPromoInput] = useState("");
   const [promoError, setPromoError] = useState("");
+  const [observations, setObservations] = useState("");
 
+  const OBSERVATIONS_MAX = 500;
   const VALID_PROMOS: Record<string, number> = { BONJOUR20: 0.20, BIENVENUE10: 0.10, RETOUR: 0 };
 
   useEffect(() => {
     const stored = sessionStorage.getItem("bt_promo_code");
     if (stored) setPromoCode(stored);
+    const storedObs = sessionStorage.getItem("bt_order_observations");
+    if (storedObs) setObservations(storedObs);
   }, []);
+
+  // Conservé entre les allers-retours panier ↔ carte
+  useEffect(() => {
+    if (observations.trim()) {
+      sessionStorage.setItem("bt_order_observations", observations);
+    } else {
+      sessionStorage.removeItem("bt_order_observations");
+    }
+  }, [observations]);
 
   const applyPromo = () => {
     const code = promoInput.trim().toUpperCase();
@@ -217,9 +230,44 @@ const Cart = () => {
               )}
             </div>
 
+            {/* Observations sur la commande */}
+            <div
+              className="bg-white rounded-2xl p-4 mt-2"
+              style={{ boxShadow: "var(--card-shadow)" }}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <MessageSquareText size={18} className="text-primary" />
+                </div>
+                <div>
+                  <label htmlFor="cart-observations" className="font-semibold text-sm block">
+                    {t("cart.observationsTitle")}
+                  </label>
+                  <p className="text-xs text-muted-foreground">{t("cart.observationsHint")}</p>
+                </div>
+              </div>
+
+              <textarea
+                id="cart-observations"
+                value={observations}
+                onChange={(e) => setObservations(e.target.value.slice(0, OBSERVATIONS_MAX))}
+                placeholder={t("cart.observationsPlaceholder")}
+                rows={3}
+                maxLength={OBSERVATIONS_MAX}
+                className="w-full px-4 py-3 rounded-xl border-2 border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition resize-none"
+              />
+
+              <div className="flex items-start justify-between gap-3 mt-2">
+                <p className="text-xs text-muted-foreground">{t("cart.observationsDriverNote")}</p>
+                <span className="text-xs text-muted-foreground whitespace-nowrap flex-shrink-0">
+                  {t("cart.observationsCounter", { count: observations.length })}
+                </span>
+              </div>
+            </div>
+
             {/* Vider le panier */}
             <button
-              onClick={clearCart}
+              onClick={() => { setObservations(""); clearCart(); }}
               className="text-sm text-muted-foreground hover:text-red-500 transition-colors flex items-center gap-1 mt-2 py-3 min-h-[44px]"
             >
               <Trash2 size={14} />

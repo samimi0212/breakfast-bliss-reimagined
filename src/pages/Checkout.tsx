@@ -103,6 +103,19 @@ const CheckoutForm = () => {
     if (stored) setPromoCode(stored);
   }, []);
 
+  // Observations saisies dans le panier — modifiables ici, transmises à la cuisine (jamais au livreur)
+  const OBSERVATIONS_MAX = 500;
+  const [observations, setObservations] = useState(
+    () => sessionStorage.getItem("bt_order_observations") ?? ""
+  );
+  useEffect(() => {
+    if (observations.trim()) {
+      sessionStorage.setItem("bt_order_observations", observations);
+    } else {
+      sessionStorage.removeItem("bt_order_observations");
+    }
+  }, [observations]);
+
   const storedCutleryQty = Number(sessionStorage.getItem("bt_cutlery_qty") ?? "0");
   const cutleryQty = storedCutleryQty > 0 ? storedCutleryQty : 0;
   const cutleryCost = cutleryQty * 0.80;
@@ -127,6 +140,8 @@ const CheckoutForm = () => {
   useEffect(() => { itemsRef.current = itemsWithCutlery; }, [itemsWithCutlery]);
   const totalRef = useRef(total + cutleryCost);
   useEffect(() => { totalRef.current = total + cutleryCost; }, [total, cutleryCost]);
+  const observationsRef = useRef(observations);
+  useEffect(() => { observationsRef.current = observations; }, [observations]);
 
   const isCoordComplete = !!(form.prenom && form.nom && form.email && form.telephone);
   const isAdresseComplete = !!(form.adresse && form.ville && form.codePostal && deliveryPrice !== null);
@@ -261,6 +276,7 @@ const CheckoutForm = () => {
           date_livraison: f.date,
           heure_livraison: f.heure,
           note: f.note,
+          observations: observationsRef.current,
           items: itms,
           total: orderTotal,
           frais_livraison: dp,
@@ -317,6 +333,7 @@ const CheckoutForm = () => {
                 heure: f.heure,
                 isMaintenant: f.isMaintenant,
                 note: f.note,
+                observations: observationsRef.current,
                 items: itms,
                 total: orderTotal,
                 fraisLivraison: dp,
@@ -329,6 +346,7 @@ const CheckoutForm = () => {
 
         sessionStorage.removeItem("bt_promo_code");
         sessionStorage.removeItem("bt_cutlery_qty");
+        sessionStorage.removeItem("bt_order_observations");
         clearCart();
         navigate(lp("/confirmation"));
       } catch (err: any) {
@@ -545,6 +563,7 @@ const CheckoutForm = () => {
         date_livraison: form.date,
         heure_livraison: form.heure,
         note: form.note,
+        observations,
         items: itemsWithCutlery,
         total: orderTotal,
         frais_livraison: deliveryPrice,
@@ -592,6 +611,7 @@ const CheckoutForm = () => {
         await supabase.from("promo_usage").insert({ email: form.email, promo_code: promoCode });
       }
       sessionStorage.removeItem("bt_cutlery_qty");
+      sessionStorage.removeItem("bt_order_observations");
 
       // 5. Envoyer l'email de confirmation
       try {
@@ -611,6 +631,7 @@ const CheckoutForm = () => {
               heure: form.heure,
               isMaintenant: form.isMaintenant,
               note: form.note,
+              observations,
               items: itemsWithCutlery,
               total: orderTotal,
               fraisLivraison: deliveryPrice,
@@ -885,6 +906,26 @@ const CheckoutForm = () => {
                 )}
                 {errors.heure && <p className="text-red-400 text-xs mt-1">{errors.heure}</p>}
               </div>
+            </div>
+
+            {/* Observations sur la commande (saisies dans le panier) */}
+            <div
+              className={sectionClass("observations", false)}
+              style={{ boxShadow: "var(--card-shadow)" }}
+              onFocus={() => setActiveSection("observations")}
+              onBlur={() => setActiveSection(null)}
+            >
+              <h2 className="font-display text-lg font-semibold mb-1">{t("checkout.observationsTitle")}</h2>
+              <p className="text-xs text-muted-foreground mb-4">{t("checkout.observationsHint")}</p>
+              <textarea
+                name="observations"
+                value={observations}
+                onChange={(e) => setObservations(e.target.value.slice(0, OBSERVATIONS_MAX))}
+                placeholder={t("checkout.observationsPlaceholder")}
+                rows={3}
+                maxLength={OBSERVATIONS_MAX}
+                className="w-full px-4 py-3 rounded-xl border-2 border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition resize-none"
+              />
             </div>
 
             {/* Note pour le livreur */}

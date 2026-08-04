@@ -181,6 +181,9 @@ const MyOrders = () => {
                       {order.note && (
                         <p className="text-muted-foreground mt-1">📝 {order.note}</p>
                       )}
+                      {order.observations && (
+                        <p className="text-muted-foreground mt-1">🍽️ {order.observations}</p>
+                      )}
                     </div>
 
                     {/* Suivi livraison Stuart */}
