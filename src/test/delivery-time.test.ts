@@ -38,12 +38,6 @@ describe("parisTimeToUtc", () => {
     expect(pickup.toISOString()).toBe("2026-08-05T08:20:00.000Z");
   });
 
-  it("place le pickup Uber 30 min avant la livraison", () => {
-    const livraison = parisTimeToUtc("2026-08-05", "11:00");
-    const pickup = new Date(livraison.getTime() - 30 * 60000);
-    expect(pickup.toISOString()).toBe("2026-08-05T08:30:00.000Z");
-  });
-
   it("ne réintroduit pas le décalage de l'ancienne implémentation", () => {
     // L'ancien code produisait 11:00Z pour un créneau de 11h00 heure de Paris
     expect(parisTimeToUtc("2026-08-05", "11:00").toISOString()).not.toBe(

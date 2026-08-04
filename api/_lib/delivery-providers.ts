@@ -1,11 +1,8 @@
-const UBER_AUTH_URL = "https://login.uber.com/oauth/v2/token";
-const UBER_API_BASE = "https://api.uber.com/v1/customers";
 const STUART_AUTH_URL = "https://api.stuart.com/oauth/token";
 const STUART_API_BASE = "https://api.stuart.com/v2";
 
 const PICKUP_ADDRESS = "371 chemin des Prés, 06410 Biot, France";
 const STUART_PICKUP_PHONE = "+33626154730";
-const UBER_PICKUP_PHONE = process.env.BREAKFAST_PHONE || "+33600000000";
 
 // Décalage entre Europe/Paris et UTC, en millisecondes, pour un instant donné.
 function parisOffsetMs(instant: Date): number {
@@ -47,6 +44,28 @@ export function parisTimeToUtc(dateStr: string, timeStr: string): Date {
   return new Date(naive - parisOffsetMs(new Date(firstPass)));
 }
 
+/**
+ * Met un numéro français au format E.164 (+33XXXXXXXXX).
+ *
+ * Le formulaire accepte aussi bien "06 12 34 56 78" que "+33 6 12 34 56 78" :
+ * la conversion se fait ici, au moment de sortir vers le transporteur, pour ne
+ * jamais lui transmettre un format qu'il pourrait refuser.
+ *
+ * Un format non reconnu est renvoyé tel quel plutôt que transformé au hasard :
+ * mieux vaut laisser le transporteur refuser qu'expédier un mauvais numéro.
+ */
+export function toE164Fr(raw: string | undefined | null): string {
+  const compact = String(raw ?? "").replace(/[\s.\-() ]/g, "");
+  if (!compact) return "";
+
+  if (compact.startsWith("+")) return compact;
+  if (compact.startsWith("00")) return `+${compact.slice(2)}`;
+  if (/^0[1-9]\d{8}$/.test(compact)) return `+33${compact.slice(1)}`;
+  if (/^[1-9]\d{8}$/.test(compact)) return `+33${compact}`;
+
+  return compact;
+}
+
 export interface DeliveryOrder {
   prenom: string;
   nom: string;
@@ -60,95 +79,6 @@ export interface DeliveryOrder {
   note?: string;
   items: { name: string; qty: number; price: string }[];
   total: number;
-}
-
-export async function getUberToken(): Promise<string> {
-  const res = await fetch(UBER_AUTH_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      grant_type: "client_credentials",
-      client_id: process.env.UBER_CLIENT_ID!,
-      client_secret: process.env.UBER_CLIENT_SECRET!,
-      scope: "eats.deliveries",
-    }),
-  });
-
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Auth Uber échouée: ${err}`);
-  }
-
-  const data: any = await res.json();
-  return data.access_token;
-}
-
-export async function createUberDelivery(order: DeliveryOrder) {
-  const token = await getUberToken();
-  const customerId = process.env.UBER_CUSTOMER_ID;
-
-  const deliveryDateTime = parisTimeToUtc(order.date, order.heure);
-  const pickupDateTime = new Date(deliveryDateTime.getTime() - 30 * 60 * 1000);
-
-  const dropoffAddress = `${order.adresse}, ${order.codePostal} ${order.ville}, France`;
-
-  const manifestItems = order.items.map((item) => ({
-    name: item.name,
-    quantity: item.qty,
-    size: "small",
-    price: Math.round(parseFloat(item.price.replace("€", "").replace(",", ".")) * 100),
-  }));
-
-  const payload = {
-    pickup_address: PICKUP_ADDRESS,
-    pickup_name: "Breakfast Time",
-    pickup_phone_number: UBER_PICKUP_PHONE,
-    pickup_ready_dt: pickupDateTime.toISOString(),
-    pickup_deadline_dt: deliveryDateTime.toISOString(),
-    dropoff_address: dropoffAddress,
-    dropoff_name: `${order.prenom} ${order.nom}`,
-    dropoff_phone_number: order.telephone,
-    dropoff_notes: order.note || "",
-    dropoff_ready_dt: deliveryDateTime.toISOString(),
-    dropoff_deadline_dt: new Date(deliveryDateTime.getTime() + 30 * 60 * 1000).toISOString(),
-    manifest_total_value: Math.round(order.total * 100),
-    manifest_items: manifestItems,
-  };
-
-  const res = await fetch(`${UBER_API_BASE}/${customerId}/deliveries`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-    body: JSON.stringify(payload),
-  });
-
-  const data: any = await res.json();
-  if (!res.ok) throw new Error(data.message || JSON.stringify(data));
-
-  return {
-    delivery_id: data.id as string,
-    tracking_url: data.tracking_url as string,
-    status: data.status as string,
-  };
-}
-
-export async function getUberDeliveryStatus(deliveryId: string) {
-  const token = await getUberToken();
-  const customerId = process.env.UBER_CUSTOMER_ID;
-  const res = await fetch(`${UBER_API_BASE}/${customerId}/deliveries/${deliveryId}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const data: any = await res.json();
-  if (!res.ok) throw new Error(data.message || JSON.stringify(data));
-  return data;
-}
-
-export async function cancelUberDelivery(deliveryId: string) {
-  const token = await getUberToken();
-  const customerId = process.env.UBER_CUSTOMER_ID;
-  await fetch(`${UBER_API_BASE}/${customerId}/deliveries/${deliveryId}/cancel`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-  });
 }
 
 export async function getStuartToken(): Promise<string> {
@@ -199,7 +129,7 @@ export async function createStuartDelivery(order: DeliveryOrder) {
         {
           address: dropoffAddress,
           comment: order.note || "",
-          contact: { firstname: order.prenom, lastname: order.nom, phone: order.telephone },
+          contact: { firstname: order.prenom, lastname: order.nom, phone: toE164Fr(order.telephone) },
           package_type: "small",
           package_description: `Commande Breakfast Time — ${order.items.map((i) => `${i.qty}x ${i.name}`).join(", ")}`,
         },

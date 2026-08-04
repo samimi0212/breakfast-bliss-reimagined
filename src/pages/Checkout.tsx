@@ -283,7 +283,7 @@ const CheckoutForm = () => {
           statut: "Payée",
         }).select("id").single();
 
-        // Livraison : Uber en priorité, bascule automatique sur Stuart en cas d'échec
+        // Livraison Stuart
         let trackingUrl = "";
         try {
           const deliveryRes = await fetch("/api/create-delivery", {
@@ -574,7 +574,7 @@ const CheckoutForm = () => {
         console.error("Supabase insert error:", dbError);
       }
 
-      // 4. Créer la livraison : Uber en priorité, bascule automatique sur Stuart en cas d'échec
+      // 4. Créer la livraison Stuart
       let trackingUrl = "";
       try {
         const deliveryRes = await fetch("/api/create-delivery", {
