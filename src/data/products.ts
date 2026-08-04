@@ -926,8 +926,8 @@ export const allProducts: Product[] = [
       },
       {
         id: "supplement",
-        label: "Supplément (+0,90€ chacun)",
-        label_en: "Add-on (+€0.90 each)",
+        label: "Supplément",
+        label_en: "Add-on",
         required: false,
         multiSelect: true,
         choices: ["Beurre de cacahuètes (+0,90€)", "Noix de coco (+0,90€)", "Noisettes torréfiées (+0,90€)"],
