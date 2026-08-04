@@ -855,6 +855,14 @@ export const allProducts: Product[] = [
         choices: ["Taille XL (+1,50€)"],
         choices_en: ["XL Size (+€1.50)"],
       },
+      {
+        id: "extras",
+        label: "Extras",
+        required: false,
+        multiSelect: false,
+        choices: ["Beurre de cacahuètes (+0,90€)"],
+        choices_en: ["Peanut Butter (+€0.90)"],
+      },
     ],
   },
   {
