@@ -7,8 +7,8 @@ const PICKUP_LAT = 43.6186;
 const PICKUP_LNG = 7.0897;
 const PICKUP_ADDRESS = "371 chemin des Prés, 06410 Biot, France";
 
-const UBER_API_BASE = "https://sandbox-api.uber.com/v1/customers";
-const STUART_API_BASE = "https://api.sandbox.stuart.com/v2";
+const UBER_API_BASE = "https://api.uber.com/v1/customers";
+const STUART_API_BASE = "https://api.stuart.com/v2";
 
 const MINIMUM_ORDER = 20;
 const FREE_DELIVERY_THRESHOLD = 45;
