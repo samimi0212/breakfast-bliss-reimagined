@@ -921,7 +921,6 @@ const CheckoutForm = () => {
                 name="observations"
                 value={observations}
                 onChange={(e) => setObservations(e.target.value.slice(0, OBSERVATIONS_MAX))}
-                placeholder={t("checkout.observationsPlaceholder")}
                 rows={3}
                 maxLength={OBSERVATIONS_MAX}
                 className="w-full px-4 py-3 rounded-xl border-2 border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition resize-none"

@@ -239,19 +239,15 @@ const Cart = () => {
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <MessageSquareText size={18} className="text-primary" />
                 </div>
-                <div>
-                  <label htmlFor="cart-observations" className="font-semibold text-sm block">
-                    {t("cart.observationsTitle")}
-                  </label>
-                  <p className="text-xs text-muted-foreground">{t("cart.observationsHint")}</p>
-                </div>
+                <label htmlFor="cart-observations" className="font-semibold text-sm">
+                  {t("cart.observationsTitle")}
+                </label>
               </div>
 
               <textarea
                 id="cart-observations"
                 value={observations}
                 onChange={(e) => setObservations(e.target.value.slice(0, OBSERVATIONS_MAX))}
-                placeholder={t("cart.observationsPlaceholder")}
                 rows={3}
                 maxLength={OBSERVATIONS_MAX}
                 className="w-full px-4 py-3 rounded-xl border-2 border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition resize-none"
