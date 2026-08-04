@@ -1084,8 +1084,8 @@ export const allProducts: Product[] = [
     category: "Boissons",
     img: "/chai-latte.png",
     desc: "",
-    composition: ["Thé noir", "Epices", "Vanille"],
-    composition_en: ["Black tea", "Spices", "Vanilla"],
+    composition: ["Lait d'avoine", "Thé noir", "Epices", "Vanille"],
+    composition_en: ["Oat milk", "Black tea", "Spices", "Vanilla"],
     options: [],
   },
   {
