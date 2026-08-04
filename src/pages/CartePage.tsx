@@ -289,7 +289,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "brownie-pecan",
       name: "Brownie Pécan",
-      price: "3,50€",
+      price: "3,80€",
       img: "/brownie.jpg",
     },
     {
