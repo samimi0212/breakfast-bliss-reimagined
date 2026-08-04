@@ -26,7 +26,6 @@ const Index = () => {
   );
 
   const [searchParams] = useSearchParams();
-  const [showLaunchPopup, setShowLaunchPopup] = useState(false);
   const [promoPopup, setPromoPopup] = useState<{ code: string; discount: string } | null>(null);
 
   useEffect(() => {
@@ -35,21 +34,8 @@ const Index = () => {
     if (promoParam && VALID_PROMOS[promoParam]) {
       sessionStorage.setItem("bt_promo_code", promoParam);
       setPromoPopup({ code: promoParam, discount: VALID_PROMOS[promoParam] });
-      return;
-    }
-
-    // Sinon, popup lancement
-    const seen = sessionStorage.getItem("bt_popup_seen");
-    if (!seen) {
-      const timer = setTimeout(() => setShowLaunchPopup(true), 800);
-      return () => clearTimeout(timer);
     }
   }, []);
-
-  const closePopup = () => {
-    sessionStorage.setItem("bt_popup_seen", "1");
-    setShowLaunchPopup(false);
-  };
 
   return (
   <>
@@ -62,34 +48,6 @@ const Index = () => {
         discount={promoPopup.discount}
         onClose={() => setPromoPopup(null)}
       />
-    )}
-
-    {/* Pop-up lancement */}
-    {showLaunchPopup && (
-      <div
-        className="fixed inset-0 z-50 flex items-center justify-center px-4"
-        style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-        onClick={closePopup}
-      >
-        <div
-          className="bg-white rounded-2xl p-8 max-w-sm w-full text-center relative"
-          style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.2)" }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="text-5xl mb-4">🎉</div>
-          <h2 className="font-display text-2xl font-bold mb-3">Breakfast Time arrive bientôt !</h2>
-          <p className="text-muted-foreground mb-6 leading-relaxed">
-            Nous ouvrons le <strong>5 août 2026</strong>.<br />
-            <strong>Les précommandes sont ouvertes !</strong> Réservez dès maintenant !
-          </p>
-          <button
-            onClick={closePopup}
-            className="w-full bg-primary text-primary-foreground py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity"
-          >
-            Précommander →
-          </button>
-        </div>
-      </div>
     )}
     <main>
       <HeroSection />
