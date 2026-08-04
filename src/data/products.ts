@@ -1064,7 +1064,8 @@ export const allProducts: Product[] = [
     category: "Boissons",
     img: "/capuccino.png",
     desc: "",
-    composition: [],
+    composition: ["Non sucré — sucre servi à part"],
+    composition_en: ["Unsweetened — sugar served on the side"],
     options: [
       {
         id: "lait",
