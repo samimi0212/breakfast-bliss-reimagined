@@ -369,19 +369,19 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "jus-orange-presse",
       name: "Jus d'orange pressé",
-      price: "3,50€",
+      price: "3,90€",
       img: "/jus-orange.png",
     },
     {
       id: "jus-pamplemousse-presse",
       name: "Jus de pamplemousse pressé",
-      price: "3,50€",
+      price: "3,90€",
       img: "/jus-pamplemousse.png",
     },
     {
       id: "jus-abricot",
       name: "Jus d'abricot",
-      price: "3,50€",
+      price: "3,90€",
       img: "/jus-abricot.png",
     },
     {
