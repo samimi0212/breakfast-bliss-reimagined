@@ -1108,8 +1108,8 @@ export const allProducts: Product[] = [
     category: "Boissons",
     img: "/chocolat-chaud.png",
     desc: "",
-    composition: ["100% cacao non sucré — sucre servi à part"],
-    composition_en: ["100% unsweetened cocoa — sugar served on the side"],
+    composition: ["100% cacao Guayaquil, non sucré — sucre servi à part"],
+    composition_en: ["100% Guayaquil cocoa, unsweetened — sugar served on the side"],
     options: [
       {
         id: "lait",
