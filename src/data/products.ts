@@ -1096,8 +1096,8 @@ export const allProducts: Product[] = [
     category: "Boissons",
     img: "/the.png",
     desc: "",
-    composition: ["Thé noir à la Bergamote", "Non sucré — sucre servi à part"],
-    composition_en: ["Bergamot black tea", "Unsweetened — sugar served on the side"],
+    composition: ["Thé noir au citron", "Non sucré — sucre servi à part"],
+    composition_en: ["Lemon black tea", "Unsweetened — sugar served on the side"],
     options: [],
   },
   {
