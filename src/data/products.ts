@@ -833,8 +833,8 @@ export const allProducts: Product[] = [
     category: "Le Sucré",
     img: "/brioche-perdue-caramel.png",
     desc: "",
-    composition: ["Brioche Nanterre pur beurre", "Caramel artisanal au beurre salé de Guérande", "Noix de pécan", "Myrtilles"],
-    composition_en: ["Pure butter Nanterre brioche", "Artisan Guérande salted butter caramel", "Pecan nuts", "Blueberries"],
+    composition: ["Brioche Nanterre pur beurre", "Caramel au beurre salé de Guérande", "Noix de pécan", "Myrtilles"],
+    composition_en: ["Pure butter Nanterre brioche", "Guérande salted butter caramel", "Pecan nuts", "Blueberries"],
   },
   {
     id: "pudding-chia",
