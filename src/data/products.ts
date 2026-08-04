@@ -746,6 +746,17 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Œufs frais de plein air", "Truffe noire du Périgord", "Fleur de sel", "1 toast"],
     composition_en: ["Free-range fresh eggs", "Black truffle from Périgord", "Fleur de sel", "1 toast"],
+    options: [
+      {
+        id: "supplement",
+        label: "Supplément",
+        label_en: "Add-on",
+        required: false,
+        multiSelect: false,
+        choices: ["Bacon crispy (+1,50€)"],
+        choices_en: ["Crispy Bacon (+€1.50)"],
+      },
+    ],
   },
   {
     id: "rostis",
