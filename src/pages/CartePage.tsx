@@ -333,7 +333,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "chai-latte",
       name: "Chai Latte",
-      price: "5,50€",
+      price: "6,20€",
       img: "/chai-latte.png",
     },
     {
@@ -347,6 +347,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       name: "Chocolat chaud",
       price: "5,50€",
       img: "/chocolat-chaud.png",
+    },
+    {
+      id: "iced-matcha-latte",
+      name: "Iced Matcha Latte",
+      price: "6,90€",
+      img: "/matcha.png",
     },
     {
       id: "smoothie-tropical",
@@ -383,12 +389,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       name: "Jus d'abricot",
       price: "3,90€",
       img: "/jus-abricot.png",
-    },
-    {
-      id: "iced-matcha-latte",
-      name: "Iced Matcha Latte",
-      price: "6,90€",
-      img: "/matcha.png",
     },
   ],
   "À Partager": [

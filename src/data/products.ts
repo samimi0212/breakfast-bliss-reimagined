@@ -1079,7 +1079,7 @@ export const allProducts: Product[] = [
   {
     id: "chai-latte",
     name: "Chai Latte",
-    price: "5,50€",
+    price: "6,20€",
     category: "Boissons",
     img: "/chai-latte.png",
     desc: "",
@@ -1119,6 +1119,16 @@ export const allProducts: Product[] = [
         choices_en: ["Oat milk (+€0.50)"],
       },
     ],
+  },
+  {
+    id: "iced-matcha-latte",
+    name: "Iced Matcha Latte",
+    price: "6,90€",
+    category: "Boissons",
+    img: "/matcha.png",
+    desc: "",
+    composition: ["Thé Matcha", "Lait d'avoine"],
+    composition_en: ["Matcha tea", "Oat milk"],
   },
   {
     id: "smoothie-tropical",
@@ -1188,16 +1198,6 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Nectar d'abricot"],
     composition_en: ["Apricot nectar"],
-  },
-  {
-    id: "iced-matcha-latte",
-    name: "Iced Matcha Latte",
-    price: "6,90€",
-    category: "Boissons",
-    img: "/matcha.png",
-    desc: "",
-    composition: ["Thé Matcha", "Lait d'avoine"],
-    composition_en: ["Matcha tea", "Oat milk"],
   },
   // ---- À PARTAGER ----
   {
