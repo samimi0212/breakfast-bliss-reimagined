@@ -612,12 +612,12 @@ export const allProducts: Product[] = [
     id: "pancakes-a-composer",
     name: "Pancakes à composer",
     name_en: "Build Your Pancakes",
-    price: "5,50€",
+    price: "6,50€",
     category: "Le Sucré",
     img: "/pancakes-composer.png",
     desc: "",
-    composition: ["2 Pancakes", "1 Nappage au choix", "1 Topping au choix"],
-    composition_en: ["2 Pancakes", "1 Topping of your choice", "1 Topping of your choice"],
+    composition: ["3 Pancakes", "1 Nappage au choix", "1 Topping au choix"],
+    composition_en: ["3 Pancakes", "1 Topping of your choice", "1 Topping of your choice"],
     options: [
       {
         id: "nappage",
