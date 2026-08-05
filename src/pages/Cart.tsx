@@ -57,6 +57,7 @@ const Cart = () => {
   };
 
   const promoDiscount = promoCode ? (VALID_PROMOS[promoCode] ?? 0) : 0;
+  // Doit rester aligné sur MINIMUM_ORDER dans api/get-delivery-price.ts
   const MIN_ORDER = 15;
   const FREE_DELIVERY_THRESHOLD = 45;
   const subtotalWithCutlery = total + (wantsCutlery ? cutleryQty * 0.80 : 0);

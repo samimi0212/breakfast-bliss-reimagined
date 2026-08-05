@@ -9,7 +9,10 @@ const PICKUP_ADDRESS = "371 chemin des Prés, 06410 Biot, France";
 
 const UBER_API_BASE = "https://api.uber.com/v1/customers";
 
-const MINIMUM_ORDER = 20;
+// Doit rester aligné sur MIN_ORDER dans src/pages/Cart.tsx et sur la clé
+// "cart.minOrder" des traductions : un écart bloquait le client à l'étape
+// adresse après lui avoir laissé valider son panier.
+const MINIMUM_ORDER = 15;
 const FREE_DELIVERY_THRESHOLD = 45;
 const CLIENT_SHARE = 0.5;
 const MAX_CLIENT_FEE = 15;
