@@ -186,7 +186,7 @@ const MyOrders = () => {
                       )}
                     </div>
 
-                    {/* Suivi livraison Stuart */}
+                    {/* Suivi livraison */}
                     {order.tracking_url && (
                       <a
                         href={order.tracking_url}

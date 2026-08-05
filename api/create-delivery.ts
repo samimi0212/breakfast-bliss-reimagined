@@ -1,7 +1,7 @@
 export const config = { runtime: "edge" };
 
 import { createClient } from "@supabase/supabase-js";
-import { createStuartDelivery, type DeliveryOrder } from "./_lib/delivery-providers";
+import { createUberDelivery, type DeliveryOrder } from "./_lib/delivery-providers";
 
 const supabase = createClient(
   "https://ommkmxahqxakoixoiiux.supabase.co",
@@ -21,18 +21,18 @@ export default async function handler(req: Request): Promise<Response> {
   try {
     const { order, commandeId } = (await req.json()) as { order: DeliveryOrder; commandeId?: string };
 
-    const stuart = await createStuartDelivery(order);
+    const uber = await createUberDelivery(order);
 
     if (commandeId) {
-      await saveTrackingUrl(commandeId, stuart.tracking_url);
+      await saveTrackingUrl(commandeId, uber.tracking_url);
     }
 
     return new Response(
-      JSON.stringify({ provider: "stuart", tracking_url: stuart.tracking_url, job_id: stuart.job_id }),
+      JSON.stringify({ provider: "uber", tracking_url: uber.tracking_url, delivery_id: uber.delivery_id }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (error: any) {
-    console.error("Livraison Stuart — échec:", error);
+    console.error("Livraison Uber Direct — échec:", error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

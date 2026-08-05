@@ -1,13 +1,13 @@
 export const config = { runtime: "edge" };
 
-import { getStuartToken } from "./_lib/delivery-providers";
+import { getUberToken } from "./_lib/delivery-providers";
 
 // Coordonnées du point de pickup : 371 chemin des Prés, 06410 Biot
 const PICKUP_LAT = 43.6186;
 const PICKUP_LNG = 7.0897;
 const PICKUP_ADDRESS = "371 chemin des Prés, 06410 Biot, France";
 
-const STUART_API_BASE = "https://api.stuart.com/v2";
+const UBER_API_BASE = "https://api.uber.com/v1/customers";
 
 const MINIMUM_ORDER = 20;
 const FREE_DELIVERY_THRESHOLD = 45;
@@ -26,7 +26,7 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
   return R * c;
 }
 
-// Grille de secours si le devis Stuart échoue
+// Grille de secours si le devis Uber échoue
 function fallbackPrice(distanceKm: number): number | null {
   if (distanceKm < 5) return 7.50;
   if (distanceKm < 10) return 12.50;
@@ -34,21 +34,17 @@ function fallbackPrice(distanceKm: number): number | null {
   return null;
 }
 
-async function getStuartQuote(dropoffAddress: string): Promise<number> {
-  const token = await getStuartToken();
-  const res = await fetch(`${STUART_API_BASE}/jobs/pricing`, {
+async function getUberQuote(dropoffAddress: string): Promise<number> {
+  const token = await getUberToken();
+  const customerId = process.env.UBER_CUSTOMER_ID;
+  const res = await fetch(`${UBER_API_BASE}/${customerId}/delivery_quotes`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-    body: JSON.stringify({
-      job: {
-        pickups: [{ address: PICKUP_ADDRESS }],
-        dropoffs: [{ address: dropoffAddress, package_type: "small" }],
-      },
-    }),
+    body: JSON.stringify({ pickup_address: PICKUP_ADDRESS, dropoff_address: dropoffAddress }),
   });
   const data: any = await res.json();
   if (!res.ok) throw new Error(data.message || JSON.stringify(data));
-  return data.amount_with_tax;
+  return data.fee / 100;
 }
 
 export default async function handler(req: Request): Promise<Response> {
@@ -99,7 +95,7 @@ export default async function handler(req: Request): Promise<Response> {
 
     let price: number;
     try {
-      const realCost = await getStuartQuote(address);
+      const realCost = await getUberQuote(address);
       price = Math.min(Math.round(realCost * CLIENT_SHARE * 100) / 100, MAX_CLIENT_FEE);
     } catch {
       const fallback = fallbackPrice(distance);

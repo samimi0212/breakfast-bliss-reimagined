@@ -1,8 +1,8 @@
-const STUART_AUTH_URL = "https://api.stuart.com/oauth/token";
-const STUART_API_BASE = "https://api.stuart.com/v2";
+const UBER_AUTH_URL = "https://login.uber.com/oauth/v2/token";
+const UBER_API_BASE = "https://api.uber.com/v1/customers";
 
 const PICKUP_ADDRESS = "371 chemin des Prés, 06410 Biot, France";
-const STUART_PICKUP_PHONE = "+33626154730";
+const PICKUP_PHONE = "+33626154730";
 
 // Décalage entre Europe/Paris et UTC, en millisecondes, pour un instant donné.
 function parisOffsetMs(instant: Date): number {
@@ -81,110 +81,110 @@ export interface DeliveryOrder {
   total: number;
 }
 
-export async function getStuartToken(): Promise<string> {
-  const clientId = process.env.STUART_CLIENT_ID!;
-  const clientSecret = process.env.STUART_CLIENT_SECRET!;
-  const credentials = btoa(`${clientId}:${clientSecret}`);
-
-  const res = await fetch(STUART_AUTH_URL, {
+export async function getUberToken(): Promise<string> {
+  const res = await fetch(UBER_AUTH_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${credentials}`,
-    },
-    body: new URLSearchParams({ grant_type: "client_credentials" }),
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "client_credentials",
+      client_id: process.env.UBER_CLIENT_ID!,
+      client_secret: process.env.UBER_CLIENT_SECRET!,
+      scope: "eats.deliveries",
+    }),
   });
 
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`Auth Stuart échouée: ${err}`);
+    throw new Error(`Auth Uber échouée: ${err}`);
   }
 
   const data: any = await res.json();
   return data.access_token;
 }
 
-export async function createStuartDelivery(order: DeliveryOrder) {
-  const dropoffAddress = `${order.adresse}, ${order.codePostal} ${order.ville}, France`;
-
+export async function createUberDelivery(order: DeliveryOrder) {
   // Contrôle des formats avant conversion : parisTimeToUtc lève un
   // « Invalid time value » peu parlant si on lui passe autre chose.
   if (!/^\d{4}-\d{2}-\d{2}$/.test(order.date ?? "") || !/^\d{2}:\d{2}$/.test(order.heure ?? "")) {
     throw new Error(
-      `Créneau de livraison illisible (date="${order.date}", heure="${order.heure}") : course non créée.`
+      `Créneau de livraison illisible (date="${order.date}", heure="${order.heure}") : livraison non créée.`
     );
   }
 
-  const deliveryTime = parisTimeToUtc(order.date, order.heure);
-
-  if (Number.isNaN(deliveryTime.getTime())) {
+  // Uber Direct exige le format E.164 et rejette TOUTE la requête sinon
+  // (« The parameters of your request were invalid »). Sans transporteur de
+  // secours, un numéro mal formé signifie zéro livraison : on échoue avec un
+  // message clair plutôt que de laisser passer l'erreur opaque d'Uber.
+  const dropoffPhone = toE164Fr(order.telephone);
+  if (!/^\+[1-9]\d{7,14}$/.test(dropoffPhone)) {
     throw new Error(
-      `Créneau de livraison illisible (date="${order.date}", heure="${order.heure}") : course non créée.`
+      `Téléphone client inexploitable ("${order.telephone}" → "${dropoffPhone}") : livraison non créée.`
     );
   }
 
-  const PICKUP_BEFORE_DELIVERY_MS = 40 * 60000;
-  const scheduledPickup = new Date(deliveryTime.getTime() - PICKUP_BEFORE_DELIVERY_MS);
+  const deliveryDateTime = parisTimeToUtc(order.date, order.heure);
 
   // « Maintenant » n'a de sens que si le créneau demandé est effectivement
-  // proche. Le 04/08/2026, une livraison prévue le lendemain à 11h30 est partie
-  // pour le jour même : si le drapeau contredit le créneau choisi, c'est le
-  // créneau qui fait foi. On corrige au lieu de refuser la course, pour ne
-  // jamais laisser une commande payée sans coursier.
+  // proche. Si le drapeau contredit le créneau choisi, c'est le créneau qui
+  // fait foi : une commande programmée ne doit jamais partir immédiatement.
   const IMMEDIATE_WINDOW_MS = 90 * 60000;
   const askedImmediate = order.isMaintenant === true;
-  const creneauIsNear = deliveryTime.getTime() - Date.now() <= IMMEDIATE_WINDOW_MS;
+  const creneauIsNear = deliveryDateTime.getTime() - Date.now() <= IMMEDIATE_WINDOW_MS;
   const isMaintenant = askedImmediate && creneauIsNear;
 
-  const pickupTime = isMaintenant
+  const pickupDateTime = isMaintenant
     ? new Date(Date.now() + 15 * 60000)
-    : scheduledPickup;
+    : new Date(deliveryDateTime.getTime() - 30 * 60000);
 
   if (askedImmediate && !creneauIsNear) {
     console.warn(
       `Drapeau « maintenant » ignoré : le créneau ${order.date} ${order.heure} ` +
-        `est trop lointain. Collecte programmée pour ${pickupTime.toISOString()}.`
+        `est trop lointain. Collecte programmée pour ${pickupDateTime.toISOString()}.`
     );
   }
 
   // Tracé systématique : permet de vérifier dans les logs Vercel ce qui a
-  // réellement été demandé à Stuart, sans avoir à reproduire la commande.
+  // réellement été demandé à Uber, sans avoir à reproduire la commande.
   console.log(
     JSON.stringify({
-      tag: "stuart_job",
+      tag: "uber_delivery",
       creneau_client: `${order.date} ${order.heure}`,
       isMaintenant_recu: askedImmediate,
       isMaintenant_applique: isMaintenant,
-      pickup_at: pickupTime.toISOString(),
-      livraison_attendue: deliveryTime.toISOString(),
+      pickup_ready_dt: pickupDateTime.toISOString(),
+      livraison_attendue: deliveryDateTime.toISOString(),
     })
   );
 
-  const token = await getStuartToken();
+  const token = await getUberToken();
+  const customerId = process.env.UBER_CUSTOMER_ID;
+
+  const dropoffAddress = `${order.adresse}, ${order.codePostal} ${order.ville}, France`;
+
+  const manifestItems = order.items.map((item) => ({
+    name: item.name,
+    quantity: item.qty,
+    size: "small",
+    price: Math.round(parseFloat(item.price.replace("€", "").replace(",", ".")) * 100),
+  }));
 
   const payload = {
-    job: {
-      pickups: [
-        {
-          address: PICKUP_ADDRESS,
-          comment: "Commande Breakfast Time — prête pour récupération",
-          pickup_at: pickupTime.toISOString(),
-          contact: { firstname: "Breakfast", lastname: "Time", phone: STUART_PICKUP_PHONE },
-        },
-      ],
-      dropoffs: [
-        {
-          address: dropoffAddress,
-          comment: order.note || "",
-          contact: { firstname: order.prenom, lastname: order.nom, phone: toE164Fr(order.telephone) },
-          package_type: "small",
-          package_description: `Commande Breakfast Time — ${order.items.map((i) => `${i.qty}x ${i.name}`).join(", ")}`,
-        },
-      ],
-    },
+    pickup_address: PICKUP_ADDRESS,
+    pickup_name: "Breakfast Time",
+    pickup_phone_number: PICKUP_PHONE,
+    pickup_ready_dt: pickupDateTime.toISOString(),
+    pickup_deadline_dt: deliveryDateTime.toISOString(),
+    dropoff_address: dropoffAddress,
+    dropoff_name: `${order.prenom} ${order.nom}`,
+    dropoff_phone_number: dropoffPhone,
+    dropoff_notes: order.note || "",
+    dropoff_ready_dt: deliveryDateTime.toISOString(),
+    dropoff_deadline_dt: new Date(deliveryDateTime.getTime() + 30 * 60000).toISOString(),
+    manifest_total_value: Math.round(order.total * 100),
+    manifest_items: manifestItems,
   };
 
-  const res = await fetch(`${STUART_API_BASE}/jobs`, {
+  const res = await fetch(`${UBER_API_BASE}/${customerId}/deliveries`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify(payload),
@@ -194,8 +194,8 @@ export async function createStuartDelivery(order: DeliveryOrder) {
   if (!res.ok) throw new Error(data.message || JSON.stringify(data));
 
   return {
-    job_id: data.id as string,
-    tracking_url: (data.deliveries?.[0]?.tracking_url as string) || "",
+    delivery_id: data.id as string,
+    tracking_url: data.tracking_url as string,
     status: data.status as string,
   };
 }

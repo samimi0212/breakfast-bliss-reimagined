@@ -31,11 +31,11 @@ describe("parisTimeToUtc", () => {
     );
   });
 
-  it("place le pickup Stuart 40 min avant la livraison", () => {
+  it("place le pickup 30 min avant la livraison", () => {
     const livraison = parisTimeToUtc("2026-08-05", "11:00");
-    const pickup = new Date(livraison.getTime() - 40 * 60000);
-    // 11h00 à Paris → pickup à 10h20 à Paris → 08h20 UTC
-    expect(pickup.toISOString()).toBe("2026-08-05T08:20:00.000Z");
+    const pickup = new Date(livraison.getTime() - 30 * 60000);
+    // 11h00 à Paris → pickup à 10h30 à Paris → 08h30 UTC
+    expect(pickup.toISOString()).toBe("2026-08-05T08:30:00.000Z");
   });
 
   it("ne réintroduit pas le décalage de l'ancienne implémentation", () => {

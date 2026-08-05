@@ -288,7 +288,7 @@ const CheckoutForm = () => {
           statut: "Payée",
         }).select("id").single();
 
-        // Livraison Stuart
+        // Livraison Uber Direct
         let trackingUrl = "";
         try {
           const deliveryRes = await fetch("/api/create-delivery", {
@@ -579,7 +579,7 @@ const CheckoutForm = () => {
         console.error("Supabase insert error:", dbError);
       }
 
-      // 4. Créer la livraison Stuart
+      // 4. Créer la livraison Uber Direct
       let trackingUrl = "";
       try {
         const deliveryRes = await fetch("/api/create-delivery", {
