@@ -1,7 +1,6 @@
 // Suivi des conversions Google Ads.
-// À compléter une fois le compte Google Ads créé : Outils > Conversions > "Achat"
-// → Google fournit un ID (AW-XXXXXXXXX) et un label de conversion.
-export const GOOGLE_ADS_ID = "AW-XXXXXXXXX";
+// Label restant à récupérer : Outils > Conversions > "purchase" > Paramètres de la balise.
+export const GOOGLE_ADS_ID = "AW-18374067488";
 export const GOOGLE_ADS_PURCHASE_LABEL = "XXXXXXXXXX";
 
 declare global {
