@@ -330,7 +330,9 @@ const CheckoutForm = () => {
         sessionStorage.removeItem("bt_promo_code");
         sessionStorage.removeItem("bt_cutlery_qty");
         clearCart();
-        navigate(lp("/confirmation"));
+        navigate(lp("/confirmation"), {
+          state: { orderId: commandeRow?.id, total: orderTotal, transactionId: paymentIntent?.id },
+        });
       } catch (err: any) {
         ev.complete("fail");
         setErrors({ general: err.message || t("checkout.errGeneric") });
@@ -624,7 +626,9 @@ const CheckoutForm = () => {
       }
 
       clearCart();
-      navigate(lp("/confirmation"));
+      navigate(lp("/confirmation"), {
+        state: { orderId: commandeRow?.id, total: orderTotal, transactionId: paymentIntent?.id },
+      });
     } catch (err: any) {
       setErrors({ general: err.message || t("checkout.errGeneric") });
       setLoading(false);

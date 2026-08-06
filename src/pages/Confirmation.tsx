@@ -1,17 +1,46 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { useTranslation } from "react-i18next";
 import { useLangPath } from "@/hooks/useLangPath";
+import { trackPurchaseConversion } from "@/lib/googleAds";
+
+interface ConfirmationState {
+  orderId?: string;
+  total?: number;
+  transactionId?: string;
+}
 
 const Confirmation = () => {
   const { t } = useTranslation();
   const { lp } = useLangPath();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const state = location.state as ConfirmationState | null;
+    if (!state?.orderId || typeof state.total !== "number") return;
+
+    // Évite de recompter la même commande si la page est rechargée
+    const firedKey = `bt_purchase_fired_${state.orderId}`;
+    if (sessionStorage.getItem(firedKey)) return;
+    sessionStorage.setItem(firedKey, "1");
+
+    const transactionId = state.transactionId || state.orderId;
+
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "purchase", {
+        transaction_id: transactionId,
+        value: state.total,
+        currency: "EUR",
+      });
+    }
+    trackPurchaseConversion({ value: state.total, transactionId });
+  }, [location.state]);
 
   return (
     <div className="min-h-screen bg-background">
