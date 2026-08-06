@@ -360,7 +360,9 @@ const CheckoutForm = () => {
         sessionStorage.removeItem("bt_gift_wrap");
         sessionStorage.removeItem("bt_order_observations");
         clearCart();
-        navigate(lp("/confirmation"));
+        navigate(lp("/confirmation"), {
+          state: { orderId: commandeRow?.id, total: orderTotal, transactionId: paymentIntent?.id },
+        });
       } catch (err: any) {
         ev.complete("fail");
         setErrors({ general: err.message || t("checkout.errGeneric") });
@@ -658,7 +660,9 @@ const CheckoutForm = () => {
       }
 
       clearCart();
-      navigate(lp("/confirmation"));
+      navigate(lp("/confirmation"), {
+        state: { orderId: commandeRow?.id, total: orderTotal, transactionId: paymentIntent?.id },
+      });
     } catch (err: any) {
       setErrors({ general: err.message || t("checkout.errGeneric") });
       setLoading(false);
