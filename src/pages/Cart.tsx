@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, UtensilsCrossed, MessageSquareText } from "lucide-react";
+import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, UtensilsCrossed, MessageSquareText, Gift } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useLangPath } from "@/hooks/useLangPath";
 import Navbar from "@/components/Navbar";
@@ -14,6 +14,7 @@ const Cart = () => {
   const { lp } = useLangPath();
   const [wantsCutlery, setWantsCutlery] = useState(false);
   const [cutleryQty, setCutleryQty] = useState(1);
+  const [wantsGiftWrap, setWantsGiftWrap] = useState(false);
   const [promoCode, setPromoCode] = useState<string | null>(null);
   const [promoInput, setPromoInput] = useState("");
   const [promoError, setPromoError] = useState("");
@@ -60,7 +61,8 @@ const Cart = () => {
   // Doit rester aligné sur MINIMUM_ORDER dans api/get-delivery-price.ts
   const MIN_ORDER = 15;
   const FREE_DELIVERY_THRESHOLD = 45;
-  const subtotalWithCutlery = total + (wantsCutlery ? cutleryQty * 0.80 : 0);
+  const GIFT_WRAP_PRICE = 3.50;
+  const subtotalWithCutlery = total + (wantsCutlery ? cutleryQty * 0.80 : 0) + (wantsGiftWrap ? GIFT_WRAP_PRICE : 0);
   const orderTotal = subtotalWithCutlery * (1 - promoDiscount);
   const isMinReached = orderTotal >= MIN_ORDER;
   const progressPct = Math.min((orderTotal / MIN_ORDER) * 100, 100);
@@ -231,6 +233,35 @@ const Cart = () => {
               )}
             </div>
 
+            {/* Emballage cadeau */}
+            <div
+              className="bg-white rounded-2xl p-4 mt-2"
+              style={{ boxShadow: "var(--card-shadow)" }}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Gift size={18} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm">{t("cart.giftWrapTitle")} <span className="text-muted-foreground font-normal">— {t("cart.giftWrapPrice")}</span></p>
+                    <p className="text-xs text-muted-foreground">{t("cart.giftWrapQuestion")}</p>
+                  </div>
+                </div>
+                {/* Toggle */}
+                <button
+                  onClick={() => setWantsGiftWrap(!wantsGiftWrap)}
+                  className="relative w-12 h-6 rounded-full transition-colors duration-200 flex-shrink-0"
+                  style={{ backgroundColor: wantsGiftWrap ? "hsl(61,45%,42%)" : "#e5e7eb" }}
+                >
+                  <span
+                    className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-200"
+                    style={{ left: wantsGiftWrap ? "calc(100% - 22px)" : "2px" }}
+                  />
+                </button>
+              </div>
+            </div>
+
             {/* Observations sur la commande */}
             <div
               className="bg-white rounded-2xl p-4 mt-2"
@@ -289,6 +320,12 @@ const Cart = () => {
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>{t("cart.cutleryLine", { count: cutleryQty })}</span>
                     <span>{(cutleryQty * 0.80).toFixed(2).replace(".", ",")}€</span>
+                  </div>
+                )}
+                {wantsGiftWrap && (
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>{t("cart.giftWrapLine")}</span>
+                    <span>{GIFT_WRAP_PRICE.toFixed(2).replace(".", ",")}€</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm text-muted-foreground">
@@ -379,6 +416,11 @@ const Cart = () => {
                     sessionStorage.setItem("bt_cutlery_qty", String(cutleryQty));
                   } else {
                     sessionStorage.removeItem("bt_cutlery_qty");
+                  }
+                  if (wantsGiftWrap) {
+                    sessionStorage.setItem("bt_gift_wrap", "1");
+                  } else {
+                    sessionStorage.removeItem("bt_gift_wrap");
                   }
                   const { data: { session } } = await supabase.auth.getSession();
                   if (session) {

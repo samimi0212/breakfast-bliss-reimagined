@@ -122,9 +122,15 @@ const CheckoutForm = () => {
   const storedCutleryQty = Number(sessionStorage.getItem("bt_cutlery_qty") ?? "0");
   const cutleryQty = storedCutleryQty > 0 ? storedCutleryQty : 0;
   const cutleryCost = cutleryQty * 0.80;
-  const itemsWithCutlery = cutleryQty > 0
-    ? [...items, { id: "couverts", name: `Couverts × ${cutleryQty}`, price: cutleryCost.toFixed(2).replace(".", ",") + "€", img: "", qty: 1 }]
-    : items;
+  const wantsGiftWrap = sessionStorage.getItem("bt_gift_wrap") === "1";
+  const GIFT_WRAP_PRICE = 3.50;
+  const giftWrapCost = wantsGiftWrap ? GIFT_WRAP_PRICE : 0;
+  const extrasCost = cutleryCost + giftWrapCost;
+  const itemsWithCutlery = [
+    ...items,
+    ...(cutleryQty > 0 ? [{ id: "couverts", name: `Couverts × ${cutleryQty}`, price: cutleryCost.toFixed(2).replace(".", ",") + "€", img: "", qty: 1 }] : []),
+    ...(wantsGiftWrap ? [{ id: "emballage-cadeau", name: "Emballage cadeau", price: GIFT_WRAP_PRICE.toFixed(2).replace(".", ",") + "€", img: "", qty: 1 }] : []),
+  ];
   const [deliveryLoading, setDeliveryLoading] = useState(false);
   const [deliveryError, setDeliveryError] = useState("");
   const [suggestions, setSuggestions] = useState<{ description: string; place_id: string }[]>([]);
@@ -141,8 +147,8 @@ const CheckoutForm = () => {
   useEffect(() => { deliveryPriceRef.current = deliveryPrice; }, [deliveryPrice]);
   const itemsRef = useRef(itemsWithCutlery);
   useEffect(() => { itemsRef.current = itemsWithCutlery; }, [itemsWithCutlery]);
-  const totalRef = useRef(total + cutleryCost);
-  useEffect(() => { totalRef.current = total + cutleryCost; }, [total, cutleryCost]);
+  const totalRef = useRef(total + extrasCost);
+  useEffect(() => { totalRef.current = total + extrasCost; }, [total, extrasCost]);
   const observationsRef = useRef(observations);
   useEffect(() => { observationsRef.current = observations; }, [observations]);
 
@@ -351,6 +357,7 @@ const CheckoutForm = () => {
 
         sessionStorage.removeItem("bt_promo_code");
         sessionStorage.removeItem("bt_cutlery_qty");
+        sessionStorage.removeItem("bt_gift_wrap");
         sessionStorage.removeItem("bt_order_observations");
         clearCart();
         navigate(lp("/confirmation"));
@@ -385,7 +392,7 @@ const CheckoutForm = () => {
         const res = await fetch("/api/get-delivery-price", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ address: fullAddress, cartTotal: total + cutleryCost }),
+          body: JSON.stringify({ address: fullAddress, cartTotal: total + extrasCost }),
         });
         const data = await res.json();
         if (!data.deliverable) {
@@ -402,7 +409,7 @@ const CheckoutForm = () => {
       }
     }, 800);
     return () => clearTimeout(timer);
-  }, [form.adresse, form.codePostal, form.ville, total, cutleryCost]);
+  }, [form.adresse, form.codePostal, form.ville, total, extrasCost]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -515,7 +522,7 @@ const CheckoutForm = () => {
       }
 
       const effectiveDelivery = freeDelivery ? 0 : (deliveryPrice ?? 0);
-      const baseTotal = total + cutleryCost + effectiveDelivery;
+      const baseTotal = total + extrasCost + effectiveDelivery;
       const orderTotal = promoCode ? baseTotal * (1 - promoDiscount) : baseTotal;
 
       // 1. Créer le PaymentIntent côté serveur
@@ -599,7 +606,7 @@ const CheckoutForm = () => {
               isMaintenant: form.isMaintenant,
               note: form.note,
               items: itemsWithCutlery,
-              total: total + cutleryCost,
+              total: total + extrasCost,
             },
           }),
         });
@@ -616,6 +623,7 @@ const CheckoutForm = () => {
         await supabase.from("promo_usage").insert({ email: form.email, promo_code: promoCode });
       }
       sessionStorage.removeItem("bt_cutlery_qty");
+      sessionStorage.removeItem("bt_gift_wrap");
       sessionStorage.removeItem("bt_order_observations");
 
       // 5. Envoyer l'email de confirmation
@@ -1035,7 +1043,7 @@ const CheckoutForm = () => {
 
               {(() => {
                 const FREE_DELIVERY_THRESHOLD = 45;
-                const subtotalWithCutlery = total + cutleryCost;
+                const subtotalWithCutlery = total + extrasCost;
                 const isFree = subtotalWithCutlery >= FREE_DELIVERY_THRESHOLD;
                 const remaining = Math.max(FREE_DELIVERY_THRESHOLD - subtotalWithCutlery, 0);
                 const pct = Math.min((subtotalWithCutlery / FREE_DELIVERY_THRESHOLD) * 100, 100);
