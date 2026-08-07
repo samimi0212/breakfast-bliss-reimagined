@@ -781,17 +781,6 @@ export const allProducts: Product[] = [
   },
   // ---- EXTRA ----
   {
-    id: "salade-verte",
-    name: "Salade verte",
-    name_en: "Green Salad",
-    price: "4,50€",
-    category: "Extra",
-    img: "/salade-verte.png",
-    desc: "",
-    composition: ["Salade fraîche", "Grenade", "Germe de betteraves", "Sauce vinaigrette (servie à part)"],
-    composition_en: ["Fresh salad", "Pomegranate", "Beetroot sprouts", "Vinaigrette dressing (served separately)"],
-  },
-  {
     id: "frites-patates-douces",
     name: "Frites de patates douces",
     name_en: "Sweet Potato Fries",
