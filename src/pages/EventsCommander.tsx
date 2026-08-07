@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, ArrowRight, ShoppingBag, Check, Minus, Plus, Trash2, Users, MapPin, Calendar } from "lucide-react";
 import plateauMini from "@/assets/entreprises/plateau-mini.png";
+import plateauMiniPac from "@/assets/entreprises/plateau-mini-pac.png";
 import plateauChaussons from "@/assets/entreprises/plateau-chaussons.png";
 import plateauPainsRaisins from "@/assets/entreprises/plateau-pains-raisins.png";
 import verrinesGranola from "@/assets/entreprises/verrines-granola.png";
@@ -288,6 +289,13 @@ const EventsCommander = () => {
             t("eventsCommander.plateauC1"),
             t("eventsCommander.plateauC2"),
           ],
+        },
+        {
+          id: "evt-plateau-pains-au-chocolat",
+          name: "Plateau pains au chocolat",
+          price: "7,50€",
+          img: plateauMiniPac,
+          composition: ["10 mini pains au chocolat"],
         },
         {
           id: "evt-plateau-chaussons-pommes",
