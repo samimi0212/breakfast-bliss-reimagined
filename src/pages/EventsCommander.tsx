@@ -6,7 +6,12 @@ import { useLangPath } from "@/hooks/useLangPath";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, ArrowRight, ShoppingBag, Check, Minus, Plus, Trash2, Users, MapPin, Calendar } from "lucide-react";
-import plateauViennoiserie from "@/assets/plateau-viennoiserie-entre.png";
+import plateauMini from "@/assets/entreprises/plateau-mini.png";
+import plateauChaussons from "@/assets/entreprises/plateau-chaussons.png";
+import plateauPainsRaisins from "@/assets/entreprises/plateau-pains-raisins.png";
+import verrinesGranola from "@/assets/entreprises/verrines-granola.png";
+import plateauChouquettes from "@/assets/entreprises/plateau-chouquettes.png";
+import cakeMarbre from "@/assets/entreprises/cake-marbre.png";
 import formuleEssentielle from "@/assets/entreprises/formule-essentielle.png";
 import formulePlaisir from "@/assets/entreprises/formule-plaisir.png";
 import formuleGouter from "@/assets/entreprises/formule-gouter.png";
@@ -151,11 +156,11 @@ const EventProductCard = ({ product }: { product: EventProduct }) => {
 
         <div className="flex items-center gap-2 mt-auto pt-2">
           <div className="flex items-center gap-2 border rounded-xl px-3 py-1.5">
-            <button onClick={() => setQty((q) => Math.max(1, q - 1))} className="hover:text-primary transition-colors">
+            <button onClick={() => setQty((q) => Math.max(1, q - 1))} className="relative hover:text-primary transition-colors before:absolute before:-inset-3 before:content-['']">
               <Minus size={13} />
             </button>
             <span className="w-5 text-center text-sm font-semibold">{qty}</span>
-            <button onClick={() => setQty((q) => q + 1)} className="hover:text-primary transition-colors">
+            <button onClick={() => setQty((q) => q + 1)} className="relative hover:text-primary transition-colors before:absolute before:-inset-3 before:content-['']">
               <Plus size={13} />
             </button>
           </div>
@@ -278,19 +283,46 @@ const EventsCommander = () => {
           id: "evt-plateau-mini-viennoiseries",
           name: t("eventsCommander.plateauName"),
           price: "29,00€",
-          img: plateauViennoiserie,
+          img: plateauMini,
           composition: [
             t("eventsCommander.plateauC1"),
             t("eventsCommander.plateauC2"),
-            t("eventsCommander.plateauC3"),
           ],
         },
         {
-          id: "evt-brioche-perdue-caramel",
-          name: "Brioche Perdue Caramel",
+          id: "evt-plateau-chaussons-pommes",
+          name: "Plateau chaussons aux pommes",
           price: "7,50€",
-          img: "/brioche-perdue-caramel.png",
-          composition: ["Brioche Nanterre pur beurre", "Caramel artisanal au beurre salé de Guérande", "Noix de pécan", "Myrtilles"],
+          img: plateauChaussons,
+          composition: ["10 mini chaussons aux pommes"],
+        },
+        {
+          id: "evt-plateau-pains-raisins",
+          name: "Plateau pains aux raisins",
+          price: "7,50€",
+          img: plateauPainsRaisins,
+          composition: ["10 mini pains aux raisins"],
+        },
+        {
+          id: "evt-verrines-granola",
+          name: "Verrines de Granola",
+          price: "7,50€",
+          img: verrinesGranola,
+          composition: ["10 verrines", "Fromage blanc", "Granola maison", "Fruits de saison", "Miel de Lavande"],
+        },
+        {
+          id: "evt-plateau-chouquettes",
+          name: "Plateau chouquettes",
+          price: "7,50€",
+          img: plateauChouquettes,
+          composition: ["Chouquettes", "Perles de sucre"],
+        },
+        {
+          id: "evt-plateau-cake-marbre",
+          name: "Plateau Cake marbré",
+          price: "7,50€",
+          img: cakeMarbre,
+          composition: ["10 tranches"],
         },
       ],
     },
@@ -601,7 +633,7 @@ const EventsCommander = () => {
                 <h2 className="font-display text-2xl font-bold mb-6">{section.label}</h2>
               </>
             )}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
               {section.products.map((product) =>
                 section.id === "menus" ? (
                   <MenuFormulaCard key={product.id} product={product} guestCount={guestCount} />
@@ -638,14 +670,14 @@ const EventsCommander = () => {
                     <div className="flex items-center gap-2 border rounded-xl px-2 py-1">
                       <button
                         onClick={() => updateQty(index, Math.max(1, item.qty - 1))}
-                        className="hover:text-primary transition-colors"
+                        className="relative hover:text-primary transition-colors before:absolute before:-inset-3 before:content-['']"
                       >
                         <Minus size={13} />
                       </button>
                       <span className="w-5 text-center text-sm font-semibold">{item.qty}</span>
                       <button
                         onClick={() => updateQty(index, item.qty + 1)}
-                        className="hover:text-primary transition-colors"
+                        className="relative hover:text-primary transition-colors before:absolute before:-inset-3 before:content-['']"
                       >
                         <Plus size={13} />
                       </button>
