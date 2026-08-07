@@ -13,6 +13,7 @@ import plateauChaussons from "@/assets/entreprises/plateau-chausson.png";
 import plateauPainsRaisins from "@/assets/entreprises/plateau-raisin.png";
 import verrinesGranola from "@/assets/entreprises/verrines-granola.png";
 import plateauChouquettes from "@/assets/entreprises/plateau-chouquettes.png";
+import plateauMacaron from "@/assets/entreprises/plateau-macaron.png";
 import cakeMarbre from "@/assets/entreprises/cake-marbre.png";
 import formuleEssentielle from "@/assets/entreprises/formule-essentielle.png";
 import formulePlaisir from "@/assets/entreprises/formule-plaisir.png";
@@ -332,6 +333,13 @@ const EventsCommander = () => {
           price: "7,50€",
           img: plateauChouquettes,
           composition: ["Chouquettes", "Perles de sucre"],
+        },
+        {
+          id: "evt-plateau-macarons",
+          name: "Plateau macarons",
+          price: "7,50€",
+          img: plateauMacaron,
+          composition: ["4 pistache", "4 fraise", "4 vanille", "4 amande", "4 chocolat"],
         },
         {
           id: "evt-plateau-cake-marbre",
