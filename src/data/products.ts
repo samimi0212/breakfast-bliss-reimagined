@@ -761,12 +761,23 @@ export const allProducts: Product[] = [
   {
     id: "rostis",
     name: "Röstis",
-    price: "6,50€",
+    price: "5,00€",
     category: "Extra",
     img: "/rostis.png",
     desc: "",
-    composition: ["4 Röstis de pommes de terre", "Sauce fraîche aux herbes"],
-    composition_en: ["4 Potato röstis", "Fresh herb sauce"],
+    composition: ["Röstis de pommes de terre", "Sauce fraîche aux herbes"],
+    composition_en: ["Potato röstis", "Fresh herb sauce"],
+    options: [
+      {
+        id: "quantite",
+        label: "Quantité",
+        label_en: "Quantity",
+        required: true,
+        multiSelect: false,
+        choices: ["3 Röstis", "6 Röstis (+4,50€)", "9 Röstis (+8,00€)"],
+        choices_en: ["3 Röstis", "6 Röstis (+€4.50)", "9 Röstis (+€8.00)"],
+      },
+    ],
   },
   // ---- EXTRA ----
   {
