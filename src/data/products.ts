@@ -711,8 +711,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/breakfast-bowl.png",
     desc: "",
-    composition: ["Salade verte", "Falafel", "Pois chiches croustillants", "Houmous", "Grenade", "Menthe fraîche", "Pickles oignons rouge", "Sauce onctueuse citronnée"],
-    composition_en: ["Green salad", "Falafel", "Crispy chickpeas", "Hummus", "Pomegranate", "Fresh mint", "Pickled red onions", "Creamy lemon sauce"],
+    composition: ["Quinoa", "Falafel", "Pois chiches croustillants", "Houmous", "Grenade", "Tomates cerises", "Pickles oignons rouge", "Sauce onctueuse citronnée"],
+    composition_en: ["Quinoa", "Falafel", "Crispy chickpeas", "Hummus", "Pomegranate", "Cherry tomatoes", "Pickled red onions", "Creamy lemon sauce"],
   },
   {
     id: "oeufs-brouilles",
