@@ -10,7 +10,7 @@ import plateauMini from "@/assets/entreprises/plateau-mini.png";
 import plateauMiniPac from "@/assets/entreprises/plateau-mini-pac.png";
 import plateauCroissant from "@/assets/entreprises/plateau-croissant.png";
 import plateauChaussons from "@/assets/entreprises/plateau-chausson.png";
-import plateauPainsRaisins from "@/assets/entreprises/plateau-pains-raisins.png";
+import plateauPainsRaisins from "@/assets/entreprises/plateau-raisin.png";
 import verrinesGranola from "@/assets/entreprises/verrines-granola.png";
 import plateauChouquettes from "@/assets/entreprises/plateau-chouquettes.png";
 import cakeMarbre from "@/assets/entreprises/cake-marbre.png";
