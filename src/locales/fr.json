@@ -548,7 +548,7 @@
     "errEmail": "Adresse email invalide",
     "errPhone": "Numéro de téléphone invalide",
     "errSlot": "Sélectionnez un créneau",
-    "errOutOfZone": "Adresse hors zone de livraison (max 15 km)",
+    "errOutOfZone": "Adresse hors zone de livraison (max 12 km)",
     "errPayment": "Erreur lors de la création du paiement",
     "errGeneric": "Une erreur est survenue. Veuillez réessayer.",
     "errServer": "Erreur serveur. Veuillez réessayer dans quelques secondes."

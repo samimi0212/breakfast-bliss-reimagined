@@ -548,7 +548,7 @@
     "errEmail": "Invalid email address",
     "errPhone": "Invalid phone number",
     "errSlot": "Please select a time slot",
-    "errOutOfZone": "Address outside delivery zone (max 15 km)",
+    "errOutOfZone": "Address outside delivery zone (max 12 km)",
     "errPayment": "Error creating payment",
     "errGeneric": "Something went wrong. Please try again.",
     "errServer": "Server error. Please try again in a few seconds."

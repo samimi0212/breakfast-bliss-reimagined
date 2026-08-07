@@ -33,7 +33,7 @@ function haversineDistance(lat1: number, lng1: number, lat2: number, lng2: numbe
 function fallbackPrice(distanceKm: number): number | null {
   if (distanceKm < 5) return 7.50;
   if (distanceKm < 10) return 12.50;
-  if (distanceKm < 15) return 17;
+  if (distanceKm < 12) return 17;
   return null;
 }
 
@@ -70,10 +70,10 @@ export default async function handler(req: Request): Promise<Response> {
     const { lat, lng } = geoData.results[0].geometry.location;
     const distance = haversineDistance(PICKUP_LAT, PICKUP_LNG, lat, lng);
 
-    if (distance > 15) {
+    if (distance > 12) {
       return new Response(JSON.stringify({
         deliverable: false,
-        message: "Cette adresse est hors de notre zone de livraison (max 15 km)",
+        message: "Cette adresse est hors de notre zone de livraison (max 12 km)",
       }), { status: 200 });
     }
 
@@ -105,7 +105,7 @@ export default async function handler(req: Request): Promise<Response> {
       if (fallback === null) {
         return new Response(JSON.stringify({
           deliverable: false,
-          message: "Cette adresse est hors de notre zone de livraison (max 15 km)",
+          message: "Cette adresse est hors de notre zone de livraison (max 12 km)",
         }), { status: 200 });
       }
       price = fallback;
