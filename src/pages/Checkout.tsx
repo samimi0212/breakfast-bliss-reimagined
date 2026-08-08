@@ -732,7 +732,7 @@ const CheckoutForm = () => {
               onBlur={() => setActiveSection(null)}
             >
               <SectionTitle icon={MapPin} title={t("checkout.adresseTitle")} complete={isAdresseComplete} />
-              {deliveryPrice === null && form.adresse && (
+              {deliveryError && form.adresse && (
                 <p className="text-sm text-red-500 mb-3">
                   Nous ne livrons pas encore à cette adresse.{" "}
                   <Link to={lp("/contact")} className="underline hover:text-red-700 transition-colors">
