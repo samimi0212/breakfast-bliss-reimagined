@@ -190,21 +190,20 @@ export default async function handler(req: Request): Promise<Response> {
           <p><strong>Téléphone :</strong> ${order.telephone}</p>
           <p><strong>Livraison :</strong> ${new Date(order.date).toLocaleDateString("fr-FR")} à ${order.heure}</p>
           <p><strong>Adresse :</strong> ${order.adresse}, ${order.codePostal} ${order.ville}</p>
-          ${order.trackingUrl ? `
           <div style="background:#f0f7e0; border-left:4px solid #6b7c2d; padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0;">
-            <p style="margin:0 0 4px 0;">🚴 <strong>Uber récupère à :</strong> ${fmt(pickupTime)}</p>
-            <p style="margin:0;">📦 <strong>Livraison estimée :</strong> ${fmt(deliveryTime)}</p>
-          </div>` : `
-          <div style="background:#ffe8e8; border-left:4px solid #c0392b; padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0;">
-            <p style="margin:0 0 4px 0;font-weight:700;color:#8a1f14;">⚠️ AUCUNE LIVRAISON UBER CRÉÉE</p>
-            <p style="margin:0;">La commande est payée mais aucun coursier n'est réservé. À faire manuellement pour ${fmt(pickupTime)} (livraison ${fmt(deliveryTime)}).</p>
-          </div>`}
+            <p style="margin:0 0 4px 0;">🚗 <strong>Départ prévu :</strong> ${fmt(pickupTime)}</p>
+            <p style="margin:0;">📦 <strong>Livraison prévue :</strong> ${fmt(deliveryTime)}</p>
+          </div>
           ${order.observations ? `
           <div style="background:#fff8e0; border-left:4px solid #e0a800; padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0;">
             <p style="margin:0 0 4px 0;font-weight:700;color:#7a5a00;">🍽️ OBSERVATIONS CLIENT — à lire en cuisine</p>
             <p style="margin:0;">${esc(order.observations)}</p>
           </div>` : ""}
-          ${order.note ? `<p><strong>Note pour le livreur :</strong> ${esc(order.note)}</p>` : ""}
+          ${order.note ? `
+          <div style="background:#e8f0ff; border-left:4px solid #3a6bc0; padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0;">
+            <p style="margin:0 0 4px 0;font-weight:700;color:#1a3a70;">📝 NOTE LIVREUR</p>
+            <p style="margin:0;">${esc(order.note)}</p>
+          </div>` : ""}
           <hr style="margin: 16px 0; border: none; border-top: 1px solid #e0e0d0;">
           <h3 style="margin: 0 0 8px 0; color: #3a3a0a;">Détail de la commande</h3>
           <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
