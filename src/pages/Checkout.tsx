@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, CreditCard, Clock, MapPin, User, Lock } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
@@ -732,6 +732,14 @@ const CheckoutForm = () => {
               onBlur={() => setActiveSection(null)}
             >
               <SectionTitle icon={MapPin} title={t("checkout.adresseTitle")} complete={isAdresseComplete} />
+              {deliveryPrice === null && form.adresse && (
+                <p className="text-sm text-red-500 mb-3">
+                  Nous ne livrons pas encore à cette adresse.{" "}
+                  <Link to={lp("/contact")} className="underline hover:text-red-700 transition-colors">
+                    Contactez nous
+                  </Link>
+                </p>
+              )}
               <div className="space-y-4">
                 <div className="relative">
                   <label className="block text-sm font-medium mb-1.5">{t("checkout.addressLabel")}</label>
@@ -760,7 +768,7 @@ const CheckoutForm = () => {
                       ))}
                     </div>
                   )}
-                  {errors.adresse && <p className="text-red-400 text-xs mt-1">{errors.adresse}</p>}
+                  {errors.adresse && !form.adresse && <p className="text-red-400 text-xs mt-1">{errors.adresse}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1.5">
