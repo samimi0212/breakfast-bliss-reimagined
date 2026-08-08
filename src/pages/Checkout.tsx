@@ -1095,9 +1095,6 @@ const CheckoutForm = () => {
                       <span className="text-muted-foreground italic text-xs">{t("checkout.enterAddress")}</span>
                     ) : null}
                   </div>
-                  {deliveryError && (
-                    <span className="text-red-400 text-xs">{deliveryError}</span>
-                  )}
                 </div>
                 {promoCode && promoDiscount > 0 && (
                   <div className="flex justify-between text-sm font-semibold" style={{ color: "#5a7a0a" }}>
