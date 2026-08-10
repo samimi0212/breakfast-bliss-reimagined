@@ -573,8 +573,8 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/bagel-cheddar2.jpg",
     desc: "",
-    composition: ["Bagel au sésame", "Œuf émietté", "Bacon crispy", "Cheddar", "Roquette", "Sauce maison"],
-    composition_en: ["Sesame bagel", "Crumbled egg", "Crispy bacon", "Cheddar", "Rocket", "House sauce"],
+    composition: ["Bagel brioché aux graines", "Œuf émietté", "Bacon crispy", "Cheddar", "Sauce fumée artisanale"],
+    composition_en: ["Brioche seeded bagel", "Crumbled egg", "Crispy bacon", "Cheddar", "Artisanal smoky sauce"],
   },
   {
     id: "bagel-saumon-avocat",
