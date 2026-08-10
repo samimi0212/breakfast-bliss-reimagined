@@ -6,7 +6,7 @@ import { useLangPath } from "@/hooks/useLangPath";
 
 const visuals = [
   "/menu-brunch.png",
-  "https://static.wixstatic.com/media/21c6e4_35577f9aced14c51b49fc307bf7656d6~mv2.jpg/v1/fill/w_917,h_917,al_c,q_85,enc_avif,quality_auto/21c6e4_35577f9aced14c51b49fc307bf7656d6~mv2.jpg",
+  "/composez-brunch.jpg",
   "/plateau-viennoiserie-entre-2.png",
   "https://static.wixstatic.com/media/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/21c6e4_a4aec83b7dd54ab48764a13c365dab08~mv2.jpg",
 ];

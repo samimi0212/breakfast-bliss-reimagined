@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useLangPath } from "@/hooks/useLangPath";
 
 const visuals = [
-  "/menu-brunch.png",
-  "/menu-anglais.png",
+  "/nos-menus.jpg",
+  "/composez-brunch.jpg",
 ];
 
 const MenuSection = () => {
