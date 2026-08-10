@@ -133,12 +133,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/avocado-toast2.jpg",
     },
     {
-      id: "oeufs-benedicte",
-      name: "Oeufs bénédicte",
-      price: "9,50€",
-      img: "/oeufs-benedicte.png",
-    },
-    {
       id: "bagel-chevre-miel",
       name: "Bagel chèvre miel",
       price: "9,50€",
@@ -148,7 +142,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "bagel-bacon-cheddar",
       name: "Bagel Bacon Cheddar",
       price: "10,90€",
-      img: "/bagel-cheddar2.png",
+      img: "/bagel-cheddar2.jpg",
     },
     {
       id: "bagel-saumon-avocat",
