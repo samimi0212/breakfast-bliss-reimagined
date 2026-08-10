@@ -192,19 +192,19 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "frites-patates-douces",
       name: "Frites de patates douces",
       price: "5,50€",
-      img: "/frites-patate-douce.png",
+      img: "/frites.jpg",
     },
     {
       id: "halloumi-grille",
       name: "Halloumi grillé",
       price: "7,50€",
-      img: "/halloumi.png",
+      img: "/halloumi.jpg",
     },
     {
       id: "rostis",
       name: "Röstis",
       price: "5,00€",
-      img: "/rostis.png",
+      img: "/rostis.jpg",
     },
   ],
   "Le Sucré": [
@@ -218,7 +218,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "gaufre-composer",
       name: "Gaufre à composer",
       price: "6,50€",
-      img: "/gaufre-composer.png",
+      img: "/gaufre.jpg",
     },
     {
       id: "brioche-perdue",
