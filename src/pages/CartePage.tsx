@@ -212,7 +212,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "pancakes-a-composer",
       name: "Pancakes à composer",
       price: "6,50€",
-      img: "/pancakes-composer.png",
+      img: "/pancakes.jpg",
     },
     {
       id: "gaufre-composer",
@@ -224,7 +224,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "brioche-perdue",
       name: "Brioche Perdue Gourmande",
       price: "7,50€",
-      img: "/brioche-perdue.png",
+      img: "/brioche-perdue-gourmande.jpeg",
     },
     {
       id: "brioche-perdue-caramel",
@@ -254,13 +254,13 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "acai-bowl",
       name: "Acaï Bowl",
       price: "10,50€",
-      img: "/acai-bowl.png",
+      img: "/acai.jpg",
     },
     {
       id: "cookie-chocolat",
       name: "Cookie Chocolat Noisette",
       price: "3,80€",
-      img: "/cookie-choco.png",
+      img: "/cookie-choco.jpg",
     },
     {
       id: "cookie-caramel",

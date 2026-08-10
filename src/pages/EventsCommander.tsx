@@ -325,7 +325,7 @@ const EventsCommander = () => {
           name: "Verrines de Granola",
           price: "7,50€",
           img: verrinesGranola,
-          composition: ["10 verrines", "Fromage blanc", "Granola maison", "Fruits de saison", "Miel de Lavande"],
+          composition: ["10 verrines", "Fromage blanc", "Granola artisanal", "Fruits de saison", "Miel de Lavande"],
         },
         {
           id: "evt-plateau-chouquettes",
