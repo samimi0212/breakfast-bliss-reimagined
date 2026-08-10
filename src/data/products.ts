@@ -248,8 +248,8 @@ export const allProducts: Product[] = [
         required: true,
         multiSelect: true,
         maxSelect: 2,
-        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Breakfast Burrito", "Chicken Burrito"],
-        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Breakfast Burrito", "Chicken Burrito"],
+        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Pulled Pork Burrito", "Chicken Burrito"],
+        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Pulled Pork Burrito", "Chicken Burrito"],
       },
       {
         id: "extra",
@@ -314,8 +314,8 @@ export const allProducts: Product[] = [
         required: true,
         multiSelect: true,
         maxSelect: 4,
-        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Breakfast Burrito", "Chicken Burrito"],
-        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Breakfast Burrito", "Chicken Burrito"],
+        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Pulled Pork Burrito", "Chicken Burrito"],
+        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Pulled Pork Burrito", "Chicken Burrito"],
       },
       {
         id: "extras",
@@ -381,7 +381,7 @@ export const allProducts: Product[] = [
         label_en: "Burrito (choose 1)",
         required: true,
         multiSelect: false,
-        choices: ["Breakfast Burrito", "Chicken Burrito"],
+        choices: ["Pulled Pork Burrito", "Chicken Burrito"],
       },
       {
         id: "smoothie",
@@ -589,13 +589,13 @@ export const allProducts: Product[] = [
   },
   {
     id: "breakfast-burrito",
-    name: "Breakfast Burrito",
+    name: "Pulled Pork Burrito",
     price: "9,50€",
     category: "Le Salé",
-    img: "/breakfast-burrito.png",
+    img: "/wrap-porc.jpg",
     desc: "",
-    composition: ["Oeufs émiettés", "Galette de pomme de terre", "Bacon crispy", "Sauce onctueuse à l'avocat"],
-    composition_en: ["Crumbled eggs", "Hash brown", "Crispy bacon", "Creamy avocado sauce"],
+    composition: ["Pulled Pork", "Oeufs brouillés", "Bacon crispy", "Chou rouge et carottes", "Sauce fumée artisanale", "Confit de tomates"],
+    composition_en: ["Pulled Pork", "Scrambled eggs", "Crispy bacon", "Red cabbage and carrots", "Artisanal smoky sauce", "Tomato confit"],
   },
   {
     id: "pancakes-a-composer",
