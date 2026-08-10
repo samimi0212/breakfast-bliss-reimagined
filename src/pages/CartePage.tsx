@@ -146,9 +146,9 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     },
     {
       id: "bagel-saumon-avocat",
-      name: "Bagel Saumon Avocat",
+      name: "Bagel Chicken",
       price: "11,50€",
-      img: "/bagel-saumon.png",
+      img: "/bagel-poulet2.jpg",
     },
     {
       id: "breakfast-burrito",
