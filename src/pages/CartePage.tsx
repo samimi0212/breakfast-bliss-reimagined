@@ -266,7 +266,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "cookie-caramel",
       name: "Cookie Caramel Beurre Salé",
       price: "3,90€",
-      img: "/cookie-caramel.jpg",
+      img: "/cookie-caramel.jpeg",
     },
     {
       id: "brownie-pecan",
@@ -278,13 +278,13 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "muffin-myrtilles",
       name: "Muffin myrtilles",
       price: "4,20€",
-      img: "/muffin-myrtilles.jpg",
+      img: "/muffin-myrtille.jpg",
     },
     {
       id: "muffin-choco",
       name: "Muffin Chocolat",
       price: "4,20€",
-      img: "/muffin-chocolat.jpg",
+      img: "/muffin-choco.jpeg",
     },
   ],
   Boissons: [
