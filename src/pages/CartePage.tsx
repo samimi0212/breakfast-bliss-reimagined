@@ -157,12 +157,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/wrap-porc.jpg",
     },
     {
-      id: "chicken-burrito",
-      name: "Chicken Burrito",
-      price: "9,50€",
-      img: "/chicken-burrito.png",
-    },
-    {
       id: "focaccia-saumon",
       name: "Focaccia Saumon",
       price: "10,90€",

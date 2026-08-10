@@ -248,8 +248,8 @@ export const allProducts: Product[] = [
         required: true,
         multiSelect: true,
         maxSelect: 2,
-        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Pulled Pork Burrito", "Chicken Burrito"],
-        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Pulled Pork Burrito", "Chicken Burrito"],
+        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Pulled Pork Burrito"],
+        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Pulled Pork Burrito"],
       },
       {
         id: "extra",
@@ -314,8 +314,8 @@ export const allProducts: Product[] = [
         required: true,
         multiSelect: true,
         maxSelect: 4,
-        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Pulled Pork Burrito", "Chicken Burrito"],
-        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Pulled Pork Burrito", "Chicken Burrito"],
+        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Pulled Pork Burrito"],
+        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Pulled Pork Burrito"],
       },
       {
         id: "extras",
@@ -381,7 +381,7 @@ export const allProducts: Product[] = [
         label_en: "Burrito (choose 1)",
         required: true,
         multiSelect: false,
-        choices: ["Pulled Pork Burrito", "Chicken Burrito"],
+        choices: ["Pulled Pork Burrito"],
       },
       {
         id: "smoothie",
@@ -660,16 +660,6 @@ export const allProducts: Product[] = [
         choices_en: ["Hazelnut bits (+€0.90)", "Pecan nuts (+€0.90)", "Mixed berries (+€0.90)", "Banana (+€0.90)", "Dark chocolate chips (+€0.90)"],
       },
     ],
-  },
-  {
-    id: "chicken-burrito",
-    name: "Chicken Burrito",
-    price: "9,50€",
-    category: "Le Salé",
-    img: "/chicken-burrito.png",
-    desc: "",
-    composition: ["Poulet mariné", "Pickles oignons rouge", "Salade fraîche", "Chou blanc", "Betterave", "Sauce spicy"],
-    composition_en: ["Marinated chicken", "Pickled red onions", "Fresh salad", "White cabbage", "Beetroot", "Spicy sauce"],
   },
   {
     id: "focaccia-saumon",
