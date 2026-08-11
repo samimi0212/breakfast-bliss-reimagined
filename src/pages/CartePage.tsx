@@ -292,13 +292,13 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "americano",
       name: "Café",
       price: "2,10€",
-      img: "/cafe.jpg",
+      img: "/cafe.png",
     },
     {
       id: "cafe-latte",
       name: "Latte Macchiato",
       price: "5,50€",
-      img: "/cafe-latte.jpg",
+      img: "/cafe-latte.png",
     },
     {
       id: "iced-latte",
@@ -310,7 +310,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "capuccino",
       name: "Capuccino",
       price: "5,50€",
-      img: "/capuccino.jpg",
+      img: "/capuccino.png",
     },
     {
       id: "chai-latte",
@@ -322,19 +322,19 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "the-earl-grey",
       name: "Thé Earl Grey citron",
       price: "2,30€",
-      img: "/the.jpg",
+      img: "/the.png",
     },
     {
       id: "chocolat-chaud",
       name: "Chocolat chaud",
       price: "5,50€",
-      img: "/chocolat-chaud.jpg",
+      img: "/chocolat-chaud.png",
     },
     {
       id: "iced-matcha-latte",
-      name: "Iced Matcha Latte",
+      name: "Matcha Latte",
       price: "6,90€",
-      img: "/matcha.png",
+      img: "/matcha-latte.png",
     },
     {
       id: "smoothie-tropical",
