@@ -301,22 +301,16 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/cafe-latte.png",
     },
     {
-      id: "iced-latte",
-      name: "Iced Latte",
-      price: "5,50€",
-      img: "/iced-latte.png",
-    },
-    {
       id: "capuccino",
       name: "Capuccino",
       price: "5,50€",
       img: "/capuccino.png",
     },
     {
-      id: "chai-latte",
-      name: "Chai Latte",
-      price: "6,20€",
-      img: "/chai-latte.png",
+      id: "chocolat-chaud",
+      name: "Chocolat chaud",
+      price: "5,50€",
+      img: "/chocolat-chaud.png",
     },
     {
       id: "the-earl-grey",
@@ -325,10 +319,16 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/the.png",
     },
     {
-      id: "chocolat-chaud",
-      name: "Chocolat chaud",
+      id: "iced-latte",
+      name: "Iced Latte",
       price: "5,50€",
-      img: "/chocolat-chaud.png",
+      img: "/iced-latte.png",
+    },
+    {
+      id: "chai-latte",
+      name: "Chai Latte",
+      price: "6,20€",
+      img: "/chai-latte.png",
     },
     {
       id: "iced-matcha-latte",
