@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GiftCardPreview from "@/components/GiftCardPreview";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { toPng } from "html-to-image";
+import jsPDF from "jspdf";
 
 const GiftCardView = () => {
   usePageMeta("Votre carte cadeau | Breakfast Time", "Découvrez votre carte cadeau Breakfast Time.", undefined, true);
 
   const [params] = useSearchParams();
-  const [previewTab, setPreviewTab] = useState<"recto" | "verso">("verso");
+  const [previewTab, setPreviewTab] = useState<"recto" | "verso">("recto");
+  const [downloading, setDownloading] = useState(false);
+  const rectoRef = useRef<HTMLDivElement>(null);
+  const versoRef = useRef<HTMLDivElement>(null);
 
   const from = params.get("from") ?? "";
   const to = params.get("to") ?? "";
@@ -17,6 +22,38 @@ const GiftCardView = () => {
   const code = params.get("code") ?? "";
   const expiresAt = params.get("expiresAt") ?? "";
   const amount = params.get("amount") ?? undefined;
+
+  const capture = async (el: HTMLDivElement) =>
+    Promise.race([
+      toPng(el, { pixelRatio: 2, skipFonts: true, cacheBust: true }),
+      new Promise<string>((_, reject) => setTimeout(() => reject(new Error("capture timeout")), 15000)),
+    ]);
+
+  const handleDownloadPdf = async () => {
+    if (!rectoRef.current || !versoRef.current || downloading) return;
+    setDownloading(true);
+    const originalTab = previewTab;
+    try {
+      setPreviewTab("recto");
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      const rectoDataUrl = await capture(rectoRef.current);
+
+      setPreviewTab("verso");
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      const versoDataUrl = await capture(versoRef.current);
+
+      const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [1748, 1240] });
+      pdf.addImage(rectoDataUrl, "PNG", 0, 0, 1748, 1240);
+      pdf.addPage([1748, 1240], "landscape");
+      pdf.addImage(versoDataUrl, "PNG", 0, 0, 1748, 1240);
+      pdf.save("carte-cadeau-breakfast-time.pdf");
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setPreviewTab(originalTab);
+      setDownloading(false);
+    }
+  };
 
   return (
     <>
@@ -49,15 +86,24 @@ const GiftCardView = () => {
             </button>
           </div>
 
-          <div className={previewTab === "recto" ? "" : "hidden"}>
+          <div className={previewTab === "recto" ? "" : "hidden"} ref={rectoRef}>
             <div className="relative w-full overflow-hidden" style={{ aspectRatio: "1748 / 1240", boxShadow: "var(--card-shadow)" }}>
               <img src="/carte-cadeau-recto.png" alt="Recto de la carte cadeau" className="absolute inset-0 w-full h-full object-contain" />
             </div>
           </div>
 
-          <div className={previewTab === "verso" ? "" : "hidden"}>
+          <div className={previewTab === "verso" ? "" : "hidden"} ref={versoRef}>
             <GiftCardPreview from={from} to={to} message={message} code={code} expiresAt={expiresAt} amount={amount} />
           </div>
+
+          <button
+            type="button"
+            onClick={handleDownloadPdf}
+            disabled={downloading}
+            className="block mx-auto mt-4 px-5 py-2 bg-primary text-primary-foreground text-sm rounded-xl font-semibold hover:opacity-90 transition-opacity disabled:opacity-60"
+          >
+            {downloading ? "Génération du PDF..." : "Télécharger en PDF"}
+          </button>
         </div>
       </main>
       <Footer />

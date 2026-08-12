@@ -47,6 +47,7 @@ export default async function handler(req: Request): Promise<Response> {
     <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,0.07);">
       <div style="height:5px;background:linear-gradient(90deg,#3a3a0a 0%,#DFF057 100%);"></div>
       <div style="padding:36px 40px 28px;text-align:center;">
+        <img src="${BASE_URL}/logo.png" alt="Breakfast Time" style="height:48px;margin-bottom:24px;" />
         <div style="display:inline-block;background:#DFF057;color:#3a3a0a;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;padding:5px 18px;border-radius:50px;margin-bottom:22px;">
           Carte cadeau
         </div>
@@ -58,9 +59,6 @@ export default async function handler(req: Request): Promise<Response> {
           Cliquez ici pour afficher votre cadeau →
         </a>
       </div>
-      <div style="padding:0 32px 28px;text-align:center;">
-        <p style="margin:0;font-size:13px;color:#999;">Le visuel de votre carte cadeau est aussi joint à cet email en PDF.</p>
-      </div>
       <div style="padding:0 40px 28px;text-align:center;">
         <p style="margin:0;font-size:13px;color:#bbb;">
           Une question ? <a href="mailto:contact@breakfast-time.fr" style="color:#3a3a0a;font-weight:600;text-decoration:none;">contact@breakfast-time.fr</a>
@@ -68,7 +66,7 @@ export default async function handler(req: Request): Promise<Response> {
       </div>
     </div>
     <div style="background:#3a3a0a;border-radius:16px;padding:22px 32px;margin-top:14px;text-align:center;">
-      <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.3px;">© 2026 Breakfast Time — Livraison dans les Alpes-Maritimes</p>
+      <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.3px;">© 2026 Breakfast Time</p>
     </div>
   </div>
 </body>
