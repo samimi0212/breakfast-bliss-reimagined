@@ -190,8 +190,8 @@ export const allProducts: Product[] = [
         label_en: "Extra (choose 1)",
         required: true,
         multiSelect: false,
-        choices: ["Cookie caramel beurre salé", "Muffin myrtilles", "Muffin chocolat", "Brownie pécan"],
-        choices_en: ["Salted Caramel Cookie", "Blueberry Muffin", "Chocolate Muffin", "Pecan Brownie"],
+        choices: ["Cookie Chocolat Noisette", "Cookie Caramel Beurre Salé", "Brownie Pécan"],
+        choices_en: ["Chocolate Hazelnut Cookie", "Salted Butter Caramel Cookie", "Pecan Brownie"],
       },
       {
         id: "jus",
@@ -255,8 +255,8 @@ export const allProducts: Product[] = [
         label_en: "Extra (choose 1)",
         required: true,
         multiSelect: false,
-        choices: ["Muffin myrtilles", "Muffin chocolat", "Cookie pépite de chocolat"],
-        choices_en: ["Blueberry Muffin", "Chocolate Muffin", "Chocolate Chip Cookie"],
+        choices: ["Cookie Chocolat Noisette", "Cookie Caramel Beurre Salé", "Brownie Pécan"],
+        choices_en: ["Chocolate Hazelnut Cookie", "Salted Butter Caramel Cookie", "Pecan Brownie"],
       },
       {
         id: "jus",
@@ -322,8 +322,8 @@ export const allProducts: Product[] = [
         required: true,
         multiSelect: true,
         maxSelect: 2,
-        choices: ["Muffin myrtilles", "Muffin chocolat", "Cookie pépite de chocolat"],
-        choices_en: ["Blueberry Muffin", "Chocolate Muffin", "Chocolate Chip Cookie"],
+        choices: ["Cookie Chocolat Noisette", "Cookie Caramel Beurre Salé", "Brownie Pécan"],
+        choices_en: ["Chocolate Hazelnut Cookie", "Salted Butter Caramel Cookie", "Pecan Brownie"],
       },
       {
         id: "jus",
