@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, User, LogOut, ShoppingBag } from "lucide-react";
+import { User, LogOut, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabase";
@@ -12,7 +12,6 @@ const Navbar = () => {
   const { t } = useTranslation();
   const { lp } = useLangPath();
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
 
@@ -57,7 +56,7 @@ const Navbar = () => {
 
         {/* Right */}
         <div className="flex-1 flex justify-end items-center gap-3">
-          <LanguageSwitcher className="hidden md:flex" />
+          <LanguageSwitcher />
           {/* Déconnexion — mobile uniquement, quand connecté */}
           {user && (
             <button
@@ -130,63 +129,8 @@ const Navbar = () => {
             )}
           </button>
 
-          {/* Panier — mobile */}
-          <button
-            onClick={() => navigate(lp("/panier"))}
-            className="md:hidden relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-muted transition-colors"
-          >
-            <ShoppingBag size={20} className="text-foreground/80" />
-            {count > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[11px] font-bold flex items-center justify-center"
-                style={{ backgroundColor: "#DFF057", color: "#3a3a0a" }}>
-                {count > 9 ? "9+" : count}
-              </span>
-            )}
-          </button>
-
-          {/* Hamburger — mobile */}
-          <button
-            onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full hover:bg-muted transition-colors"
-            aria-label="Menu"
-          >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-
         </div>
       </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-border animate-fade-in">
-          <div className="flex flex-col px-6 py-4 gap-4">
-            <LanguageSwitcher />
-            {user ? (
-              <div className="flex flex-col gap-2">
-                <p className="text-foreground font-medium py-2">{t("navbar.greeting", { name: prenom })}</p>
-                <a href={lp("/mon-compte")} className="text-foreground py-2 text-sm">
-                  {t("navbar.myAccount")}
-                </a>
-                <button onClick={handleLogout} className="text-red-500 font-medium py-2 text-left text-sm">
-                  {t("navbar.logout")}
-                </button>
-              </div>
-            ) : (
-              <div className="flex flex-col gap-4">
-                <a href={lp("/connexion")} className="text-foreground font-medium py-2">
-                  {t("navbar.login")}
-                </a>
-                <a
-                  href={lp("/inscription")}
-                  className="bg-primary text-primary-foreground text-center px-5 py-3 rounded-full font-semibold"
-                >
-                  {t("navbar.register")}
-                </a>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </nav>
   );
 };
