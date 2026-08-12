@@ -19,9 +19,9 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   try {
-    const { recipientEmail, cardFrom, cardTo, message, amount, code, expiresAt, pdfBase64 } = await req.json();
+    const { recipientEmail, cardFrom, cardTo, message, amount, code, expiresAt } = await req.json();
 
-    if (!recipientEmail || !cardFrom || !cardTo || !code || !pdfBase64) {
+    if (!recipientEmail || !cardFrom || !cardTo || !code) {
       return new Response(JSON.stringify({ error: "Champs manquants" }), { status: 400 });
     }
 

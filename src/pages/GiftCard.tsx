@@ -1,21 +1,46 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GiftCardPreview from "@/components/GiftCardPreview";
 import { useTranslation } from "react-i18next";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { useLangPath } from "@/hooks/useLangPath";
+import { supabase } from "@/lib/supabase";
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { Lock } from "lucide-react";
 
-const generateTestCode = () => {
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+const CARD_ELEMENT_OPTIONS = {
+  hidePostalCode: true,
+  style: {
+    base: {
+      fontSize: "16px",
+      color: "#1a1a0a",
+      fontFamily: "system-ui, sans-serif",
+      "::placeholder": { color: "#9ca3af" },
+    },
+    invalid: { color: "#ef4444" },
+  },
+};
+
+const generateCode = () => {
   const seg = () => Math.random().toString(36).slice(2, 6).toUpperCase();
   return `${seg()}-${seg()}-${seg()}`;
 };
 
 const AMOUNTS = [25, 40, 60];
 
-const GiftCard = () => {
+const GiftCardForm = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const { lp } = useLangPath();
+  const stripe = useStripe();
+  const elements = useElements();
   usePageMeta("Carte Cadeau | Breakfast Time", "Offrez un brunch Breakfast Time : carte cadeau originale pour toutes les occasions.", "/carte-cadeau");
 
   const previewExpiresAt = (() => {
@@ -28,8 +53,9 @@ const GiftCard = () => {
   const [customAmount, setCustomAmount] = useState("");
   const [showAmount, setShowAmount] = useState(false);
   const [sendToSelf, setSendToSelf] = useState(false);
-  const [form, setForm] = useState({ from: "", to: "", message: "", recipientEmail: "", yourEmail: "" });
+  const [form, setForm] = useState({ from: "", to: "", message: "", recipientEmail: "", buyerEmail: "" });
   const [error, setError] = useState("");
+  const [paying, setPaying] = useState(false);
   const [previewCode, setPreviewCode] = useState("XXXX-XXXX-XXXX");
   const [previewTab, setPreviewTab] = useState<"recto" | "verso">("verso");
   const [testStatus, setTestStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -42,22 +68,112 @@ const GiftCard = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = () => {
+  const validate = () => {
     if (!finalAmount || finalAmount <= 0) {
       setError(t("giftCard.errorAmount"));
-      return;
+      return false;
     }
-    if (!form.from || !form.to || (sendToSelf ? !form.yourEmail : !form.recipientEmail)) {
+    if (!form.from || !form.to || !form.buyerEmail || (!sendToSelf && !form.recipientEmail)) {
       setError(t("giftCard.errorRequired"));
-      return;
+      return false;
     }
+    return true;
+  };
+
+  const handlePayment = async () => {
+    if (!validate()) return;
+    if (!stripe || !elements) return;
+
     setError("");
-    // TODO: paiement Stripe + génération du code carte cadeau
+    setPaying(true);
+
+    try {
+      // 1. Créer le PaymentIntent
+      const res = await fetch("/api/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: finalAmount }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || "Erreur de paiement");
+
+      // 2. Confirmer le paiement
+      const cardElement = elements.getElement(CardElement);
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+          card: cardElement!,
+          billing_details: { email: form.buyerEmail },
+        },
+      });
+
+      if (stripeError) {
+        setError(stripeError.message || "Le paiement a échoué.");
+        setPaying(false);
+        return;
+      }
+
+      // 3. Générer le code et créer la carte cadeau en base (avec retry si collision de code)
+      const expiresAtDate = new Date();
+      expiresAtDate.setFullYear(expiresAtDate.getFullYear() + 1);
+
+      let code = generateCode();
+      let created = false;
+      for (let attempt = 0; attempt < 3 && !created; attempt++) {
+        const { error: rpcError } = await supabase.rpc("create_gift_card", {
+          p_code: code,
+          p_amount: finalAmount,
+          p_buyer_email: form.buyerEmail,
+          p_card_from: form.from,
+          p_card_to: form.to,
+          p_message: form.message,
+          p_show_amount: showAmount,
+          p_expires_at: expiresAtDate.toISOString(),
+          p_stripe_payment_intent_id: paymentIntent?.id ?? null,
+        });
+        if (!rpcError) {
+          created = true;
+        } else {
+          code = generateCode();
+        }
+      }
+      if (!created) throw new Error("Impossible de générer la carte cadeau, contactez-nous.");
+
+      // 4. Envoyer l'email avec le lien vers la carte
+      const recipientEmail = sendToSelf ? form.buyerEmail : form.recipientEmail;
+      await fetch("/api/send-gift-card-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipientEmail,
+          cardFrom: form.from,
+          cardTo: form.to,
+          message: form.message,
+          amount: showAmount ? previewAmount : null,
+          code,
+          expiresAt: expiresAtDate.toLocaleDateString(i18n.language === "en" ? "en-GB" : "fr-FR"),
+        }),
+      });
+
+      // 5. Rediriger vers la page de visualisation de la carte
+      const viewParams = new URLSearchParams({
+        from: form.from,
+        to: form.to,
+        code,
+        expiresAt: expiresAtDate.toLocaleDateString(i18n.language === "en" ? "en-GB" : "fr-FR"),
+        ...(form.message ? { message: form.message } : {}),
+        ...(showAmount ? { amount: previewAmount } : {}),
+      });
+      navigate(lp(`/carte-cadeau/voir?${viewParams.toString()}`));
+    } catch (e: any) {
+      console.error(e);
+      setError(e.message || "Une erreur est survenue, réessayez.");
+      setPaying(false);
+    }
   };
 
   // Envoi de test (sans paiement) — pour valider le rendu du PDF reçu par email
   const handleTestSend = async () => {
-    const testEmail = sendToSelf ? form.yourEmail : form.recipientEmail;
+    const testEmail = sendToSelf ? form.buyerEmail : form.recipientEmail;
     if (!finalAmount || finalAmount <= 0) {
       setError(t("giftCard.errorAmount"));
       return;
@@ -69,7 +185,7 @@ const GiftCard = () => {
     setError("");
     setTestStatus("sending");
 
-    const code = generateTestCode();
+    const code = generateCode();
     setPreviewCode(code);
     setPreviewTab("verso");
     await new Promise((resolve) => setTimeout(resolve, 50));
@@ -178,32 +294,45 @@ const GiftCard = () => {
                 <textarea name="message" value={form.message} onChange={handleChange} placeholder={t("giftCard.messagePlaceholder")} rows={3} className={`${inputClass} resize-none`} />
               </div>
 
+              <div>
+                <label className="block text-sm font-medium mb-1.5">{t("giftCard.yourEmailLabel")} <span className="text-red-400">*</span></label>
+                <input name="buyerEmail" type="email" value={form.buyerEmail} onChange={handleChange} placeholder={t("giftCard.yourEmailPlaceholder")} className={inputClass} />
+              </div>
+
               <label className="flex items-center gap-2 text-sm cursor-pointer">
                 <input type="checkbox" checked={sendToSelf} onChange={(e) => setSendToSelf(e.target.checked)} className="w-4 h-4 accent-primary" />
                 {t("giftCard.sendToSelf")}
               </label>
 
-              {sendToSelf ? (
+              {!sendToSelf && (
                 <div>
-                  <label className="block text-sm font-medium mb-1.5">{t("giftCard.yourEmailLabel")}</label>
-                  <input name="yourEmail" type="email" value={form.yourEmail} onChange={handleChange} placeholder={t("giftCard.yourEmailPlaceholder")} className={inputClass} />
-                </div>
-              ) : (
-                <div>
-                  <label className="block text-sm font-medium mb-1.5">{t("giftCard.recipientEmailLabel")}</label>
+                  <label className="block text-sm font-medium mb-1.5">{t("giftCard.recipientEmailLabel")} <span className="text-red-400">*</span></label>
                   <input name="recipientEmail" type="email" value={form.recipientEmail} onChange={handleChange} placeholder={t("giftCard.recipientEmailPlaceholder")} className={inputClass} />
                   <p className="italic text-xs text-muted-foreground mt-1">{t("giftCard.recipientEmailNote")}</p>
                 </div>
               )}
 
+              <div>
+                <label className="block text-sm font-medium mb-1.5">Carte bancaire</label>
+                <div className={inputClass}>
+                  <CardElement options={CARD_ELEMENT_OPTIONS} />
+                </div>
+              </div>
+
               {error && <p className="text-red-400 text-sm">{error}</p>}
 
               <button
-                onClick={handleSubmit}
-                className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity"
+                onClick={handlePayment}
+                disabled={paying || !stripe}
+                className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity disabled:opacity-60"
               >
-                {t("giftCard.submit")}
+                {paying ? "Paiement en cours..." : `Payer ${finalAmount > 0 ? finalAmount : ""}€`}
               </button>
+
+              <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1">
+                <Lock size={11} />
+                Paiement sécurisé par Stripe
+              </p>
 
               <p className="text-xs text-muted-foreground text-center">{t("giftCard.validityNote")}</p>
 
@@ -270,5 +399,11 @@ const GiftCard = () => {
     </>
   );
 };
+
+const GiftCard = () => (
+  <Elements stripe={stripePromise} options={{ locale: "fr" }}>
+    <GiftCardForm />
+  </Elements>
+);
 
 export default GiftCard;
