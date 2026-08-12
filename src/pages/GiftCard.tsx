@@ -92,6 +92,7 @@ const GiftCard = () => {
           recipientEmail: testEmail,
           cardFrom: form.from,
           cardTo: form.to,
+          message: form.message,
           amount: showAmount ? previewAmount : null,
           code,
           expiresAt: previewExpiresAt,
