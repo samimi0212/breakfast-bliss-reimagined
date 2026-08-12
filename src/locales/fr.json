@@ -283,7 +283,9 @@
     "label": "Carte Cadeau",
     "title": "Offrir un Brunch",
     "subtitle": "Un cadeau original et unique, à offrir sans se tromper, pour toutes les occasions.",
-    "previewLabel": "Aperçu du verso de votre carte",
+    "previewLabel": "Aperçu de votre carte",
+    "previewRecto": "Recto",
+    "previewVerso": "Verso",
     "amountLabel": "Montant",
     "amountCustom": "Montant libre",
     "amountCustomPlaceholder": "Montant en €",
@@ -303,7 +305,7 @@
     "submit": "Continuer vers le paiement",
     "errorRequired": "Merci de remplir tous les champs.",
     "errorAmount": "Merci de choisir un montant valide.",
-    "validityNote": "Valable 1 an à compter de la date d'achat, utilisable en plusieurs fois sur l'ensemble de la carte."
+    "validityNote": "Valable 1 an à compter de la date d'achat, utilisable en plusieurs fois sur l'ensemble du site."
   },
   "notFound": {
     "title": "Page introuvable",

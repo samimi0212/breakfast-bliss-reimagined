@@ -283,7 +283,9 @@
     "label": "Gift Card",
     "title": "Give the Gift of Brunch",
     "subtitle": "An original, one-of-a-kind gift that's always a safe bet, for any occasion.",
-    "previewLabel": "Preview of the back of your card",
+    "previewLabel": "Preview of your card",
+    "previewRecto": "Front",
+    "previewVerso": "Back",
     "amountLabel": "Amount",
     "amountCustom": "Custom amount",
     "amountCustomPlaceholder": "Amount in €",
@@ -303,7 +305,7 @@
     "submit": "Continue to payment",
     "errorRequired": "Please fill in all fields.",
     "errorAmount": "Please choose a valid amount.",
-    "validityNote": "Valid for 1 year from purchase date, can be used across multiple orders."
+    "validityNote": "Valid for 1 year from purchase date, can be used across the whole site, over multiple orders."
   },
   "notFound": {
     "title": "Page not found",

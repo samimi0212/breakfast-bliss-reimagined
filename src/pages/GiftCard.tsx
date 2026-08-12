@@ -31,6 +31,7 @@ const GiftCard = () => {
   const [form, setForm] = useState({ from: "", to: "", message: "", recipientEmail: "", yourEmail: "" });
   const [error, setError] = useState("");
   const [previewCode, setPreviewCode] = useState("XXXX-XXXX-XXXX");
+  const [previewTab, setPreviewTab] = useState<"recto" | "verso">("verso");
   const [testStatus, setTestStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const previewRef = useRef<HTMLDivElement>(null);
 
@@ -70,6 +71,7 @@ const GiftCard = () => {
 
     const code = generateTestCode();
     setPreviewCode(code);
+    setPreviewTab("verso");
     await new Promise((resolve) => setTimeout(resolve, 50));
 
     try {
@@ -214,14 +216,42 @@ const GiftCard = () => {
                 >
                   {testStatus === "sending" ? "Envoi en cours..." : "Test : recevoir la carte par email"}
                 </button>
-                {testStatus === "sent" && <p className="text-green-600 text-sm text-center">Email envoyé ! Vérifie ta boîte mail.</p>}
+                {testStatus === "sent" && <p className="text-green-600 text-sm text-center">Email envoyé</p>}
                 {testStatus === "error" && <p className="text-red-400 text-sm text-center">Échec de l'envoi, réessaie.</p>}
               </div>
             </div>
 
             <div className="lg:sticky lg:top-32">
               <p className="text-sm font-medium text-muted-foreground mb-3 text-center">{t("giftCard.previewLabel")}</p>
-              <div ref={previewRef}>
+
+              <div className="flex justify-center gap-2 mb-3">
+                <button
+                  type="button"
+                  onClick={() => setPreviewTab("recto")}
+                  className={`px-4 py-1.5 rounded-full text-xs font-semibold border-2 transition-all duration-200 ${
+                    previewTab === "recto" ? "bg-primary text-primary-foreground border-primary" : "bg-white border-border text-foreground hover:border-primary"
+                  }`}
+                >
+                  {t("giftCard.previewRecto")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPreviewTab("verso")}
+                  className={`px-4 py-1.5 rounded-full text-xs font-semibold border-2 transition-all duration-200 ${
+                    previewTab === "verso" ? "bg-primary text-primary-foreground border-primary" : "bg-white border-border text-foreground hover:border-primary"
+                  }`}
+                >
+                  {t("giftCard.previewVerso")}
+                </button>
+              </div>
+
+              <div className={previewTab === "recto" ? "" : "hidden"}>
+                <div className="relative w-full overflow-hidden" style={{ aspectRatio: "1748 / 1240", boxShadow: "var(--card-shadow)" }}>
+                  <img src="/carte-cadeau-recto.png" alt="Aperçu du recto de la carte cadeau" className="absolute inset-0 w-full h-full object-contain" />
+                </div>
+              </div>
+
+              <div className={previewTab === "verso" ? "" : "hidden"} ref={previewRef}>
                 <GiftCardPreview
                   from={form.from}
                   to={form.to}
