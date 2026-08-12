@@ -19,15 +19,38 @@ const Cart = () => {
   const [promoInput, setPromoInput] = useState("");
   const [promoError, setPromoError] = useState("");
   const [observations, setObservations] = useState("");
+  const [giftCardCode, setGiftCardCode] = useState<string | null>(null);
+  const [giftCardBalance, setGiftCardBalance] = useState(0);
+  const [giftCardInput, setGiftCardInput] = useState("");
+  const [giftCardError, setGiftCardError] = useState("");
+  const [giftCardChecking, setGiftCardChecking] = useState(false);
 
   const OBSERVATIONS_MAX = 500;
   const VALID_PROMOS: Record<string, number> = { BONJOUR20: 0.20, BIENVENUE10: 0.10, RETOUR: 0 };
+
+  const checkGiftCard = async (code: string): Promise<{ balance: number; status: string; expires_at: string } | null> => {
+    const { data, error } = await supabase.rpc("check_gift_card", { p_code: code });
+    if (error || !data || data.length === 0) return null;
+    return data[0];
+  };
 
   useEffect(() => {
     const stored = sessionStorage.getItem("bt_promo_code");
     if (stored) setPromoCode(stored);
     const storedObs = sessionStorage.getItem("bt_order_observations");
     if (storedObs) setObservations(storedObs);
+
+    const storedGiftCard = sessionStorage.getItem("bt_giftcard_code");
+    if (storedGiftCard) {
+      checkGiftCard(storedGiftCard).then((result) => {
+        if (result && result.status === "active" && new Date(result.expires_at) > new Date() && result.balance > 0) {
+          setGiftCardCode(storedGiftCard);
+          setGiftCardBalance(Number(result.balance));
+        } else {
+          sessionStorage.removeItem("bt_giftcard_code");
+        }
+      });
+    }
   }, []);
 
   // Conservé entre les allers-retours panier ↔ carte
@@ -57,6 +80,39 @@ const Cart = () => {
     setPromoError("");
   };
 
+  const applyGiftCard = async () => {
+    const code = giftCardInput.trim().toUpperCase();
+    if (!code) return;
+    setGiftCardChecking(true);
+    setGiftCardError("");
+    const result = await checkGiftCard(code);
+    setGiftCardChecking(false);
+    if (!result) {
+      setGiftCardError("Code invalide");
+      return;
+    }
+    if (result.status !== "active" || new Date(result.expires_at) < new Date()) {
+      setGiftCardError("Cette carte cadeau n'est plus valable");
+      return;
+    }
+    if (result.balance <= 0) {
+      setGiftCardError("Cette carte cadeau n'a plus de solde");
+      return;
+    }
+    sessionStorage.setItem("bt_giftcard_code", code);
+    setGiftCardCode(code);
+    setGiftCardBalance(Number(result.balance));
+    setGiftCardInput("");
+    setGiftCardError("");
+  };
+
+  const removeGiftCard = () => {
+    sessionStorage.removeItem("bt_giftcard_code");
+    setGiftCardCode(null);
+    setGiftCardBalance(0);
+    setGiftCardError("");
+  };
+
   const promoDiscount = promoCode ? (VALID_PROMOS[promoCode] ?? 0) : 0;
   // Doit rester aligné sur MINIMUM_ORDER dans api/get-delivery-price.ts
   const MIN_ORDER = 15;
@@ -64,6 +120,8 @@ const Cart = () => {
   const GIFT_WRAP_PRICE = 3.50;
   const subtotalWithCutlery = total + (wantsCutlery ? cutleryQty * 0.80 : 0) + (wantsGiftWrap ? GIFT_WRAP_PRICE : 0);
   const orderTotal = subtotalWithCutlery * (1 - promoDiscount);
+  const giftCardDeduction = giftCardCode ? Math.min(giftCardBalance, orderTotal) : 0;
+  const amountDue = Math.max(orderTotal - giftCardDeduction, 0);
   const isMinReached = orderTotal >= MIN_ORDER;
   const progressPct = Math.min((orderTotal / MIN_ORDER) * 100, 100);
   const isFreeDeliveryReached = subtotalWithCutlery >= FREE_DELIVERY_THRESHOLD;
@@ -341,9 +399,15 @@ const Cart = () => {
                     <span>-{(subtotalWithCutlery * promoDiscount).toFixed(2).replace(".", ",")}€</span>
                   </div>
                 )}
+                {giftCardCode && giftCardDeduction > 0 && (
+                  <div className="flex justify-between text-sm font-semibold" style={{ color: "#5a7a0a" }}>
+                    <span>🎁 Carte cadeau {giftCardCode}</span>
+                    <span>-{giftCardDeduction.toFixed(2).replace(".", ",")}€</span>
+                  </div>
+                )}
                 <div className="border-t border-border pt-4 flex justify-between font-bold text-lg">
                   <span>{t("cart.total")}</span>
-                  <span className="text-primary">{orderTotal.toFixed(2).replace(".", ",")}€</span>
+                  <span className="text-primary">{amountDue.toFixed(2).replace(".", ",")}€</span>
                 </div>
               </div>
 
@@ -390,6 +454,39 @@ const Cart = () => {
                   </div>
                   {promoError && (
                     <p className="text-xs text-red-500 mt-1.5 ml-1">{promoError}</p>
+                  )}
+                </div>
+              )}
+
+              {/* Carte cadeau */}
+              {giftCardCode ? (
+                <div className="flex items-center justify-between bg-muted rounded-xl px-4 py-2.5 mb-4">
+                  <span className="text-sm font-semibold whitespace-nowrap" style={{ color: "#5a7a0a" }}>
+                    🎁 {giftCardCode} — solde {giftCardBalance.toFixed(2).replace(".", ",")}€
+                  </span>
+                  <button onClick={removeGiftCard} className="text-xs text-muted-foreground hover:text-red-500 transition-colors ml-3 whitespace-nowrap flex-shrink-0">Retirer</button>
+                </div>
+              ) : (
+                <div className="mb-4">
+                  <div className="flex gap-2 w-full min-w-0">
+                    <input
+                      type="text"
+                      value={giftCardInput}
+                      onChange={(e) => { setGiftCardInput(e.target.value); setGiftCardError(""); }}
+                      onKeyDown={(e) => e.key === "Enter" && applyGiftCard()}
+                      placeholder="Code carte cadeau"
+                      className="min-w-0 flex-1 px-3 py-2.5 rounded-xl border-2 border-border text-sm focus:outline-none focus:border-primary transition-colors"
+                    />
+                    <button
+                      onClick={applyGiftCard}
+                      disabled={giftCardChecking}
+                      className="flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-60"
+                    >
+                      {giftCardChecking ? "..." : "Appliquer"}
+                    </button>
+                  </div>
+                  {giftCardError && (
+                    <p className="text-xs text-red-500 mt-1.5 ml-1">{giftCardError}</p>
                   )}
                 </div>
               )}

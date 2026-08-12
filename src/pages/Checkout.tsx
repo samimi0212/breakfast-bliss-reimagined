@@ -101,6 +101,22 @@ const CheckoutForm = () => {
   const promoDiscount = promoCode ? (VALID_PROMOS[promoCode] ?? 0) : 0;
   const [deliveryPrice, setDeliveryPrice] = useState<number | null>(null);
   const freeDelivery = promoCode === "RETOUR" || deliveryPrice === 0;
+  const [giftCardCode, setGiftCardCode] = useState<string | null>(null);
+  const [giftCardBalance, setGiftCardBalance] = useState(0);
+
+  useEffect(() => {
+    const storedGiftCard = sessionStorage.getItem("bt_giftcard_code");
+    if (!storedGiftCard) return;
+    supabase.rpc("check_gift_card", { p_code: storedGiftCard }).then(({ data, error }) => {
+      const result = data?.[0];
+      if (error || !result || result.status !== "active" || new Date(result.expires_at) < new Date() || result.balance <= 0) {
+        sessionStorage.removeItem("bt_giftcard_code");
+        return;
+      }
+      setGiftCardCode(storedGiftCard);
+      setGiftCardBalance(Number(result.balance));
+    });
+  }, []);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("bt_promo_code");
@@ -127,6 +143,10 @@ const CheckoutForm = () => {
   const GIFT_WRAP_PRICE = 3.50;
   const giftWrapCost = wantsGiftWrap ? GIFT_WRAP_PRICE : 0;
   const extrasCost = cutleryCost + giftWrapCost;
+  const effectiveDelivery = freeDelivery ? 0 : (deliveryPrice ?? 0);
+  const totalAfterPromo = (total + extrasCost + effectiveDelivery) * (1 - promoDiscount);
+  const giftCardDeduction = giftCardCode ? Math.min(giftCardBalance, totalAfterPromo) : 0;
+  const amountDue = Math.max(totalAfterPromo - giftCardDeduction, 0);
   const itemsWithCutlery = [
     ...items,
     ...(cutleryQty > 0 ? [{ id: "couverts", name: `Couverts × ${cutleryQty}`, price: cutleryCost.toFixed(2).replace(".", ",") + "€", img: "", qty: 1 }] : []),
@@ -234,12 +254,24 @@ const CheckoutForm = () => {
       const storedPromo = sessionStorage.getItem("bt_promo_code");
       const orderTotal = storedPromo ? baseTotal * 0.80 : baseTotal;
 
+      // Carte cadeau éventuellement appliquée : on revérifie le solde en direct
+      const storedGiftCardCode = sessionStorage.getItem("bt_giftcard_code");
+      let giftCardDeductionAP = 0;
+      if (storedGiftCardCode) {
+        const { data: gcData } = await supabase.rpc("check_gift_card", { p_code: storedGiftCardCode });
+        const gcResult = gcData?.[0];
+        if (gcResult && gcResult.status === "active" && new Date(gcResult.expires_at) > new Date() && gcResult.balance > 0) {
+          giftCardDeductionAP = Math.min(Number(gcResult.balance), orderTotal);
+        }
+      }
+      const amountDueAP = Math.max(orderTotal - giftCardDeductionAP, 0);
+
       try {
         // Créer le PaymentIntent
         const res = await fetch("/api/create-payment-intent", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: orderTotal, promoCode: storedPromo }),
+          body: JSON.stringify({ amount: amountDueAP, promoCode: storedPromo }),
         });
         const data = await res.json();
         if (!res.ok || data.error) {
@@ -293,7 +325,15 @@ const CheckoutForm = () => {
           total: orderTotal,
           frais_livraison: dp,
           statut: "Payée",
+          gift_card_code: storedGiftCardCode,
+          gift_card_amount: storedGiftCardCode ? giftCardDeductionAP : null,
         }).select("id").single();
+
+        if (storedGiftCardCode && giftCardDeductionAP > 0) {
+          const { error: redeemErrorAP } = await supabase.rpc("redeem_gift_card", { p_code: storedGiftCardCode, p_amount: giftCardDeductionAP });
+          if (redeemErrorAP) console.error("Gift card redeem error:", redeemErrorAP);
+          sessionStorage.removeItem("bt_giftcard_code");
+        }
 
         // Livraison Uber Direct
         let trackingUrl = "";
@@ -524,41 +564,43 @@ const CheckoutForm = () => {
         }
       }
 
-      const effectiveDelivery = freeDelivery ? 0 : (deliveryPrice ?? 0);
-      const baseTotal = total + extrasCost + effectiveDelivery;
-      const orderTotal = promoCode ? baseTotal * (1 - promoDiscount) : baseTotal;
+      const orderTotal = totalAfterPromo;
+      let paymentIntent: { id?: string } | null = null;
 
-      // 1. Créer le PaymentIntent côté serveur
-      const res = await fetch("/api/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: orderTotal, promoCode }),
-      });
-      let data: any;
-      try {
-        data = await res.json();
-      } catch {
-        throw new Error(t("checkout.errServer"));
-      }
-      if (!res.ok || data.error) throw new Error(data.error || t("checkout.errPayment"));
+      if (amountDue > 0) {
+        // 1. Créer le PaymentIntent côté serveur
+        const res = await fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: amountDue, promoCode }),
+        });
+        let data: any;
+        try {
+          data = await res.json();
+        } catch {
+          throw new Error(t("checkout.errServer"));
+        }
+        if (!res.ok || data.error) throw new Error(data.error || t("checkout.errPayment"));
 
-      // 2. Confirmer le paiement avec Stripe
-      const cardElement = elements.getElement(CardElement);
-      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
-        payment_method: {
-          card: cardElement!,
-          billing_details: {
-            name: `${form.prenom} ${form.nom}`,
-            email: form.email,
-            phone: form.telephone,
+        // 2. Confirmer le paiement avec Stripe
+        const cardElement = elements.getElement(CardElement);
+        const { error: stripeError, paymentIntent: confirmedIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+          payment_method: {
+            card: cardElement!,
+            billing_details: {
+              name: `${form.prenom} ${form.nom}`,
+              email: form.email,
+              phone: form.telephone,
+            },
           },
-        },
-      });
+        });
 
-      if (stripeError) {
-        setErrors({ general: stripeError.message || t("checkout.errGeneric") });
-        setLoading(false);
-        return;
+        if (stripeError) {
+          setErrors({ general: stripeError.message || t("checkout.errGeneric") });
+          setLoading(false);
+          return;
+        }
+        paymentIntent = confirmedIntent;
       }
 
       // 3. Enregistrer la commande dans Supabase — le tracking_url est complété une fois la livraison créée
@@ -583,6 +625,8 @@ const CheckoutForm = () => {
         total: orderTotal,
         frais_livraison: deliveryPrice,
         statut: "Payée",
+        gift_card_code: giftCardCode,
+        gift_card_amount: giftCardCode ? giftCardDeduction : null,
       }).select("id").single();
 
       if (dbError) {
@@ -625,9 +669,15 @@ const CheckoutForm = () => {
       if (promoCode) {
         await supabase.from("promo_usage").insert({ email: form.email, promo_code: promoCode });
       }
+      // Déduire le montant utilisé du solde de la carte cadeau
+      if (giftCardCode && giftCardDeduction > 0) {
+        const { error: redeemError } = await supabase.rpc("redeem_gift_card", { p_code: giftCardCode, p_amount: giftCardDeduction });
+        if (redeemError) console.error("Gift card redeem error:", redeemError);
+      }
       sessionStorage.removeItem("bt_cutlery_qty");
       sessionStorage.removeItem("bt_gift_wrap");
       sessionStorage.removeItem("bt_order_observations");
+      sessionStorage.removeItem("bt_giftcard_code");
 
       // 5. Envoyer l'email de confirmation
       try {
@@ -986,6 +1036,12 @@ const CheckoutForm = () => {
                 </p>
               )}
 
+              {amountDue <= 0 ? (
+                <p className="text-sm font-semibold text-center py-4" style={{ color: "#5a7a0a" }}>
+                  🎁 Commande entièrement couverte par votre carte cadeau
+                </p>
+              ) : (
+              <>
               {/* Google Pay / Apple Pay */}
               {paymentRequest && (
                 <div className="mb-5">
@@ -1023,6 +1079,8 @@ const CheckoutForm = () => {
                 <Lock size={11} />
                 {t("checkout.securePayment")}
               </p>
+              </>
+              )}
             </div>
 
           </div>
@@ -1102,11 +1160,15 @@ const CheckoutForm = () => {
                     <span>-{(total * promoDiscount).toFixed(2).replace(".", ",")}€</span>
                   </div>
                 )}
+                {giftCardCode && giftCardDeduction > 0 && (
+                  <div className="flex justify-between text-sm font-semibold" style={{ color: "#5a7a0a" }}>
+                    <span>🎁 Carte cadeau {giftCardCode}</span>
+                    <span>-{giftCardDeduction.toFixed(2).replace(".", ",")}€</span>
+                  </div>
+                )}
                 <div className="flex justify-between font-bold text-lg pt-2 border-t border-border">
                   <span>{t("checkout.total")}</span>
-                  <span className="text-primary">
-                    {(total * (1 - promoDiscount) + (freeDelivery ? 0 : (deliveryPrice ?? 0))).toFixed(2).replace(".", ",")}€
-                  </span>
+                  <span className="text-primary">{amountDue.toFixed(2).replace(".", ",")}€</span>
                 </div>
               </div>
 
@@ -1120,7 +1182,9 @@ const CheckoutForm = () => {
                 ) : (
                   <>
                     <CreditCard size={18} />
-                    {t("checkout.payBtn", { amount: ((total + (deliveryPrice ?? 0)) * (1 - promoDiscount)).toFixed(2).replace(".", ",") })}
+                    {amountDue > 0
+                      ? t("checkout.payBtn", { amount: amountDue.toFixed(2).replace(".", ",") })
+                      : "Confirmer la commande"}
                   </>
                 )}
               </button>
