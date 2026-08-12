@@ -16,6 +16,7 @@ const ProductPage = () => {
   const isEn = i18n.language === "en";
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const [hoveredImg, setHoveredImg] = useState<string | null>(null);
   const { addItem } = useCart();
   const [selections, setSelections] = useState<Record<string, string | string[]>>({});
   // Mémorise le dernier choix retiré pour continuer la désélection même sous le max
@@ -116,6 +117,17 @@ const ProductPage = () => {
   };
 
   const related = allProducts.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 3);
+
+  const EXCLUDED_HOVER = new Set(["beurre", "nappage", "confiture", "miel", "sel", "sucre", "sauce", "bacon", "bacon crispy"]);
+
+  const findProductImg = (item: string): string | null => {
+    const clean = item.replace(/^\d+\s+/, "").toLowerCase().trim();
+    if (EXCLUDED_HOVER.has(clean)) return null;
+    const match = allProducts.find((p) =>
+      p.name.toLowerCase().includes(clean) || clean.includes(p.name.toLowerCase())
+    );
+    return match?.img || null;
+  };
 
   const localName = isEn ? (product.name_en || product.name) : product.name;
   const localComposition = isEn ? (product.composition_en || product.composition) : product.composition;
@@ -377,9 +389,13 @@ const ProductPage = () => {
         {/* Produit principal */}
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
           {/* Image */}
-          <div className="relative">
+          <div className="relative sticky top-28">
             <div className="aspect-square rounded-3xl overflow-hidden bg-muted">
-              <img src={product.img} alt={product.name} className="w-full h-full object-cover" />
+              <img
+                src={hoveredImg || product.img}
+                alt={product.name}
+                className="w-full h-full object-cover transition-all duration-300"
+              />
             </div>
           </div>
 
@@ -402,8 +418,14 @@ const ProductPage = () => {
                   {localComposition.map((item, i) => {
                     const hasChoice = item.includes("au choix") || item.includes("of your choice");
                     const cleanItem = item.replace(" au choix", "").replace(" of your choice", "").replace(" to choose", "");
+                    const linkedImg = hasChoice ? null : findProductImg(cleanItem);
                     return (
-                      <li key={i} className="flex items-center gap-3 text-sm text-foreground/80">
+                      <li
+                        key={i}
+                        className={`flex items-center gap-3 text-sm text-foreground/80 rounded-xl px-2 py-1 -mx-2 transition-colors duration-150 ${linkedImg ? "cursor-default hover:bg-primary/10" : ""}`}
+                        onMouseEnter={() => linkedImg && setHoveredImg(linkedImg)}
+                        onMouseLeave={() => setHoveredImg(null)}
+                      >
                         <span className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
                           <Check size={12} className="text-primary" />
                         </span>
@@ -468,10 +490,13 @@ const ProductPage = () => {
                           const supplement = extractSupplement(choice);
                           const isPaid = option.firstFree ? isSelected && paidItems.includes(choice) : isSelected && supplement > 0;
                           const showPriceBadge = supplement > 0 && (isSelected ? isPaid : (!option.firstFree || withPriceArr.length >= option.firstFree));
+                          const choiceImg = option.id.includes("nappage") ? null : findProductImg(cleanChoice);
                           return (
                             <button key={choice}
                               onClick={() => handleSelect(option.id, choice, option.multiSelect, option.maxSelect)}
                               disabled={totalReached && count === 0}
+                              onMouseEnter={() => choiceImg && setHoveredImg(choiceImg)}
+                              onMouseLeave={() => setHoveredImg(null)}
                               className={`relative px-4 py-2.5 rounded-xl text-sm font-semibold border-2 transition-all duration-200 ${
                                 isSelected ? "bg-primary text-primary-foreground border-primary"
                                 : totalReached && count === 0 ? "bg-white border-border text-muted-foreground opacity-40 cursor-not-allowed"
