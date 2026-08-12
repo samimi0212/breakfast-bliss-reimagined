@@ -119,12 +119,17 @@ const ProductPage = () => {
   const related = allProducts.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 3);
 
   const EXCLUDED_HOVER = new Set(["beurre", "nappage", "confiture", "miel", "sel", "sucre", "sauce", "bacon", "bacon crispy"]);
+  const HOVER_ALIASES: Record<string, string> = {
+    "mini croissants": "mini viennoiseries",
+    "mini pains au chocolat": "mini viennoiseries",
+  };
 
   const findProductImg = (item: string): string | null => {
     const clean = item.replace(/^\d+\s+/, "").toLowerCase().trim();
     if (EXCLUDED_HOVER.has(clean)) return null;
+    const lookup = HOVER_ALIASES[clean] ?? clean;
     const match = allProducts.find((p) =>
-      p.name.toLowerCase().includes(clean) || clean.includes(p.name.toLowerCase())
+      p.name.toLowerCase().includes(lookup) || lookup.includes(p.name.toLowerCase())
     );
     return match?.img || null;
   };
