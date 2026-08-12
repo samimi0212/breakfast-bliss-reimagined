@@ -357,7 +357,7 @@ export const allProducts: Product[] = [
     composition: [
       "1 Gâteau de pancakes à la pâte à tartiner",
       "4 Mini viennoiseries",
-      "1 Burrito au choix",
+      "1 Bagel / Burrito au choix",
       "1 Smoothie au choix",
       "1 Boisson chaude au choix",
       "2 Bougies scintillantes",
@@ -366,7 +366,7 @@ export const allProducts: Product[] = [
     composition_en: [
       "1 Pancake cake à la pâte à tartiner",
       "4 Mini pastries",
-      "1 Burrito of your choice",
+      "1 Bagel / Burrito of your choice",
       "1 Smoothie of your choice",
       "1 Hot drink of your choice",
       "2 Sparkling candles",
@@ -374,12 +374,13 @@ export const allProducts: Product[] = [
     ],
     options: [
       {
-        id: "burrito",
-        label: "Burrito (1 au choix)",
-        label_en: "Burrito (choose 1)",
+        id: "bagel-burrito",
+        label: "Bagel / Burrito (1 au choix)",
+        label_en: "Bagel / Burrito (choose 1)",
         required: true,
         multiSelect: false,
-        choices: ["Pulled Pork Burrito"],
+        choices: ["Bagel Chèvre Noix", "Bagel Bacon Cheddar", "Bagel Chicken", "Pulled Pork Burrito"],
+        choices_en: ["Goat Cheese & Walnut Bagel", "Bacon Cheddar Bagel", "Chicken Bagel", "Pulled Pork Burrito"],
       },
       {
         id: "smoothie",
