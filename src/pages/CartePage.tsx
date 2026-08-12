@@ -135,25 +135,25 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "bagel-chevre-miel",
       name: "Bagel Chèvre Noix",
-      price: "9,50€",
+      price: "9,70€",
       img: "/bagel-chevre2.jpg",
     },
     {
       id: "bagel-bacon-cheddar",
       name: "Bagel Bacon Cheddar",
-      price: "10,90€",
+      price: "9,70€",
       img: "/bagel-cheddar2.jpg",
     },
     {
       id: "bagel-saumon-avocat",
       name: "Bagel Chicken",
-      price: "11,50€",
+      price: "9,70€",
       img: "/bagel-poulet2.jpg",
     },
     {
       id: "breakfast-burrito",
       name: "Pulled Pork Burrito",
-      price: "9,50€",
+      price: "9,70€",
       img: "/wrap-porc.jpg",
     },
     {
