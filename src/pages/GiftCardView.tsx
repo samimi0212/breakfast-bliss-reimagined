@@ -1,15 +1,18 @@
 import { useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GiftCardPreview from "@/components/GiftCardPreview";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { useLangPath } from "@/hooks/useLangPath";
 import { toPng } from "html-to-image";
 import jsPDF from "jspdf";
 
 const GiftCardView = () => {
   usePageMeta("Votre carte cadeau | Breakfast Time", "Découvrez votre carte cadeau Breakfast Time.", undefined, true);
 
+  const navigate = useNavigate();
+  const { lp } = useLangPath();
   const [params] = useSearchParams();
   const [previewTab, setPreviewTab] = useState<"recto" | "verso">("recto");
   const [downloading, setDownloading] = useState(false);
@@ -96,14 +99,23 @@ const GiftCardView = () => {
             <GiftCardPreview from={from} to={to} message={message} code={code} expiresAt={expiresAt} amount={amount} />
           </div>
 
-          <button
-            type="button"
-            onClick={handleDownloadPdf}
-            disabled={downloading}
-            className="block mx-auto mt-4 px-5 py-2 bg-primary text-primary-foreground text-sm rounded-xl font-semibold hover:opacity-90 transition-opacity disabled:opacity-60"
-          >
-            {downloading ? "Génération du PDF..." : "Télécharger en PDF"}
-          </button>
+          <div className="flex justify-center gap-3 mt-4">
+            <button
+              type="button"
+              onClick={handleDownloadPdf}
+              disabled={downloading}
+              className="px-5 py-2 bg-primary text-primary-foreground text-sm rounded-xl font-semibold hover:opacity-90 transition-opacity disabled:opacity-60"
+            >
+              {downloading ? "Génération du PDF..." : "Télécharger en PDF"}
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate(lp("/"))}
+              className="px-5 py-2 border-2 border-primary text-primary text-sm rounded-xl font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
+            >
+              Commander maintenant
+            </button>
+          </div>
         </div>
       </main>
       <Footer />
