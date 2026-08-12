@@ -159,7 +159,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "focaccia-saumon",
       name: "Pinsa Verde",
-      price: "10,90€",
+      price: "11,50€",
       img: "/pinsa.jpg",
     },
     {

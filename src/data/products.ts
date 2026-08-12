@@ -665,7 +665,7 @@ export const allProducts: Product[] = [
     id: "focaccia-saumon",
     name: "Pinsa Verde",
     name_en: "Pinsa Verde",
-    price: "10,90€",
+    price: "11,50€",
     category: "Le Salé",
     img: "/pinsa.jpg",
     desc: "",
