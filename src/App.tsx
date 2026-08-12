@@ -25,6 +25,7 @@ import MentionsLegales from "./pages/MentionsLegales.tsx";
 import CGV from "./pages/CGV.tsx";
 import Confidentialite from "./pages/Confidentialite.tsx";
 import Contact from "./pages/Contact.tsx";
+import GiftCard from "./pages/GiftCard.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import VillePage from "./pages/VillePage.tsx";
 import BlogPage from "./pages/BlogPage.tsx";
@@ -56,6 +57,7 @@ const routeDefs = [
   { path: "/cgv", element: <CGV /> },
   { path: "/confidentialite", element: <Confidentialite /> },
   { path: "/contact", element: <Contact /> },
+  { path: "/carte-cadeau", element: <GiftCard /> },
   { path: "/jeu", element: <Jeu /> },
   { path: "/produit/:id", element: <ProductPage /> },
   { path: "/blog", element: <BlogPage /> },

@@ -279,6 +279,32 @@
     "successTitle": "Message sent!",
     "successText": "We'll get back to you as soon as possible."
   },
+  "giftCard": {
+    "label": "Gift Card",
+    "title": "Give the Gift of Brunch",
+    "subtitle": "An original, one-of-a-kind gift that's always a safe bet, for any occasion.",
+    "previewLabel": "Preview of the back of your card",
+    "amountLabel": "Amount",
+    "amountCustom": "Custom amount",
+    "amountCustomPlaceholder": "Amount in €",
+    "showAmountOnCard": "Show the amount on the gift card",
+    "fromLabel": "From",
+    "fromPlaceholder": "Your name",
+    "toLabel": "To",
+    "toPlaceholder": "Recipient's name",
+    "messageLabel": "Message (optional)",
+    "messagePlaceholder": "A little note to go with your gift...",
+    "sendToSelf": "Send it to me",
+    "recipientEmailLabel": "Recipient's email",
+    "recipientEmailNote": "Gift card sent immediately to the recipient after payment",
+    "recipientEmailPlaceholder": "email@recipient.com",
+    "yourEmailLabel": "Your email",
+    "yourEmailPlaceholder": "you@email.com",
+    "submit": "Continue to payment",
+    "errorRequired": "Please fill in all fields.",
+    "errorAmount": "Please choose a valid amount.",
+    "validityNote": "Valid for 1 year from purchase date, can be used across multiple orders."
+  },
   "notFound": {
     "title": "Page not found",
     "back": "Back to home"

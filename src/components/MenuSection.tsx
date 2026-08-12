@@ -7,6 +7,7 @@ import { useLangPath } from "@/hooks/useLangPath";
 const visuals = [
   "/nos-menus.jpg",
   "/composez-brunch.jpg",
+  "/carte-cadeau.png",
 ];
 
 const MenuSection = () => {
@@ -18,6 +19,7 @@ const MenuSection = () => {
   const options = [
     { title: t("menuSection.o1Title"), desc: t("menuSection.o1Desc"), cta: t("menuSection.o1Cta"), link: lp("/carte") + "?tab=menus", imgIndex: 0 },
     { title: t("menuSection.o2Title"), desc: t("menuSection.o2Desc"), cta: t("menuSection.o2Cta"), link: lp("/carte") + "?tab=carte", imgIndex: 1 },
+    { title: "Offrir un Brunch", desc: "Un cadeau original et unique, à offrir sans se tromper, pour toutes les occasions.", cta: "Offrir une carte cadeau", link: lp("/carte-cadeau"), imgIndex: 2 },
   ];
 
   return (

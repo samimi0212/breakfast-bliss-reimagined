@@ -279,6 +279,32 @@
     "successTitle": "Message envoyé !",
     "successText": "Nous vous répondrons dans les plus brefs délais."
   },
+  "giftCard": {
+    "label": "Carte Cadeau",
+    "title": "Offrir un Brunch",
+    "subtitle": "Un cadeau original et unique, à offrir sans se tromper, pour toutes les occasions.",
+    "previewLabel": "Aperçu du verso de votre carte",
+    "amountLabel": "Montant",
+    "amountCustom": "Montant libre",
+    "amountCustomPlaceholder": "Montant en €",
+    "showAmountOnCard": "Indiquer le montant sur la carte cadeau",
+    "fromLabel": "De la part de",
+    "fromPlaceholder": "Votre nom",
+    "toLabel": "Pour",
+    "toPlaceholder": "Le nom du destinataire",
+    "messageLabel": "Message (optionnel)",
+    "messagePlaceholder": "Un petit mot pour accompagner votre cadeau...",
+    "sendToSelf": "Me l'envoyer à moi-même",
+    "recipientEmailLabel": "Email du destinataire",
+    "recipientEmailNote": "Carte cadeau envoyée immédiatement au destinataire après le paiement",
+    "recipientEmailPlaceholder": "email@destinataire.com",
+    "yourEmailLabel": "Votre email",
+    "yourEmailPlaceholder": "votre@email.com",
+    "submit": "Continuer vers le paiement",
+    "errorRequired": "Merci de remplir tous les champs.",
+    "errorAmount": "Merci de choisir un montant valide.",
+    "validityNote": "Valable 1 an à compter de la date d'achat, utilisable en plusieurs fois sur l'ensemble de la carte."
+  },
   "notFound": {
     "title": "Page introuvable",
     "back": "Retour à l'accueil"
