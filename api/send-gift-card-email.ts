@@ -47,7 +47,7 @@ export default async function handler(req: Request): Promise<Response> {
     <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,0.07);">
       <div style="height:5px;background:linear-gradient(90deg,#3a3a0a 0%,#DFF057 100%);"></div>
       <div style="padding:36px 40px 28px;text-align:center;">
-        <img src="${BASE_URL}/logo.png" alt="Breakfast Time" style="height:48px;margin-bottom:24px;" />
+        <img src="${BASE_URL}/logo.png" alt="Breakfast Time" style="display:block;height:80px;margin:0 auto 24px;" />
         <div style="display:inline-block;background:#DFF057;color:#3a3a0a;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:700;padding:5px 18px;border-radius:50px;margin-bottom:22px;">
           Carte cadeau
         </div>
@@ -77,12 +77,6 @@ export default async function handler(req: Request): Promise<Response> {
       to: recipientEmail,
       subject: "Votre carte cadeau Breakfast Time",
       html: emailHtml,
-      attachments: [
-        {
-          filename: "carte-cadeau-breakfast-time.pdf",
-          content: pdfBase64,
-        },
-      ],
     });
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
