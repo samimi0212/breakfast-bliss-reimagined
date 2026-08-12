@@ -535,12 +535,12 @@ export const allProducts: Product[] = [
   {
     id: "avocado-toast",
     name: "Avocado Toast",
-    price: "10,90€",
+    price: "10,50€",
     category: "Le Salé",
     img: "/avocado-toast2.jpg",
     desc: "",
-    composition: ["2 Tranches de pain au levain", "Sauce onctueuse à l'avocat", "Stracciatella", "Émincé d'avocat", "Jeunes pousses", "Sésame doré"],
-    composition_en: ["2 Slices of sourdough bread", "Creamy avocado sauce", "Stracciatella", "Sliced avocado", "Baby greens", "Golden sesame"],
+    composition: ["Tranche de pain au levain", "Sauce onctueuse à l'avocat", "Stracciatella", "Émincé d'avocat", "Jeunes pousses", "Sésame doré"],
+    composition_en: ["Slice of sourdough bread", "Creamy avocado sauce", "Stracciatella", "Sliced avocado", "Baby greens", "Golden sesame"],
     options: [
       {
         id: "supplement",
