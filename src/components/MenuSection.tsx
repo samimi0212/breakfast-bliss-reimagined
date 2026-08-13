@@ -49,7 +49,7 @@ const MenuSection = () => {
               <div
                 key={i}
                 onMouseEnter={() => setActiveImg(option.imgIndex)}
-                onClick={() => navigate(option.link)}
+                onClick={() => { navigate(option.link); window.scrollTo(0, 0); }}
                 className="group flex-1 rounded-2xl cursor-pointer transition-all duration-300 hover:scale-[1.02] overflow-hidden"
                 style={{ backgroundColor: "white", boxShadow: "var(--card-shadow)" }}
               >
