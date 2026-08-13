@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,8 +7,6 @@ import { useTranslation } from "react-i18next";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useLangPath } from "@/hooks/useLangPath";
 import { supabase } from "@/lib/supabase";
-import { toPng } from "html-to-image";
-import jsPDF from "jspdf";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Lock } from "lucide-react";
@@ -56,10 +54,8 @@ const GiftCardForm = () => {
   const [form, setForm] = useState({ from: "", to: "", message: "", recipientEmail: "", buyerEmail: "" });
   const [error, setError] = useState("");
   const [paying, setPaying] = useState(false);
-  const [previewCode, setPreviewCode] = useState("XXXX-XXXX-XXXX");
+  const [previewCode] = useState("XXXX-XXXX-XXXX");
   const [previewTab, setPreviewTab] = useState<"recto" | "verso">("verso");
-  const [testStatus, setTestStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const previewRef = useRef<HTMLDivElement>(null);
 
   const finalAmount = amount === "custom" ? Number(customAmount) : amount;
   const previewAmount = finalAmount > 0 ? `${finalAmount}€` : "";
@@ -168,58 +164,6 @@ const GiftCardForm = () => {
       console.error(e);
       setError(e.message || "Une erreur est survenue, réessayez.");
       setPaying(false);
-    }
-  };
-
-  // Envoi de test (sans paiement) — pour valider le rendu du PDF reçu par email
-  const handleTestSend = async () => {
-    const testEmail = sendToSelf ? form.buyerEmail : form.recipientEmail;
-    if (!finalAmount || finalAmount <= 0) {
-      setError(t("giftCard.errorAmount"));
-      return;
-    }
-    if (!form.from || !form.to || !testEmail) {
-      setError(t("giftCard.errorRequired"));
-      return;
-    }
-    setError("");
-    setTestStatus("sending");
-
-    const code = generateCode();
-    setPreviewCode(code);
-    setPreviewTab("verso");
-    await new Promise((resolve) => setTimeout(resolve, 50));
-
-    try {
-      if (!previewRef.current) throw new Error("preview not ready");
-      const dataUrl = await Promise.race([
-        toPng(previewRef.current, { pixelRatio: 2, skipFonts: true, cacheBust: true }),
-        new Promise<string>((_, reject) => setTimeout(() => reject(new Error("capture timeout")), 15000)),
-      ]);
-
-      const pdf = new jsPDF({ orientation: "landscape", unit: "px", format: [1748, 1240] });
-      pdf.addImage(dataUrl, "PNG", 0, 0, 1748, 1240);
-      const pdfBase64 = pdf.output("datauristring").split(",")[1];
-
-      const res = await fetch("/api/send-gift-card-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          recipientEmail: testEmail,
-          cardFrom: form.from,
-          cardTo: form.to,
-          message: form.message,
-          amount: showAmount ? previewAmount : null,
-          code,
-          expiresAt: previewExpiresAt,
-          pdfBase64,
-        }),
-      });
-      if (!res.ok) throw new Error("send failed");
-      setTestStatus("sent");
-    } catch (e) {
-      console.error(e);
-      setTestStatus("error");
     }
   };
 
@@ -335,20 +279,6 @@ const GiftCardForm = () => {
               </p>
 
               <p className="text-xs text-muted-foreground text-center">{t("giftCard.validityNote")}</p>
-
-              <div className="border-t border-border pt-4 space-y-2">
-                <p className="text-xs text-muted-foreground text-center">Test interne — sans paiement</p>
-                <button
-                  type="button"
-                  onClick={handleTestSend}
-                  disabled={testStatus === "sending"}
-                  className="w-full border-2 border-primary text-primary py-3 rounded-xl font-semibold hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-60"
-                >
-                  {testStatus === "sending" ? "Envoi en cours..." : "Test : recevoir la carte par email"}
-                </button>
-                {testStatus === "sent" && <p className="text-green-600 text-sm text-center">Email envoyé</p>}
-                {testStatus === "error" && <p className="text-red-400 text-sm text-center">Échec de l'envoi, réessaie.</p>}
-              </div>
             </div>
 
             <div className="lg:sticky lg:top-32">
@@ -381,7 +311,7 @@ const GiftCardForm = () => {
                 </div>
               </div>
 
-              <div className={previewTab === "verso" ? "" : "hidden"} ref={previewRef}>
+              <div className={previewTab === "verso" ? "" : "hidden"}>
                 <GiftCardPreview
                   from={form.from}
                   to={form.to}
