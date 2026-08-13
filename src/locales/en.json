@@ -39,7 +39,7 @@
     "newsletterAlreadyTextShort": "Already subscribed!",
     "newsletterAlreadyText": "This email address is already subscribed to our newsletter.",
     "newsletterError": "Something went wrong, please try again.",
-    "description": "Breakfasts and brunches, delivered to your door in under 45 minutes. Alpes-Maritimes, 7 days a week.",
+    "description": "Breakfasts and brunches, delivered wherever you are — pre-order or same-day, in under 45 minutes. Alpes-Maritimes.",
     "copyright": "© 2026 Breakfast Time",
     "copyrightFull": "© 2026 Breakfast Time. All rights reserved.",
     "legalLink": "Legal notice",
@@ -51,7 +51,7 @@
     "title1": "Making the ordinary",
     "titleExtra": "Extra",
     "titleOrdinaire": "ordinary",
-    "subtitle": "Breakfasts and brunches, delivered to your door in under 45 minutes. Alpes-Maritimes, 7 days a week.",
+    "subtitle": "Breakfasts and brunches, delivered wherever you are — pre-order or same-day, in under 45 minutes. Alpes-Maritimes.",
     "cta": "Browse the menu",
     "ctaHow": "How it works",
     "imgAlt": "Luxurious breakfast delivered at home",
@@ -354,7 +354,12 @@
     "infoHoursLabel": "Hours",
     "infoHoursValue": "8am – 3pm",
     "infoDaysLabel": "Days",
-    "infoDaysValue": "Mon. – Sun."
+    "infoDaysValue": "Mon. – Sun.",
+    "cardTitle": "Do we deliver to you?",
+    "cardSubtitle": "Enter your address to check your eligibility instantly.",
+    "checking": "Checking",
+    "resultOkText": "Good news, we deliver to your address!",
+    "resultKoText": "Address outside our zone,"
   },
   "myAccount": {
     "personalLabel": "My account",

@@ -39,7 +39,7 @@
     "newsletterAlreadyTextShort": "Déjà inscrit(e) !",
     "newsletterAlreadyText": "Cette adresse email est déjà abonnée à notre newsletter.",
     "newsletterError": "Une erreur est survenue, veuillez réessayer.",
-    "description": "Des petits-déjeuners et brunchs, livrés chez vous en moins de 45 minutes. Alpes-Maritimes, 7j/7.",
+    "description": "Des petits-déjeuners et brunchs, livrés où que vous soyez en précommande ou le jour même en moins de 45 minutes. Alpes-Maritimes.",
     "copyright": "© 2026 Breakfast Time",
     "copyrightFull": "© 2026 Breakfast Time. Tous droits réservés.",
     "legalLink": "Mentions légales",
@@ -51,7 +51,7 @@
     "title1": "Rendre l'ordinaire",
     "titleExtra": "Extra",
     "titleOrdinaire": "ordinaire",
-    "subtitle": "Des petits-déjeuners et brunchs, livrés chez vous en moins de 45 minutes. Alpes-Maritimes, 7j/7.",
+    "subtitle": "Des petits-déjeuners et brunchs, livrés où que vous soyez en précommande ou le jour même en moins de 45 minutes. Alpes-Maritimes.",
     "cta": "Découvrir la carte",
     "ctaHow": "Comment ça marche",
     "imgAlt": "Petit-déjeuner luxueux livré à domicile",
@@ -354,7 +354,12 @@
     "infoHoursLabel": "Horaires",
     "infoHoursValue": "8h – 15h",
     "infoDaysLabel": "Jours",
-    "infoDaysValue": "Lun. – Dim."
+    "infoDaysValue": "Lun. – Dim.",
+    "cardTitle": "Livrons-nous chez vous ?",
+    "cardSubtitle": "Entrez votre adresse pour vérifier votre éligibilité en un instant.",
+    "checking": "Vérification",
+    "resultOkText": "Bonne nouvelle, nous livrons à votre adresse !",
+    "resultKoText": "Adresse hors zone,"
   },
   "myAccount": {
     "personalLabel": "Espace personnel",

@@ -7,7 +7,6 @@ import HowItWorks from "@/components/HowItWorks";
 import MenuSection from "@/components/MenuSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import AboutSection from "@/components/AboutSection";
-import DeliveryZone from "@/components/DeliveryZone";
 import EventsPromo from "@/components/EventsPromo";
 import OrderOnline from "@/components/OrderOnline";
 import FinalCTA from "@/components/FinalCTA";
@@ -55,7 +54,6 @@ const Index = () => {
       <OrderOnline />
       <EventsPromo />
       <HowItWorks />
-      <DeliveryZone />
       <WhyChooseUs />
       <AboutSection />
       <FinalCTA />
