@@ -6,6 +6,7 @@ import { ArrowLeft, ShoppingBag, Check, Minus, Plus } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { useLangPath } from "@/hooks/useLangPath";
 import { allProducts } from "@/data/products";
+import { productSeoDescriptions } from "@/data/productSeoDescriptions";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ProductPage = () => {
@@ -35,10 +36,18 @@ const ProductPage = () => {
       ? `${productName} | Breakfast delivery in Antibes, Cannes & Nice — Breakfast Time`
       : `${productName} | Livraison petit-déjeuner à Antibes, Cannes et Nice — Breakfast Time`
     : "Breakfast Time";
+  const seoDesc = product ? productSeoDescriptions[product.id] : undefined;
+  const metaComposition = product ? (isEn ? product.composition_en : product.composition) : [];
   const metaDesc = product
     ? isEn
-      ? `Order ${productName} delivered to your door in Antibes, Cannes, Nice and surroundings. Fresh products prepared in the morning, delivery in 30–45 min, 7 days a week from 8am to 3pm.`
-      : `Commandez ${productName} livré à domicile à Antibes, Cannes, Nice et alentours. Produits frais préparés le matin, livraison en 30–45 min, 7j/7 de 8h à 15h.`
+      ? seoDesc?.en
+        ?? (metaComposition?.length
+          ? `${productName} : ${metaComposition.slice(0, 4).join(", ")}. Delivered fresh to your door in Antibes, Cannes, Nice, 7 days a week from 8am to 3pm.`
+          : `Order ${productName} delivered to your door in Antibes, Cannes, Nice and surroundings. Fresh products prepared in the morning, delivery in 30–45 min, 7 days a week from 8am to 3pm.`)
+      : seoDesc?.fr
+        ?? (metaComposition?.length
+          ? `${productName} : ${metaComposition.slice(0, 4).join(", ")}. Livré frais à domicile à Antibes, Cannes, Nice, 7j/7 de 8h à 15h.`
+          : `Commandez ${productName} livré à domicile à Antibes, Cannes, Nice et alentours. Produits frais préparés le matin, livraison en 30–45 min, 7j/7 de 8h à 15h.`)
     : "";
   usePageMeta(metaTitle, metaDesc, product ? `/produit/${product.id}` : undefined);
 
