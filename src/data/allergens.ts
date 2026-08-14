@@ -36,7 +36,6 @@ export const PRODUCT_ALLERGENS: Record<string, string[]> = {
   // Viennoiseries
   "croissant": ["GL", "LA", "OE"],
   "pain-au-chocolat": ["GL", "LA", "OE"],
-  "brioche": ["GL", "LA", "OE"],
   "chausson-pommes": ["GL", "LA", "OE"],
   "pain-aux-raisins": ["GL", "LA", "OE"],
   "suisse": ["GL", "LA", "OE"],
@@ -46,10 +45,8 @@ export const PRODUCT_ALLERGENS: Record<string, string[]> = {
   "baguette": ["GL"],
   "baguette-bio": ["GL", "SE"],
   "pain-ciabatta": ["GL"],
-  "petit-pain-gluten-free": [],
   "petit-pain-campagne": ["GL"],
   "pain-pepites": ["GL", "LA", "SO"],
-  "pain-complet": ["GL"],
   "pain-nordique": ["GL", "SE"],
 
   // Le Salé
