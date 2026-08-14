@@ -432,7 +432,7 @@ const ProductPage = () => {
                   {localComposition.map((item, i) => {
                     const hasChoice = item.includes("au choix") || item.includes("of your choice");
                     const cleanItem = item.replace(" au choix", "").replace(" of your choice", "").replace(" to choose", "");
-                    const linkedImg = hasChoice ? null : findProductImg(cleanItem);
+                    const linkedImg = (product.category === "Nos Menus" && !hasChoice) ? findProductImg(cleanItem) : null;
                     return (
                       <li
                         key={i}
@@ -504,7 +504,7 @@ const ProductPage = () => {
                           const supplement = extractSupplement(choice);
                           const isPaid = option.firstFree ? isSelected && paidItems.includes(choice) : isSelected && supplement > 0;
                           const showPriceBadge = supplement > 0 && (isSelected ? isPaid : (!option.firstFree || withPriceArr.length >= option.firstFree));
-                          const choiceImg = option.id.includes("nappage") ? null : findProductImg(cleanChoice);
+                          const choiceImg = (product.category === "Nos Menus" && !option.id.includes("nappage")) ? findProductImg(cleanChoice) : null;
                           return (
                             <button key={choice}
                               onClick={() => handleSelect(option.id, choice, option.multiSelect, option.maxSelect)}
