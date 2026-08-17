@@ -189,6 +189,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
   ],
   "Le Sucré": [
     {
+      id: "french-tartines",
+      name: "French Tartines",
+      price: "4,50€",
+      img: "/tartines.jpg",
+    },
+    {
       id: "pancakes-a-composer",
       name: "Pancakes à composer",
       price: "6,50€",

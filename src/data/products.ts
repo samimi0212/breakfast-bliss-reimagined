@@ -564,6 +564,28 @@ export const allProducts: Product[] = [
     composition_en: ["Pulled Pork", "Scrambled eggs", "Crispy bacon", "Red cabbage and carrots", "Artisanal smoky sauce", "Tomato confit"],
   },
   {
+    id: "french-tartines",
+    name: "French Tartines",
+    name_en: "French Tartines",
+    price: "4,50€",
+    category: "Le Sucré",
+    img: "/tartines.jpg",
+    desc: "",
+    composition: ["1/2 Baguette Tradition", "1 Beurre", "1 Nappage au choix"],
+    composition_en: ["1/2 Tradition Baguette", "1 Butter", "1 Topping of your choice"],
+    options: [
+      {
+        id: "nappage",
+        label: "Choix du nappage",
+        label_en: "Choice of topping",
+        required: true,
+        multiSelect: false,
+        choices: ["Fraise", "Abricot", "Nocciolata"],
+        choices_en: ["Strawberry", "Apricot", "Nocciolata"],
+      },
+    ],
+  },
+  {
     id: "pancakes-a-composer",
     name: "Pancakes à composer",
     name_en: "Build Your Pancakes",
