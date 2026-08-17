@@ -121,8 +121,8 @@ export const allProducts: Product[] = [
     category: "Nos Menus",
     img: "/menu-brunch-texte.png",
     desc: "",
-    composition: ["1 Bagel au choix", "1 Frites de patates douces", "1 Viennoiserie au choix", "1 Granola bowl parfait", "1 Jus frais au choix", "1 Boisson chaude au choix"],
-    composition_en: ["1 Bagel of your choice", "1 Sweet potato fries", "1 Pastry of your choice", "1 Granola Bowl Parfait", "1 Fresh juice of your choice", "1 Hot drink of your choice"],
+    composition: ["1 Bagel au choix", "1 Frites de patates douces", "1 Viennoiserie au choix", "3 Pancakes à composer", "1 Jus frais au choix", "1 Boisson chaude au choix"],
+    composition_en: ["1 Bagel of your choice", "1 Sweet potato fries", "1 Pastry of your choice", "3 Pancakes to compose", "1 Fresh juice of your choice", "1 Hot drink of your choice"],
     options: [
       {
         id: "bagel",
@@ -159,6 +159,15 @@ export const allProducts: Product[] = [
         multiSelect: false,
         choices: ["Café", "Latte Macchiato (+1,50€)", "Chocolat chaud (+1,50€)", "Thé Earl Grey citron"],
         choices_en: ["Café", "Latte Macchiato (+€1.50)", "Hot Chocolate (+€1.50)", "Earl Grey Tea"],
+      },
+      {
+        id: "pancakes",
+        label: "Pancakes à composer",
+        label_en: "Pancakes to compose",
+        required: true,
+        multiSelect: false,
+        choices: ["Nocciolata - Bananes", "Sirop d'érable - Fruits rouges", "Caramel beurre salé - Noix de pécan", "Crème de pistache - Noisettes"],
+        choices_en: ["Nocciolata - Bananas", "Maple syrup - Red berries", "Salted butter caramel - Pecan nuts", "Pistachio cream - Hazelnuts"],
       },
     ],
   },
