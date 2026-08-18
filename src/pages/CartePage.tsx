@@ -191,7 +191,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "french-tartines",
       name: "French Tartines",
-      price: "4,50€",
+      price: "4,00€",
       img: "/tartines.jpg",
     },
     {

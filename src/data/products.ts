@@ -567,7 +567,7 @@ export const allProducts: Product[] = [
     id: "french-tartines",
     name: "French Tartines",
     name_en: "French Tartines",
-    price: "4,50€",
+    price: "4,00€",
     category: "Le Sucré",
     img: "/tartines.jpg",
     desc: "",
