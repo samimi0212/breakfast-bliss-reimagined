@@ -113,6 +113,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/avocado-toast.jpg",
     },
     {
+      id: "bagel-avocat-saumon",
+      name: "Bagel Avocat Saumon",
+      price: "9,70€",
+      img: "/bagel-saumon.jpg",
+    },
+    {
       id: "bagel-chevre-miel",
       name: "Bagel Chèvre Noix",
       price: "9,70€",

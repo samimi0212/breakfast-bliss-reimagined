@@ -522,6 +522,17 @@ export const allProducts: Product[] = [
     composition_en: ["Slice of sourdough bread", "Creamy avocado sauce", "Stracciatella", "Sliced avocado", "Baby greens", "Golden sesame", "Smoked salmon"],
   },
   {
+    id: "bagel-avocat-saumon",
+    name: "Bagel Avocat Saumon",
+    name_en: "Avocado Salmon Bagel",
+    price: "9,70€",
+    category: "Le Salé",
+    img: "/bagel-saumon.jpg",
+    desc: "",
+    composition: ["Bagel brioché aux graines", "Cream cheese", "Saumon fumé", "Avocat", "Câpres", "Pickles oignons rouges"],
+    composition_en: ["Brioche seeded bagel", "Cream cheese", "Smoked salmon", "Avocado", "Capers", "Pickled red onions"],
+  },
+  {
     id: "bagel-chevre-miel",
     name: "Bagel Chèvre Noix",
     name_en: "Goat Cheese & Walnut Bagel",
