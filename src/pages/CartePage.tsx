@@ -137,6 +137,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/bagel-chicken.jpg",
     },
     {
+      id: "toast-mediterraneen",
+      name: "Burratina",
+      price: "11,50€",
+      img: "/burratina.jpg",
+    },
+    {
       id: "breakfast-burrito",
       name: "Pulled Pork Burrito",
       price: "9,70€",
@@ -147,12 +153,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       name: "Pinsa Verde",
       price: "11,50€",
       img: "/pinsa-verde.jpg",
-    },
-    {
-      id: "toast-mediterraneen",
-      name: "Toast méditerranéen",
-      price: "11,50€",
-      img: "/toast-med.jpg",
     },
     {
       id: "breakfast-bowl",
