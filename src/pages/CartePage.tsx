@@ -48,7 +48,7 @@ const menus = [
   },
   {
     id: "birthday-box",
-    name: "Birthday Box",
+    name: "Happy Box",
     price: "35,00€",
     img: "/birthday-box-texte.png",
   },
@@ -153,12 +153,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       name: "Pinsa Verde",
       price: "11,50€",
       img: "/pinsa-verde.jpg",
-    },
-    {
-      id: "breakfast-bowl",
-      name: "Bowl Veggie",
-      price: "11,50€",
-      img: "/bowl-veggie.jpg",
     },
     {
       id: "oeufs-brouilles",

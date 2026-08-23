@@ -358,7 +358,7 @@ export const allProducts: Product[] = [
   },
   {
     id: "birthday-box",
-    name: "Birthday Box",
+    name: "Happy Box",
     price: "35,00€",
     category: "Nos Menus",
     img: "/birthday-box-texte.png",
@@ -681,16 +681,6 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Pinsa", "Pesto artisanal", "Burrata", "Mortadelle", "Pistache", "Tomates confites"],
     composition_en: ["Pinsa", "Artisanal pesto", "Burrata", "Mortadella", "Pistachio", "Confit tomatoes"],
-  },
-  {
-    id: "breakfast-bowl",
-    name: "Bowl Veggie",
-    price: "11,50€",
-    category: "Le Salé",
-    img: "/bowl-veggie.jpg",
-    desc: "",
-    composition: ["Quinoa et boulgour", "Falafel", "Pois chiches croustillants", "Houmous", "Grenade", "Jeunes pousses", "Pickles oignons rouge", "Sauce onctueuse citronnée"],
-    composition_en: ["Quinoa and bulgur", "Falafel", "Crispy chickpeas", "Hummus", "Pomegranate", "Baby greens", "Pickled red onions", "Creamy lemon sauce"],
   },
   {
     id: "oeufs-brouilles",
