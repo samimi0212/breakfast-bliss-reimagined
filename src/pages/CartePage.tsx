@@ -139,8 +139,8 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "toast-mediterraneen",
       name: "Burratina",
-      price: "11,50€",
-      img: "/burratina.jpg",
+      price: "10,50€",
+      img: "/burratina.png",
     },
     {
       id: "breakfast-burrito",
