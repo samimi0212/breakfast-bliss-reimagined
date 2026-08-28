@@ -665,17 +665,6 @@ export const allProducts: Product[] = [
     ],
   },
   {
-    id: "focaccia-saumon",
-    name: "Pinsa Verde",
-    name_en: "Pinsa Verde",
-    price: "11,50€",
-    category: "Le Salé",
-    img: "/pinsa-verde.jpg",
-    desc: "",
-    composition: ["Pinsa", "Pesto artisanal", "Burrata", "Mortadelle", "Pistache", "Tomates confites"],
-    composition_en: ["Pinsa", "Artisanal pesto", "Burrata", "Mortadella", "Pistachio", "Confit tomatoes"],
-  },
-  {
     id: "oeufs-brouilles",
     name: "Oeufs brouillés",
     name_en: "Scrambled Eggs",

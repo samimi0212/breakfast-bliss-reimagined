@@ -149,12 +149,6 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/pulled-burrito.png",
     },
     {
-      id: "focaccia-saumon",
-      name: "Pinsa Verde",
-      price: "11,50€",
-      img: "/pinsa-verde.jpg",
-    },
-    {
       id: "oeufs-brouilles",
       name: "Oeufs brouillés",
       price: "4,50€",
