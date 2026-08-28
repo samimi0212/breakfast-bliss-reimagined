@@ -551,7 +551,7 @@ export const allProducts: Product[] = [
     name_en: "Chicken Bagel",
     price: "8,90€",
     category: "Le Salé",
-    img: "/bagel-chicken.jpg",
+    img: "/bagel-chicken.png",
     desc: "",
     composition: ["Bagel brioché", "Poulet mariné aux herbes", "Salade fraîche", "Sauce fumée artisanale", "Pickles oignons rouges"],
     composition_en: ["Brioche bagel", "Herb-marinated chicken", "Fresh salad", "Artisanal smoky sauce", "Pickled red onions"],
