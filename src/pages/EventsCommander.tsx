@@ -6,20 +6,30 @@ import { useLangPath } from "@/hooks/useLangPath";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowLeft, ArrowRight, ShoppingBag, Check, Minus, Plus, Trash2, Users, MapPin, Calendar } from "lucide-react";
-import plateauMini from "@/assets/entreprises/plateau-mini.png";
-import plateauMiniPac from "@/assets/entreprises/plateau-mini-pac.png";
-import plateauCroissant from "@/assets/entreprises/plateau-croissant.png";
-import plateauChaussons from "@/assets/entreprises/plateau-chausson.png";
-import plateauPainsRaisins from "@/assets/entreprises/plateau-raisin.png";
-import verrinesGranola from "@/assets/entreprises/verrines-granola.png";
-import plateauChouquettes from "@/assets/entreprises/plateau-chouquettes.png";
-import plateauMacaron from "@/assets/entreprises/plateau-macaron.png";
-import cakeMarbre from "@/assets/entreprises/cake-marbre.png";
-import formuleEssentielle from "@/assets/entreprises/formule-essentielle.png";
-import formulePlaisir from "@/assets/entreprises/formule-plaisir.png";
-import formuleGouter from "@/assets/entreprises/formule-gouter.png";
+import plateauMini from "@/assets/4.png";
+import plateauMiniPac from "@/assets/5.png";
+import plateauCroissant from "@/assets/6.png";
+import plateauChaussons from "@/assets/7.jpeg";
+import plateauPainsRaisins from "@/assets/8.jpeg";
+import verrinesGranola from "@/assets/9.jpeg";
+import plateauChouquettes from "@/assets/10.jpeg";
+import plateauMacaron from "@/assets/11.jpg";
+import cakeMarbre from "@/assets/12.jpeg";
+import plateauPancakes from "@/assets/13.jpeg";
+import plateauFruits from "@/assets/14.jpeg";
+import plateauFromage from "@/assets/15.jpg";
+import plateauCharcuterie from "@/assets/plateau-charcuterie.jpg";
+import thermosCafe from "@/assets/thermos-cafe.jpg";
+import thermosChocolat from "@/assets/thermos-chocolat.jpg";
+import eauDetox from "@/assets/eau-detox.jpg";
+import jusFrais from "@/assets/jus-frais1.jpg";
+import clocheCookies from "@/assets/Cookies.jpg";
+import verrineCrudites from "@/assets/verrine-crudites.jpg";
+import formuleEssentielle from "@/assets/1.png";
+import formulePlaisir from "@/assets/2.png";
+import formuleGouter from "@/assets/3.png";
 
-type EventProduct = { id: string; name: string; price: string; img: string; composition: string[] };
+type EventProduct = { id: string; name: string; price: string; img: string; imgPosition?: string; composition: string[] };
 
 const parseEuroPrice = (price: string): number => {
   const match = price.replace(",", ".").match(/[\d.]+/);
@@ -52,15 +62,15 @@ const MenuFormulaCard = ({ product, guestCount }: { product: EventProduct; guest
         boxShadow: justAdded ? "0 0 0 2px #DFF057, var(--card-shadow)" : "var(--card-shadow)",
       }}
     >
-      <div className="relative overflow-hidden aspect-square">
+      <div className="relative overflow-hidden h-40">
         <img src={product.img} alt={product.name} className="w-full h-full object-cover" loading="lazy" />
         {cartQty > 0 && (
           <div
-            className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-md"
+            className="absolute top-2 right-2 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold shadow-md"
             style={{ backgroundColor: "#3a3a0a", color: "#DFF057" }}
           >
-            <ShoppingBag size={13} />
-            {cartQty} convives dans le panier
+            <ShoppingBag size={12} />
+            {cartQty} convives
           </div>
         )}
       </div>
@@ -125,20 +135,21 @@ const EventProductCard = ({ product }: { product: EventProduct }) => {
         boxShadow: justAdded ? "0 0 0 2px #DFF057, var(--card-shadow)" : "var(--card-shadow)",
       }}
     >
-      <div className="relative overflow-hidden aspect-square">
+      <div className="relative overflow-hidden h-40">
         <img
           src={product.img}
           alt={product.name}
           className="w-full h-full object-cover"
+          style={{ objectPosition: product.imgPosition ?? "center" }}
           loading="lazy"
         />
         {cartQty > 0 && (
           <div
-            className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-md"
+            className="absolute top-2 right-2 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold shadow-md"
             style={{ backgroundColor: "#3a3a0a", color: "#DFF057" }}
           >
-            <ShoppingBag size={13} />
-            {cartQty} dans le panier
+            <ShoppingBag size={12} />
+            {cartQty}
           </div>
         )}
       </div>
@@ -342,11 +353,32 @@ const EventsCommander = () => {
           composition: ["4 pistache", "4 fraise", "4 vanille", "4 amande", "4 chocolat"],
         },
         {
+          id: "evt-cloche-cookies",
+          name: "Cloche de cookies",
+          price: "7,50€",
+          img: clocheCookies,
+          composition: [],
+        },
+        {
           id: "evt-plateau-cake-marbre",
           name: "Plateau Cake marbré",
           price: "7,50€",
           img: cakeMarbre,
           composition: ["10 tranches"],
+        },
+        {
+          id: "evt-plateau-pancakes",
+          name: "Plateau Pancakes",
+          price: "25,00€",
+          img: plateauPancakes,
+          composition: ["10 pièces"],
+        },
+        {
+          id: "evt-plateau-fruits",
+          name: "Plateau de fruits",
+          price: "25,00€",
+          img: plateauFruits,
+          composition: ["Pour 10 personnes"],
         },
       ],
     },
@@ -355,18 +387,25 @@ const EventsCommander = () => {
       label: "Salé",
       products: [
         {
-          id: "evt-oeufs-benedicte",
-          name: "Oeufs bénédicte",
-          price: "9,50€",
-          img: "/oeufs-benedicte.png",
-          composition: ["Muffin toastée", "Bacon crispy", "Oeufs brouillés", "Sauce Hollandaise"],
+          id: "evt-plateau-fromage",
+          name: "Plateau de fromage",
+          price: "45,00€",
+          img: plateauFromage,
+          composition: ["Pour 10 personnes"],
         },
         {
-          id: "evt-bagel-chevre-miel",
-          name: "Bagel chèvre miel",
-          price: "9,50€",
-          img: "/bagel-chevre.png",
-          composition: ["Bagel sésame", "Rondelles de chèvre", "Miel de Lavande", "Roquette"],
+          id: "evt-plateau-charcuterie",
+          name: "Plateau de charcuterie",
+          price: "45,00€",
+          img: plateauCharcuterie,
+          composition: ["Pour 10 personnes"],
+        },
+        {
+          id: "evt-verrine-crudites",
+          name: "Verrine de crudités",
+          price: "7,50€",
+          img: verrineCrudites,
+          composition: [],
         },
       ],
     },
@@ -375,18 +414,25 @@ const EventsCommander = () => {
       label: "Boissons chaudes",
       products: [
         {
-          id: "evt-cafe-latte",
-          name: "Café Latte",
+          id: "evt-thermos-cafe",
+          name: "Thermos de café",
           price: "5,50€",
-          img: "/cafe-latte.png",
-          composition: [],
+          img: thermosCafe,
+          composition: ["Carafe ou distributeur inox selon quantité"],
         },
         {
-          id: "evt-chocolat-chaud",
-          name: "Chocolat chaud",
+          id: "evt-thermos-the",
+          name: "Thermos de thé",
           price: "5,50€",
-          img: "/chocolat-chaud.png",
-          composition: [],
+          img: thermosCafe,
+          composition: ["Carafe ou distributeur inox selon quantité", "Assortiment de thé Kusmi Tea"],
+        },
+        {
+          id: "evt-thermos-chocolat",
+          name: "Thermos de chocolat chaud",
+          price: "5,50€",
+          img: thermosChocolat,
+          composition: ["Carafe ou distributeur inox selon quantité"],
         },
       ],
     },
@@ -395,18 +441,19 @@ const EventsCommander = () => {
       label: "Boissons froides",
       products: [
         {
-          id: "evt-jus-orange-presse",
-          name: "Jus d'orange pressé",
+          id: "evt-jus-frais",
+          name: "Jus frais",
           price: "3,50€",
-          img: "/jus-orange.png",
-          composition: ["100% jus pressé", "Sans sucres ajoutés"],
+          img: jusFrais,
+          imgPosition: "center 40%",
+          composition: ["Carafe ou distributeur inox selon quantité", "Orange, pamplemousse, pêche, abricot"],
         },
         {
-          id: "evt-smoothie-fruits-rouges",
-          name: "Smoothie fruits rouges",
-          price: "6,50€",
-          img: "/smoothie-fruits-rouges.png",
-          composition: ["Mix de fruits rouges", "Lait", "Vanille", "Miel"],
+          id: "evt-eau-detox",
+          name: "Eau détox",
+          price: "3,50€",
+          img: eauDetox,
+          composition: ["Fraise, Agrumes au choix"],
         },
       ],
     },
