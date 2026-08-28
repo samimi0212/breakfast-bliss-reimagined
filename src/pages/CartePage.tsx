@@ -195,7 +195,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "rostis",
       name: "Röstis",
-      price: "5,00€",
+      price: "3,50€",
       img: "/rostis.png",
     },
   ],

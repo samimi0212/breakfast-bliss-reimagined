@@ -755,7 +755,7 @@ export const allProducts: Product[] = [
   {
     id: "rostis",
     name: "Röstis",
-    price: "5,00€",
+    price: "3,50€",
     category: "Extra",
     img: "/rostis.png",
     desc: "",
@@ -768,7 +768,7 @@ export const allProducts: Product[] = [
         label_en: "Quantity",
         required: true,
         multiSelect: false,
-        choices: ["3 Röstis", "6 Röstis (+4,50€)", "9 Röstis (+8,00€)"],
+        choices: ["3 Röstis", "6 Röstis (+3€)", "9 Röstis (+5,50€)"],
         choices_en: ["3 Röstis", "6 Röstis (+€4.50)", "9 Röstis (+€8.00)"],
       },
     ],
