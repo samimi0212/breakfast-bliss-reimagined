@@ -92,7 +92,7 @@ const EventsPromo = () => {
       {/* Modale devis / rappel */}
       {activeEventType && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-8 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto"
           onClick={() => setActiveEventType(null)}
         >
           <div

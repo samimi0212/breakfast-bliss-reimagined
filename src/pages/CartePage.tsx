@@ -25,14 +25,14 @@ const menus = [
   {
     id: "menu-brunch",
     name: "Menu Brunch",
-    price: "27,90€",
+    price: "24,90€",
     img: "/menu-brunch-texte.png",
   },
   {
     id: "menu-veggie",
-    name: "Menu Veggie",
-    price: "23,90€",
-    img: "/menu-veggie-texte.png",
+    name: "Menu Lunch",
+    price: "16,90€",
+    img: "/menu-veggie-titre.png",
   },
   {
     id: "menu-duo",
@@ -77,7 +77,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     {
       id: "mini-viennoiseries",
       name: "Mini viennoiseries",
-      price: "3,40€",
+      price: "3,20€",
       img: "/mini-viennoiserie.jpg",
     },
     {
@@ -88,29 +88,23 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     },
     {
       id: "baguette",
-      name: "Baguette",
-      price: "2,20€",
+      name: "1/2 Baguette",
+      price: "0,90€",
       img: "/baguette.jpg",
-    },
-    {
-      id: "baguette-bio",
-      name: "Baguette céréales",
-      price: "2,70€",
-      img: "/baguette-cereales.jpg",
     },
     {
       id: "petit-pain-campagne",
       name: "Petit pavé campagne",
-      price: "1,40€",
+      price: "0,50€",
       img: "/pave-campagne.jpg",
     },
   ],
   "Le Salé": [
     {
       id: "avocado-toast",
-      name: "Avocado Toast",
-      price: "11,50€",
-      img: "/avocado-toast.jpg",
+      name: "Tartine Avocat Saumon",
+      price: "11,90€",
+      img: "/tartine-avocat.png",
     },
     {
       id: "bagel-avocat-saumon",
