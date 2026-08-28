@@ -503,6 +503,17 @@ export const allProducts: Product[] = [
     composition_en: ["Slice of sourdough bread", "Cream cheese sauce", "Smoked salmon", "Sliced avocado", "Baby greens", "Gomasio"],
   },
   {
+    id: "avocado-toast-feta",
+    name: "Avocado Toast",
+    name_en: "Avocado Toast",
+    price: "9,70€",
+    category: "Le Salé",
+    img: "/avocado-toast1.jpg",
+    desc: "",
+    composition: ["2 tranches de pain toastées", "Écrasée d'avocat", "Fêta", "Grenade"],
+    composition_en: ["2 slices of toast", "Smashed avocado", "Feta", "Pomegranate"],
+  },
+  {
     id: "bagel-avocat-saumon",
     name: "Bagel Avocat Saumon",
     name_en: "Avocado Salmon Bagel",
