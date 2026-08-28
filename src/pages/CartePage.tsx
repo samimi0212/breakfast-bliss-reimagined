@@ -178,7 +178,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "frites-patates-douces",
       name: "Frites de patates douces",
       price: "5,50€",
-      img: "/frites.jpg",
+      img: "/frites.png",
     },
     {
       id: "halloumi-grille",
