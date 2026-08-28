@@ -501,6 +501,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Tranche de pain au levain", "Sauce cream cheese", "Saumon fumé", "Émincé d'avocat", "Jeunes pousses", "Gomasio"],
     composition_en: ["Slice of sourdough bread", "Cream cheese sauce", "Smoked salmon", "Sliced avocado", "Baby greens", "Gomasio"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "avocado-toast-feta",
@@ -512,6 +513,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["2 tranches de pain toastées", "Écrasée d'avocat", "Fêta", "Grenade"],
     composition_en: ["2 slices of toast", "Smashed avocado", "Feta", "Pomegranate"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "bagel-avocat-saumon",
@@ -523,6 +525,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Bagel brioché aux graines", "Cream cheese", "Saumon fumé", "Avocat", "Câpres", "Pickles oignons rouges"],
     composition_en: ["Brioche seeded bagel", "Cream cheese", "Smoked salmon", "Avocado", "Capers", "Pickled red onions"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "bagel-chevre-miel",
@@ -534,6 +537,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Bagel brioché aux graines", "Chèvre cendrée", "Noix", "Jeunes pousses", "Sauce miel moutarde", "Confit de poires"],
     composition_en: ["Brioche bagel", "Ash-ripened goat cheese", "Fresh salad", "AOP Grenoble walnuts", "Baby greens", "Creamy sauce", "Pear confit"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "bagel-bacon-cheddar",
@@ -544,6 +548,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Bagel brioché aux graines", "Œuf émietté", "Bacon crispy", "Cheddar", "Sauce hollandaise"],
     composition_en: ["Brioche seeded bagel", "Crumbled egg", "Crispy bacon", "Cheddar", "Sauce Bénédicte"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "bagel-saumon-avocat",
@@ -555,6 +560,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Bagel brioché aux graines", "Poulet mariné", "Pickles chou rouges", "Jeunes pousses", "Sauce fumée"],
     composition_en: ["Brioche bagel", "Herb-marinated chicken", "Fresh salad", "Artisanal smoky sauce", "Pickled red onions"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "toast-mediterraneen",
@@ -566,6 +572,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Pinsa", "Confit de tomates", "Burrata", "Tomates cerises mélangées", "Basilic", "Huile d'olive"],
     composition_en: ["Pinsa", "Tomato confit", "Burrata", "Mixed cherry tomatoes", "Basil", "Olive oil"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "breakfast-burrito",
@@ -577,6 +584,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Effiloché de poulet", "Oeufs brouillés", "Bacon crispy", "Pickles de chou rouge", "Sauce fumée"],
     composition_en: ["Pulled chicken", "Scrambled eggs", "Crispy bacon", "Pickled red cabbage", "Tomato confit", "Smoky sauce"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "french-tartines",
@@ -681,8 +689,8 @@ export const allProducts: Product[] = [
         label_en: "Add-on",
         required: false,
         multiSelect: false,
-        choices: ["Bacon crispy (+1€)"],
-        choices_en: ["Crispy Bacon (+€1)"],
+        choices: ["Bacon crispy (+1€)", "Oignons frits (+1€)"],
+        choices_en: ["Crispy Bacon (+€1)", "Fried onions (+€1)"],
       },
     ],
   },
@@ -703,10 +711,22 @@ export const allProducts: Product[] = [
         label_en: "Add-on",
         required: false,
         multiSelect: false,
-        choices: ["Bacon crispy (+1€)"],
-        choices_en: ["Crispy Bacon (+€1)"],
+        choices: ["Bacon crispy (+1€)", "Oignons frits (+1€)"],
+        choices_en: ["Crispy Bacon (+€1)", "Fried onions (+€1)"],
       },
     ],
+  },
+  {
+    id: "avocado-toast-gf",
+    name: "Avocado Toast - Gluten Free",
+    name_en: "Avocado Toast - Gluten Free",
+    price: "12,50€",
+    category: "Le Salé",
+    img: "/avocado-gluten.jpg",
+    desc: "",
+    composition: ["1 tranche de pain à la farine de riz sarrasin et millet", "Écrasée d'avocat", "Fêta", "Grenade"],
+    composition_en: ["1 slice of rice, buckwheat and millet flour bread", "Smashed avocado", "Feta", "Pomegranate"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "croque-monsieur-gf",
@@ -718,6 +738,7 @@ export const allProducts: Product[] = [
     desc: "",
     composition: ["Tranches de pain à la farine de riz sarrasin et millet", "Emmental", "Jambon blanc", "Béchamel"],
     composition_en: ["Rice, buckwheat and millet flour bread slices", "Emmental", "White ham", "Béchamel"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
     id: "rostis",

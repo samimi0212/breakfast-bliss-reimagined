@@ -161,6 +161,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/oeufs-truffe.png",
     },
     {
+      id: "avocado-toast-gf",
+      name: "Avocado Toast - Gluten Free",
+      price: "12,50€",
+      img: "/avocado-gluten.jpg",
+    },
+    {
       id: "croque-monsieur-gf",
       name: "Croque Monsieur - Gluten Free",
       price: "11,90€",
