@@ -709,6 +709,17 @@ export const allProducts: Product[] = [
     ],
   },
   {
+    id: "croque-monsieur-gf",
+    name: "Croque Monsieur - Gluten Free",
+    name_en: "Croque Monsieur - Gluten Free",
+    price: "11,90€",
+    category: "Le Salé",
+    img: "/croque-gluten.jpg",
+    desc: "",
+    composition: ["Tranches de pain à la farine de riz sarrasin et millet", "Emmental", "Jambon blanc", "Béchamel"],
+    composition_en: ["Rice, buckwheat and millet flour bread slices", "Emmental", "White ham", "Béchamel"],
+  },
+  {
     id: "rostis",
     name: "Röstis",
     price: "5,00€",

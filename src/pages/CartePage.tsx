@@ -160,6 +160,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       price: "7,50€",
       img: "/oeufs-truffe.png",
     },
+    {
+      id: "croque-monsieur-gf",
+      name: "Croque Monsieur - Gluten Free",
+      price: "11,90€",
+      img: "/croque-gluten.jpg",
+    },
   ],
   "Extra": [
     {
