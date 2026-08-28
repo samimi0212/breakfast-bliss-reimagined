@@ -575,7 +575,7 @@ export const allProducts: Product[] = [
     category: "Le Salé",
     img: "/pulled-burrito.png",
     desc: "",
-    composition: ["Effiloché de poulet", "Oeufs brouillés", "Bacon crispy", "Pickles de chou rouge", "Confit de tomates", "Sauce fumée"],
+    composition: ["Effiloché de poulet", "Oeufs brouillés", "Bacon crispy", "Pickles de chou rouge", "Sauce fumée"],
     composition_en: ["Pulled chicken", "Scrambled eggs", "Crispy bacon", "Pickled red cabbage", "Tomato confit", "Smoky sauce"],
   },
   {
