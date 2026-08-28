@@ -137,6 +137,12 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       img: "/bagel-chicken.png",
     },
     {
+      id: "egg-comte-muffin",
+      name: "Egg Comté Muffin",
+      price: "6,50€",
+      img: "/egg-muffin.png",
+    },
+    {
       id: "toast-mediterraneen",
       name: "Burratina",
       price: "10,50€",

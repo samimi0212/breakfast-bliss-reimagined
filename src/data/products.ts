@@ -563,6 +563,18 @@ export const allProducts: Product[] = [
     options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
+    id: "egg-comte-muffin",
+    name: "Egg Comté Muffin",
+    name_en: "Egg Comté Muffin",
+    price: "6,50€",
+    category: "Le Salé",
+    img: "/egg-muffin.png",
+    desc: "",
+    composition: ["Muffin", "Oeufs brouillés", "Jambon blanc", "Comté"],
+    composition_en: ["Muffin", "Scrambled eggs", "White ham", "Comté"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
+  },
+  {
     id: "toast-mediterraneen",
     name: "Burratina",
     name_en: "Burratina",
