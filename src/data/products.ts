@@ -604,7 +604,7 @@ export const allProducts: Product[] = [
     name_en: "French Tartines",
     price: "4,00€",
     category: "Le Sucré",
-    img: "/tartines.jpg",
+    img: "/french-tartines.png",
     desc: "",
     composition: ["1/2 Baguette Tradition", "1 Beurre", "1 Nappage au choix"],
     composition_en: ["1/2 Tradition Baguette", "1 Butter", "1 Topping of your choice"],
