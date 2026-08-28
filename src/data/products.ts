@@ -791,7 +791,7 @@ export const allProducts: Product[] = [
     name_en: "Grilled Halloumi",
     price: "7,50€",
     category: "Extra",
-    img: "/halloumi.jpg",
+    img: "/halloumi.png",
     desc: "",
     composition: ["4 tranches de Halloumi AOP", "Fleur de sel", "Sauce fraîche aux herbes"],
     composition_en: ["4 slices of PDO Halloumi", "Fleur de sel", "Fresh herb sauce"],

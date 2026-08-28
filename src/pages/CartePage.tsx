@@ -190,7 +190,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "halloumi-grille",
       name: "Halloumi grillé",
       price: "7,50€",
-      img: "/halloumi.jpg",
+      img: "/halloumi.png",
     },
     {
       id: "rostis",
