@@ -144,9 +144,9 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
     },
     {
       id: "breakfast-burrito",
-      name: "Pulled Pork Burrito",
-      price: "9,70€",
-      img: "/pulled-burrito.jpg",
+      name: "Pulled Burrito",
+      price: "8,70€",
+      img: "/pulled-burrito.png",
     },
     {
       id: "focaccia-saumon",
