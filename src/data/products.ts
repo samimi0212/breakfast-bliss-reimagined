@@ -530,7 +530,7 @@ export const allProducts: Product[] = [
     name_en: "Goat Cheese & Walnut Bagel",
     price: "8,90€",
     category: "Le Salé",
-    img: "/bagel-chevre.jpg",
+    img: "/bagel-chevre.png",
     desc: "",
     composition: ["Bagel brioché", "Chèvre cendrée", "Salade fraîche", "Noix de Grenoble AOP", "Jeunes pousses", "Sauce crémeuse", "Confit de poires"],
     composition_en: ["Brioche bagel", "Ash-ripened goat cheese", "Fresh salad", "AOP Grenoble walnuts", "Baby greens", "Creamy sauce", "Pear confit"],
