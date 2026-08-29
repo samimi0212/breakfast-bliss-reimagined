@@ -805,7 +805,7 @@ export const allProducts: Product[] = [
     category: "Le Sucré",
     img: "/brioche-gourmande.png",
     desc: "",
-    composition: ["Brioche de Nanterre pur beurre", "Nocciolata", "Eclats de noisettes grillées"],
+    composition: ["Brioche au lait et beurre", "Nocciolata", "Eclats de noisettes grillées"],
     composition_en: ["Pure butter Nanterre brioche", "Nocciolata", "Toasted hazelnut bits"],
     options: [
       {
