@@ -246,7 +246,7 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "porridge",
       name: "Porridge Mangue Vanille",
       price: "9,50€",
-      img: "/porridge.jpg",
+      img: "/porridge.png",
     },
     {
       id: "acai-bowl",
@@ -320,13 +320,13 @@ const produits: Record<string, { id: string; name: string; price: string; img: s
       id: "chai-latte",
       name: "Chai Latte",
       price: "6,20€",
-      img: "/chai.jpg",
+      img: "/chai.png",
     },
     {
       id: "iced-matcha-latte",
       name: "Matcha Latte",
       price: "6,90€",
-      img: "/matcha.jpg",
+      img: "/matcha-latte.png",
     },
     {
       id: "smoothie-tropical",
