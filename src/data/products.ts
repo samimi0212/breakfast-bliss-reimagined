@@ -761,6 +761,18 @@ export const allProducts: Product[] = [
     options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
   },
   {
+    id: "croque-monsieur",
+    name: "Croque Monsieur",
+    name_en: "Croque Monsieur",
+    price: "7,50€",
+    category: "Le Salé",
+    img: "/croque.png",
+    desc: "",
+    composition: ["Pain de mie toasté", "Emmental", "Jambon blanc", "Béchamel", "Custard moutarde"],
+    composition_en: ["Toasted white bread", "Emmental", "White ham", "Béchamel", "Mustard custard"],
+    options: [{ id: "supplement", label: "Supplément", label_en: "Add-on", required: false, multiSelect: true, choices: ["Oignons frits (+1€)"], choices_en: ["Fried onions (+€1)"] }],
+  },
+  {
     id: "croque-monsieur-gf",
     name: "Croque Monsieur - Gluten Free",
     name_en: "Croque Monsieur - Gluten Free",
