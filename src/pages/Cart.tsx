@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, UtensilsCrossed, MessageSquareText, Gift } from "lucide-react";
+import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, UtensilsCrossed, MessageSquareText, Gift, Flower2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useLangPath } from "@/hooks/useLangPath";
 import Navbar from "@/components/Navbar";
@@ -15,6 +15,9 @@ const Cart = () => {
   const [wantsCutlery, setWantsCutlery] = useState(false);
   const [cutleryQty, setCutleryQty] = useState(1);
   const [wantsGiftWrap, setWantsGiftWrap] = useState(false);
+  const [wantsRose, setWantsRose] = useState(false);
+  const [wantsPersonalMessage, setWantsPersonalMessage] = useState(false);
+  const [personalMessage, setPersonalMessage] = useState("");
   const [promoCode, setPromoCode] = useState<string | null>(null);
   const [promoInput, setPromoInput] = useState("");
   const [promoError, setPromoError] = useState("");
@@ -118,7 +121,9 @@ const Cart = () => {
   const MIN_ORDER = 15;
   const FREE_DELIVERY_THRESHOLD = 45;
   const GIFT_WRAP_PRICE = 3.50;
-  const subtotalWithCutlery = total + (wantsCutlery ? cutleryQty * 0.80 : 0) + (wantsGiftWrap ? GIFT_WRAP_PRICE : 0);
+  const ROSE_PRICE = 6.50;
+  const PERSONAL_MESSAGE_PRICE = 1.50;
+  const subtotalWithCutlery = total + (wantsCutlery ? cutleryQty * 0.80 : 0) + (wantsGiftWrap ? GIFT_WRAP_PRICE : 0) + (wantsRose ? ROSE_PRICE : 0) + (wantsPersonalMessage ? PERSONAL_MESSAGE_PRICE : 0);
   const orderTotal = subtotalWithCutlery * (1 - promoDiscount);
   const giftCardDeduction = giftCardCode ? Math.min(giftCardBalance, orderTotal) : 0;
   const amountDue = Math.max(orderTotal - giftCardDeduction, 0);
@@ -320,6 +325,75 @@ const Cart = () => {
               </div>
             </div>
 
+            {/* Rose rouge */}
+            <div
+              className="bg-white rounded-2xl p-4 mt-2"
+              style={{ boxShadow: "var(--card-shadow)" }}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Flower2 size={18} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm">Rose rouge <span className="text-muted-foreground font-normal">— {ROSE_PRICE.toFixed(2).replace(".", ",")}€</span></p>
+                    <p className="text-xs text-muted-foreground">Souhaitez-vous ajouter une rose rouge ?</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setWantsRose(!wantsRose)}
+                  className="relative w-12 h-6 rounded-full transition-colors duration-200 flex-shrink-0"
+                  style={{ backgroundColor: wantsRose ? "hsl(61,45%,42%)" : "#e5e7eb" }}
+                >
+                  <span
+                    className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-200"
+                    style={{ left: wantsRose ? "calc(100% - 22px)" : "2px" }}
+                  />
+                </button>
+              </div>
+            </div>
+
+            {/* Message personnalisé */}
+            <div
+              className="bg-white rounded-2xl p-4 mt-2"
+              style={{ boxShadow: "var(--card-shadow)" }}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <MessageSquareText size={18} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm">Message personnalisé <span className="text-muted-foreground font-normal">— {PERSONAL_MESSAGE_PRICE.toFixed(2).replace(".", ",")}€</span></p>
+                    <p className="text-xs text-muted-foreground">Souhaitez-vous ajouter un message ?</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setWantsPersonalMessage(!wantsPersonalMessage)}
+                  className="relative w-12 h-6 rounded-full transition-colors duration-200 flex-shrink-0"
+                  style={{ backgroundColor: wantsPersonalMessage ? "hsl(61,45%,42%)" : "#e5e7eb" }}
+                >
+                  <span
+                    className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-200"
+                    style={{ left: wantsPersonalMessage ? "calc(100% - 22px)" : "2px" }}
+                  />
+                </button>
+              </div>
+              {wantsPersonalMessage && (
+                <div className="mt-4 pt-4 border-t border-border">
+                  <textarea
+                    value={personalMessage}
+                    onChange={(e) => setPersonalMessage(e.target.value.slice(0, 300))}
+                    rows={3}
+                    maxLength={300}
+                    placeholder="Votre message personnalisé..."
+                    className="w-full px-4 py-3 rounded-xl border-2 border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition resize-none"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1 text-right">{personalMessage.length}/300</p>
+                </div>
+              )}
+            </div>
+
             {/* Observations sur la commande */}
             <div
               className="bg-white rounded-2xl p-4 mt-2"
@@ -384,6 +458,18 @@ const Cart = () => {
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>{t("cart.giftWrapLine")}</span>
                     <span>{GIFT_WRAP_PRICE.toFixed(2).replace(".", ",")}€</span>
+                  </div>
+                )}
+                {wantsRose && (
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>🌹 Rose rouge</span>
+                    <span>{ROSE_PRICE.toFixed(2).replace(".", ",")}€</span>
+                  </div>
+                )}
+                {wantsPersonalMessage && (
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>✉️ Message personnalisé</span>
+                    <span>{PERSONAL_MESSAGE_PRICE.toFixed(2).replace(".", ",")}€</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm text-muted-foreground">
@@ -518,6 +604,16 @@ const Cart = () => {
                     sessionStorage.setItem("bt_gift_wrap", "1");
                   } else {
                     sessionStorage.removeItem("bt_gift_wrap");
+                  }
+                  if (wantsRose) {
+                    sessionStorage.setItem("bt_rose", "1");
+                  } else {
+                    sessionStorage.removeItem("bt_rose");
+                  }
+                  if (wantsPersonalMessage && personalMessage.trim()) {
+                    sessionStorage.setItem("bt_personal_message", personalMessage.trim());
+                  } else {
+                    sessionStorage.removeItem("bt_personal_message");
                   }
                   const { data: { session } } = await supabase.auth.getSession();
                   if (session) {

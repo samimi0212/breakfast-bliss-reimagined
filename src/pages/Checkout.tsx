@@ -142,7 +142,14 @@ const CheckoutForm = () => {
   const wantsGiftWrap = sessionStorage.getItem("bt_gift_wrap") === "1";
   const GIFT_WRAP_PRICE = 3.50;
   const giftWrapCost = wantsGiftWrap ? GIFT_WRAP_PRICE : 0;
-  const extrasCost = cutleryCost + giftWrapCost;
+  const wantsRose = sessionStorage.getItem("bt_rose") === "1";
+  const ROSE_PRICE = 6.50;
+  const roseCost = wantsRose ? ROSE_PRICE : 0;
+  const personalMessage = sessionStorage.getItem("bt_personal_message") ?? "";
+  const wantsPersonalMessage = personalMessage.trim().length > 0;
+  const PERSONAL_MESSAGE_PRICE = 1.50;
+  const personalMessageCost = wantsPersonalMessage ? PERSONAL_MESSAGE_PRICE : 0;
+  const extrasCost = cutleryCost + giftWrapCost + roseCost + personalMessageCost;
   const effectiveDelivery = freeDelivery ? 0 : (deliveryPrice ?? 0);
   const totalAfterPromo = (total + extrasCost + effectiveDelivery) * (1 - promoDiscount);
   const giftCardDeduction = giftCardCode ? Math.min(giftCardBalance, totalAfterPromo) : 0;
@@ -151,6 +158,8 @@ const CheckoutForm = () => {
     ...items,
     ...(cutleryQty > 0 ? [{ id: "couverts", name: `Couverts × ${cutleryQty}`, price: cutleryCost.toFixed(2).replace(".", ",") + "€", img: "", qty: 1 }] : []),
     ...(wantsGiftWrap ? [{ id: "emballage-cadeau", name: "Emballage cadeau", price: GIFT_WRAP_PRICE.toFixed(2).replace(".", ",") + "€", img: "", qty: 1 }] : []),
+    ...(wantsRose ? [{ id: "rose-rouge", name: "Rose rouge", price: ROSE_PRICE.toFixed(2).replace(".", ",") + "€", img: "", qty: 1 }] : []),
+    ...(wantsPersonalMessage ? [{ id: "message-personnalise", name: `Message personnalisé : ${personalMessage}`, price: PERSONAL_MESSAGE_PRICE.toFixed(2).replace(".", ",") + "€", img: "", qty: 1 }] : []),
   ];
   const [deliveryLoading, setDeliveryLoading] = useState(false);
   const [deliveryError, setDeliveryError] = useState("");
@@ -400,6 +409,8 @@ const CheckoutForm = () => {
         sessionStorage.removeItem("bt_cutlery_qty");
         sessionStorage.removeItem("bt_gift_wrap");
         sessionStorage.removeItem("bt_order_observations");
+        sessionStorage.removeItem("bt_rose");
+        sessionStorage.removeItem("bt_personal_message");
         clearCart();
         navigate(lp("/confirmation"), {
           state: { orderId: commandeRow?.id, total: orderTotal, transactionId: paymentIntent?.id },
