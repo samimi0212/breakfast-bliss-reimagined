@@ -70,7 +70,7 @@ export default async function handler(req: Request): Promise<Response> {
           ✓
         </div>
         <h1 style="margin:0 0 10px;font-size:26px;font-weight:700;color:#2a2a08;line-height:1.2;">Merci ${order.prenom} !</h1>
-        <p style="margin:0;font-size:15px;color:#7a7a50;line-height:1.6;">Votre commande est confirmée et en cours de préparation.</p>
+        <p style="margin:0;font-size:15px;color:#7a7a50;line-height:1.6;">Votre commande est confirmée et enregistrée.</p>
       </div>
 
       <!-- Bloc livraison -->
