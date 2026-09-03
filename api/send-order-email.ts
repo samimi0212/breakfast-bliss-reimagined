@@ -28,7 +28,7 @@ export default async function handler(req: Request): Promise<Response> {
           <td style="padding:12px 0;border-bottom:1px solid #f0ece2;vertical-align:top;">
             <span style="font-size:14px;font-weight:700;color:#2a2a08;">${item.name}</span>${
           item.options && Object.keys(item.options).length > 0
-            ? `<br><span style="font-size:12px;color:#aaa;margin-top:2px;display:inline-block;">${Object.values(item.options).flatMap((v: any) => Array.isArray(v) ? v : [v]).join(", ")}</span>`
+            ? `<br><span style="font-size:12px;color:#aaa;margin-top:2px;display:inline-block;">${Object.values(item.options).flatMap((v: any) => Array.isArray(v) ? v : [v]).map((s: any) => String(s).replace(/\s*\(\+[0-9,]+€\)/g, "")).join(", ")}</span>`
             : ""
         }
           </td>

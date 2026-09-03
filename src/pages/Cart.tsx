@@ -202,7 +202,7 @@ const Cart = () => {
                           className="text-xs px-2 py-0.5 rounded-full font-medium"
                           style={{ backgroundColor: "#DFF057", color: "#5a5a1a" }}
                         >
-                          {v}
+                          {v.replace(/\s*\(\+[0-9,]+€\)/g, "")}
                         </span>
                         ))
                       )}
